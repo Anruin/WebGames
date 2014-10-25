@@ -9,6 +9,7 @@
 		if (se.Debug) console.log("Obstacle created", this);
 	};
 
+	window.game = new se.Game();
 })(window.se = window.se || {});
 
 console.log("main.js");
@@ -24,7 +25,6 @@ path.moveTo(start);
 // PaperScript does that for us, and much more!
 path.lineTo(start + [ 100, -50 ]);
 
-window.game = new se.Game();
 
 view.onFrame = function(event) {
 	game.update(event);

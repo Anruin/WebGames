@@ -19,15 +19,18 @@
 			this.next.update(event);
 			// this.next.turn(this.dir);
 		}
+		var moveGx = this.gx[this.dirNum].move;
+		//fixik:
+		if(!moveGx)
+			return true;
 
 		var num = event.count%10;
-		var length = this.gx[this.dirNum].move.length;
-		while(num >= length)
-			num -= length;
+		while(num >= moveGx.length)
+			num -= moveGx.length;
 
 		if(event.count%49 === 0) {
-			console.log(this.gx[this.dirNum].move[num]);
-			this.item.image = document.getElementById(this.gx[this.dirNum].move[num]);
+			console.log(this.gx[this.dirNum].move[num] + " - " + event.count + " - " + event.delta);
+			this.item.image = document.getElementById(moveGx[num]);
 		}
 	};
 
