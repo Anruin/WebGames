@@ -69,40 +69,31 @@
 		if (se.Debug) console.log("Block graphics created", this);
 	};
 
-	se.BlockGraphics.prototype.move = function(_pos) {
-		var i = 0;
-		for (i = 0; i < this.u.length; i++) {
-			this.u[i].position += _pos;
-		}
-		for (i = 0; i < this.d.length; i++) {
-			this.d[i].position += _pos;
-		}
-		for (i = 0; i < this.l.length; i++) {
-			this.l[i].position += _pos;
-		}
-		for (i = 0; i < this.r.length; i++) {
-			this.r[i].position += _pos;
-		}
-	};
-	
 	/**
 	 * Block
 	 * @constructor
 	 */
-	se.Block = function(_graphics) {
-		this.gx = _graphics;
+	se.Block = function(_pos, _gx) {
+		this.gx = _gx;
 		this.dir = new Point(0, 0);
+		this.item = new Raster(_gx[0][0]);
+		this.item.position = _pos;
+		this.item.scale(se.BlockScale);
 
 		// Hierarchy
 		var next;
 	};
 
 	se.Block.prototype.update = function() {
-		this.gx.move(this.dir * se.Step);
+		this.move(this.dir * se.Step);
 		if (this.next) {
 			this.next.update();
 			this.next.turn(this.dir);
 		}
+	};
+
+	se.Block.prototype.move = function(_pos) {
+		this.item.position += _pos;
 	};
 
 	se.Block.prototype.turn = function(dir) {
@@ -129,12 +120,12 @@
 	 * @constructor
 	 */
 	se.Pawn = function() {
-		var headGxU = ['pawn-mv-u01', 'pawn-mv-u02'];
-		var headGxD = ['pawn-mv-d01', 'pawn-mv-d02'];
-		var headGxL = ['pawn-mv-l01', 'pawn-mv-l02'];
-		var headGxR = ['pawn-mv-r01', 'pawn-mv-r02'];
-		var headGx = new se.BlockGraphics(headGxU, headGxD, headGxL, headGxR);
-		this.head = new se.Block(headGx);
+		var headGx = {};
+		headGx[se.Directions.LEFT] = ['pawn-mv-l01', 'pawn-mv-l02'];
+		headGx[se.Directions.UP] = ['pawn-mv-u01', 'pawn-mv-u02'];
+		headGx[se.Directions.RIGHT] = ['pawn-mv-r01', 'pawn-mv-r02'];
+		headGx[se.Directions.DOWN] = ['pawn-mv-d01', 'pawn-mv-d02'];
+		this.head = new se.Block(Point(0, 0), headGx);
 		if (se.Debug) console.log("Pawn created", this);
 	};
 
@@ -146,7 +137,6 @@
 
 	se.Pawn.prototype.turn = function(dir) {
 		this.head.turn(dir);
-
 	};
 
 	/**
