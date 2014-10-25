@@ -28,7 +28,7 @@
 		while(num >= moveGx.length)
 			num -= moveGx.length;
 
-		if(event.count%49 === 0) {
+		if(event.count%(config.params.actor.interval - 1) === 0) {
 			console.log(this.gx[this.dirNum].move[num] + " - " + event.count + " - " + event.delta);
 			this.item.image = document.getElementById(moveGx[num]);
 		}

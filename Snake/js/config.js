@@ -12,11 +12,8 @@ var config = {
 		block: {
 			size: 1
 		},
-		snake: {
-			length: {
-				start: 3,
-				max: 10
-			},
+		actor: {
+			interval: 50,
 			velocity: 0.021
 		},
 		field: {
