@@ -32,20 +32,20 @@ var config = {
    img: {
       snake: {
          down: {
-            stand: dir.img + "front-stand.png",
-            move: [dir.img + "front-move-01.png", dir.img + "front-move-02.png"]
+            stand: dir.img + "pawn-st-d.png",
+            move: [dir.img + "pawn-mv-d01.png", dir.img + "pawn-mv-d02.png"]
          },
          up: {
-            stand: dir.img + "back-stand.png",
-            move: [dir.img + "back-move-01.png", dir.img + "back-move-02.png"]
+            stand: dir.img + "pawn-st-u.png",
+            move: [dir.img + "pawn-mv-u01.png", dir.img + "pawn-mv-u02.png"]
          },
          left: {
-            move: [dir.img + "left-move-01.png", dir.img + "left-move-02.png"]
+            move: [dir.img + "pawn-mv-l01.png", dir.img + "pawn-mv-l02.png"]
          },
          right: {
-            move: [dir.img + "right-move-01.png", dir.img + "right-move-02.png"]
+            move: [dir.img + "pawn-mv-r01.png", dir.img + "pawn-mv-r02.png"]
          }
       },
-      food: [dir.img + "food-01.png", dir.img + "food-02.png", dir.img + "food-03.png", dir.img + "food-04.png"]
+      food: [dir.img + "collectible-01.png", dir.img + "collectible-02.png", dir.img + "collectible-03.png", dir.img + "collectible-04.png"]
    }
 };
