@@ -5,8 +5,8 @@ console.log('pawn.js');
 (function(se, paper) {
 	se.Pawn = function() {
 		this.controller = null;
-	}
-	se.EXTEND(se.Pawn, se.Actor);
+	};
+	se.$extend(se.Pawn, se.Actor);
 
 	/*
 	se.Pawn = function(_player) {

@@ -18,6 +18,8 @@ console.log('scene.js');
 	 * @param _dt delta time
 	 */
 	se.Scene.prototype.update = function (_dt) {
+		if (se.$debug) console.log('Scene update');
+
 		for (var i = 0; i < this.actors.length; i++) {
 			this.actors[i].update(_dt);
 		}
@@ -27,7 +29,9 @@ console.log('scene.js');
 	 * Create new actor
 	 */
 	se.Scene.prototype.createActor = function () {
-		this.actors.push(new se.Actor());
+		var actor = new se.Actor();
+		this.actors.push(actor);
+		return actor;
 	};
 
 	/**

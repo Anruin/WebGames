@@ -11,6 +11,8 @@ console.log('game.js');
 	};
 
 	se.Game.prototype.update = function (_dt) {
+		if (se.$debug) console.log('Game update');
+
 		if (this.activeScene)
 			this.activeScene.update(_dt);
 	}

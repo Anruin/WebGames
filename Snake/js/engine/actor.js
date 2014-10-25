@@ -13,7 +13,7 @@ console.log('actor.js');
 		 * Animations library
 		 * @type Object
 		 */
-		this.animations = null;
+		this.animations = [];
 		/**
 		 * Active animation
 		 * @type Array
@@ -28,8 +28,13 @@ console.log('actor.js');
 	};
 
 	se.Actor.prototype.update = function(_dt) {
+		if (se.$debug) console.log('Actor update');
+
 		if (this.activeAnimation) {
-			this.activeAnimation.update(_dt);
+			var frame = this.activeAnimation.update(_dt);
+			if (frame !== false && frame !== null) {
+				this.item.image = document.getElementById(frame);
+			}
 		}
 	};
 
@@ -42,16 +47,7 @@ console.log('actor.js');
 	};
 
 	/////////////////////////////////////
-	/*
-	se.Actor = function(_position, _sprites) {
-		this.gx = _sprites;
-		this.dir = new Point(0, 0);
-		this.dirNum = 3;
-		this.item = new Raster(_sprites[se.Directions.DOWN].stand);
-		this.item.position = _position;
-		this.item.scale(se.BlockScale);
-		this.next = null;
-	};
+/*
 
 	se.Actor.prototype.update = function(event) {
 		this.move(this.dir * se.Step);

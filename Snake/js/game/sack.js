@@ -10,7 +10,7 @@ console.log('sack.js');
 		 */
 		this.next = null;
 	}
-	se.EXTEND(se.Sack, se.Actor);
+	se.$extend(se.Sack, se.Actor);
 
 	se.Sack.prototype.update = function() {
 		this.move(this.velocity);

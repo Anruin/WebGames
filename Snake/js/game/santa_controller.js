@@ -1,7 +1,7 @@
 /**
  * Created by Anry on 25.10.2014.
  */
-console.log('santaController.js');
+console.log('santa_controller.js');
 (function(se, paper) {
 	se.SantaController = function() {
 		this.pawn = null;
@@ -27,7 +27,7 @@ console.log('santaController.js');
 		];
 	};
 
-	se.EXTEND(se.SantaController, se.Controller);
+	se.$extend(se.SantaController, se.Controller);
 })(window.se = window.se || {});
 
 var controller = new se.SantaController();

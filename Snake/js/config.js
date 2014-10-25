@@ -48,7 +48,7 @@ var config = {
 		collectibles: ["collectible-01", "collectible-02", "collectible-03", "collectible-04"]
 	}
 };
-
+/*
 function addImage(name) {
     var img = document.createElement("IMG");
     img.setAttribute('src', config.img.dir + name + config.img.ext);
@@ -68,3 +68,4 @@ for(var dir in config.img.pawn){
 config.img.collectibles.map(function(name){
     addImage(name);
 });
+    */

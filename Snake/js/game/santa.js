@@ -12,7 +12,7 @@ console.log('santa.js');
 		this.sack = null;
 	};
 
-	se.EXTEND(se.Santa, se.Pawn);
+	se.$extend(se.Santa, se.Pawn);
 
 	se.Santa.prototype.update = function() {
 		this.move(this.velocity);

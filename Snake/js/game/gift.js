@@ -7,7 +7,7 @@ console.log('gift.js');
 	se.Gift = function() {
 	};
 
-	se.EXTEND(se.Gift, se.Collectible);
+	se.$extend(se.Gift, se.Collectible);
 
 	se.Gift.prototype.update = function() {
 		se.Collectible.prototype.update.call(this);
