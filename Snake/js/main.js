@@ -1,6 +1,6 @@
 (function(se) {
 	se.Debug = true;
-	se.Step = 1;
+	se.Step = 1; // 1 second update
 	se.BlockScale = 0.5;
 
 	/**
@@ -22,9 +22,9 @@
 	 */
 	se.Collectible = function(_pos) {
 		if (se.Debug) console.log("Collectible created", this);
-		this.gx = new Raster("collectible-01");
-		this.gx.position = _pos;
-		this.gx.scale(se.BlockScale);
+		this.item = new Raster("collectible-01");
+		this.item.position = _pos;
+		this.item.scale(se.BlockScale);
 	};
 
 	/**
@@ -37,21 +37,27 @@
 		this.item = new Raster(_gx[se.Directions.DOWN].stand);
 		this.item.position = _pos;
 		this.item.scale(se.BlockScale);
-
-		// Hierarchy
-		var next;
+		this.next = null;
 	};
 
 	se.Block.prototype.update = function() {
 		this.move(this.dir * se.Step);
 		if (this.next) {
 			this.next.update();
-			this.next.turn(this.dir);
+			// this.next.turn(this.dir);
 		}
 	};
 
 	se.Block.prototype.move = function(_pos) {
 		this.item.position += _pos;
+	};
+
+	se.Block.prototype.intersects = function (_item) {
+		if (_item) {
+			if ((this.item.bounds.x + this.item.bounds.width > _item.bounds.x) && (this.item.bounds.y + this.item.bounds.height > _item.bounds.y) && (_item.bounds.x + _item.bounds.width > this.item.bounds.x) && (_item.bounds.y + _item.bounds.height > this.item.bounds.y)) {
+				return true;
+			}
+		}
 	};
 
 	se.Block.prototype.turn = function(dir) {
@@ -73,11 +79,16 @@
 		}
 	};
 
+	se.Player = function() {
+		this.collected = 0;
+	};
+
 	/**
 	 * Player controllable pawn
 	 * @constructor
 	 */
-	se.Pawn = function() {
+	se.Pawn = function(_player) {
+		this.player = _player;
 		var headGx = {};
 		headGx[se.Directions.LEFT] = config.img.pawn.left;
 		headGx[se.Directions.UP] = config.img.pawn.up;
@@ -89,21 +100,33 @@
 	};
 
 	se.Pawn.prototype.grow = function() {
-		var blockGxU = ['collectible-01'];
-		var block = new se.Block(blockGx);
-		this.blocks.push();
+		var blockGx = 	{};
+		blockGx[se.Directions.LEFT] = config.img.pawn.left;
+		blockGx[se.Directions.UP] = config.img.pawn.up;
+		blockGx[se.Directions.RIGHT] = config.img.pawn.right;
+		blockGx[se.Directions.DOWN] = config.img.pawn.down;
+		this.head.next = new se.Block(this.head.position, blockGx);
 	};
 
 	se.Pawn.prototype.turn = function(dir) {
-        this.head.item.image = document.getElementById(this.head.gx[dir].move[0]);
+		this.head.item.image = document.getElementById(this.head.gx[dir].move[0]);
 		this.head.turn(dir);
 	};
 
 	/**
 	 * Pawn frame update
 	 */
-	se.Pawn.prototype.update = function() {
+	se.Pawn.prototype.update = function(_game) {
 		this.head.update();
+		var i, intersectsWithCollectible, intersectsWithObstacle;
+		for (i = 0; i < _game.collectibles.length; i++) {
+			if (this.head.intersects(_game.collectibles[i].item)) {
+				_game.collectibles[i].item.remove();
+				_game.collectibles.splice(i, 1);
+				this.grow();
+				this.player.collected++;
+			}
+		}
 	};
 
 	/**
@@ -111,11 +134,13 @@
 	 * @constructor
 	 */
 	se.Game = function() {
-		this.pawn = new se.Pawn();
+		this.player = new se.Player();
+		this.pawn = new se.Pawn(this.player);
 		this.collectibles = [];
 		this.obstacles = [];
-
 		this.collectibles.push(new se.Collectible(new Point(300, 200)));
+		this.collectibles.push(new se.Collectible(new Point(150, 100)));
+		this.collectibles.push(new se.Collectible(new Point(200, 150)));
 		if (se.Debug) console.log("Game created", this);
 	};
 
@@ -130,11 +155,10 @@
 	 * Frame update
 	 */
 	se.Game.prototype.update = function() {
-		this.pawn.update();
+		this.pawn.update(this);
 	};
 })(window.se = window.se || {});
 
-window.game = new se.Game();
 
 // Create a Paper.js Path to draw a line into it:
 var path = new Path();
@@ -146,6 +170,8 @@ path.moveTo(start);
 // Note the plus operator on Point objects.
 // PaperScript does that for us, and much more!
 path.lineTo(start + [ 100, -50 ]);
+
+window.game = new se.Game();
 
 view.onFrame = function(event) {
 	game.update();
