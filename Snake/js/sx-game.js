@@ -80,15 +80,15 @@
 	};
 
 	/**
-	 * Block
+	 * Actor
 	 * @param pos
 	 * @param size
 	 * @param prev
 	 * @param id
-	 * @returns {sx.Block}
+	 * @returns {sx.Actor}
 	 * @constructor
 	 */
-	sx.Block = function(pos, size, prev, id) {
+	sx.Actor = function(pos, size, prev, id) {
 		this.pos = pos;
 		this.size = size;
 		this.prev = prev;
@@ -96,7 +96,7 @@
 		this.next = null;
 		this.entity = null;
 
-		if (sx.Debug) { console.log('Block created: ', JSON.stringify(pos), JSON.stringify(size), (prev ? prev.id : '-'), id); }
+		if (sx.Debug) { console.log('Actor created: ', JSON.stringify(pos), JSON.stringify(size), (prev ? prev.id : '-'), id); }
 		return this;
 	};
 
@@ -105,7 +105,7 @@
 	 * @param pos
 	 * @param context
 	 */
-	sx.Block.prototype.update = function(pos, context) {
+	sx.Actor.prototype.update = function(pos, context) {
 		// Clear
 
 		if (this.next) {
@@ -139,7 +139,7 @@
 
 		var block = null, prev = null;
 		for (var i = 0; i < length; i++) {
-			block = new sx.Block(pos, block_size, prev, i);
+			block = new sx.Actor(pos, block_size, prev, i);
 			if (prev) {
 				prev.next = block;
 			}

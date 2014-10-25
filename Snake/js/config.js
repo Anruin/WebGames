@@ -29,27 +29,27 @@ var config = {
 			}
 		}
 	},
-   img: {
-       dir:"img/",
-       ext: ".png",
-       pawn: {
-				 left: {
-					 move: ["pawn-mv-l01", "pawn-mv-l02"]
-				 },
-				 up: {
-					 stand: "pawn-st-u",
-					 move: ["pawn-mv-u01", "pawn-mv-u02"]
-				 },
-				 right: {
-					 move: ["pawn-mv-r01", "pawn-mv-r02"]
-				 },
-				 down: {
-					 stand: "pawn-st-d",
-					 move: ["pawn-mv-d01", "pawn-mv-d02"]
-				 }
-       },
-       food: ["collectible-01", "collectible-02", "collectible-03", "collectible-04"]
-   }
+	img: {
+		dir:"img/",
+		ext: ".png",
+		pawn: {
+			left: {
+				move: ["pawn-mv-l01", "pawn-mv-l02"]
+			},
+			up: {
+				stand: "pawn-st-u",
+				move: ["pawn-mv-u01", "pawn-mv-u02"]
+			},
+			right:
+			{
+				move: ["pawn-mv-r01", "pawn-mv-r02"]},
+			down: {
+				stand: "pawn-st-d",
+				move: ["pawn-mv-d01", "pawn-mv-d02"]
+			}
+		},
+		collectibles: ["collectible-01", "collectible-02", "collectible-03", "collectible-04"]
+	}
 };
 
 function addImage(name) {
