@@ -28,55 +28,13 @@
 	};
 
 	/**
-	 * Block graphics structure
-	 * @param _up Sprites array for upwards direction
-	 * @param _down Sprites array for downwards direction
-	 * @param _left Sprites array for left direction
-	 * @param _right Sprites array for right direction
-	 * @constructor
-	 */
-	se.BlockGraphics = function (_up, _down, _left, _right) {
-		this.u = [];
-		this.d = [];
-		this.l = [];
-		this.r = [];
-		var i = 0, raster = null;
-		for (i = 0; i < _up.length; i++) {
-			raster = new Raster(_up[i]);
-			raster.visible = false;
-			raster.scale(se.BlockScale);
-			this.u.push(raster);
-		}
-		for (i = 0; i < _down.length; i++) {
-			raster = new Raster(_down[i]);
-			raster.visible = false;
-			raster.scale(se.BlockScale);
-			this.d.push(raster);
-		}
-		for (i = 0; i < _left.length; i++) {
-			raster = new Raster(_left[i]);
-			raster.visible = false;
-			raster.scale(se.BlockScale);
-			this.l.push(raster);
-		}
-		for (i = 0; i < _right.length; i++) {
-			raster = new Raster(_right[i]);
-			raster.visible = false;
-			raster.scale(se.BlockScale);
-			this.r.push(raster);
-		}
-		this.d[0].visible = true;
-		if (se.Debug) console.log("Block graphics created", this);
-	};
-
-	/**
 	 * Block
 	 * @constructor
 	 */
 	se.Block = function(_pos, _gx) {
 		this.gx = _gx;
 		this.dir = new Point(0, 0);
-		this.item = new Raster(_gx[0][0]);
+		this.item = new Raster(_gx[se.Directions.DOWN].stand);
 		this.item.position = _pos;
 		this.item.scale(se.BlockScale);
 
@@ -121,10 +79,11 @@
 	 */
 	se.Pawn = function() {
 		var headGx = {};
-		headGx[se.Directions.LEFT] = ['pawn-mv-l01', 'pawn-mv-l02'];
-		headGx[se.Directions.UP] = ['pawn-mv-u01', 'pawn-mv-u02'];
-		headGx[se.Directions.RIGHT] = ['pawn-mv-r01', 'pawn-mv-r02'];
-		headGx[se.Directions.DOWN] = ['pawn-mv-d01', 'pawn-mv-d02'];
+		headGx[se.Directions.LEFT] = config.img.pawn.left;
+		headGx[se.Directions.UP] = config.img.pawn.up;
+		headGx[se.Directions.RIGHT] = config.img.pawn.right;
+		headGx[se.Directions.DOWN] = config.img.pawn.down;
+
 		this.head = new se.Block(Point(0, 0), headGx);
 		if (se.Debug) console.log("Pawn created", this);
 	};
@@ -136,9 +95,7 @@
 	};
 
 	se.Pawn.prototype.turn = function(dir) {
-        this.head.item.image = document.getElementById(this.head.gx[dir][0]);
-        //this.head.item.rotate(3);
-        //console.log(this.head.item.image);
+        this.head.item.image = document.getElementById(this.head.gx[dir].move[0]);
 		this.head.turn(dir);
 	};
 
@@ -166,6 +123,7 @@
 	 * Startup initialization
 	 */
 	se.Game.prototype.start = function() {
+
 	};
 
 	/**

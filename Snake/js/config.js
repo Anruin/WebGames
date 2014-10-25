@@ -30,22 +30,44 @@ var config = {
 		}
 	},
    img: {
-      snake: {
-         down: {
-            stand: dir.img + "pawn-st-d.png",
-            move: [dir.img + "pawn-mv-d01.png", dir.img + "pawn-mv-d02.png"]
-         },
-         up: {
-            stand: dir.img + "pawn-st-u.png",
-            move: [dir.img + "pawn-mv-u01.png", dir.img + "pawn-mv-u02.png"]
-         },
-         left: {
-            move: [dir.img + "pawn-mv-l01.png", dir.img + "pawn-mv-l02.png"]
-         },
-         right: {
-            move: [dir.img + "pawn-mv-r01.png", dir.img + "pawn-mv-r02.png"]
-         }
-      },
-      food: [dir.img + "collectible-01.png", dir.img + "collectible-02.png", dir.img + "collectible-03.png", dir.img + "collectible-04.png"]
+       dir:"img/",
+       ext: ".png",
+       pawn: {
+             down: {
+                stand: "pawn-st-d",
+                move: ["pawn-mv-d01", "pawn-mv-d02"]
+             },
+             up: {
+                stand: "pawn-st-u",
+                move: ["pawn-mv-u01", "pawn-mv-u02"]
+             },
+             left: {
+                move: ["pawn-mv-l01", "pawn-mv-l02"]
+             },
+             right: {
+                move: ["pawn-mv-r01", "pawn-mv-r02"]
+             }
+       },
+       food: ["collectible-01", "collectible-02", "collectible-03", "collectible-04"]
    }
 };
+
+function addImage(name) {
+    var img = document.createElement("IMG");
+    img.setAttribute('src', config.img.dir + name + config.img.ext);
+    img.setAttribute('id', name);
+    var container = document.getElementById('images');
+    container.appendChild(img);
+}
+for(var dir in config.img.pawn){
+    if(config.img.pawn[dir].stand)
+        addImage(config.img.pawn[dir].stand);
+
+    config.img.pawn[dir].move.map(function(name){
+        addImage(name);
+    });
+}
+
+config.img.food.map(function(name){
+    addImage(name);
+});
