@@ -34,17 +34,28 @@
 	se.Block = function(_pos, _gx) {
 		this.gx = _gx;
 		this.dir = new Point(0, 0);
+		this.dirNum = 3;
 		this.item = new Raster(_gx[se.Directions.DOWN].stand);
 		this.item.position = _pos;
 		this.item.scale(se.BlockScale);
 		this.next = null;
 	};
 
-	se.Block.prototype.update = function() {
+	se.Block.prototype.update = function(event) {
 		this.move(this.dir * se.Step);
 		if (this.next) {
 			this.next.update();
 			// this.next.turn(this.dir);
+		}
+
+		var num = event.count%10;
+		var length = this.gx[this.dirNum].move.length;
+		while(num >= length)
+			num -= length;
+
+		if(event.count%49 === 0) {
+			console.log(this.gx[this.dirNum].move[num]);
+			this.item.image = document.getElementById(this.gx[this.dirNum].move[num]);
 		}
 	};
 
@@ -64,15 +75,19 @@
 		switch (dir) {
 			case se.Directions.UP:
 				this.dir = new Point(0, -1);
+				this.dirNum = se.Directions.UP;
 				break;
 			case se.Directions.DOWN:
 				this.dir = new Point(0, 1);
+				this.dirNum = se.Directions.DOWN;
 				break;
 			case se.Directions.LEFT:
 				this.dir = new Point(-1, 0);
+				this.dirNum = se.Directions.LEFT;
 				break;
 			case se.Directions.RIGHT:
 				this.dir = new Point(1, 0);
+				this.dirNum = se.Directions.RIGHT;
 				break;
 			default:
 				if (se.Debug) console.log("Something went wrong...");
@@ -117,7 +132,7 @@
 	 * Pawn frame update
 	 */
 	se.Pawn.prototype.update = function(_game) {
-		this.head.update();
+		this.head.update(event);
 		var i, intersectsWithCollectible, intersectsWithObstacle;
 		for (i = 0; i < _game.collectibles.length; i++) {
 			if (this.head.intersects(_game.collectibles[i].item)) {
@@ -154,8 +169,8 @@
 	/**
 	 * Frame update
 	 */
-	se.Game.prototype.update = function() {
-		this.pawn.update(this);
+	se.Game.prototype.update = function(event) {
+		this.pawn.update(event);
 	};
 })(window.se = window.se || {});
 
@@ -174,7 +189,7 @@ path.lineTo(start + [ 100, -50 ]);
 window.game = new se.Game();
 
 view.onFrame = function(event) {
-	game.update();
+	game.update(event);
 };
 
 // Create a centered text item at the center of the view:
