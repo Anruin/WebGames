@@ -5,7 +5,7 @@ console.log('test.js');
 (function(se, paper) {
 })(window.se = window.se || {}, paper);
 
-var scene, gift, pawn, animation, framesLeft, framesUp, framesRight, framesDown;
+var scene, gift, pawn, animation, framesLeft, framesUp, framesRight, framesDown, controller;
 
 se.$debug = false;
 
@@ -35,10 +35,11 @@ game.activeScene = game.scenes[0];
 console.log('Active scene set', game.activeScene);
 
 // Create pawn and initialize graphics
-pawn = game.activeScene.createActor();
+pawn = new se.Santa();
 pawn.item = new Raster();
 pawn.item.position = [100, 100];
-console.log('Actor created', pawn);
+game.activeScene.pawns.push(pawn);
+console.log('Pawn created', pawn);
 
 // Frames for animations
 framesLeft = [
@@ -59,6 +60,7 @@ animation = new se.Animation();
 animation.name = 'WalkLeft';
 animation.loop = true;
 animation.frames = framesLeft;
+console.log(pawn);
 pawn.animations.push(animation);
 
 animation = new se.Animation();
@@ -82,3 +84,12 @@ pawn.animations.push(animation);
 // Select active animation
 pawn.activeAnimation = pawn.animations[0];
 
+// Create controller
+controller = new se.SantaController();
+controller.pawn = pawn;
+
+function onKeyDown(event) {
+	controller.onInput(event);
+	// When a key is pressed, set the content of the text item:
+	text.content = 'The ' + event.key + ' key was pressed!';
+}

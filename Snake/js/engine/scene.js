@@ -20,8 +20,12 @@ console.log('scene.js');
 	se.Scene.prototype.update = function (_dt) {
 		if (se.$debug) console.log('Scene update');
 
-		for (var i = 0; i < this.actors.length; i++) {
-			this.actors[i].update(_dt);
+		for (var actor in this.actors) {
+			actor.update(_dt);
+		}
+
+		for (var pawn in this.pawns) {
+			pawn.update(_dt);
 		}
 	};
 

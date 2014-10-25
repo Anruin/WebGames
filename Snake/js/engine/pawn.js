@@ -5,6 +5,7 @@ console.log('pawn.js');
 (function(se, paper) {
 	se.Pawn = function() {
 		this.controller = null;
+		se.Actor.call(this);
 	};
 	se.$extend(se.Pawn, se.Actor);
 
