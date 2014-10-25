@@ -1,12 +1,19 @@
 (function(se) {
 	se.Debug = true;
+	se.Step = 1;
+	se.BlockScale = 0.5;
+
+	/**
+	 * Directions enumerator
+	 */
+	se.Directions = { LEFT: 0, UP: 1, RIGHT: 2, DOWN: 3 };
 
 	/**
 	 * Obstacle
 	 * @constructor
 	 */
 	se.Obstacle = function () {
-		if (se.Debug) console.log("Obstacle created");
+		if (se.Debug) console.log("Obstacle created", this);
 	};
 
 	/**
@@ -14,7 +21,7 @@
 	 * @constructor
 	 */
 	se.Collectible = function() {
-		if (se.Debug) console.log("Collectible created");
+		if (se.Debug) console.log("Collectible created", this);
 	};
 
 	/**
@@ -31,27 +38,48 @@
 		this.l = [];
 		this.r = [];
 		var i = 0, raster = null;
-		for (i = _up.length - 1; i >= 0; i--) {
+		for (i = 0; i < _up.length; i++) {
 			raster = new Raster(_up[i]);
 			raster.visible = false;
+			raster.scale(se.BlockScale);
 			this.u.push(raster);
 		}
-		for (i = _down.length - 1; i >= 0; i--) {
+		for (i = 0; i < _down.length; i++) {
 			raster = new Raster(_down[i]);
 			raster.visible = false;
+			raster.scale(se.BlockScale);
 			this.d.push(raster);
 		}
-		for (i = _left.length - 1; i >= 0; i--) {
+		for (i = 0; i < _left.length; i++) {
 			raster = new Raster(_left[i]);
 			raster.visible = false;
+			raster.scale(se.BlockScale);
 			this.l.push(raster);
 		}
-		for (i = _right.length - 1; i >= 0; i--) {
+		for (i = 0; i < _right.length; i++) {
 			raster = new Raster(_right[i]);
 			raster.visible = false;
+			raster.scale(se.BlockScale);
 			this.r.push(raster);
 		}
+		this.d[0].visible = true;
 		if (se.Debug) console.log("Block graphics created", this);
+	};
+
+	se.BlockGraphics.prototype.move = function(_pos) {
+		var i = 0;
+		for (i = 0; i < this.u.length; i++) {
+			this.u[i].position += _pos;
+		}
+		for (i = 0; i < this.d.length; i++) {
+			this.d[i].position += _pos;
+		}
+		for (i = 0; i < this.l.length; i++) {
+			this.l[i].position += _pos;
+		}
+		for (i = 0; i < this.r.length; i++) {
+			this.r[i].position += _pos;
+		}
 	};
 	
 	/**
@@ -60,14 +88,40 @@
 	 */
 	se.Block = function(_graphics) {
 		this.gx = _graphics;
+		this.dir = new Point(0, 0);
 
 		// Hierarchy
 		var next;
 	};
 
 	se.Block.prototype.update = function() {
+		this.gx.move(this.dir * se.Step);
 		if (this.next) {
 			this.next.update();
+			this.next.turn(this.dir);
+		}
+	};
+
+	se.Block.prototype.turn = function(dir) {
+		switch (dir) {
+			case se.Directions.UP:
+				this.dir.x = 0;
+				this.dir.y = -1;
+				break;
+			case se.Directions.DOWN:
+				this.dir.x = 0;
+				this.dir.y = 1;
+				break;
+			case se.Directions.LEFT:
+				this.dir.x = -1;
+				this.dir.y = 0;
+				break;
+			case se.Directions.RIGHT:
+				this.dir.x = 1;
+				this.dir.y = 0;
+				break;
+			default:
+				if (se.Debug) console.log("Something went wrong...");
 		}
 	};
 
@@ -82,7 +136,7 @@
 		var headGxR = ['pawn-mv-r01', 'pawn-mv-r02'];
 		var headGx = new se.BlockGraphics(headGxU, headGxD, headGxL, headGxR);
 		this.head = new se.Block(headGx);
-		if (se.Debug) console.log("Pawn created");
+		if (se.Debug) console.log("Pawn created", this);
 	};
 
 	se.Pawn.prototype.grow = function() {
@@ -92,7 +146,7 @@
 	};
 
 	se.Pawn.prototype.turn = function(dir) {
-		console.log("Turning " + dir);
+		this.head.turn(dir);
 	};
 
 	/**
@@ -100,6 +154,7 @@
 	 */
 	se.Pawn.prototype.update = function() {
 		this.head.update();
+	//	if (se.Debug) console.log("Pawn update");
 	};
 
 	/**
@@ -110,7 +165,7 @@
 		this.pawn = new se.Pawn();
 		this.collectibles = [];
 		this.obstacles = [];
-		if (se.Debug) console.log("Game created");
+		if (se.Debug) console.log("Game created", this);
 	};
 
 	/**
@@ -127,7 +182,6 @@
 })(window.se = window.se || {});
 
 var game = new se.Game();
-console.log(game);
 
 // Create a Paper.js Path to draw a line into it:
 var path = new Path();
@@ -141,6 +195,7 @@ path.moveTo(start);
 path.lineTo(start + [ 100, -50 ]);
 
 view.onFrame = function(event) {
+	game.pawn.update();
 };
 
 // Create a centered text item at the center of the view:
@@ -153,13 +208,13 @@ var text = new PointText({
 
 function onKeyDown(event) {
 	if (event.key == "up" || event.key == "w") {
-		game.pawn.turn("up");
+		game.pawn.turn(se.Directions.UP);
 	} else if (event.key == "down" || event.key == "s") {
-		game.pawn.turn("down");
+		game.pawn.turn(se.Directions.DOWN);
 	} else if (event.key == "left" || event.key == "a") {
-		game.pawn.turn("left");
+		game.pawn.turn(se.Directions.LEFT);
 	} else if (event.key == "right" || event.key == "d") {
-		game.pawn.turn("right");
+		game.pawn.turn(se.Directions.RIGHT);
 	}
 	// When a key is pressed, set the content of the text item:
 	text.content = 'The ' + event.key + ' key was pressed!';
