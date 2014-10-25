@@ -20,8 +20,11 @@
 	 * Collectible
 	 * @constructor
 	 */
-	se.Collectible = function() {
+	se.Collectible = function(_pos) {
 		if (se.Debug) console.log("Collectible created", this);
+		this.gx = new Raster("collectible-01");
+		this.gx.position = _pos;
+		this.gx.scale(se.BlockScale);
 	};
 
 	/**
@@ -105,20 +108,16 @@
 	se.Block.prototype.turn = function(dir) {
 		switch (dir) {
 			case se.Directions.UP:
-				this.dir.x = 0;
-				this.dir.y = -1;
+				this.dir = new Point(0, -1);
 				break;
 			case se.Directions.DOWN:
-				this.dir.x = 0;
-				this.dir.y = 1;
+				this.dir = new Point(0, 1);
 				break;
 			case se.Directions.LEFT:
-				this.dir.x = -1;
-				this.dir.y = 0;
+				this.dir = new Point(-1, 0);
 				break;
 			case se.Directions.RIGHT:
-				this.dir.x = 1;
-				this.dir.y = 0;
+				this.dir = new Point(1, 0);
 				break;
 			default:
 				if (se.Debug) console.log("Something went wrong...");
@@ -147,6 +146,7 @@
 
 	se.Pawn.prototype.turn = function(dir) {
 		this.head.turn(dir);
+
 	};
 
 	/**
@@ -154,7 +154,6 @@
 	 */
 	se.Pawn.prototype.update = function() {
 		this.head.update();
-	//	if (se.Debug) console.log("Pawn update");
 	};
 
 	/**
@@ -165,6 +164,8 @@
 		this.pawn = new se.Pawn();
 		this.collectibles = [];
 		this.obstacles = [];
+
+		this.collectibles.push(new se.Collectible(new Point(300, 200)));
 		if (se.Debug) console.log("Game created", this);
 	};
 
@@ -178,10 +179,11 @@
 	 * Frame update
 	 */
 	se.Game.prototype.update = function() {
+		this.pawn.update();
 	};
 })(window.se = window.se || {});
 
-var game = new se.Game();
+window.game = new se.Game();
 
 // Create a Paper.js Path to draw a line into it:
 var path = new Path();
@@ -195,7 +197,7 @@ path.moveTo(start);
 path.lineTo(start + [ 100, -50 ]);
 
 view.onFrame = function(event) {
-	game.pawn.update();
+	game.update();
 };
 
 // Create a centered text item at the center of the view:
