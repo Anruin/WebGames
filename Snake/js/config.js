@@ -68,6 +68,6 @@ for(var dir in config.img.pawn){
     });
 }
 
-config.img.food.map(function(name){
+config.img.collectibles.map(function(name){
     addImage(name);
 });

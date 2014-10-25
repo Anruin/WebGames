@@ -19,7 +19,10 @@
 			this.next.update(event);
 			// this.next.turn(this.dir);
 		}
-
+		//fixik:
+		if(!this.gx[this.dirNum].move)
+			return true;
+		
 		var num = event.count%10;
 		var length = this.gx[this.dirNum].move.length;
 		while(num >= length)
