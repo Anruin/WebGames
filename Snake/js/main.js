@@ -136,6 +136,9 @@
 	};
 
 	se.Pawn.prototype.turn = function(dir) {
+        this.head.item.image = document.getElementById(this.head.gx[dir][0]);
+        //this.head.item.rotate(3);
+        //console.log(this.head.item.image);
 		this.head.turn(dir);
 	};
 
