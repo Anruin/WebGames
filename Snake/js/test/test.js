@@ -58,13 +58,9 @@ define([
 	// Select active animation
 	santa.activeAnimation = santa.animations[0];
 
+	game.activeScene.createGift();
 	// Create pawn and initialize graphics
-	var gift = new se.Gift();
-	gift.item = new paper.Raster();
-	gift.item.position = new paper.Point(300,300);
-	gift.item.image = document.getElementById(config.img.collectibles[0]);
-	gift.item.scale(0.5);
-	game.activeScene.collectibles.push(gift);
+
 	console.log('Gift created', gift);
 
 	// Create controller

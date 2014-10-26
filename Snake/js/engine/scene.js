@@ -3,9 +3,12 @@
  */
 define([
 	"../se",
+	"../game/config",
+	"../helpers/helpers",
 	"./actor",
-	"./pawn"
-], function (se) {
+	"./pawn",
+	"../game/gift"
+], function (se, config, helpers) {
 	console.log('scene.js');
 	/**
 	 * Scene constructor
@@ -36,8 +39,10 @@ define([
 			pawn.update(_dt);
 
 			curScene.collectibles.map(function(obj){
-				if(pawn.intersects(obj))
+				if(pawn.intersects(obj)){
 					obj.item.remove();
+					curScene.createGift();
+				}
 			});
 		});
 	};
@@ -59,5 +64,16 @@ define([
 		var pawn = new se.Pawn();
 		_player.possess(pawn);
 		this.pawns.push(pawn);
+	}
+	se.Scene.prototype.createGift = function() {
+		var gift = new se.Gift();
+		gift.item = new paper.Raster();
+		gift.item.position = helpers.getRandomPointInView();
+
+		var randomImage = config.img.collectibles[helpers.randomIndex(config.img.collectibles)];
+		gift.item.image = document.getElementById(randomImage);
+
+		gift.item.scale(0.3);
+		this.collectibles.push(gift);
 	}
 })
