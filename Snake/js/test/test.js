@@ -11,10 +11,11 @@ define([
 	"../engine/animation",
 	"../game/santa",
 	"../game/santa_controller",
-	"../game/gift"
+			"../game/gift"
 ], function (se, config, helpers){
-function Start () {
-	// Create game
+		function Start () {
+	helpers.addAllImagesToDOM();
+			// Create game
 	paper.project = new paper.Project(document.getElementById('sx-game'));
 	paper.project.tool = new paper.Tool({});
 	window.game = new se.Game(paper.project);

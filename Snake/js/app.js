@@ -1,7 +1,7 @@
 define([
 	"./test/test",
-	"./helpers/helpers"
+	"./helpers/helpers",
+	"domReady!"
   ], function(test, helpers) {
-		helpers.addAllImagesToDOM();
     return test;
 });
