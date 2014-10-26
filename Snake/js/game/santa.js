@@ -20,7 +20,8 @@ console.log('santa.js');
 	};
 
 	se.Santa.prototype.turn = function(_params) {
-
+		this.velocity = _params.direction;
+		console.log(this.velocity);
 	};
 
 })(window.se = window.se || {}, paper);

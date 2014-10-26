@@ -6,22 +6,31 @@ console.log('actor.js');
 	se.Actor = function() {
 		/**
 		 * Paper item
-		 * @type {}
+		 * @type Object
 		 */
 		this.item = null;
 		/**
 		 * Animations library
-		 * @type {}
+		 * @type Object
 		 */
 		this.animations = null;
 		/**
+		 * Active animation
+		 * @type Array
+		 */
+		this.activeAnimation = null;
+		this.animationTimer = 0.0;
+		/**
 		 * Velocity
-		 * @type {Point}
+		 * @type Object
 		 */
 		this.velocity = null;
 	};
 
 	se.Actor.prototype.update = function(_dt) {
+		if (this.activeAnimation) {
+			this.activeAnimation.update(_dt);
+		}
 	};
 
 	se.Actor.prototype.move = function(_point) {
@@ -29,9 +38,7 @@ console.log('actor.js');
 	};
 
 	se.Actor.prototype.intersects = function(_actor) {
-		if (_actor && ((this.item.bounds.x + this.item.bounds.width > _actor.item.bounds.x) && (this.item.bounds.y + this.item.bounds.height > _actor.item.bounds.y) && (_actor.item.bounds.x + _actor.item.bounds.width > this.item.bounds.x) && (_actor.item.bounds.y + _actor.item.bounds.height > this.item.bounds.y)))
-			return true;
-		return false;
+		return !!(_actor && ((this.item.bounds.x + this.item.bounds.width > _actor.item.bounds.x) && (this.item.bounds.y + this.item.bounds.height > _actor.item.bounds.y) && (_actor.item.bounds.x + _actor.item.bounds.width > this.item.bounds.x) && (_actor.item.bounds.y + _actor.item.bounds.height > this.item.bounds.y)));
 	};
 
 	/////////////////////////////////////

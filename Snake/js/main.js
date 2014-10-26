@@ -3,7 +3,12 @@
 	se.Step = 1; // 1 second update
 	se.BlockScale = 0.5;
 
-	se.Directions = { LEFT: 0, UP: 1, RIGHT: 2, DOWN: 3 };
+	se.Directions = {
+		LEFT: new Point(-1, 0),
+		UP: new Point(0, -1),
+		RIGHT: new Point(1, 0),
+		DOWN: new Point(0, 1)
+	};
 
 	window.game = new se.Game();
 })(window.se = window.se || {});

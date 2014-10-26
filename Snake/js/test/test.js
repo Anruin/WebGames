@@ -7,3 +7,8 @@ console.log('test.js');
 
 
 })(window.se = window.se || {}, paper);
+
+var actor01 = new se.Actor();
+actor01.animations = {
+	
+};

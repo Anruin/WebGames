@@ -5,7 +5,7 @@ console.log('gift.js');
 (function(se, paper) {
 
 	se.Gift = function() {
-	}
+	};
 
 	se.EXTEND(se.Gift, se.Collectible);
 

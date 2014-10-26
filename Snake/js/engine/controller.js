@@ -5,6 +5,15 @@ console.log('controller.js');
 (function(se, paper) {
 	se.Controller = function() {
 		this.pawn = null;
+		this.controls = null;
+	};
+
+	se.Controller.prototype.onInput = function(_event) {
+		var controls = this.controls.filter(function(o) {
+			return (o.keys.indexOf(_event.key) != -1);
+		});
+		var control = controls[0];
+		control.action(control.params);
 	};
 
 	se.Controller.prototype.possess = function(_pawn) {

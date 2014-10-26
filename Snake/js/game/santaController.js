@@ -10,37 +10,30 @@ console.log('santaController.js');
 			{
 				keys: ['a', 'left'],
 				action: controller.pawn.turn,
-				params: [se.Directions.LEFT]
+				params: { direction: se.Directions.LEFT }
 			}, {
 				keys: ['w', 'up'],
 				action: controller.pawn.turn,
-				params: [se.Directions.UP]
+				params: { direction: se.Directions.UP }
 			}, {
 				keys: ['d', 'right'],
 				action: controller.pawn.turn,
-				params: [se.Directions.RIGHT]
+				params: { direction: se.Directions.RIGHT }
 			}, {
 				keys: ['s', 'down'],
 				action: controller.pawn.turn,
-				params: [se.Directions.DOWN]
+				params: { direction: se.Directions.DOWN }
 			}
 		];
 	};
 
-	se.SantaController.prototype.onKeyDown = function(_event) {
-		var results = this.controls.filter(function(temp) {
-			return (temp.keys.indexOf(_event.key) != -1);
-		});
-		var control = results[0];
-		control.action(control.params);
-	};
-
+	se.EXTEND(se.SantaController, se.Controller);
 })(window.se = window.se || {});
 
 var controller = new se.SantaController();
 
 function onKeyDown(event) {
-	controller.onKeyDown(event);
+	controller.onInput(event);
 	// When a key is pressed, set the content of the text item:
 	text.content = 'The ' + event.key + ' key was pressed!';
 }
