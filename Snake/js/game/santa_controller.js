@@ -15,19 +15,19 @@ define([
 			{
 				keys: ['a', 'left'],
 				func: 'turn',
-				params: { direction: se.Directions.LEFT }
+				params: { direction: se.Directions.LEFT, name: "left" }
 			}, {
 				keys: ['w', 'up'],
 				func: 'turn',
-				params: { direction: se.Directions.UP }
+				params: { direction: se.Directions.UP, name: "up" }
 			}, {
 				keys: ['d', 'right'],
 				func: 'turn',
-				params: { direction: se.Directions.RIGHT }
+				params: { direction: se.Directions.RIGHT, name: "right" }
 			}, {
 				keys: ['s', 'down'],
 				func: 'turn',
-				params: { direction: se.Directions.DOWN }
+				params: { direction: se.Directions.DOWN, name: "down" }
 			}
 		];
 	};

@@ -31,6 +31,9 @@ define([
 	se.Santa.prototype.turn = function(_params) {
 		console.log('Was velocity: ' + this.velocity);
 		this.velocity = _params.direction;
+		this.activeAnimation = this.animations.filter(function(obj){
+			return obj.name == _params.name;
+		})[0];
 		console.log('Set velocity: ' + this.velocity);
 	};
 	se.Santa.prototype.action = function(_func, _params) {

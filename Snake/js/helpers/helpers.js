@@ -39,7 +39,7 @@ define([
 		getFramesAnimations : function() {
 			var animations = [];
 			for(objName in config.img.pawn) {
-				var name = 'frames-' + objName;
+				var name = objName;
 				var frames = [];
 
 				config.img.pawn[objName].move.map(function(image){
