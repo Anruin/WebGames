@@ -14,19 +14,19 @@ define([
 		this.controls = [
 			{
 				keys: ['a', 'left'],
-				action: this.pawn.turn,
+				func: 'turn',
 				params: { direction: se.Directions.LEFT }
 			}, {
 				keys: ['w', 'up'],
-				action: this.pawn.turn,
+				func: 'turn',
 				params: { direction: se.Directions.UP }
 			}, {
 				keys: ['d', 'right'],
-				action: this.pawn.turn,
+				func: 'turn',
 				params: { direction: se.Directions.RIGHT }
 			}, {
 				keys: ['s', 'down'],
-				action: this.pawn.turn,
+				func: 'turn',
 				params: { direction: se.Directions.DOWN }
 			}
 		];

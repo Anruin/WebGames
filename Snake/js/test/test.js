@@ -30,7 +30,7 @@ function Start () {
 
 	paper.tool.onKeyDown = function(event) {
 		console.log('keydown');
-		controller.onInput(event);
+		controller.onInput(event.key);
 	};
 
 	// Create scene
@@ -46,19 +46,19 @@ function Start () {
 	console.log('Active scene set', game.activeScene);
 
 	// Create pawn and initialize graphics
-	pawn = new se.Santa();
-	pawn.item = new paper.Raster();
-	pawn.item.position = [100, 100];
-	game.activeScene.pawns.push(pawn);
-	console.log('Pawn created', pawn);
+	var santa = new se.Santa();
+	santa.item = new paper.Raster();
+	santa.item.position = new paper.Point(100,100);
+	game.activeScene.pawns.push(santa);
+	console.log('Pawn created', santa);
 
-	pawn.animations = helpers.getFramesAnimations();
+	santa.animations = helpers.getFramesAnimations();
 	// Select active animation
-	pawn.activeAnimation = pawn.animations[0];
+	santa.activeAnimation = santa.animations[0];
 
 	// Create controller
 	console.log('Create controller');
-	controller = new se.SantaController(pawn);
+	controller = new se.SantaController(santa);
 	console.log(controller);
 
 	//paper.project.initialize();

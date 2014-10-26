@@ -14,6 +14,9 @@ define([
 	};
 	se.$extend(se.Pawn, se.Actor);
 
+	se.Pawn.prototype.update = function(_dt) {
+		se.Actor.prototype.update.call(this, _dt);
+	};
 	/*
 	se.Pawn = function(_player) {
 		this.player = _player;

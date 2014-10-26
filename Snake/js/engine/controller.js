@@ -11,12 +11,12 @@ define([
 		this.controls = null;
 	};
 
-	se.Controller.prototype.onInput = function(_event) {
+	se.Controller.prototype.onInput = function(_key) {
 		var control = this.controls.filter(function(o) {
-			return (o.keys.indexOf(_event.key) != -1);
+			return (o.keys.indexOf(_key) != -1);
 		})[0];
 
-		control.action(control.params);
+		this.pawn.action(control.func, control.params);
 	};
 
 	se.Controller.prototype.possess = function(_pawn) {

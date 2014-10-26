@@ -20,20 +20,20 @@ define([
 	se.Animation.prototype.update = function (_dt) {
 		if (se.$debug) console.log('Animation update', this.activeFrameIndex);
 
-		if (this.frames.length > 0) {
-			var activeFrame = this.frames[this.activeFrameIndex];
-			if (this.timer > 0) {
-				this.timer -= _dt;
-				return false;
-			} else {
-				this.activeFrameIndex++;
-				if (this.activeFrameIndex >= this.frames.length)
-					this.activeFrameIndex = 0;
-				this.timer = activeFrame.duration;
-				return activeFrame.image;
-			}
-		}
+		if (this.frames.length === 0)
+			return null;
 
-		return null;
+		var activeFrame = this.frames[this.activeFrameIndex];
+
+		if (this.timer > 0) {
+			this.timer -= _dt;
+			return false;
+		} else {
+			this.activeFrameIndex++;
+			if (this.activeFrameIndex >= this.frames.length)
+				this.activeFrameIndex = 0;
+			this.timer = activeFrame.duration;
+			return activeFrame.image;
+		}
 	};
 })

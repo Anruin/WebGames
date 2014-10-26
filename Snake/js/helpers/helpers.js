@@ -17,15 +17,15 @@ define([
 		addAllImagesToDOM: function (){
 			for(var dir in config.img.pawn){
 				if(config.img.pawn[dir].stand)
-					this.addImageToDOM(config.img.pawn[dir].stand);
+					helpers.addImageToDOM(config.img.pawn[dir].stand);
 
 				config.img.pawn[dir].move.map(function(name){
-					this.addImageToDOM(name);
+					helpers.addImageToDOM(name);
 				});
 			}
 
 			config.img.collectibles.map(function(name){
-				this.addImage(name);
+				helpers.addImageToDOM(name);
 			});
 		},
 
@@ -50,7 +50,7 @@ define([
 					frames.push(newFrame);
 				});
 
-				animations.push(this.createAnimation(name, frames));
+				animations.push(helpers.createAnimation(name, frames));
 			}
 			return animations;
 		}

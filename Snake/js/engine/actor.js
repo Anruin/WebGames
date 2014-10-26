@@ -22,14 +22,13 @@ define([
 			 * @type Object
 			 */
 			this.velocity = null;
+			this.animations = [];
 		};
 		/**
 		 * Animations library
 		 * @type Object
-		 */
-		se.Actor.prototype.animations = [];
-
-	se.Actor.prototype.velocity = null;
+		// */
+		//se.Actor.prototype.animations = [];
 
 		se.Actor.prototype.update = function (_dt) {
 			if (se.$debug) console.log('Actor update');
@@ -43,7 +42,11 @@ define([
 		};
 
 		se.Actor.prototype.move = function (_point) {
-			this.item.position += _point;
+			if(_point){
+				this.item.position.x += _point.x;
+				this.item.position.y += _point.y;
+			}
+			console.log('position: '+this.item.position);
 		};
 
 		se.Actor.prototype.intersects = function (_actor) {
