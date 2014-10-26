@@ -1,5 +1,7 @@
 define([
-	"./test/test"
-  ], function(test) {
+	"./test/test",
+	"./helpers/helpers"
+  ], function(test, helpers) {
+		helpers.addAllImagesToDOM();
     return test;
 });

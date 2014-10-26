@@ -49,7 +49,7 @@ define(function () {
 			collectibles: ["collectible-01", "collectible-02", "collectible-03", "collectible-04"]
 		}
 	};
-	/*
+
 	 function addImage(name) {
 	 var img = document.createElement("IMG");
 	 img.setAttribute('src', config.img.dir + name + config.img.ext);
@@ -69,7 +69,7 @@ define(function () {
 	 config.img.collectibles.map(function(name){
 	 addImage(name);
 	 });
-	 */
+
 //(function(se) {
 //	se.Directions = {
 //		LEFT: new Point(-1, 0),
@@ -79,4 +79,5 @@ define(function () {
 //	};
 //})
 	console.log('config.js');
+	return config;
 })

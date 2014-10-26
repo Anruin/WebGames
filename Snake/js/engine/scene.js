@@ -1,7 +1,6 @@
 /**
  * Created by Anry on 25.10.2014.
  */
-
 define([
 	"../se",
 	"./actor",

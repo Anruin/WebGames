@@ -6,16 +6,16 @@ define([
 	"../se"
 ], function (se) {
 	console.log('controller.js');
-	se.Controller = function() {
-		this.pawn = null;
+	se.Controller = function(pawn) {
+		this.pawn = pawn;
 		this.controls = null;
 	};
 
 	se.Controller.prototype.onInput = function(_event) {
-		var controls = this.controls.filter(function(o) {
+		var control = this.controls.filter(function(o) {
 			return (o.keys.indexOf(_event.key) != -1);
-		});
-		var control = controls[0];
+		})[0];
+
 		control.action(control.params);
 	};
 
