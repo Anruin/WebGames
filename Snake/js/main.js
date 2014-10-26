@@ -5,10 +5,6 @@
 
 	se.Directions = { LEFT: 0, UP: 1, RIGHT: 2, DOWN: 3 };
 
-	se.Obstacle = function () {
-		if (se.Debug) console.log("Obstacle created", this);
-	};
-
 	window.game = new se.Game();
 })(window.se = window.se || {});
 
@@ -37,20 +33,6 @@ var text = new PointText({
 	justification: 'center',
 	fontSize: 15
 });
-
-function onKeyDown(event) {
-	if (event.key == "up" || event.key == "w") {
-		game.pawn.turn(se.Directions.UP);
-	} else if (event.key == "down" || event.key == "s") {
-		game.pawn.turn(se.Directions.DOWN);
-	} else if (event.key == "left" || event.key == "a") {
-		game.pawn.turn(se.Directions.LEFT);
-	} else if (event.key == "right" || event.key == "d") {
-		game.pawn.turn(se.Directions.RIGHT);
-	}
-	// When a key is pressed, set the content of the text item:
-	text.content = 'The ' + event.key + ' key was pressed!';
-}
 
 function onKeyUp(event) {
 	// When a key is released, set the content of the text item:
