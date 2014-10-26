@@ -10,11 +10,6 @@ console.log('actor.js');
 		 */
 		this.item = null;
 		/**
-		 * Animations library
-		 * @type Object
-		 */
-		this.animations = [];
-		/**
 		 * Active animation
 		 * @type Array
 		 */
@@ -26,6 +21,11 @@ console.log('actor.js');
 		 */
 		this.velocity = null;
 	};
+	/**
+	 * Animations library
+	 * @type Object
+	 */
+	se.Actor.prototype.animations = [];
 
 	se.Actor.prototype.update = function(_dt) {
 		if (se.$debug) console.log('Actor update');
@@ -39,7 +39,7 @@ console.log('actor.js');
 	};
 
 	se.Actor.prototype.move = function(_point) {
-		this.actor.position += _point;
+		this.item.position += _point;
 	};
 
 	se.Actor.prototype.intersects = function(_actor) {

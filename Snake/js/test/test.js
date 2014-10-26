@@ -3,6 +3,10 @@
  */
 console.log('test.js');
 (function(se, paper) {
+
+// Create game
+	window.game = new se.Game();
+	console.log('Game created', game);
 })(window.se = window.se || {}, paper);
 
 var scene, gift, pawn, animation, framesLeft, framesUp, framesRight, framesDown, controller;
@@ -18,9 +22,6 @@ view.onKeyDown = function(event) {
 
 };
 
-// Create game
-window.game = new se.Game();
-console.log('Game created', game);
 
 // Create scene
 scene = new se.Scene(game);
@@ -85,11 +86,13 @@ pawn.animations.push(animation);
 pawn.activeAnimation = pawn.animations[0];
 
 // Create controller
-controller = new se.SantaController();
+console.log('Create controller');
+controller = new se.SantaController(pawn);
 controller.pawn = pawn;
+console.log(controller);
 
 function onKeyDown(event) {
 	controller.onInput(event);
 	// When a key is pressed, set the content of the text item:
-	text.content = 'The ' + event.key + ' key was pressed!';
+	//text.content = 'The ' + event.key + ' key was pressed!';
 }

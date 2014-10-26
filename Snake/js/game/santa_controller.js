@@ -3,8 +3,8 @@
  */
 console.log('santa_controller.js');
 (function(se, paper) {
-	se.SantaController = function() {
-		this.pawn = null;
+	se.SantaController = function(pawn) {
+		this.pawn = pawn;
 		// TODO: Take from configuration
 		this.controls = [
 			{
@@ -27,5 +27,6 @@ console.log('santa_controller.js');
 		];
 	};
 
+	se.SantaController.prototype.pawn = null;
 	se.$extend(se.SantaController, se.Controller);
 })(window.se = window.se || {});

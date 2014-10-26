@@ -12,7 +12,7 @@ console.log('scene.js');
 		this.pawns = [];
 		this.actors = [];
 	};
-
+	se.Scene.prototype.pawns = [];
 	/**
 	 * Update frame
 	 * @param _dt delta time
@@ -24,9 +24,9 @@ console.log('scene.js');
 			actor.update(_dt);
 		}
 
-		for (var pawn in this.pawns) {
+		this.pawns.map(function(pawn){
 			pawn.update(_dt);
-		}
+		});
 	};
 
 	/**
@@ -37,7 +37,7 @@ console.log('scene.js');
 		this.actors.push(actor);
 		return actor;
 	};
-
+	se.Scene.prototype.pawn = null;
 	/**
 	 * Create new pawn and possess by player
 	 * @param _player
