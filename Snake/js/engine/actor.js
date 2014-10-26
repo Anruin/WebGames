@@ -14,6 +14,11 @@ console.log('actor.js');
 		 * @type {}
 		 */
 		this.animations = null;
+		/**
+		 * Velocity
+		 * @type {Point}
+		 */
+		this.velocity = null;
 	};
 
 	se.Actor.prototype.update = function(_dt) {
