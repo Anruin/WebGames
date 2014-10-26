@@ -4,6 +4,7 @@
 console.log('animation.js');
 (function(se, paper) {
 	se.Animation = function() {
+		this.name = '';
 		this.loop = true;
 		this.timer = 0.0;
 		this.frames = [];
