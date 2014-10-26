@@ -9,5 +9,10 @@ define([
 	console.log('collectible.js');
 	se.Collectible = function () {
 	};
-	se.EXTEND(se.Collectible, se.Actor);
+	se.$extend(se.Collectible, se.Actor);
+
+	se.Actor.prototype.update = function(_dt) {
+
+		se.Actor.prototype.update.call(this, _dt);
+	};
 })

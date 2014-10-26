@@ -46,10 +46,12 @@ define([
 				this.item.position.x += _point.x;
 				this.item.position.y += _point.y;
 			}
-			console.log('position: '+this.item.position);
 		};
 
 		se.Actor.prototype.intersects = function (_actor) {
+			if(!_actor.item.position && !this.item.position)
+				return false;
+
 			return !!(_actor && ((this.item.bounds.x + this.item.bounds.width > _actor.item.bounds.x) && (this.item.bounds.y + this.item.bounds.height > _actor.item.bounds.y) && (_actor.item.bounds.x + _actor.item.bounds.width > this.item.bounds.x) && (_actor.item.bounds.y + _actor.item.bounds.height > this.item.bounds.y)));
 		};
 

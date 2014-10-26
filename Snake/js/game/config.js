@@ -10,8 +10,8 @@ define(function () {
 		},
 		obstacleClass: "sx-engine-obstacle",
 		params: {
-			block: {
-				size: 1
+			collectible: {
+				height: 100
 			},
 			actor: {
 				interval: 50,
@@ -29,7 +29,7 @@ define(function () {
 		},
 		img: {
 			dir: "img/",
-			ext: ".png",
+			ext: ".svg",
 			pawn: {
 				left: {
 					move: ["pawn-mv-l01", "pawn-mv-l02"]
@@ -46,7 +46,8 @@ define(function () {
 					move: ["pawn-mv-d01", "pawn-mv-d02"]
 				}
 			},
-			collectibles: ["collectible-01", "collectible-02", "collectible-03", "collectible-04"]
+			collectibles: ["gift-2-1", "gift-2-2", "gift-2-3"]
+			//collectibles: ["collectible-01", "collectible-02", "collectible-03", "collectible-04"]
 		}
 	};
 

@@ -15,21 +15,30 @@ define([
 	se.Scene = function(_game) {
 		this.pawns = [];
 		this.actors = [];
+		this.collectibles = [];
 	};
 	se.Scene.prototype.pawns = [];
+	se.Scene.prototype.collectibles = [];
 	/**
 	 * Update frame
 	 * @param _dt delta time
 	 */
 	se.Scene.prototype.update = function (_dt) {
+		var curScene = this;
+
 		if (se.$debug) console.log('Scene update');
 
-		for (var actor in this.actors) {
+		curScene.actors.map(function(actor){
 			actor.update(_dt);
-		}
+		});
 
-		this.pawns.map(function(pawn){
+		curScene.pawns.map(function(pawn){
 			pawn.update(_dt);
+
+			curScene.collectibles.map(function(obj){
+				if(pawn.intersects(obj))
+					obj.item.remove();
+			});
 		});
 	};
 

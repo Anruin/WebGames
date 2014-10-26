@@ -10,7 +10,8 @@ define([
 	"../engine/scene",
 	"../engine/animation",
 	"../game/santa",
-	"../game/santa_controller"
+	"../game/santa_controller",
+	"../game/gift"
 ], function (se, config, helpers){
 function Start () {
 	// Create game
@@ -52,9 +53,18 @@ function Start () {
 	game.activeScene.pawns.push(santa);
 	console.log('Pawn created', santa);
 
-	santa.animations = helpers.getFramesAnimations();
+	santa.animations = helpers.getFramesAnimations("pawn");
 	// Select active animation
 	santa.activeAnimation = santa.animations[0];
+
+	// Create pawn and initialize graphics
+	var gift = new se.Gift();
+	gift.item = new paper.Raster();
+	gift.item.position = new paper.Point(300,300);
+	gift.item.image = document.getElementById(config.img.collectibles[0]);
+	gift.item.scale(0.5);
+	game.activeScene.collectibles.push(gift);
+	console.log('Gift created', gift);
 
 	// Create controller
 	console.log('Create controller');

@@ -7,10 +7,14 @@ define([
 	"../game/config"
 ], function (se, config){
 	var helpers = {
-		addImageToDOM: function (name) {
+		addImageToDOM: function (_name, _class) {
 			var img = document.createElement("IMG");
-			img.setAttribute('src', config.img.dir + name + config.img.ext);
-			img.setAttribute('id', name);
+			img.setAttribute('src', config.img.dir + _name + config.img.ext);
+			img.setAttribute('id', _name);
+
+			if(_class && config.params[_class].height)
+				img.style.height = config.params[_class].height;
+
 			var container = document.getElementById('images');
 			container.appendChild(img);
 		},
@@ -25,7 +29,7 @@ define([
 			}
 
 			config.img.collectibles.map(function(name){
-				helpers.addImageToDOM(name);
+				helpers.addImageToDOM(name, "collectible");
 			});
 		},
 
@@ -36,13 +40,12 @@ define([
 			animation.frames = _frames;
 			return animation;
 		},
-		getFramesAnimations : function() {
+		getFramesAnimations : function(name) {
 			var animations = [];
-			for(objName in config.img.pawn) {
-				var name = objName;
+			for(objName in config.img[name]) {
 				var frames = [];
-
-				config.img.pawn[objName].move.map(function(image){
+				var test = config.img[name][objName];
+				config.img[name][objName].move.map(function(image){
 					var newFrame = {
 						image: image,
 						duration: 0.25
@@ -50,7 +53,7 @@ define([
 					frames.push(newFrame);
 				});
 
-				animations.push(helpers.createAnimation(name, frames));
+				animations.push(helpers.createAnimation(objName, frames));
 			}
 			return animations;
 		}
