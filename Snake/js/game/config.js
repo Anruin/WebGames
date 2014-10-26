@@ -6,31 +6,31 @@ define(function () {
 		container: {
 			id: "sx-engine",
 			width: 500,
-			height: 500
-		},
-		obstacleClass: "sx-engine-obstacle",
-		params: {
-			collectible: {
-				height: 100
+				height: 500
 			},
-			actor: {
-				interval: 50,
-				velocity: 0.021
-			},
-			field: {
-				width: 100,
-				height: 100
-			},
-			time: {
-				update: {
-					interval: 500
+			obstacleClass: "sx-engine-obstacle",
+			params: {
+				collectible: {
+					height: 100
+				},
+				actor: {
+					interval: 50,
+					velocity: 0.021
+				},
+				field: {
+					width: 100,
+					height: 100
+				},
+				time: {
+					update: {
+						interval: 500
+					}
 				}
-			}
-		},
-		img: {
-			dir: "img/",
-			ext: ".svg",
-			pawn: {
+			},
+			img: {
+				dir: "img/",
+				ext: ".png",
+				pawn: {
 				left: {
 					move: ["pawn-mv-l01", "pawn-mv-l02"]
 				},
