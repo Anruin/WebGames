@@ -5,48 +5,42 @@ console.log('santaController.js');
 (function(se, paper) {
 	se.SantaController = function() {
 		this.pawn = null;
-		this.controls = null;
+		// TODO: Take from configuration
+		this.controls = [
+			{
+				keys: ['a', 'left'],
+				action: controller.pawn.turn,
+				params: [se.Directions.LEFT]
+			}, {
+				keys: ['w', 'up'],
+				action: controller.pawn.turn,
+				params: [se.Directions.UP]
+			}, {
+				keys: ['d', 'right'],
+				action: controller.pawn.turn,
+				params: [se.Directions.RIGHT]
+			}, {
+				keys: ['s', 'down'],
+				action: controller.pawn.turn,
+				params: [se.Directions.DOWN]
+			}
+		];
 	};
 
 	se.SantaController.prototype.onKeyDown = function(_event) {
-		this.controls.filter();
+		var results = this.controls.filter(function(temp) {
+			return (temp.keys.indexOf(_event.key) != -1);
+		});
+		var control = results[0];
+		control.action(control.params);
 	};
 
 })(window.se = window.se || {});
 
 var controller = new se.SantaController();
 
-controller.controls = [
-	{
-		keys: ['a', 'left'],
-		action: controller.pawn.turn,
-		params: [se.Directions.LEFT]
-	}, {
-		keys: ['w', 'up'],
-		action: controller.pawn.turn,
-		params: [se.Directions.UP]
-	}, {
-		keys: ['d', 'right'],
-		action: controller.pawn.turn,
-		params: [se.Directions.RIGHT]
-	}, {
-		keys: ['s', 'down'],
-		action: controller.pawn.turn,
-		params: [se.Directions.DOWN]
-	}
-];
-
-
 function onKeyDown(event) {
-	if (event.key == "up") {
-		game.pawn.turn(se.Directions.UP);
-	} else if (event.key == "down" || event.key == "s") {
-		game.pawn.turn(se.Directions.DOWN);
-	} else if (event.key == "left" || event.key == "a") {
-		game.pawn.turn(se.Directions.LEFT);
-	} else if (event.key == "right" || event.key == "d") {
-		game.pawn.turn(se.Directions.RIGHT);
-	}
+	controller.onKeyDown(event);
 	// When a key is pressed, set the content of the text item:
 	text.content = 'The ' + event.key + ' key was pressed!';
 }
