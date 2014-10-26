@@ -14,7 +14,7 @@ define([
 			"../game/gift"
 ], function (se, config, helpers){
 		function Start () {
-	helpers.addAllImagesToDOM();
+	//helpers.addAllImagesToDOM();
 			// Create game
 	paper.project = new paper.Project(document.getElementById('sx-game'));
 	paper.project.tool = new paper.Tool({});
