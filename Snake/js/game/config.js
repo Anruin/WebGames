@@ -51,26 +51,6 @@ define(function () {
 		}
 	};
 
-	 function addImage(name) {
-	 var img = document.createElement("IMG");
-	 img.setAttribute('src', config.img.dir + name + config.img.ext);
-	 img.setAttribute('id', name);
-	 var container = document.getElementById('images');
-	 container.appendChild(img);
-	 }
-	 for(var dir in config.img.pawn){
-	 if(config.img.pawn[dir].stand)
-	 addImage(config.img.pawn[dir].stand);
-
-	 config.img.pawn[dir].move.map(function(name){
-	 addImage(name);
-	 });
-	 }
-
-	 config.img.collectibles.map(function(name){
-	 addImage(name);
-	 });
-
 //(function(se) {
 //	se.Directions = {
 //		LEFT: new Point(-1, 0),
