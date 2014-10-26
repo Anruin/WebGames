@@ -31,6 +31,7 @@ console.log('animation.js');
 			this.activeFrame = filtered[0].image;
 			this.timer += _dt;
 		}
+		return this.activeFrame;
 	};
 
 })(window.se = window.se || {});

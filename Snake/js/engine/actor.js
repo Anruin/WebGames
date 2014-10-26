@@ -29,7 +29,7 @@ console.log('actor.js');
 
 	se.Actor.prototype.update = function(_dt) {
 		if (this.activeAnimation) {
-			this.activeAnimation.update(_dt);
+			this.item.image = this.activeAnimation.update(_dt);
 		}
 	};
 
