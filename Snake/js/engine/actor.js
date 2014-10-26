@@ -1,14 +1,42 @@
 /**
  * Created by Anry on 25.10.2014.
  */
-
+console.log('actor.js');
 (function(se, paper) {
-	se.Actor = function(_pos, _gx) {
-		this.gx = _gx;
+	se.Actor = function() {
+		/**
+		 * Paper item
+		 * @type {}
+		 */
+		this.item = null;
+		/**
+		 * Animations library
+		 * @type {}
+		 */
+		this.animations = null;
+	};
+
+	se.Actor.prototype.update = function(_dt) {
+	};
+
+	se.Actor.prototype.move = function(_point) {
+		this.actor.position += _point;
+	};
+
+	se.Actor.prototype.intersects = function(_actor) {
+		if (_actor && ((this.item.bounds.x + this.item.bounds.width > _actor.item.bounds.x) && (this.item.bounds.y + this.item.bounds.height > _actor.item.bounds.y) && (_actor.item.bounds.x + _actor.item.bounds.width > this.item.bounds.x) && (_actor.item.bounds.y + _actor.item.bounds.height > this.item.bounds.y)))
+			return true;
+		return false;
+	};
+
+	/////////////////////////////////////
+	/*
+	se.Actor = function(_position, _sprites) {
+		this.gx = _sprites;
 		this.dir = new Point(0, 0);
 		this.dirNum = 3;
-		this.item = new Raster(_gx[se.Directions.DOWN].stand);
-		this.item.position = _pos;
+		this.item = new Raster(_sprites[se.Directions.DOWN].stand);
+		this.item.position = _position;
 		this.item.scale(se.BlockScale);
 		this.next = null;
 	};
@@ -67,6 +95,5 @@
 			default:
 				if (se.Debug) console.log("Something went wrong...");
 		}
-	};
-})(window.se = window.se || {});
-console.log('actor.js');
+	};*/
+})(window.se = window.se || {}, paper);

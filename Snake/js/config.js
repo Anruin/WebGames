@@ -3,11 +3,11 @@ var dir = {
 }
 var config = {
    container: {
-      id: "sx-game",
+      id: "sx-engine",
       width: 500,
       height: 500
    },
-   obstacleClass: "sx-game-obstacle",
+   obstacleClass: "sx-engine-obstacle",
 	params: {
 		block: {
 			size: 1

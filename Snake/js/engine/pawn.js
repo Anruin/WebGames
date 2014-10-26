@@ -1,13 +1,14 @@
 /**
  * Created by Anry on 25.10.2014.
  */
-
+console.log('pawn.js');
 (function(se, paper) {
+	se.Pawn = function() {
+		this.controller = null;
+	}
+	se.EXTEND(se.Pawn, se.Actor);
 
-	/**
-	 * Player controllable pawn
-	 * @constructor
-	 */
+	/*
 	se.Pawn = function(_player) {
 		this.player = _player;
 		var headGx = {};
@@ -34,9 +35,6 @@
 		this.head.turn(dir);
 	};
 
-	/**
-	 * Pawn frame update
-	 */
 	se.Pawn.prototype.update = function(_game, event) {
 		this.head.update(event);
 		var i, intersectsWithCollectible, intersectsWithObstacle;
@@ -49,6 +47,5 @@
 			}
 		}
 	};
+	*/
 })(window.se = window.se || {});
-
-console.log('pawn.js');
