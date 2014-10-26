@@ -1,8 +1,11 @@
 /**
  * Created by Anry on 25.10.2014.
  */
-console.log('controller.js');
-(function(se, paper) {
+
+define([
+	"../se"
+], function (se) {
+	console.log('controller.js');
 	se.Controller = function() {
 		this.pawn = null;
 		this.controls = null;
@@ -20,4 +23,4 @@ console.log('controller.js');
 		this.pawn = _pawn;
 		_pawn.controller = this;
 	}
-})(window.se = window.se || {});
+})

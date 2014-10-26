@@ -1,9 +1,14 @@
 /**
  * Created by Anry on 25.10.2014.
  */
-console.log('santa.js');
-(function(se, paper) {
 
+define([
+	"../se",
+	"./sack",
+	"../engine/common",
+	"../engine/pawn"
+], function (se) {
+	console.log('santa.js');
 	se.Santa = function() {
 		/**
 		 * Sack
@@ -25,4 +30,4 @@ console.log('santa.js');
 		console.log('Set velocity: ' + this.velocity);
 	};
 
-})(window.se = window.se || {}, paper);
+})

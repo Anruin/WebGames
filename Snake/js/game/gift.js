@@ -1,9 +1,13 @@
 /**
  * Created by Anry on 25.10.2014.
  */
-console.log('gift.js');
-(function(se, paper) {
 
+define([
+	"../se",
+	"../engine/common",
+	"../engine/collectible"
+], function (se) {
+	console.log('gift.js');
 	se.Gift = function() {
 	};
 
@@ -12,4 +16,4 @@ console.log('gift.js');
 	se.Gift.prototype.update = function() {
 		se.Collectible.prototype.update.call(this);
 	}
-})(window.se = window.se || {}, paper);
+})

@@ -1,8 +1,13 @@
 /**
  * Created by Anry on 25.10.2014.
  */
-console.log('pawn.js');
-(function(se, paper) {
+
+define([
+	"../se",
+	"../engine/common",
+	"./actor"
+], function (se) {
+	console.log('pawn.js');
 	se.Pawn = function() {
 		this.controller = null;
 		se.Actor.call(this);
@@ -49,4 +54,4 @@ console.log('pawn.js');
 		}
 	};
 	*/
-})(window.se = window.se || {});
+})

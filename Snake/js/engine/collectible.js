@@ -1,9 +1,13 @@
 /**
  * Created by Anry on 25.10.2014.
  */
-console.log('collectible.js');
-(function(se, paper) {
+define([
+	"../se",
+	"../engine/common",
+	"../engine/actor"
+], function (se) {
+	console.log('collectible.js');
 	se.Collectible = function () {
 	};
 	se.EXTEND(se.Collectible, se.Actor);
-})(window.se = window.se || {}, paper);
+})

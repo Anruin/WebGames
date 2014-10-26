@@ -1,8 +1,13 @@
 /**
  * Created by Anry on 25.10.2014.
  */
-console.log('santa_controller.js');
-(function(se, paper) {
+
+define([
+	"../se",
+	"../engine/common",
+	"../engine/controller"
+], function (se) {
+	console.log('santa_controller.js');
 	se.SantaController = function(pawn) {
 		this.pawn = pawn;
 		// TODO: Take from configuration
@@ -29,4 +34,4 @@ console.log('santa_controller.js');
 
 	se.SantaController.prototype.pawn = null;
 	se.$extend(se.SantaController, se.Controller);
-})(window.se = window.se || {});
+})

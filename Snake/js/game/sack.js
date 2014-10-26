@@ -1,8 +1,12 @@
 /**
  * Created by Anry on 25.10.2014.
  */
-console.log('sack.js');
-(function(se, paper) {
+define([
+	"../se",
+	"../engine/common",
+	"../engine/actor"
+], function (se) {
+	console.log('sack.js');
 	se.Sack = function() {
 		/**
 		 * Sack
@@ -16,4 +20,4 @@ console.log('sack.js');
 		this.move(this.velocity);
 		se.Actor.prototype.update.call(this);
 	}
-})(window.se = window.se || {}, paper);
+})

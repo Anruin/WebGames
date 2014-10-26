@@ -1,9 +1,11 @@
 /**
  * Created by Anry on 25.10.2014.
  */
-console.log('animation.js');
-(function(se, paper) {
-	se.Animation = function() {
+define([
+	"../se"
+], function (se) {
+	console.log('animation.js');
+	se.Animation = function () {
 		this.name = '';
 		this.loop = true;
 		this.timer = 0.0;
@@ -34,5 +36,4 @@ console.log('animation.js');
 
 		return null;
 	};
-
-})(window.se = window.se || {});
+})

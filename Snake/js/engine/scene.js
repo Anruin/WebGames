@@ -1,8 +1,13 @@
 /**
  * Created by Anry on 25.10.2014.
  */
-console.log('scene.js');
-(function(se, paper) {
+
+define([
+	"../se",
+	"./actor",
+	"./pawn"
+], function (se) {
+	console.log('scene.js');
 	/**
 	 * Scene constructor
 	 * @param _game
@@ -47,4 +52,4 @@ console.log('scene.js');
 		_player.possess(pawn);
 		this.pawns.push(pawn);
 	}
-})(window.se = window.se || {}, paper);
+})

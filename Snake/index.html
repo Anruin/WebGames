@@ -13,7 +13,9 @@
 		<link rel="stylesheet" href="css/normalize.css">
 		<link rel="stylesheet" href="css/main.css">
 		<script src="js/vendor/modernizr-2.6.2.min.js"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 		<script src="js/vendor/paper-full.js"></script>
+		<script data-main="js/config" src="js/vendor/require.min.js"></script>
 	</head>
 	<body>
 		<!--[if lt IE 7]>
@@ -36,23 +38,9 @@
 			<img src="img/collectible-04.png" id="collectible-04">
 		</div>
 		<canvas id="sx-game" data-paper-resize="true" data-paper-keepalive="false"></canvas>
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
-		<script src="js/game/config.js"></script>
 		<script src="js/plugins.js"></script>
-		<script type="text/paperscript" data-paper-canvas="sx-game" src="js/engine/common.js"></script>
-		<script type="text/paperscript" data-paper-canvas="sx-game" src="js/engine/animation.js"></script>
-		<script type="text/paperscript" data-paper-canvas="sx-game" src="js/engine/actor.js"></script>
-		<script type="text/paperscript" data-paper-canvas="sx-game" src="js/engine/controller.js"></script>
-		<script type="text/paperscript" data-paper-canvas="sx-game" src="js/engine/pawn.js"></script>
-		<script type="text/paperscript" data-paper-canvas="sx-game" src="js/engine/player.js"></script>
-		<script type="text/paperscript" data-paper-canvas="sx-game" src="js/engine/scene.js"></script>
-		<script type="text/paperscript" data-paper-canvas="sx-game" src="js/game/santa_controller.js"></script>
-		<script type="text/paperscript" data-paper-canvas="sx-game" src="js/engine/game.js"></script>
-		<script type="text/paperscript" data-paper-canvas="sx-game" src="js/game/santa.js"></script>
-		<script type="text/paperscript" data-paper-canvas="sx-game" src="js/game/obstacle.js"></script>
-		<script type="text/paperscript" data-paper-canvas="sx-game" src="js/test/test.js"></script>
-		<script type="text/paperscript" data-paper-canvas="sx-game" src="js/main.js"></script>
+
 		<!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
 		<script>
 			(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
