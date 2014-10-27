@@ -20,7 +20,7 @@ define([
 	};
 	se.$extend(se.Pawn, se.Actor);
 
-	se.Pawn.prototype.update = function(_dt) {
+	se.Pawn.prototype.move = function(_dt) {
 		if(this.path) {
 			this.path.firstSegment.point = this.item.position;
 			for (var i = 0; i < this.path.segments.length - 1; i++) {
@@ -36,6 +36,11 @@ define([
 			}
 			this.path.smooth();
 		}
+
+		se.Actor.prototype.move.call(this, _dt);
+	};
+
+	se.Pawn.prototype.update = function(_dt) {
 		se.Actor.prototype.update.call(this, _dt);
 	};
 	se.Pawn.prototype.turn = function(_dt) {
