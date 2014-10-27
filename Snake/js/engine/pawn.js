@@ -12,34 +12,75 @@ define([
 	console.log('pawn.js');
 	se.Pawn = function() {
 		this.controller = null;
-		this.follower = null;
+		this.path = null;
+		this.followers = [];
+		this.turns = [];
 		se.Actor.call(this);
 	};
 	se.$extend(se.Pawn, se.Actor);
 
 	se.Pawn.prototype.update = function(_dt) {
-		var follower = this.follower;
-		while(follower){
-			follower.update(_dt);
-			follower = follower.follower;
+		//if (this.follower)
+		//	this.follower.update(_dt);
+		//
+		//if (this.turns.length) {
+		//	if (this.turns[0].point.x == this.item.position.x
+		//			&& this.turns[0].point.y == this.item.position.y) {
+		//		this.turns.splice(0, 1);
+		//	}
+		//	this.velocity = this.velocity || this.turns[0].velocity;
+		//}
+		if(this.path) {
+			this.path.firstSegment.point = this.item.position;
+			for (var i = 0; i < this.path.segments.length - 1; i++) {
+				var segment = this.path.segments[i];
+				var nextSegment = segment.next;
+				var vector = new paper.Point([segment.point.x - nextSegment.point.x,
+					segment.point.y - nextSegment.point.y]);
+				vector.length = 100;
+				nextSegment.point = [segment.point.x - vector.x,
+					segment.point.y - vector.y];
+
+				this.followers[i].item.position = nextSegment.point;
+			}
+			this.path.smooth();
 		}
+		if(this.velocity)
+			this.move(this.velocity);
+
 		se.Actor.prototype.update.call(this, _dt);
 	};
-	se.Pawn.prototype.addFollower = function(_dt) {
-		var newFollower = new se.Pawn();
-		newFollower.item = new paper.Raster();
-		newFollower.item.position = this.item.position;
+	se.Pawn.prototype.turn = function(_dt) {
+		//if(this.follower){
+		//	this.follower.turns.push({
+		//		point: this.item.position,
+		//		velocity: this.velocity
+		//	});
+		//}
+		se.Actor.prototype.turn.call(this, _dt);
+	};
+	se.Pawn.prototype.addSegment = function(_dt) {
+		if(!this.path){
+			this.path = new paper.Path({
+				strokeColor: '#6d6d6d',
+				strokeWidth: 5
+			});
+			this.path.add(this.item.position);
+		}
+		var segment = new se.Pawn();
+		segment.item = new paper.Raster();
+
+		var position = [this.path.lastSegment.point.x - this.velocity.x * 5,
+			this.path.lastSegment.point.y - this.velocity.y * 5];
+
+		this.path.add(position);
+		segment.item.position = this.path.lastSegment.point;
 
 		var randomImage = config.img.followers[helpers.randomIndex(config.img.followers)];
-		newFollower.item.image = document.getElementById(randomImage);
+		segment.item.image = document.getElementById(randomImage);
 
-		newFollower.item.scale(0.7);
-
-		var lastPrimary = this;
-		while(lastPrimary.follower){
-			lastPrimary = lastPrimary.follower;
-		}
-		lastPrimary.follower = newFollower;
+		segment.item.scale(0.7);
+		this.followers.push(segment);
 	};
 	/*
 	se.Pawn.prototype.update = function(_game, event) {

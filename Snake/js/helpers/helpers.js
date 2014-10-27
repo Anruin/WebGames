@@ -47,7 +47,7 @@ define([
 			var animations = [];
 			for(objName in config.img[name]) {
 				var frames = [];
-				var test = config.img[name][objName];
+
 				config.img[name][objName].move.map(function(image){
 					var newFrame = {
 						image: image,
@@ -67,9 +67,24 @@ define([
 			return helpers.randomNum(0, array.length-1);
 		},
 		getRandomPointInView: function() {
-			var x = helpers.randomNum(100, paper.project.view.bounds.width-200);
-			var y = helpers.randomNum(100, paper.project.view.bounds.height-200);
+			var x = helpers.randomNum(100, paper.project.view.bounds.width - 200);
+			var y = helpers.randomNum(100, paper.project.view.bounds.height - 200);
 			return new paper.Point(x,y);
+		},
+		setNotIntersectRandomPoint: function(forRandom, forCompar){
+			var temporary = new se.Actor();
+			temporary.item = new paper.Raster();
+
+			temporary.item.bounds.width = forRandom.item.bounds.width;
+			temporary.item.bounds.height = forRandom.item.bounds.height;
+
+			temporary.item.position = helpers.getRandomPointInView();
+			while(forCompar.intersects(temporary)){
+				temporary.item.position = helpers.getRandomPointInView();
+			}
+
+			forRandom.item.position = temporary.item.position;
+			temporary.item.remove();
 		}
 	}
 	return helpers;

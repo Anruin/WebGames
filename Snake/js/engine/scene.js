@@ -43,7 +43,7 @@ define([
 					obj.item.remove();
 					curScene.collectibles.splice(curScene.collectibles.indexOf(obj), 1);
 
-					pawn.addFollower();
+					pawn.addSegment();
 				}
 			});
 
@@ -74,10 +74,12 @@ define([
 	se.Scene.prototype.createGift = function() {
 		var gift = new se.Gift();
 		gift.item = new paper.Raster();
-		gift.item.position = helpers.getRandomPointInView();
-
 		var randomImage = config.img.collectibles[helpers.randomIndex(config.img.collectibles)];
 		gift.item.image = document.getElementById(randomImage);
+		helpers.setNotIntersectRandomPoint(gift, this.pawns[0]);
+		//gift.item.position = helpers.getRandomPointInView();
+
+
 
 		gift.item.scale(0.3);
 		this.collectibles.push(gift);

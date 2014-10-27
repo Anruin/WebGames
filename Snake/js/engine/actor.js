@@ -54,4 +54,14 @@ define([
 
 			return !!(_actor && ((this.item.bounds.x + this.item.bounds.width > _actor.item.bounds.x) && (this.item.bounds.y + this.item.bounds.height > _actor.item.bounds.y) && (_actor.item.bounds.x + _actor.item.bounds.width > this.item.bounds.x) && (_actor.item.bounds.y + _actor.item.bounds.height > this.item.bounds.y)));
 		};
+
+	se.Actor.prototype.turn = function(_params) {
+		this.velocity = _params.direction;
+		this.activeAnimation = this.animations.filter(function(obj){
+			return obj.name == _params.name;
+		})[0];
+	};
+	se.Actor.prototype.action = function(_func, _params) {
+		this[_func](_params);
+	};
 })
