@@ -66,6 +66,7 @@ define([
 
 		segment.item.scale(0.7);
 		this.followers.push(segment);
+		game.activeScene.actors.push(segment);
 	};
 	/*
 	se.Pawn.prototype.update = function(_game, event) {

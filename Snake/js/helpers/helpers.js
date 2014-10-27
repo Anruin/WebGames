@@ -71,7 +71,7 @@ define([
 			var y = helpers.randomNum(100, paper.project.view.bounds.height - 200);
 			return new paper.Point(x,y);
 		},
-		setNotIntersectRandomPoint: function(forRandom, forCompar){
+		setNotIntersectRandomPoint: function(forRandom, arrayForCompare){
 			var temporary = new se.Actor();
 			temporary.item = new paper.Raster();
 
@@ -79,12 +79,18 @@ define([
 					forRandom.item.bounds.height);
 
 			temporary.item.position = helpers.getRandomPointInView();
-			while(forCompar.intersects(temporary)){
+
+			while(helpers.findIntersects(arrayForCompare, temporary)){
 				temporary.item.position = helpers.getRandomPointInView();
 			}
 
 			forRandom.item.position = temporary.item.position;
 			temporary.item.remove();
+		},
+		findIntersects: function(array, object) {
+			return array.some(function (el){
+				return el.intersects(object);
+			});
 		}
 	}
 	return helpers;

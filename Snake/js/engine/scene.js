@@ -77,7 +77,7 @@ define([
 		gift.item = new paper.Raster();
 		var randomImage = config.img.collectibles[helpers.randomIndex(config.img.collectibles)];
 		gift.item.image = document.getElementById(randomImage);
-		helpers.setNotIntersectRandomPoint(gift, this.pawns[0]);
+		helpers.setNotIntersectRandomPoint(gift, game.activeScene.actors);
 		//gift.item.position = helpers.getRandomPointInView();
 
 

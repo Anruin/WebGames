@@ -53,6 +53,7 @@ define([
 	santa.item.position = helpers.getRandomPointInView();
 	santa.item.image = document.getElementById(config.img.pawn.down.stand);
 	game.activeScene.pawns.push(santa);
+	game.activeScene.actors.push(santa);
 	console.log('Pawn created', santa);
 
 	santa.animations = helpers.getFramesAnimations("pawn");
