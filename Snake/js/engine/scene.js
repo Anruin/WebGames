@@ -75,14 +75,12 @@ define([
 	se.Scene.prototype.createGift = function() {
 		var gift = new se.Gift();
 		gift.item = new paper.Raster();
+
 		var randomImage = config.img.collectibles[helpers.randomIndex(config.img.collectibles)];
 		gift.item.image = document.getElementById(randomImage);
-		helpers.setNotIntersectRandomPoint(gift, game.activeScene.actors);
-		//gift.item.position = helpers.getRandomPointInView();
-
-
-
 		gift.item.scale(0.3);
+
+		helpers.setNotIntersectRandomPoint(gift, game.activeScene.actors);
 		this.collectibles.push(gift);
 	}
 })

@@ -33,6 +33,9 @@ define([
 		se.Actor.prototype.update = function (_dt) {
 			if (se.$debug) console.log('Actor update');
 
+			if(this.velocity)
+				this.move(this.velocity);
+
 			if (this.activeAnimation) {
 				var frame = this.activeAnimation.update(_dt);
 				if (frame !== false && frame !== null) {

@@ -36,9 +36,6 @@ define([
 			}
 			this.path.smooth();
 		}
-		if(this.velocity)
-			this.move(this.velocity);
-
 		se.Actor.prototype.update.call(this, _dt);
 	};
 	se.Pawn.prototype.turn = function(_dt) {
