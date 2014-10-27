@@ -31,6 +31,9 @@ define([
 			config.img.collectibles.map(function(name){
 				helpers.addImageToDOM(name, "collectible");
 			});
+			config.img.followers.map(function(name){
+				helpers.addImageToDOM(name, "collectible");
+			});
 		},
 
 		createAnimation: function (_name, _frames){

@@ -42,6 +42,8 @@ define([
 				if(pawn.intersects(obj)){
 					obj.item.remove();
 					curScene.collectibles.splice(curScene.collectibles.indexOf(obj), 1);
+
+					pawn.addFollower();
 				}
 			});
 

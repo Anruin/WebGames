@@ -46,8 +46,8 @@ define(function () {
 					move: ["pawn-mv-d01", "pawn-mv-d02"]
 				}
 			},
-			collectibles: ["gift-2-1", "gift-2-2", "gift-2-3"]
-			//collectibles: ["collectible-01", "collectible-02", "collectible-03", "collectible-04"]
+			collectibles: ["gift-2-1", "gift-2-2", "gift-2-3"],
+			followers: ["collectible-01", "collectible-02", "collectible-03", "collectible-04"]
 		}
 	};
 
