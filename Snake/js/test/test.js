@@ -50,13 +50,14 @@ define([
 	// Create pawn and initialize graphics
 	var santa = new se.Santa();
 	santa.item = new paper.Raster();
-	santa.item.position = new paper.Point(100,100);
+	santa.item.position = helpers.getRandomPointInView();
+	santa.item.image = document.getElementById(config.img.pawn.down.stand);
 	game.activeScene.pawns.push(santa);
 	console.log('Pawn created', santa);
 
 	santa.animations = helpers.getFramesAnimations("pawn");
 	// Select active animation
-	santa.activeAnimation = santa.animations[0];
+	//santa.activeAnimation = santa.animations[0];
 
 	game.activeScene.createGift();
 	// Create pawn and initialize graphics

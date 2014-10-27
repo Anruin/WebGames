@@ -41,9 +41,13 @@ define([
 			curScene.collectibles.map(function(obj){
 				if(pawn.intersects(obj)){
 					obj.item.remove();
-					curScene.createGift();
+					curScene.collectibles.splice(curScene.collectibles.indexOf(obj), 1);
 				}
 			});
+
+			while(curScene.collectibles.length < 2){
+				curScene.createGift();
+			}
 		});
 	};
 

@@ -9,6 +9,7 @@ define([
 ], function (se) {
 	console.log('gift.js');
 	se.Gift = function() {
+		se.Collectible.call(this);
 	};
 
 	se.$extend(se.Gift, se.Collectible);

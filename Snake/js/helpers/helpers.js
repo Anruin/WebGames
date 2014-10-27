@@ -64,8 +64,8 @@ define([
 			return helpers.randomNum(0, array.length-1);
 		},
 		getRandomPointInView: function() {
-			var x = helpers.randomNum(100, paper.project.view.bounds.width-100);
-			var y = helpers.randomNum(100, paper.project.view.bounds.height-100);
+			var x = helpers.randomNum(100, paper.project.view.bounds.width-200);
+			var y = helpers.randomNum(100, paper.project.view.bounds.height-200);
 			return new paper.Point(x,y);
 		}
 	}
