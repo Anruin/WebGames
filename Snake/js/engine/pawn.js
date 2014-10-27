@@ -57,31 +57,18 @@ define([
 		var segment = new se.Pawn();
 		segment.item = new paper.Raster();
 
+		//устанавливает новый обьект в противоположном направлении движения санты
 		var position = [this.path.lastSegment.point.x - this.velocity.x * 5,
 			this.path.lastSegment.point.y - this.velocity.y * 5];
 
 		this.path.add(position);
-		segment.item.position = this.path.lastSegment.point;
+		segment.item.position = position;
 
 		var randomImage = config.img.followers[helpers.randomIndex(config.img.followers)];
 		segment.item.image = document.getElementById(randomImage);
-
 		segment.item.scale(0.7);
+
 		this.followers.push(segment);
 		game.activeScene.actors.push(segment);
 	};
-	/*
-	se.Pawn.prototype.update = function(_game, event) {
-		this.head.update(event);
-		var i, intersectsWithCollectible, intersectsWithObstacle;
-		for (i = 0; i < _game.collectibles.length; i++) {
-			if (this.head.intersects(_game.collectibles[i].item)) {
-				_game.collectibles[i].item.remove();
-				_game.collectibles.splice(i, 1);
-				this.grow();
-				this.player.collected++;
-			}
-		}
-	};
-	*/
 })
