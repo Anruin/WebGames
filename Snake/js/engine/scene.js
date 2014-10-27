@@ -43,6 +43,7 @@ define([
 					obj.item.remove();
 					curScene.collectibles.splice(curScene.collectibles.indexOf(obj), 1);
 
+					pawn.score +=1;
 					pawn.addSegment();
 				}
 			});

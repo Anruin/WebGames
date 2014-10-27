@@ -69,6 +69,8 @@ define([
 	controller = new se.SantaController(santa);
 	console.log(controller);
 
+			//paper.project.initialize();
+
 	//paper.project.initialize();
 	console.log('test.js');
 }

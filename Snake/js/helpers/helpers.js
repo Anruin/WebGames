@@ -75,8 +75,8 @@ define([
 			var temporary = new se.Actor();
 			temporary.item = new paper.Raster();
 
-			temporary.item.bounds.width = forRandom.item.bounds.width;
-			temporary.item.bounds.height = forRandom.item.bounds.height;
+			temporary.item.size = new paper.Size(forRandom.item.bounds.width,
+					forRandom.item.bounds.height);
 
 			temporary.item.position = helpers.getRandomPointInView();
 			while(forCompar.intersects(temporary)){

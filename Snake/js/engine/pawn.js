@@ -11,6 +11,7 @@ define([
 ], function (se, config, helpers) {
 	console.log('pawn.js');
 	se.Pawn = function() {
+		this.score = 0;
 		this.controller = null;
 		this.path = null;
 		this.followers = [];
@@ -20,16 +21,6 @@ define([
 	se.$extend(se.Pawn, se.Actor);
 
 	se.Pawn.prototype.update = function(_dt) {
-		//if (this.follower)
-		//	this.follower.update(_dt);
-		//
-		//if (this.turns.length) {
-		//	if (this.turns[0].point.x == this.item.position.x
-		//			&& this.turns[0].point.y == this.item.position.y) {
-		//		this.turns.splice(0, 1);
-		//	}
-		//	this.velocity = this.velocity || this.turns[0].velocity;
-		//}
 		if(this.path) {
 			this.path.firstSegment.point = this.item.position;
 			for (var i = 0; i < this.path.segments.length - 1; i++) {
@@ -51,12 +42,6 @@ define([
 		se.Actor.prototype.update.call(this, _dt);
 	};
 	se.Pawn.prototype.turn = function(_dt) {
-		//if(this.follower){
-		//	this.follower.turns.push({
-		//		point: this.item.position,
-		//		velocity: this.velocity
-		//	});
-		//}
 		se.Actor.prototype.turn.call(this, _dt);
 	};
 	se.Pawn.prototype.addSegment = function(_dt) {
