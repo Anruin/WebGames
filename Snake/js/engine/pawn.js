@@ -33,7 +33,7 @@ define([
 		var randomImage = config.img.followers[helpers.randomIndex(config.img.followers)];
 		newFollower.item.image = document.getElementById(randomImage);
 
-		newFollower.item.scale(0.3);
+		newFollower.item.scale(0.7);
 
 		var lastPrimary = this;
 		while(lastPrimary.follower){
