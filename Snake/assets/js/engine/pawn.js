@@ -114,8 +114,8 @@ define([
 		segment.item = new paper.Raster();
 
 		//устанавливает новый обьект в противоположном направлении движения санты
-		var position = [this.path.lastSegment.point.x - this.velocity.x * 5,
-			this.path.lastSegment.point.y - this.velocity.y * 5];
+		var position = [this.path.lastSegment.point.x - this.velocity.x * 100,
+			this.path.lastSegment.point.y - this.velocity.y * 100];
 
 		this.path.add(position);
 		segment.item.position = position;
