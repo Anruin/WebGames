@@ -65,10 +65,26 @@ define([
 	};
 	se.Pawn.prototype.update = function(_dt) {
 		this.pathOffset = this.offsetPosition();
+		this.setPathDegree();
 		se.Actor.prototype.update.call(this, _dt);
 	};
 	se.Pawn.prototype.turn = function(_params) {
+		this.setPathDegree(_params.name);
 		se.Actor.prototype.turn.call(this, _params);
+	};
+
+	se.Pawn.prototype.setPathDegree = function(pawnDir) {
+		if(!this.path)
+			return;
+
+		switch(pawnDir){
+			case "up":
+				this.path.insertBelow(this.item);
+				break
+			case "down":
+				this.path.insertAbove(this.item);
+				break
+		}
 	};
 
 	se.Pawn.prototype.addSegment = function(_dt) {
