@@ -22,7 +22,7 @@ define([
 	};
 	se.$extend(se.Pawn, se.Actor);
 
-	se.Pawn.prototype.move = function(_dt) {
+	se.Pawn.prototype.move = function(_point) {
 		if(this.path) {
 			this.path.firstSegment.point = this.pathOffset || this.item.position;
 			//var length = config.params.path.firstLength / 5;
@@ -58,8 +58,11 @@ define([
 			}
 			this.path.smooth();
 		}
-		if(!helpers.isIntersects(this.followers,this))
-			se.Actor.prototype.move.call(this, _dt);
+																										//temporary for yellow rectangle
+		if(!helpers.isIntersects(this.followers,this) && !this.intersects({item:game.activeScene.yellow}))
+			se.Actor.prototype.move.call(this, _point);
+		else
+			this.item.position = this.lastPosition;
 	};
 	se.Pawn.prototype.offsetPosition = function() {
 		if(this.path){
@@ -121,9 +124,14 @@ define([
 		segment.item.position = position;
 
 		var randomImage = config.img.followers[helpers.randomIndex(config.img.followers)];
+		segment.item.visible = false;
 		segment.item.image = document.getElementById(randomImage);
 		segment.item.scale(0.7);
 
+		while(this.intersects(segment))
+			segment.item.position = helpers.getRandomPointInView();
+
+		segment.item.visible = true;
 		this.followers.push(segment);
 		game.activeScene.actors.push(segment);
 	};

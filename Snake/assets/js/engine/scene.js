@@ -19,6 +19,18 @@ define([
 		this.pawns = [];
 		this.actors = [];
 		this.collectibles = [];
+
+		//temporary yellow rectangle
+		this.yellow = new paper.Path({
+			strokeColor: '#ffd76e',
+			strokeWidth: 30,
+			strokeCap: 'round'
+		});
+		this.yellow.add([500, 300]);
+		this.yellow.add([900, 300]);
+		this.yellow.add([1200, 450]);
+		this.yellow.add([800, 450]);
+		this.yellow.closed = true;
 	};
 	se.Scene.prototype.pawns = [];
 	se.Scene.prototype.collectibles = [];

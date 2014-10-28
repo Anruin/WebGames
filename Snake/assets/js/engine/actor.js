@@ -12,6 +12,7 @@ define([
 		 * @type Object
 		 */
 		this.item = null;
+		this.lastPosition = null;
 		/**
 		 * Active animation
 		 * @type Array
@@ -47,9 +48,18 @@ define([
 	};
 
 	se.Actor.prototype.move = function (_point) {
-		if (_point) {
-			this.item.position.x += _point.x;
-			this.item.position.y += _point.y;
+		if (!_point)
+			return;
+
+		if(paper.project.view.bounds.contains(this.item.bounds)){
+			this.lastPosition = this.item.position;
+			this.item.position = helpers.pointSumm(this.item.position, _point);
+		}
+		else{
+			if(this.item.position != this.lastPosition)
+				this.item.position = this.lastPosition;
+			else
+				this.item.position = helpers.pointSumm(this.item.position, {x: -_point.x, y: -_point.y});
 		}
 	};
 	se.Actor.prototype.turn = function (_params) {
