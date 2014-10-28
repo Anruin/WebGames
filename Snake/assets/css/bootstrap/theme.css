@@ -1,0 +1,591 @@
+html {
+  height: 100%;
+  position: relative;
+}
+body {
+  height: 100%;
+  max-height: 600%;
+  width: 100%;
+  min-width: 960px;
+}
+.text-lg {
+  font-size: 18px;
+}
+.padding-lg {
+  padding-left: 45px;
+  padding-right: 45px;
+}
+.navbar .text-lg {
+  line-height: 1em;
+}
+.navbar .navbar-brand {
+  background-color: #1D1D1B;
+  color: #ffffff;
+  padding: 0;
+}
+.navbar .navbar-brand .svgicon {
+  font-size: 56px;
+}
+.navbar.navbar-fixed-top {
+  border-bottom: 0;
+}
+.navbar .nav-block-language {
+  position: absolute;
+  top: 0;
+  left: 7.4%;
+  color: #ffffff;
+}
+.navbar .nav-block-language .active {
+  color: #ffffff;
+}
+.navbar .nav-block-game-life {
+  position: absolute;
+  top: 0;
+  left: 22.26%;
+}
+.navbar .nav-block-game-life .svgicon {
+  margin-left: 0;
+  margin-right: 10px;
+}
+.navbar .nav-block-btn {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  margin-left: -70.5px;
+}
+.navbar .nav-block-btn .btn {
+  font-size: 15px;
+  padding: 10px 0;
+  line-height: 14px;
+  width: 141px;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  -webkit-border-radius: 9px;
+  -moz-border-radius: 9px;
+  border-radius: 9px;
+}
+.navbar .nav-block-btn .btn:hover {
+  background-color: #F7D9C1;
+  border-color: #F7D9C1;
+  color: #7495AA;
+}
+.navbar .nav-block-tel {
+  position: absolute;
+  top: 0;
+  left: 62%;
+}
+.navbar .nav-block-tel .svgicon-tel {
+  font-size: 26px;
+  margin-top: 14px;
+  margin-right: 0;
+}
+.navbar .nav-block-social {
+  position: absolute;
+  top: 0;
+  left: 81%;
+  padding-top: 18px;
+}
+.game-levels {
+  position: relative;
+  z-index: 10;
+  height: 100%;
+}
+.game-levels .game-level {
+  position: relative;
+  display: block;
+  height: 100%;
+  _height: 100%;
+  min-height: 663px;
+  /*border: 5px dashed #ff0000;*/
+}
+.game-levels .game-level.level-1 .level-1__img-text {
+  position: absolute;
+  height: 32.6%;
+  width: auto;
+  top: 22.6%;
+  text-align: center;
+  margin: 0 auto;
+  left: 20px;
+  right: 20px;
+}
+.game-levels .game-level.level-1 .level-1__countdown {
+  position: absolute;
+  top: 65%;
+  left: 20px;
+  right: 20px;
+  margin: 0 auto;
+}
+.game-levels .game-level.level-1 .level-1__div-timer {
+  display: inline-block;
+  width: 131px;
+  height: 111px;
+  background: url('../../img/level-1__timer-bg.png') no-repeat 0 0;
+  background-size: cover;
+  padding-left: 12px;
+}
+.game-levels .game-level.level-1 .level-1__timer-text {
+  font-size: 20px;
+}
+.game-levels .game-level.level-1 .level-1__timer-text .days {
+  display: block;
+  line-height: 20px;
+}
+.game-levels .game-level.level-1 .level-1__timer-text .to {
+  display: block;
+  line-height: 16px;
+}
+.game-levels .game-level.level-1 .level-1__timer-text .new-year {
+  display: block;
+  line-height: 30px;
+  font-weight: 800;
+}
+.game-levels .game-level.level-2 .level-2__block-1 {
+  position: absolute;
+  top: 15%;
+  left: 0;
+  right: 0;
+}
+.game-levels .game-level.level-2 .level-2__block-2 {
+  position: absolute;
+  top: 46%;
+  left: 0;
+  right: 0;
+}
+.game-levels .game-level.level-2 .level-2__block-2 h2 {
+  margin-top: 0;
+  letter-spacing: 0.1em;
+}
+.game-levels .game-level.level-2 .level-2__block-3 {
+  position: absolute;
+  top: 72%;
+  left: 0;
+  right: 0;
+}
+.game-levels .game-level.level-2 .lead {
+  font-size: 28px;
+  line-height: 38px;
+}
+.game-levels .game-level.level-2 .level-2__icons p {
+  font-weight: 700;
+  font-size: 15px;
+}
+.game-levels .game-level.level-2 .level-2__icon {
+  display: block;
+  margin: 0 auto 10px auto;
+  width: 80px;
+  height: 80px;
+  background-color: #be5751;
+  color: #fff;
+  font-size: 80px;
+  border-radius: 50%;
+  line-height: 1em;
+}
+.game-levels .game-level.level-2 h2 {
+  font-size: 36px;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.game-levels .game-level.level-3 .level-3__caption {
+  position: absolute;
+  top: 19.45%;
+  left: 20px;
+  right: 20px;
+  text-align: center;
+}
+.game-levels .game-level.level-3 .level-3__caption h1 {
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 50px;
+  margin-top: 0;
+  letter-spacing: 0.1em;
+}
+.game-levels .game-level.level-3 .level-3__text {
+  font-size: 19px;
+  position: absolute;
+  top: 41.47%;
+  left: 20px;
+  right: 20px;
+  text-align: center;
+  margin-top: 0;
+}
+.game-levels .game-level.level-3 .level-3__advantage {
+  position: absolute;
+  width: 200px;
+  margin-left: -100px;
+}
+.game-levels .game-level.level-3 .level-3__advantage .level-3__icon {
+  display: block;
+  margin: 0 auto 10px auto;
+  width: 80px;
+  height: 80px;
+  background-color: #be5751;
+  color: #fff;
+  font-size: 48px;
+  font-weight: 800;
+  border-radius: 50%;
+  line-height: 88px;
+  text-align: center;
+}
+.game-levels .game-level.level-3 .level-3__advantage p {
+  font-size: 15px;
+  line-height: 22px;
+  font-weight: 700;
+  text-align: center;
+}
+.game-levels .game-level.level-3 .adv-1 {
+  left: 17%;
+  top: 37%;
+}
+.game-levels .game-level.level-3 .adv-2 {
+  left: 28%;
+  top: 68%;
+}
+.game-levels .game-level.level-3 .adv-3 {
+  left: 50%;
+  top: 51%;
+}
+.game-levels .game-level.level-3 .adv-4 {
+  left: 72%;
+  top: 68%;
+}
+.game-levels .game-level.level-3 .adv-5 {
+  left: 83%;
+  top: 37%;
+}
+.game-levels .game-level.level-4 .level-4__caption {
+  position: absolute;
+  top: 18.09%;
+  left: 20px;
+  right: 20px;
+  text-align: center;
+}
+.game-levels .game-level.level-4 .level-4__caption h1 {
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 50px;
+  margin-top: 0;
+  letter-spacing: 0.1em;
+}
+.game-levels .game-level.level-4 .level-4__lights {
+  width: 100%;
+  position: relative;
+  margin-top: 10%;
+  padding: 0;
+}
+.game-levels .game-level.level-4 .level-4__lights img {
+  position: absolute;
+  top: 0;
+  padding: 0;
+  width: 100%;
+  height: auto;
+}
+.game-levels .game-level.level-4 .level-4__texts .level-4__text {
+  position: absolute;
+  width: 25%;
+  left: 0;
+  right: 0;
+  bottom: 3%;
+  top: 65.4%;
+  padding: 0 12px;
+}
+.game-levels .game-level.level-4 .level-4__texts .level-4__text.text-1 {
+  left: 0;
+}
+.game-levels .game-level.level-4 .level-4__texts .level-4__text.text-2 {
+  left: 25%;
+  padding-top: 7.7%;
+}
+.game-levels .game-level.level-4 .level-4__texts .level-4__text.text-3 {
+  left: 50%;
+  padding-top: 7.7%;
+}
+.game-levels .game-level.level-4 .level-4__texts .level-4__text.text-4 {
+  left: 75%;
+}
+.game-levels .game-level.level-4 .level-4__texts .level-4__text .text-content {
+  height: 100%;
+  padding: 5px 20px;
+  color: transparent;
+  font-size: 15px;
+  font-size: 2vh;
+  line-height: 1.46em;
+  font-weight: 300;
+  border: 2px dashed #fff;
+  -webkit-border-radius: 13px;
+  -moz-border-radius: 13px;
+  border-radius: 13px;
+  cursor: pointer;
+}
+.game-levels .game-level.level-4 .bulb-1,
+.game-levels .game-level.level-4 .bulb-2,
+.game-levels .game-level.level-4 .bulb-3,
+.game-levels .game-level.level-4 .bulb-4 {
+  display: none;
+}
+.game-levels .game-level.level-4.light-1 .bulb-1 {
+  display: block;
+}
+.game-levels .game-level.level-4.light-1 .text-1 .text-content {
+  border-color: transparent;
+  color: #ffffff;
+  cursor: text;
+}
+.game-levels .game-level.level-4.light-2 .bulb-2 {
+  display: block;
+}
+.game-levels .game-level.level-4.light-2 .text-2 .text-content {
+  border-color: transparent;
+  color: #ffffff;
+  cursor: text;
+}
+.game-levels .game-level.level-4.light-3 .bulb-3 {
+  display: block;
+}
+.game-levels .game-level.level-4.light-3 .text-3 .text-content {
+  border-color: transparent;
+  color: #ffffff;
+  cursor: text;
+}
+.game-levels .game-level.level-4.light-4 .bulb-4 {
+  display: block;
+}
+.game-levels .game-level.level-4.light-4 .text-4 .text-content {
+  border-color: transparent;
+  color: #ffffff;
+  cursor: text;
+}
+.game-levels .game-level.level-5 .level-5__price {
+  position: absolute;
+  top: 15.23%;
+  height: 18.1%;
+  width: 100%;
+  background-image: url('../../img/level-5__price.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: 50% 50%;
+}
+.game-levels .game-level.level-5 .level-5__price-info {
+  text-align: center;
+  position: absolute;
+  font-size: 15px;
+  line-height: 22px;
+  color: #ffffff;
+  top: 36.2%;
+  left: 20px;
+  right: 20px;
+  text-shadow: 1px 0px 1px #be5751;
+  letter-spacing: 0.05em;
+}
+.game-levels .game-level.level-5 .level-5__list {
+  width: 33.33%;
+  left: 8.33%;
+  position: absolute;
+  top: 52.7%;
+  font-size: 24px;
+  font-weight: 300;
+  color: #4D4D4D;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  line-height: 34px;
+}
+.game-levels .game-level.level-5 .level-5__list li {
+  list-style: none;
+}
+.game-levels .game-level.level-5 .level-5__list li:before {
+  content: "";
+  display: block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #7495AA;
+  position: absolute;
+  margin-top: 10px;
+  margin-left: -30px;
+}
+.game-levels .game-level.level-5 .level-5__right-block {
+  position: absolute;
+  width: 30%;
+  margin-right: -15%;
+  right: 20%;
+  bottom: 3.33%;
+}
+.game-levels .game-level.level-5 .level-5__right-block p {
+  font-weight: 700;
+  margin-bottom: 4.2%;
+}
+.game-levels .game-level.level-5 .level-5__controls {
+  font-size: 0;
+  margin-bottom: 10px;
+}
+.game-levels .game-level.level-5 .level-5__controls .level-5__control {
+  display: inline-block;
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 32px;
+  width: 36px;
+  height: 32px;
+  text-align: center;
+  border: 1px solid #4D4D4D;
+  border-radius: 13px;
+  margin: 1px;
+}
+.game-levels .game-level.level-5 .level-5__btn {
+  position: absolute;
+  left: 50%;
+  margin-left: -102px;
+  width: 204px;
+  height: 58px;
+  background-image: url('../../img/level-5__btn.png');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  bottom: 6.33%;
+}
+.game-levels .game-level.level-5 .level-5__btn:hover {
+  background-image: url('../../img/level-5__btn__hover.png');
+}
+.game-levels .game-level.level-6 .level-6__form {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 9%;
+}
+.game-levels .game-level.level-6 .level-6__form .form-control {
+  font-size: 12px;
+  font-weight: 700;
+  border-color: transparent;
+  border-radius: 0;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+.game-levels .game-level.level-6 .level-6__form .form-control.bg-info {
+  background: #E1F3FF;
+}
+.game-levels .game-level.level-6 .level-6__form .form-group {
+  margin-bottom: 12px;
+}
+.game-levels .game-level.level-6 .level-6__form .btn {
+  border-radius: 0;
+  color: #7495AA;
+  font-size: 24px;
+  font-weight: 700;
+  padding: 13px 12px 12px 12px;
+}
+.game-levels .game-level.level-6 .level-6__form .checkbox {
+  float: left;
+}
+.game-levels .game-level.level-6 .level-6__form .checkbox-text {
+  display: block;
+  color: #ffffff;
+  margin-left: 38px;
+}
+.game-levels .game-level .level-content {
+  padding-top: 56px;
+}
+.game-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+}
+.game-background .level-bg {
+  height: 200%;
+  position: relative;
+  /*opacity: .5;*/
+}
+.game-background .level-bg img {
+  /*opacity: .5;*/
+}
+.game-background .level-bg.level-1 {
+  z-index: 6;
+  background-color: #C1E2F7;
+}
+.game-background .level-bg.level-2 {
+  z-index: 5;
+  background-color: #ffffff;
+}
+.game-background .level-bg.level-3 {
+  z-index: 4;
+  background-color: #B5E6E3;
+}
+.game-background .level-bg.level-4 {
+  z-index: 3;
+  background-color: #ffffff;
+}
+.game-background .level-bg.level-5 {
+  z-index: 2;
+  background-color: #BF5852;
+}
+.game-background .level-bg.level-6 {
+  z-index: 1;
+  background-color: #ffffff;
+}
+.game-background .level-bg img {
+  width: 100%;
+  height: auto;
+}
+.game-background .level-bg .level-background-fixed-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.game__start_position {
+  margin-top: -14px;
+  height: 50px;
+  text-align: center;
+}
+.game__player {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  background-image: url('../../img/game__player.png');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+}
+.timer__digit {
+  display: block;
+  width: 38px;
+  height: 112px;
+  background-size: contain;
+  float: left;
+  margin: 6px 8px;
+}
+.timer__digit.digit-1 {
+  background-image: url('../../img/timer__1.png');
+}
+.timer__digit.digit-2 {
+  background-image: url('../../img/timer__2.png');
+}
+.timer__digit.digit-3 {
+  background-image: url('../../img/timer__3.png');
+}
+.timer__digit.digit-4 {
+  background-image: url('../../img/timer__4.png');
+}
+.timer__digit.digit-5 {
+  background-image: url('../../img/timer__5.png');
+}
+.timer__digit.digit-6 {
+  background-image: url('../../img/timer__6.png');
+}
+.timer__digit.digit-7 {
+  background-image: url('../../img/timer__7.png');
+}
+.timer__digit.digit-8 {
+  background-image: url('../../img/timer__8.png');
+}
+.timer__digit.digit-9 {
+  background-image: url('../../img/timer__9.png');
+}
+.timer__digit.digit-0 {
+  background-image: url('../../img/timer__0.png');
+}

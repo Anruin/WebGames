@@ -1,0 +1,48 @@
+@font-face {
+	font-family: 'Circle';
+	src: url('../fonts/CRC15.eot');
+	src: local('☺'), url('../fonts/CRC15.woff') format('woff'), url('../fonts/CRC15.ttf') format('truetype'), url('../fonts/CRC15.svg') format('svg');
+	font-weight: 100;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Circle';
+	src: url('../fonts/CRC25.eot');
+	src: local('☺'), url('../fonts/CRC25.woff') format('woff'), url('../fonts/CRC25.ttf') format('truetype'), url('../fonts/CRC25.svg') format('svg');
+	font-weight: 200;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Circle';
+	src: url('../fonts/CRC35.eot');
+	src: local('☺'), url('../fonts/CRC35.woff') format('woff'), url('../fonts/CRC35.ttf') format('truetype'), url('../fonts/CRC35.svg') format('svg');
+	font-weight: 300;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Circle';
+	src: url('../fonts/CRC55.eot');
+	src: local('☺'), url('../fonts/CRC55.woff') format('woff'), url('../fonts/CRC55.ttf') format('truetype'), url('../fonts/CRC55.svg') format('svg');
+	font-weight: 400;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Circle';
+	src: url('../fonts/CRC65.eot');
+	src: local('☺'), url('../fonts/CRC65.woff') format('woff'), url('../fonts/CRC65.ttf') format('truetype'), url('../fonts/CRC65.svg') format('svg');
+	font-weight: 700;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Circle';
+	src: url('../fonts/CRC75.eot');
+	src: local('☺'), url('../fonts/CRC75.woff') format('woff'), url('../fonts/CRC75.ttf') format('truetype'), url('../fonts/CRC75.svg') format('svg');
+	font-weight: 800;
+	font-style: normal;
+}
+
