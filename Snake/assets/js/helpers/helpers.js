@@ -81,14 +81,14 @@ define([
 
 			temporary.item.position = helpers.getRandomPointInView();
 
-			while(helpers.findIntersects(arrayForCompare, temporary)){
+			while(helpers.isIntersects(arrayForCompare, temporary)){
 				temporary.item.position = helpers.getRandomPointInView();
 			}
 
 			forRandom.item.position = temporary.item.position;
 			temporary.item.remove();
 		},
-		findIntersects: function(array, object) {
+		isIntersects: function(array, object) {
 			return array.some(function (el){
 				return el.intersects(object);
 			});
