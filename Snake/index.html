@@ -1,40 +1,311 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>	  <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>		 <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>		 <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<title></title>
-		<meta name="description" content="">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-		<link rel="stylesheet" href="css/normalize.css">
-		<link rel="stylesheet" href="css/main.css">
-		<script src="js/vendor/modernizr-2.6.2.min.js"></script>
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-		<script src="js/vendor/paper-full.js"></script>
-		<script data-main="js/config" src="js/vendor/require.min.js"></script>
-	</head>
-	<body>
-		<!--[if lt IE 7]>
-			<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-		<![endif]-->
-		<div id="images">
+<html lang="ru">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>NewYear::Верстка</title>
+
+	<!-- Bootstrap -->
+	<link href="assets/css/bootstrap/bootstrap.css" rel="stylesheet">
+	<link href="assets/css/bootstrap/theme.css" rel="stylesheet">
+	<link href="assets/css/icomoon.css" rel="stylesheet">
+	<link href="assets/css/fonts.css" rel="stylesheet">
+
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+
+	<!-- GAME -->
+	<script src="js/vendor/paper-full.js"></script>
+	<script data-main="js/config" src="js/vendor/require.min.js"></script>
+	<script src="js/plugins.js"></script>
+	<link href="assets/css/game.css" rel="stylesheet">
+	<!-- GAME -->
+</head>
+<body>
+<!-- GAME -->
+<div id="images"></div>
+<canvas id="sx-game" data-paper-resize="true" data-paper-keepalive="false"></canvas>
+<!-- GAME -->
+
+<nav class="navbar navbar-default navbar-fixed-top">
+	<div class="container-fluid">
+
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#">
+				<div class="svgicon svgicon-logo">
+					<span class="sr-only">Design Bureau Verstak</span>
+				</div>
+			</a>
 		</div>
-		<canvas id="sx-game" data-paper-resize="true" data-paper-keepalive="false"></canvas>
 
-		<script src="js/plugins.js"></script>
+		<ul class="nav navbar-nav nav-block-language">
+			<li><a class="text-uppercase active" href="#"><span class="svgicon text-lg svgicon-dot"></span> Рус</a></li>
+			<li><a class="text-uppercase" href="#"><span class="svgicon text-lg svgicon-dot-empty"></span> Eng</a></li>
+		</ul>
 
-		<!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-		<script>
-			(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-			function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-			e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-			e.src='//www.google-analytics.com/analytics.js';
-			r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-			ga('create','UA-XXXXX-X');ga('send','pageview');
-		</script>
-	</body>
+		<ul class="nav navbar-nav nav-block-game-life">
+			<li>
+				<p class="navbar-text text-lg">ЖИЗНИ</p>
+				<p class="navbar-text text-lg svgicon svgicon-heart"></p>
+				<p class="navbar-text text-lg svgicon svgicon-heart-empty"></p>
+				<p class="navbar-text text-lg svgicon svgicon-heart-empty"></p>
+			</li>
+		</ul>
+
+		<ul class="nav navbar-nav nav-block-btn">
+			<li><button type="button" class="btn btn-primary navbar-btn text-uppercase">Заказать</button></li>
+		</ul>
+
+		<ul class="nav navbar-nav nav-block-tel">
+			<li>
+				<p class="navbar-text svgicon svgicon-tel"></p>
+				<p class="navbar-text text-lg">+7 499 322 01 93</p>
+			</li>
+		</ul>
+
+		<ul class="nav navbar-nav nav-block-social">
+			<li>Facebook</li>
+			<li>Twitter</li>
+		</ul>
+
+	</div><!-- /.container-fluid -->
+</nav>
+
+<div class="game-levels" id="game_levels">
+	<section class="game-level level-1" id="level_1" data-level-id="1">
+		<!-- Уровень 1 -->
+		<div class="level-content">
+			<div class="text-center">
+				<img class="level-1__img-text img-responsive" src="assets/img/level-1__img-text.png" alt="Дарите подарки и увеличивайте продажи">
+				<div class="level-1__countdown">
+					<div class="level-1__div-timer">
+						<div class="timer__digit digit-9"></div>
+						<div class="timer__digit digit-5"></div>
+					</div>
+					<p class="level-1__timer-text"><span class="days">ДНЕЙ</span><span class="to">до</span><span class="new-year">НОВОГО ГОДА</span></p>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="game-level level-2" id="level_2" data-level-id="2">
+		<!-- Уровень 2 -->
+		<div class="level-content">
+			<div class="container level-2__block-1">
+				<div class="row">
+					<div class="col-xs-5 col-xs-offset-1 padding-lg">
+						<p class="lead text-right">Каждый год вы&nbsp;<span class="text-primary">тратите <br>много денег и&nbsp;времени</span> <br> на&nbsp;новогодние подарки <br>для партнеров и&nbsp;клиентов. </p>
+					</div>
+					<div class="col-xs-5 padding-lg">
+						<p class="lead text-left">Сколько из них <br><span class="text-primary">выбрасывается</span> в мусор, <br><span class="text-primary">пылится</span> в дальнем углу <br>или <span class="text-primary">передаривается</span>?</p>
+					</div>
+				</div>
+			</div>
+			<div class="container level-2__block-2">
+				<h2 class="text-center">Мы предлагаем новый <br>инструмент, который <br>объединяет в&nbsp;себе</h2>
+			</div>
+			<div class="container level-2__block-3">
+				<div class="row">
+					<div class="col-xs-8 col-xs-offset-2 level-2__icons">
+						<div class="col-xs-3 text-center">
+							<div class="level-2__icon">
+								<span class="svgicon svgicon-email"></span>
+							</div>
+							<p class="text-uppercase">E-mail <br>агента</p>
+						</div>
+						<div class="col-xs-3 text-center">
+							<div class="level-2__icon">
+								<span class="svgicon svgicon-website"></span>
+							</div>
+							<p class="text-uppercase">Промо-сайт</p>
+						</div>
+						<div class="col-xs-3 text-center">
+							<div class="level-2__icon">
+								<span class="svgicon svgicon-game"></span>
+							</div>
+							<p class="text-uppercase">Игру <br>с призами</p>
+						</div>
+						<div class="col-xs-3 text-center">
+							<div class="level-2__icon">
+								<span class="svgicon svgicon-analytics"></span>
+							</div>
+							<p class="text-uppercase">Аналитику <br>по&nbsp;базе клиентов</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="game-level level-3" id="level_3" data-level-id="3">
+		<!-- Уровень 3 -->
+		<div class="level-content">
+			<div class="container level-3__caption">
+				<h1 class="text-uppercase text-center">Поздравительное <br>Web-приложение <br>с игрой</h1>
+			</div>
+			<div class="container level-3__text text-uppercase text-center">Преимущества:</div>
+			<div class="level-3__advantage adv-1">
+				<div class="level-3__icon">1</div>
+				<p class="text-uppercase">Положительные эмоции при игре и&nbsp;выигрыше</p>
+			</div>
+			<div class="level-3__advantage adv-2">
+				<div class="level-3__icon">2</div>
+				<p class="text-uppercase">Удобный инструмент для&nbsp;поздравлений и&nbsp;промо-акций</p>
+			</div>
+			<div class="level-3__advantage adv-3">
+				<div class="level-3__icon">3</div>
+				<p class="text-uppercase">Стимуляция <br>продаж</p>
+			</div>
+			<div class="level-3__advantage adv-4">
+				<div class="level-3__icon">4</div>
+				<p class="text-uppercase">Максимальный <br>географический <br>охват</p>
+			</div>
+			<div class="level-3__advantage adv-5">
+				<div class="level-3__icon">5</div>
+				<p class="text-uppercase">Запоминающийся <br>способ сделать<br>подарок</p>
+			</div>
+		</div>
+	</section>
+	<section class="game-level level-4" id="level_4" data-level-id="4">
+		<!-- Уровень 4 -->
+		<div class="level-content">
+			<div class="container level-4__caption">
+				<h1 class="text-uppercase text-center">Как это работает?</h1>
+			</div>
+			<div class="container level-4__lights">
+				<img class="img-responsive bulb-0" src="assets/img/level-4__lights.svg" alt="">
+				<img class="img-responsive bulb-1" src="assets/img/level-4__lights_1.svg" alt="">
+				<img class="img-responsive bulb-2" src="assets/img/level-4__lights_2.svg" alt="">
+				<img class="img-responsive bulb-3" src="assets/img/level-4__lights_3.svg" alt="">
+				<img class="img-responsive bulb-4" src="assets/img/level-4__lights_4.svg" alt="">
+			</div>
+			<div class="level-4__texts">
+				<div class="level-4__text text-1">
+					<div class="text-content">
+						<p>В приложение загружается база клиентов, по которой в определённый момент происходит рассылка поздравлений со ссылкой на сайт. Сайт является <strong>поздравительной открыткой и игрой одновременно.</strong></p>
+					</div>
+				</div>
+				<div class="level-4__text text-2">
+					<div class="text-content">
+						<p>Клиент играет в несложную игру и получает удовольствие. По результату игры клиенту отправляется письмо, где его <strong>поздравляют с победой</strong> и <strong>сообщают о подарке.</strong></p>
+					</div>
+				</div>
+				<div class="level-4__text text-3">
+					<div class="text-content">
+						<p>Подарком может являться что угодно. Например, скидка на услуги компании. Главное, что клиент получает <strong>персональное поздравление</strong> и <strong>предложение продолжить сотрудничество.</strong></p>
+					</div>
+				</div>
+				<div class="level-4__text text-4">
+					<div class="text-content">
+						<p>Через несколько недель у&nbsp;вас появляется ещё один повод <strong>напомнить о&nbsp;себе</strong> и&nbsp;<strong>стимулировать продажи</strong> в&nbsp;начале нового года.</p>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+	</section>
+	<section class="game-level level-5" id="level_5" data-level-id="5">
+		<!-- Уровень 5 -->
+		<div class="level-content">
+			<div class="level-5__price"></div>
+			<p class="level-5__price-info text-uppercase">Стоимость поздравления, аналогичного <br>этому сайту с игрой, которую вы можете <br>попробовать сейчас</p>
+			<ul class="level-5__list">
+				<li>Адаптивная вёрстка</li>
+				<li>Уникальный дизайн сайта</li>
+				<li>Удобный инструмент управления базой данных</li>
+				<li>10 видов игр на выбор</li>
+			</ul>
+			<div class="level-5__right-block">
+				<div class="level-5__controls text-center">
+					<span class="level-5__control">↑</span>
+					<br>
+					<span class="level-5__control">←</span>
+					<span class="level-5__control">↓</span>
+					<span class="level-5__control">→</span>
+				</div>
+				<p class="text-center text-uppercase">Управление</p>
+				<div class="game__start_position">
+					<span class="game__player"></span>
+				</div>
+				<p class="text-center text-uppercase"><span class="text-primary">Соберите все подарки,</span> <br>а потом раздайте <br>их людям</p>
+				<p class="text-center text-uppercase"><span class="text-primary">Избегайте столкновения</span> <br>деда мороза с текстом, <br>обходите бомбы и ямы</p>
+			</div>
+			<a href="#" class="level-5__btn"><span class="sr-only">Играть</span></a>
+		</div>
+	</section>
+	<section class="game-level level-6" id="level_6" data-level-id="6">
+		<!-- Уровень 6 -->
+		<div class="level-content">
+			<div class="container level-6__form">
+				<form class="form-horizontal">
+					<div class="form-group">
+						<div class="col-xs-4 col-xs-offset-4">
+							<input type="text" class="form-control input-lg text-uppercase bg-info" placeholder="ПРЕДСТАВТЕСЬ, ПОЖАЛУЙСТА">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-xs-4 col-xs-offset-4">
+							<input type="email" class="form-control input-lg text-uppercase bg-info" placeholder="ЭЛЕКТРОННАЯ ПОЧТА">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-xs-4 col-xs-offset-4">
+							<input type="tel" class="form-control input-lg text-uppercase bg-info" placeholder="ТЕЛЕФОН">
+						</div>
+						<div class="col-xs-2">
+							<input type="text" class="form-control input-lg text-uppercase" placeholder="ПРОМО КОД">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-xs-4 col-xs-offset-4">
+							<label>
+								<input type="checkbox" class="checkbox"> <span class="checkbox-text">ДЕРЖИТЕ МЕНЯ В КУРСЕ <br>КРЕАТИВНЫХ ПРОГРАММ СТУДИИ!</span>
+							</label>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-xs-4 col-xs-offset-4">
+							<input class="btn btn-lg btn-info btn-block" type="button" value="ОТПРАВИТЬ">
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</section>
+</div>
+
+<div class="game-background" id="game_background">
+	<div class="level-bg level-1">
+		<img class="level-background-fixed-bottom" src="assets/img/level-1__bg.svg" alt="">
+	</div>
+	<div class="level-bg level-2">
+		<img class="level-background-fixed-bottom" src="assets/img/level-2__bg.svg" alt="">
+	</div>
+	<div class="level-bg level-3">
+		<img class="level-background-fixed-bottom" src="assets/img/level-3__bg.svg" alt="">
+	</div>
+	<div class="level-bg level-4">
+		<img class="level-background-fixed-bottom" src="assets/img/level-4__bg.svg" alt="">
+	</div>
+	<div class="level-bg level-5">
+		<img class="level-background-fixed-bottom" src="assets/img/level-5__bg.svg" alt="">
+	</div>
+	<div class="level-bg level-6">
+		<img class="level-background-fixed-bottom" src="assets/img/level-6__bg.svg" alt="">
+	</div>
+</div>
+
+<!-- Scripts  -->
+<script src="assets/js/vendor/jquery.js"></script>
+<script src="assets/js/vendor/bootstrap.min.js"></script>
+<script src="assets/js/vendor/TweenMax.min.js"></script>
+<script src="assets/js/vendor/jquery.scrollmagic.js"></script>
+<script src="assets/js/vendor/jquery.scrollmagic.debug.js"></script>
+<script src="assets/js/background.js"></script>
+<script src="assets/js/functions.js"></script>
+</body>
 </html>

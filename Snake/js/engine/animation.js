@@ -35,6 +35,5 @@ define([
 			this.timer = activeFrame.duration;
 			return activeFrame.image;
 		}
-		return this.activeFrame;
 	};
 })
