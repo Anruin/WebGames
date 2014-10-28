@@ -1,8 +1,11 @@
 /**
  * Created by Anry on 25.10.2014.
  */
-console.log('game.js');
-(function(se, paper) {
+
+define([
+	"../se"
+], function (se) {
+	console.log('game.js');
 	se.Game = function(paper) {
 		this.paper = paper;
 		this.scenes = [];
@@ -11,7 +14,9 @@ console.log('game.js');
 	};
 
 	se.Game.prototype.update = function (_dt) {
+		if (se.$debug) console.log('Game update');
+
 		if (this.activeScene)
 			this.activeScene.update(_dt);
 	}
-})(window.se = window.se || {}, paper);
+})

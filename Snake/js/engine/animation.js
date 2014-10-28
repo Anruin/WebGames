@@ -1,14 +1,16 @@
 /**
  * Created by Anry on 25.10.2014.
  */
-console.log('animation.js');
-(function(se, paper) {
-	se.Animation = function() {
+define([
+	"../se"
+], function (se) {
+	console.log('animation.js');
+	se.Animation = function () {
 		this.name = '';
 		this.loop = true;
 		this.timer = 0.0;
 		this.frames = [];
-		this.activeFrame = null;
+		this.activeFrameIndex = 0;
 	};
 
 	/**
@@ -16,22 +18,23 @@ console.log('animation.js');
 	 * @param _dt
 	 */
 	se.Animation.prototype.update = function (_dt) {
-		// Find frames with time greater than current animation time
-		var timer = this.timer;
-		var filtered = this.frames.filter(function(o) {
-			return (o.time > timer);
-		});
-		// Get first frame found, if none, go to start
-		if (filtered.length == 0) {
-			if (this.loop) {
-				this.activeFrame = this.frames[0];
-				this.timer = 0.0;
-			}
+		if (se.$debug) console.log('Animation update', this.activeFrameIndex);
+
+		if (this.frames.length === 0)
+			return null;
+
+		var activeFrame = this.frames[this.activeFrameIndex];
+
+		if (this.timer > 0) {
+			this.timer -= _dt;
+			return false;
 		} else {
-			this.activeFrame = filtered[0].image;
-			this.timer += _dt;
+			this.activeFrameIndex++;
+			if (this.activeFrameIndex >= this.frames.length)
+				this.activeFrameIndex = 0;
+			this.timer = activeFrame.duration;
+			return activeFrame.image;
 		}
 		return this.activeFrame;
 	};
-
-})(window.se = window.se || {});
+})

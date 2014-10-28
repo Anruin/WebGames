@@ -1,8 +1,11 @@
 /**
  * Created by Anry on 25.10.2014.
  */
-console.log('player.js');
-(function(se, paper) {
+
+define([
+	"../se"
+], function (se) {
+	console.log('player.js');
 	se.Player = function() {
 		this.pawn = null;
 	};
@@ -11,4 +14,4 @@ console.log('player.js');
 		this.pawn = _pawn;
 		_pawn.player = this;
 	}
-})(window.se = window.se || {});
+})

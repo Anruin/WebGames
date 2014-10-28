@@ -1,51 +1,74 @@
 /**
  * Created by Anry on 25.10.2014.
  */
-console.log('pawn.js');
-(function(se, paper) {
+
+define([
+	"../se",
+	"../game/config",
+	"../helpers/helpers",
+	"../engine/common",
+	"./actor"
+], function (se, config, helpers) {
+	console.log('pawn.js');
 	se.Pawn = function() {
+		this.score = 0;
 		this.controller = null;
-	}
-	se.EXTEND(se.Pawn, se.Actor);
-
-	/*
-	se.Pawn = function(_player) {
-		this.player = _player;
-		var headGx = {};
-		headGx[se.Directions.LEFT] = config.img.pawn.left;
-		headGx[se.Directions.UP] = config.img.pawn.up;
-		headGx[se.Directions.RIGHT] = config.img.pawn.right;
-		headGx[se.Directions.DOWN] = config.img.pawn.down;
-
-		this.head = new se.Actor(Point(0, 0), headGx);
-		if (se.Debug) console.log("Pawn created", this);
+		this.path = null;
+		this.followers = [];
+		this.turns = [];
+		se.Actor.call(this);
 	};
+	se.$extend(se.Pawn, se.Actor);
 
-	se.Pawn.prototype.grow = function() {
-		var blockGx = 	{};
-		blockGx[se.Directions.LEFT] = config.img.collectibles[0];
-		blockGx[se.Directions.UP] = config.img.collectibles[0];
-		blockGx[se.Directions.RIGHT] = config.img.collectibles[0];
-		blockGx[se.Directions.DOWN] = config.img.collectibles[0];
-		this.head.next = new se.Actor(this.head.position, blockGx);
-	};
+	se.Pawn.prototype.move = function(_dt) {
+		if(this.path) {
+			this.path.firstSegment.point = this.item.position;
+			for (var i = 0; i < this.path.segments.length - 1; i++) {
+				var segment = this.path.segments[i];
+				var nextSegment = segment.next;
+				var vector = new paper.Point([segment.point.x - nextSegment.point.x,
+					segment.point.y - nextSegment.point.y]);
+				vector.length = 100;
+				nextSegment.point = [segment.point.x - vector.x,
+					segment.point.y - vector.y];
 
-	se.Pawn.prototype.turn = function(dir) {
-		this.head.item.image = document.getElementById(this.head.gx[dir].move[0]);
-		this.head.turn(dir);
-	};
-
-	se.Pawn.prototype.update = function(_game, event) {
-		this.head.update(event);
-		var i, intersectsWithCollectible, intersectsWithObstacle;
-		for (i = 0; i < _game.collectibles.length; i++) {
-			if (this.head.intersects(_game.collectibles[i].item)) {
-				_game.collectibles[i].item.remove();
-				_game.collectibles.splice(i, 1);
-				this.grow();
-				this.player.collected++;
+				this.followers[i].item.position = nextSegment.point;
 			}
+			this.path.smooth();
 		}
+
+		se.Actor.prototype.move.call(this, _dt);
 	};
-	*/
-})(window.se = window.se || {});
+
+	se.Pawn.prototype.update = function(_dt) {
+		se.Actor.prototype.update.call(this, _dt);
+	};
+	se.Pawn.prototype.turn = function(_dt) {
+		se.Actor.prototype.turn.call(this, _dt);
+	};
+	se.Pawn.prototype.addSegment = function(_dt) {
+		if(!this.path){
+			this.path = new paper.Path({
+				strokeColor: '#6d6d6d',
+				strokeWidth: 5
+			});
+			this.path.add(this.item.position);
+		}
+		var segment = new se.Pawn();
+		segment.item = new paper.Raster();
+
+		//устанавливает новый обьект в противоположном направлении движения санты
+		var position = [this.path.lastSegment.point.x - this.velocity.x * 5,
+			this.path.lastSegment.point.y - this.velocity.y * 5];
+
+		this.path.add(position);
+		segment.item.position = position;
+
+		var randomImage = config.img.followers[helpers.randomIndex(config.img.followers)];
+		segment.item.image = document.getElementById(randomImage);
+		segment.item.scale(0.7);
+
+		this.followers.push(segment);
+		game.activeScene.actors.push(segment);
+	};
+})

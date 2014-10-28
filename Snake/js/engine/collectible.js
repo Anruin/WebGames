@@ -1,9 +1,19 @@
 /**
  * Created by Anry on 25.10.2014.
  */
-console.log('collectible.js');
-(function(se, paper) {
+define([
+	"../se",
+	"../engine/common",
+	"../engine/actor"
+], function (se) {
+	console.log('collectible.js');
 	se.Collectible = function () {
+		se.Actor.call(this);
 	};
-	se.EXTEND(se.Collectible, se.Actor);
-})(window.se = window.se || {}, paper);
+	se.$extend(se.Collectible, se.Actor);
+
+	se.Collectible.prototype.update = function(_dt) {
+
+		se.Actor.prototype.update.call(this, _dt);
+	};
+})
