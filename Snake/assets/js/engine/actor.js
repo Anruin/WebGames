@@ -5,7 +5,6 @@ define([
 	"../se",
 	"../helpers/helpers"
 ], function (se, helpers) {
-	console.log('actor.js');
 	se.Actor = function () {
 		/**
 		 * Paper item

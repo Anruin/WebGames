@@ -8,7 +8,6 @@ define([
 	"../engine/common",
 	"../engine/pawn"
 ], function (se, helpers) {
-	console.log('santa.js');
 	se.Santa = function() {
 		/**
 		 * Sack

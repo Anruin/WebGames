@@ -7,7 +7,6 @@ define([
 	"../engine/common",
 	"../engine/collectible"
 ], function (se) {
-	console.log('gift.js');
 	se.Gift = function() {
 		se.Collectible.call(this);
 	};

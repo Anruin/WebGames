@@ -5,7 +5,6 @@
 define([
 	"../se"
 ], function (se) {
-	console.log('game.js');
 	se.Game = function(paper) {
 		this.paper = paper;
 		this.scenes = [];

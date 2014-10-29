@@ -9,7 +9,6 @@ define([
 	"./pawn",
 	"../game/gift"
 ], function (se, config, helpers) {
-	console.log('scene.js');
 	/**
 	 * Scene constructor
 	 * @param _game
@@ -19,18 +18,8 @@ define([
 		this.pawns = [];
 		this.actors = [];
 		this.collectibles = [];
+		this.obstacles = [];
 
-		//temporary yellow rectangle
-		this.yellow = new paper.Path({
-			strokeColor: '#ffd76e',
-			strokeWidth: 30,
-			strokeCap: 'round'
-		});
-		this.yellow.add([500, 300]);
-		this.yellow.add([900, 300]);
-		this.yellow.add([1200, 450]);
-		this.yellow.add([800, 450]);
-		this.yellow.closed = true;
 	};
 	se.Scene.prototype.pawns = [];
 	se.Scene.prototype.collectibles = [];
@@ -84,13 +73,23 @@ define([
 		_player.possess(pawn);
 		this.pawns.push(pawn);
 	}
+	se.Scene.prototype.initObstacles = function() {
+		var obstacles = document.getElementsByClassName(config.obstacle.class);
+		var i = 0;
+		while(obstacles[i]){
+			var el = obstacles[i].getBoundingClientRect();
+			var rect = new paper.Rectangle(el.left, el.top, el.width, el.height);
+			this.obstacles.push(rect);
+			i++;
+		}
+	}
 	se.Scene.prototype.createGift = function() {
 		var gift = new se.Gift();
 		gift.item = new paper.Raster();
 
 		var randomImage = config.img.collectibles[helpers.randomIndex(config.img.collectibles)];
 		gift.item.image = document.getElementById(randomImage);
-		gift.item.scale(0.3);
+		gift.item.scale(config.params.collectible.scale);
 
 		helpers.setNotIntersectRandomPoint(gift, game.activeScene.actors);
 		this.collectibles.push(gift);

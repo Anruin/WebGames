@@ -5,7 +5,6 @@
 define([
 	"../se"
 ], function (se) {
-	console.log('controller.js');
 	se.Controller = function(pawn) {
 		this.pawn = pawn;
 		this.controls = null;

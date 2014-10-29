@@ -7,7 +7,6 @@ define([
 	"../engine/common",
 	"../engine/controller"
 ], function (se) {
-	console.log('santa_controller.js');
 	se.SantaController = function(pawn) {
 		this.pawn = pawn;
 		// TODO: Take from configuration

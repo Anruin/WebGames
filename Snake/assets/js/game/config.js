@@ -6,42 +6,49 @@ define(function () {
 		container: {
 			id: "sx-engine",
 			width: 500,
-				height: 500
-			},
-			obstacleClass: "sx-engine-obstacle",
-			params: {
-				path: {
-					length: 100,
-					firstLength: 270,
-					strokeColor: '#6d6d6d',
-					strokeWidth: 5,
-					strokeCap: 'round'
-				},
-				collectible: {
-					height: 100,
-					offset: {
-						x: 0,
-						y: 35
-					}
-				},
-				actor: {
-					interval: 50,
-					velocity: 0.021
-				},
-				field: {
-					width: 100,
-					height: 100
-				},
-				time: {
-					update: {
-						interval: 500
-					}
+			height: 500
+		},
+		obstacle: {
+			class: "game-obstacle"
+		},
+		params: {
+			path: {
+				length: 50,
+				firstLength: 115,
+				strokeColor: '#6d6d6d',
+				strokeWidth: 3,
+				strokeCap: 'round',
+				offset:{
+					right: {x:25,y:0},
+					up: {x:33,y:0},
+					left: {x:-25,y:0},
+					down: {x:33,y:0}
 				}
 			},
-			img: {
-				dir: "assets/img/",
-				ext: ".png",
-				pawn: {
+			collectible: {
+				scale: 0.2,
+				height: 100,
+				offset: {
+					x: 0,
+					y: 15
+				}
+			},
+			pawn: {
+				scale: 0.5
+			},
+			follower:{
+				scale: 0.3
+			},
+			time: {
+				update: {
+					interval: 500
+				}
+			}
+		},
+		img: {
+			dir: "assets/img/",
+			ext: ".png",
+			pawn: {
 				left: {
 					move: ["pawn-mv-l01", "pawn-mv-l02"]
 				},
@@ -70,6 +77,5 @@ define(function () {
 //		DOWN: new Point(0, 1)
 //	};
 //})
-	console.log('config.js');
 	return config;
 })

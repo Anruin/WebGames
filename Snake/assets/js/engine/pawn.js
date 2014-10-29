@@ -9,7 +9,6 @@ define([
 	"../engine/common",
 	"./actor"
 ], function (se, config, helpers) {
-	console.log('pawn.js');
 	se.Pawn = function() {
 		this.score = 0;
 		this.controller = null;
@@ -24,6 +23,9 @@ define([
 
 	se.Pawn.prototype.move = function(_point) {
 		if(this.path) {
+			console.log("Исходный x:"+this.item.position.x+", y:"+this.item.position.y);
+			console.log("Смещенный x:"+this.pathOffset.x+", y:"+this.pathOffset.y);
+
 			this.path.firstSegment.point = this.pathOffset || this.item.position;
 			//var length = config.params.path.firstLength / 5;
 			//for (var i = 0; i < this.path.segments.length - 1; i++) {
@@ -58,30 +60,23 @@ define([
 			}
 			this.path.smooth();
 		}
-																										//temporary for yellow rectangle
-		if(!helpers.isIntersects(this.followers,this) && !this.intersects({item:game.activeScene.yellow}))
+
+		if(!helpers.isIntersects(this.followers,this) && !helpers.isIntersects(game.activeScene.obstacles,this)) // !this.intersects({item:game.activeScene.yellow}))
 			se.Actor.prototype.move.call(this, _point);
 		else
 			this.item.position = this.lastPosition;
 	};
 	se.Pawn.prototype.offsetPosition = function() {
+		var offset = {x:0, y:0};
 		if(this.path){
-			var pathOffset= {x:0, y:0};
-			switch(this.lastTurn){
-				case "right":
-					pathOffset = {x:50,y:0};
-					break
-				case "up":
-					pathOffset = {x:75,y:0};
-					break
-				case "left":
-					pathOffset = {x:-50,y:0};
-					break
-				case "down":
-					pathOffset = {x:75,y:0};
-					break
+			offset = {x:config.params.path.offset[this.lastTurn].x, y:config.params.path.offset[this.lastTurn].y};
+			var firstFollower = this.followers[0];
+
+			if(this.item.position.x < firstFollower.item.position.x && (this.lastTurn=="up"||this.lastTurn=="down")){
+				console.log("Мешок правее санты")
+				offset.x = - offset.x;
 			}
-			return helpers.pointDiff(this.item.position, pathOffset);
+			return helpers.pointDiff(this.item.position,offset);
 		}
 	};
 	se.Pawn.prototype.update = function(_dt) {
@@ -126,7 +121,7 @@ define([
 		var randomImage = config.img.followers[helpers.randomIndex(config.img.followers)];
 		segment.item.visible = false;
 		segment.item.image = document.getElementById(randomImage);
-		segment.item.scale(0.7);
+		segment.item.scale(config.params.follower.scale);
 
 		while(this.intersects(segment))
 			segment.item.position = helpers.getRandomPointInView();

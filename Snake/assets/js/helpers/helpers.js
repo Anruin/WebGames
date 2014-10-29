@@ -89,8 +89,14 @@ define([
 			temporary.item.remove();
 		},
 		isIntersects: function(array, object) {
+			var objBounds = object.bounds || object.item ? object.item.bounds : object;
 			return array.some(function (el){
-				return el.intersects(object);
+				if(el.item)
+					return el.item.bounds.intersects(objBounds);
+				else if(el.bounds)
+					return el.bounds.intersects(objBounds);
+				else
+					return el.intersects(objBounds);
 			});
 		},
 		pointSumm: function(point1, point2){

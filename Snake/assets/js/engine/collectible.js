@@ -6,7 +6,6 @@ define([
 	"../engine/common",
 	"../engine/actor"
 ], function (se) {
-	console.log('collectible.js');
 	se.Collectible = function () {
 		se.Actor.call(this);
 	};

@@ -14,14 +14,14 @@ define([
 			"../game/gift"
 ], function (se, config, helpers){
 		function Start () {
+			var scene, gift, pawn, animation, framesLeft, framesUp, framesRight, framesDown, controller;
+
 			helpers.addAllImagesToDOM();
 			// Create game
 			paper.project = new paper.Project(document.getElementById('sx-game'));
 			paper.project.tool = new paper.Tool({});
 			window.game = new se.Game(paper.project);
 			console.log('Game created', game);
-
-			var scene, gift, pawn, animation, framesLeft, framesUp, framesRight, framesDown, controller;
 
 			se.$debug = false;
 
@@ -53,14 +53,14 @@ define([
 
 			santa.item.position = helpers.getRandomPointInView();
 
-
+			santa.item.scale(config.params.pawn.scale);
 			santa.item.image = document.getElementById(config.img.pawn.down.stand);
 			game.activeScene.pawns.push(santa);
 			game.activeScene.actors.push(santa);
-
-			//temporary for yellow rectangle
-			while (santa.intersects({item: game.activeScene.yellow}))
-				santa.item.position = helpers.getRandomPointInView();
+			game.activeScene.initObstacles();
+			//TODO: make this code to each obstacle
+			//while (santa.intersects({item: game.activeScene.yellow}))
+			//	santa.item.position = helpers.getRandomPointInView();
 			console.log('Pawn created', santa);
 
 			santa.animations = helpers.getFramesAnimations("pawn");
@@ -80,7 +80,6 @@ define([
 			//paper.project.initialize();
 
 			//paper.project.initialize();
-			console.log('test.js');
 		}
 	return Start;
 });

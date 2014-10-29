@@ -5,7 +5,6 @@
 define([
 	"../se"
 ], function (se) {
-	console.log('player.js');
 	se.Player = function() {
 		this.pawn = null;
 	};

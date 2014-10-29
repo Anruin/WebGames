@@ -7,7 +7,6 @@ define([
 	"../engine/common",
 	"../engine/actor"
 ], function (se) {
-	console.log('obstacle.js');
 	se.Obstacle = function () {
 	};
 	se.$extend(se.Obstacle, se.Actor);

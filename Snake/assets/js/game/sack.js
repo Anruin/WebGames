@@ -6,7 +6,6 @@ define([
 	"../engine/common",
 	"../engine/actor"
 ], function (se) {
-	console.log('sack.js');
 	se.Sack = function() {
 		/**
 		 * Sack

@@ -4,7 +4,6 @@
 define([
 	"../se"
 ], function (se) {
-	console.log('animation.js');
 	se.Animation = function () {
 		this.name = '';
 		this.loop = true;

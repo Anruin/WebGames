@@ -4,7 +4,6 @@
 define([
 	"../se"
 ], function (se) {
-	console.log('common.js');
 
 	se.Directions = {
 		LEFT: new paper.Point(-1, 0),
