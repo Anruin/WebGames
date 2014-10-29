@@ -16,7 +16,7 @@ define(function () {
 				length: 50,
 				firstLength: 50,
 				strokeColor: '#6d6d6d',
-				strokeWidth: 3,
+				strokeWidth: 2,
 				strokeCap: 'round',
 				offset:{
 					right: {x:25,y:0},
@@ -34,10 +34,10 @@ define(function () {
 				}
 			},
 			pawn: {
-				scale: 0.5
+				scale: 0.4
 			},
 			follower:{
-				scale: 0.3
+				scale: 0.25
 			},
 			time: {
 				update: {
