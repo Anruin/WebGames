@@ -48,7 +48,7 @@ define([
 			var santa = new se.Santa();
 			santa.item = new paper.Raster();
 
-			santa.item.position = helpers.getRandomPointInView();
+			santa.item.position = [670,350];
 
 			santa.item.scale(config.params.pawn.scale);
 			game.activeScene.pawns.push(santa);
@@ -57,8 +57,7 @@ define([
 
 			santa.item.image = document.getElementById(config.img.pawn.down.stand);
 
-			while (helpers.isIntersects(game.activeScene.obstacles, santa))
-				santa.item.position = helpers.getRandomPointInView();
+			//helpers.setNotIntersectRandomPoint(santa, game.activeScene.obstacles)
 
 			console.log('Pawn created', santa);
 
