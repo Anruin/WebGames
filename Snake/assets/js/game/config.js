@@ -14,7 +14,7 @@ define(function () {
 		params: {
 			path: {
 				length: 50,
-				firstLength: 115,
+				firstLength: 50,
 				strokeColor: '#6d6d6d',
 				strokeWidth: 3,
 				strokeCap: 'round',

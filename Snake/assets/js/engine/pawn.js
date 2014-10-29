@@ -60,8 +60,8 @@ define([
 			}
 			this.path.smooth();
 		}
-
-		if(!helpers.isIntersects(this.followers,this) && !helpers.isIntersects(game.activeScene.obstacles,this)) // !this.intersects({item:game.activeScene.yellow}))
+		//!helpers.isIntersects(this.followers,this) &&
+		if(!helpers.isIntersects(game.activeScene.obstacles,this)) // !this.intersects({item:game.activeScene.yellow}))
 			se.Actor.prototype.move.call(this, _point);
 		else
 			this.item.position = this.lastPosition;
