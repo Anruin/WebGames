@@ -73,23 +73,19 @@ define([
 			return new paper.Point(x,y);
 		},
 		setNotIntersectRandomPoint: function(forRandom, arrayForCompare){
-			var temporary = new se.Actor();
-			temporary.item = new paper.Raster();
+			var tempRect = new paper.Rectangle(forRandom.item.bounds.x, forRandom.item.bounds.y,
+					forRandom.item.bounds.width, forRandom.item.bounds.height);
 
-			temporary.item.size = new paper.Size(forRandom.item.bounds.width,
-					forRandom.item.bounds.height);
-
-			temporary.item.position = helpers.getRandomPointInView();
-
-			while(helpers.isIntersects(arrayForCompare, temporary)){
-				temporary.item.position = helpers.getRandomPointInView();
+			tempRect.point = helpers.getRandomPointInView();
+			
+			while(helpers.isIntersects(arrayForCompare, {bounds:tempRect})){
+				tempRect.point = helpers.getRandomPointInView();
 			}
 
-			forRandom.item.position = temporary.item.position;
-			temporary.item.remove();
+			forRandom.item.position = tempRect.point;
 		},
 		isIntersects: function(array, object) {
-			var objBounds = object.bounds || object.item ? object.item.bounds : object;
+			var objBounds = object.bounds || (object.item ? object.item.bounds : object);
 			return array.some(function (el){
 				if(el.item && !el.item.area)
 					return el.item.bounds.intersects(objBounds);
