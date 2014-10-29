@@ -12,5 +12,8 @@ requirejs.config({
 });
 
 require(['app'], function(app) {
-    app();
+	$('.level-5__btn').click(function(){
+		app();
+		return false;
+	});
 });

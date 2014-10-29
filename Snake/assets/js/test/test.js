@@ -54,7 +54,6 @@ define([
 			santa.item.position = helpers.getRandomPointInView();
 
 			santa.item.scale(config.params.pawn.scale);
-			santa.item.image = document.getElementById(config.img.pawn.down.stand);
 			game.activeScene.pawns.push(santa);
 			game.activeScene.actors.push(santa);
 			game.activeScene.initObstacles();
@@ -67,6 +66,7 @@ define([
 			santa.animations = helpers.getFramesAnimations("pawn");
 			// Select active animation
 			//santa.activeAnimation = santa.animations[0];
+			santa.item.image = document.getElementById(config.img.pawn.down.stand);
 
 			game.activeScene.createGift();
 			// Create pawn and initialize graphics
@@ -77,10 +77,11 @@ define([
 			console.log('Create controller');
 			controller = new se.SantaController(santa);
 			console.log(controller);
-
+			//controller.onInput("down");
 			//paper.project.initialize();
 
 			//paper.project.initialize();
+			santa.update();
 		}
 	return Start;
 });
