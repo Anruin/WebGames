@@ -76,7 +76,7 @@ define([
 			controller = new se.SantaController(santa);
 			console.log(controller);
 			//костыль против непоявления первоначальной игры
-			//controller.onInput("down");
+			controller.onInput("down");
 			//paper.project.initialize();
 
 			//paper.project.initialize();
