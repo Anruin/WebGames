@@ -20,15 +20,12 @@ define([
 			// Create game
 			paper.project = new paper.Project(document.getElementById('sx-game'));
 			paper.project.tool = new paper.Tool({});
+			paper.project.activate();
+			paper.project.view.pause();
 			window.game = new se.Game(paper.project);
 			console.log('Game created', game);
 
 			se.$debug = false;
-
-			// Set up updates
-			paper.project.view.onFrame = function (event) {
-				game.update(event.delta);
-			};
 
 			paper.tool.onKeyDown = function (event) {
 				console.log('keydown');
@@ -58,6 +55,8 @@ define([
 			game.activeScene.actors.push(santa);
 			game.activeScene.initObstacles();
 
+			santa.item.image = document.getElementById(config.img.pawn.down.stand);
+
 			while (helpers.isIntersects(game.activeScene.obstacles, santa))
 				santa.item.position = helpers.getRandomPointInView();
 
@@ -66,7 +65,6 @@ define([
 			santa.animations = helpers.getFramesAnimations("pawn");
 			// Select active animation
 			//santa.activeAnimation = santa.animations[0];
-			santa.item.image = document.getElementById(config.img.pawn.down.stand);
 
 			game.activeScene.createGift();
 			// Create pawn and initialize graphics
@@ -77,10 +75,20 @@ define([
 			console.log('Create controller');
 			controller = new se.SantaController(santa);
 			console.log(controller);
+			//костыль против непоявления первоначальной игры
 			//controller.onInput("down");
 			//paper.project.initialize();
 
 			//paper.project.initialize();
+			//paper.project.view.play();
+			//paper.project.view.update();
+			// Set up updates
+			paper.project.view.onFrame = function (event) {
+				game.update(event.delta);
+			};
+			paper.project.layers[0].activate();
+			paper.project.view.play();
+			paper.project.view.update();
 			santa.update();
 		}
 	return Start;
