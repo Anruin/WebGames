@@ -123,7 +123,7 @@ define([
 		segment.item.image = document.getElementById(randomImage);
 		segment.item.scale(config.params.follower.scale);
 
-		while(this.intersects(segment))
+		while(this.item.bounds.intersects(segment.item.bounds))
 			segment.item.position = helpers.getRandomPointInView();
 
 		segment.item.visible = true;

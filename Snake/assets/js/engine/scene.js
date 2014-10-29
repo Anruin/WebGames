@@ -7,7 +7,8 @@ define([
 	"../helpers/helpers",
 	"./actor",
 	"./pawn",
-	"../game/gift"
+	"../game/gift",
+	"../game/obstacle",
 ], function (se, config, helpers) {
 	/**
 	 * Scene constructor
@@ -40,7 +41,7 @@ define([
 			pawn.update(_dt);
 
 			curScene.collectibles.map(function(obj){
-				if(pawn.intersects(obj)){
+				if(pawn.item.bounds.intersects(obj.item.bounds)){
 					obj.item.remove();
 					curScene.collectibles.splice(curScene.collectibles.indexOf(obj), 1);
 
@@ -78,8 +79,11 @@ define([
 		var i = 0;
 		while(obstacles[i]){
 			var el = obstacles[i].getBoundingClientRect();
-			var rect = new paper.Rectangle(el.left, el.top, el.width, el.height);
-			this.obstacles.push(rect);
+			var obst = new se.Obstacle();
+			obst.item = new paper.Rectangle(el.left, el.top, el.width, el.height);
+			//rect.selected = true;
+			this.obstacles.push(obst);
+			this.actors.push(obst);
 			i++;
 		}
 	}

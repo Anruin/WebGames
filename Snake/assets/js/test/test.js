@@ -58,9 +58,10 @@ define([
 			game.activeScene.pawns.push(santa);
 			game.activeScene.actors.push(santa);
 			game.activeScene.initObstacles();
-			//TODO: make this code to each obstacle
-			//while (santa.intersects({item: game.activeScene.yellow}))
-			//	santa.item.position = helpers.getRandomPointInView();
+
+			while (helpers.isIntersects(game.activeScene.obstacles, santa))
+				santa.item.position = helpers.getRandomPointInView();
+
 			console.log('Pawn created', santa);
 
 			santa.animations = helpers.getFramesAnimations("pawn");

@@ -91,8 +91,10 @@ define([
 		isIntersects: function(array, object) {
 			var objBounds = object.bounds || object.item ? object.item.bounds : object;
 			return array.some(function (el){
-				if(el.item)
+				if(el.item && !el.item.area)
 					return el.item.bounds.intersects(objBounds);
+				if(el.item && el.item.area)
+					return el.item.intersects(objBounds);
 				else if(el.bounds)
 					return el.bounds.intersects(objBounds);
 				else
