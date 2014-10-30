@@ -17,27 +17,34 @@ define([
 	se.Game.prototype.update = function (_dt) {
 		if (se.$debug) console.log('Game update');
 
+		if(!this.activeScene.level){
+			this.activeScene.level = config.levels[0];
+			this.initLevel();
+		}
+
 		if (this.activeScene)
 			this.activeScene.update(_dt);
 
 		if(this.activeScene.mainPawn.score == this.activeScene.level.score){
+			this.activeScene.level = config.levels[config.levels.indexOf(this.activeScene.level) + 1];
 
-			this.activeScene.level = config.levels[config.levels.indexOf(this.activeScene.level)+1];
+			if(!this.activeScene.level)
+				this.gameOver();
 
-			if(!this.activeScene.level){
-				game.activeScene.mainPawn.item.position = [-1000,-1000];
-				this.activeScene.level = config.finish;
-				//paper.project.view.remove();
-				paper.project.clear();
-				paper.project.remove();
-				document.getElementById('sx-game').style.display = "none";
-				$('html, body').animate({
-					scrollTop: $('#' + this.activeScene.level.name).offset().top
-				},500);
-				return false;
-			}
-			game.activeScene.mainPawn.item.position = game.activeScene.level.spawn;
-			game.activeScene.mainPawn.lastPosition = game.activeScene.level.spawn;
+			this.initLevel();
+		}
+	}
+	se.Game.prototype.initLevel = function () {
+		if(!game.activeScene.mainPawn)
+			game.activeScene.mainPawn = game.activeScene.pawns[0];
+
+		game.activeScene.mainPawn.item.position = game.activeScene.level.spawn;
+		game.activeScene.mainPawn.lastPosition = game.activeScene.level.spawn;
+
+		if(config.levels.indexOf(game.activeScene.level)==0){
+			game.activeScene.initObstacles();
+		}
+		else {
 			$('html, body').animate({
 				scrollTop: $('#' + this.activeScene.level.name).offset().top
 			}, {
@@ -46,11 +53,25 @@ define([
 					game.activeScene.initObstacles();
 				}
 			});
-			this.activeScene.collectibles.map(function(obj){
-				obj.item.remove();
-				game.activeScene.collectibles.splice(game.activeScene.collectibles.indexOf(obj), 1);
-			})
 		}
 
+		this.activeScene.collectibles.map(function(obj){
+			obj.item.remove();
+		})
+		this.activeScene.collectibles = [];
+	}
+
+	se.Game.prototype.gameOver = function () {
+		game.activeScene.mainPawn.item.position = [-1000,-1000];
+		this.activeScene.level = config.finish;
+
+		paper.project.clear();
+		paper.project.remove();
+
+		document.getElementById('sx-game').style.display = "none";
+
+		$('html, body').animate({
+			scrollTop: $('#' + this.activeScene.level.name).offset().top
+		},500);
 	}
 })

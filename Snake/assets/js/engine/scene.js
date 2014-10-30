@@ -21,6 +21,7 @@ define([
 		this.collectibles = [];
 		this.obstacles = [];
 		this.mainPawn = null;
+		this.level= null;
 	};
 	se.Scene.prototype.pawns = [];
 	se.Scene.prototype.collectibles = [];
@@ -103,7 +104,7 @@ define([
 		var gift = new se.Gift();
 		gift.item = new paper.Raster();
 
-		var randomImage = config.img.collectibles[helpers.randomIndex(config.img.collectibles)];
+		var randomImage = this.level.collectibles[helpers.randomIndex(this.level.collectibles)];
 		gift.item.image = document.getElementById(randomImage);
 		gift.item.scale(config.params.collectible.scale);
 		helpers.setNotIntersectRandomPoint(gift, game.activeScene.actors);

@@ -71,7 +71,6 @@ define([
 			var firstFollower = this.followers[0];
 
 			if(this.item.position.x < firstFollower.item.position.x && (this.lastTurn=="up"||this.lastTurn=="down")){
-				console.log("Мешок правее санты")
 				offset.x = - offset.x;
 			}
 			return helpers.pointDiff(this.item.position,offset);

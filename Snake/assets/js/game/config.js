@@ -12,11 +12,11 @@ define(function () {
 			class: "game-obstacle"
 		},
 		levels: [
-			{name: "level_5", score: 3, spawn: [670,350]},
-			{name: "level_4", score: 6, spawn: [670,350]},
-			{name: "level_3", score: 9, spawn: [670,600]},
-			{name: "level_2", score: 12, spawn: [100,100]},
-			{name: "level_1", score: 15, spawn: [100,100]}
+			{name: "level_5", score: 3, spawn: [670,350], collectibles: ["gift-2-1", "gift-2-2", "gift-2-3"]},
+			{name: "level_4", score: 6, spawn: [670,350], collectibles: ["gift-3-1", "gift-3-2", "gift-3-3"]},
+			{name: "level_3", score: 9, spawn: [670,550], collectibles: ["gift-4-1", "gift-4-2", "gift-4-3"]},
+			{name: "level_2", score: 12, spawn: [100,100], collectibles: ["gift-5-1", "gift-5-2", "gift-5-3"]},
+			{name: "level_1", score: 15, spawn: [100,100], collectibles: ["gift-5-1", "gift-5-2", "gift-5-3"]}
 		],
 		finish: {name:"level_6"},
 		params: {
@@ -72,7 +72,6 @@ define(function () {
 					move: ["pawn-mv-d01", "pawn-mv-d02"]
 				}
 			},
-			collectibles: ["gift-2-1", "gift-2-2", "gift-2-3"],
 			followers: ["collectible-01", "collectible-02", "collectible-03", "collectible-04"]
 		}
 	};

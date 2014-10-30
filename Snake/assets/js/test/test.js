@@ -46,17 +46,10 @@ define([
 			// Create pawn and initialize graphics
 			var santa = new se.Santa();
 			santa.item = new paper.Raster();
-
-
 			santa.item.scale(config.params.pawn.scale);
-			game.activeScene.pawns.push(santa);
-			game.activeScene.mainPawn = santa;
-			game.activeScene.actors.push(santa);
-			game.activeScene.level = config.levels[0];
-			santa.item.position = game.activeScene.level.spawn;
-			game.activeScene.initObstacles();
-
 			santa.item.image = document.getElementById(config.img.pawn.down.stand);
+			game.activeScene.pawns.push(santa);
+			game.activeScene.actors.push(santa);
 
 			//helpers.setNotIntersectRandomPoint(santa, game.activeScene.obstacles)
 
@@ -66,7 +59,6 @@ define([
 			// Select active animation
 			//santa.activeAnimation = santa.animations[0];
 
-			game.activeScene.createGift();
 			// Create pawn and initialize graphics
 
 			console.log('Gifts created', game.activeScene.collectibles);
@@ -77,7 +69,6 @@ define([
 			console.log(controller);
 			//костыль против непоявления первоначальной игры
 			controller.onInput("down");
-			//paper.project.initialize();
 
 			//paper.project.initialize();
 			//paper.project.view.play();

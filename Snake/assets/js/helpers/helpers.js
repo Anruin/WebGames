@@ -28,11 +28,13 @@ define([
 				});
 			}
 
-			config.img.collectibles.map(function(name){
-				helpers.addImageToDOM(name, "collectible");
+			config.levels.map(function(level){
+				level.collectibles.map(function(name){
+					helpers.addImageToDOM(name, "collectible");
+				});
 			});
 			config.img.followers.map(function(name){
-				helpers.addImageToDOM(name, "collectible");
+				helpers.addImageToDOM(name, "follower");
 			});
 		},
 
@@ -73,29 +75,28 @@ define([
 			return new paper.Point(x,y);
 		},
 		setNotIntersectRandomPoint: function(forRandom, arrayForCompare){
-			var tempRect = new paper.Rectangle(forRandom.item.bounds.x, forRandom.item.bounds.y,
-					forRandom.item.bounds.width, forRandom.item.bounds.height);
-
-			tempRect.point = helpers.getRandomPointInView();
+			forRandom.item.position = helpers.getRandomPointInView();
 			
-			while(helpers.isIntersects(arrayForCompare, {bounds:tempRect})){
-				tempRect.point = helpers.getRandomPointInView();
+			while(helpers.isIntersects(arrayForCompare, forRandom)){
+				forRandom.item.position = helpers.getRandomPointInView();
 			}
-
-			forRandom.item.position = tempRect.point;
 		},
 		isIntersects: function(array, object) {
 			var objBounds = object.bounds || (object.item ? object.item.bounds : object);
-			return array.some(function (el){
+			var mainResult =  array.some(function (el){
+				var result;
 				if(el.item && !el.item.point)
-					return objBounds.intersects(el.item.bounds) || objBounds.contains(el.item.bounds);
+					result = objBounds.intersects(el.item.bounds) || objBounds.contains(el.item.bounds) || el.item.bounds.contains();
 				if(el.item && el.item.point)
-					return objBounds.intersects(el.item) || objBounds.contains(el.item.bounds);
+					result = objBounds.intersects(el.item) || objBounds.contains(el.item) || objBounds.contains(el.item);
 				else if(el.bounds)
-					return objBounds.intersects(el.bounds) || objBounds.contains(el.item.bounds);
+					result = objBounds.intersects(el.bounds) || objBounds.contains(el.bounds) || objBounds.contains(el.bounds);
 				else
-					return objBounds.intersects(el) || objBounds.contains(el.item.bounds);
+					result = objBounds.intersects(el) || objBounds.contains(el) || objBounds.contains(el);
+
+				return result;
 			});
+			return mainResult;
 		},
 		pointSumm: function(point1, point2){
 			return new paper.Point(point1.x + point2.x, point1.y + point2.y);
