@@ -29,7 +29,8 @@ define([
 				this.activeScene.level = config.finish;
 				//paper.project.view.remove();
 				paper.project.clear();
-				//paper.project.remove();
+				paper.project.remove();
+				document.getElementById('sx-game').style.display = "none";
 				$('html, body').animate({
 					scrollTop: $('#' + this.activeScene.level.name).offset().top
 				},500);

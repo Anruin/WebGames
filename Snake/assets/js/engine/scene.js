@@ -77,7 +77,6 @@ define([
 	}
 	se.Scene.prototype.initObstacles = function() {
 		var curScene = this;
-
 		if(curScene.obstacles.length){
 			curScene.obstacles.map(function(obst){
 				curScene.actors.splice(curScene.actors.indexOf(obst), 1);
@@ -86,7 +85,7 @@ define([
 		curScene.obstacles = [];
 		curScene.obstacles.length = 0;
 
-		var obstacles = $('#'+curScene.level.name+" ."+config.obstacle.class);
+		var obstacles = document.getElementById(curScene.level.name).getElementsByClassName(config.obstacle.class);
 		var i = 0;
 		while(obstacles[i]){
 			var el = obstacles[i].getBoundingClientRect();

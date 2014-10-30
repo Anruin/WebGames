@@ -88,13 +88,13 @@ define([
 			var objBounds = object.bounds || (object.item ? object.item.bounds : object);
 			return array.some(function (el){
 				if(el.item && !el.item.point)
-					return el.item.bounds.intersects(objBounds);
+					return objBounds.intersects(el.item.bounds) || objBounds.contains(el.item.bounds);
 				if(el.item && el.item.point)
-					return el.item.intersects(objBounds);
+					return objBounds.intersects(el.item) || objBounds.contains(el.item.bounds);
 				else if(el.bounds)
-					return el.bounds.intersects(objBounds);
+					return objBounds.intersects(el.bounds) || objBounds.contains(el.item.bounds);
 				else
-					return el.intersects(objBounds);
+					return objBounds.intersects(el) || objBounds.contains(el.item.bounds);
 			});
 		},
 		pointSumm: function(point1, point2){
