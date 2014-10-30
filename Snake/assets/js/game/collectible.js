@@ -1,8 +1,11 @@
 /**
  * Created by Anry on 25.10.2014.
  */
-(function(se, paper) {
-	se.Collectible = function () {
+define([
+	"../se",
+	"../helpers/helpers"
+], function (se, helpers) {
+	se.NPC = function () {
 	};
-	se.$extend(se.Collectible, se.Actor);
-})(window.se = window.se || {}, paper);
+	se.$extend(se.NPC, se.Actor);
+})

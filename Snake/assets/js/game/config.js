@@ -47,10 +47,24 @@ define(function () {
 			follower:{
 				scale: 0.25
 			},
-			time: {
-				update: {
-					interval: 500
-				}
+			npc: {
+				lvls: [4],
+				variant: [{
+					animation: ["npc-animation-1-1", "npc-animation-1-2"],
+					accept: ["npc-accept-1-1", "npc-accept-1-2", "npc-accept-1-3", "npc-accept-1-4"]
+				},
+					{
+						animation: ["npc-animation-2-1", "npc-animation-2-2"],
+						accept: ["npc-accept-2-1", "npc-accept-2-2", "npc-accept-2-3", "npc-accept-2-4"]
+					},
+					{
+						animation: ["npc-animation-2-1", "npc-animation-2-2"],
+						accept: ["npc-accept-2-1", "npc-accept-2-2", "npc-accept-2-3", "npc-accept-2-4"]
+					},
+					{
+						animation: ["npc-animation-2-1", "npc-animation-2-2"],
+						accept: ["npc-accept-2-1", "npc-accept-2-2", "npc-accept-2-3", "npc-accept-2-4"]
+					}]
 			}
 		},
 		img: {
