@@ -11,6 +11,14 @@ define(function () {
 		obstacle: {
 			class: "game-obstacle"
 		},
+		levels: [
+			{name: "level_5", score: 3, spawn: [670,350]},
+			{name: "level_4", score: 6, spawn: [670,350]},
+			{name: "level_3", score: 9, spawn: [670,600]},
+			{name: "level_2", score: 12, spawn: [100,100]},
+			{name: "level_1", score: 15, spawn: [100,100]}
+		],
+		finish: {name:"level_6"},
 		params: {
 			path: {
 				length: 50,

@@ -1,7 +1,6 @@
 /**
  * Created by Anry on 25.10.2014.
  */
-console.log('obstacle.js');
 define([
 	"../se",
 	"../engine/common",

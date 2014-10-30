@@ -47,11 +47,13 @@ define([
 			var santa = new se.Santa();
 			santa.item = new paper.Raster();
 
-			santa.item.position = [670,350];
 
 			santa.item.scale(config.params.pawn.scale);
 			game.activeScene.pawns.push(santa);
+			game.activeScene.mainPawn = santa;
 			game.activeScene.actors.push(santa);
+			game.activeScene.level = config.levels[0];
+			santa.item.position = game.activeScene.level.spawn;
 			game.activeScene.initObstacles();
 
 			santa.item.image = document.getElementById(config.img.pawn.down.stand);

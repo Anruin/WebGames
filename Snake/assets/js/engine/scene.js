@@ -51,7 +51,8 @@ define([
 			});
 
 			while(curScene.collectibles.length < 2){
-				curScene.createGift();
+				if(curScene.obstacles.length)
+					curScene.createGift();
 			}
 		});
 	};
@@ -75,17 +76,29 @@ define([
 		this.pawns.push(pawn);
 	}
 	se.Scene.prototype.initObstacles = function() {
-		var obstacles = document.getElementsByClassName(config.obstacle.class);
+		var curScene = this;
+
+		if(curScene.obstacles.length){
+			curScene.obstacles.map(function(obst){
+				curScene.actors.splice(curScene.actors.indexOf(obst), 1);
+			})
+		}
+		curScene.obstacles = [];
+		curScene.obstacles.length = 0;
+
+		var obstacles = document.getElementById(curScene.level.name).getElementsByClassName(config.obstacle.class);
 		var i = 0;
 		while(obstacles[i]){
 			var el = obstacles[i].getBoundingClientRect();
 			var obst = new se.Obstacle();
 			obst.item = new paper.Rectangle(el.left, el.top, el.width, el.height);
 			//rect.selected = true;
-			this.obstacles.push(obst);
-			this.actors.push(obst);
+			curScene.obstacles.push(obst);
+			curScene.actors.push(obst);
 			i++;
 		}
+		if(!curScene.obstacles.length)
+			curScene.obstacles.length = 1;
 	}
 	se.Scene.prototype.createGift = function() {
 		var gift = new se.Gift();

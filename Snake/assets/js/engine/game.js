@@ -3,13 +3,15 @@
  */
 
 define([
-	"../se"
-], function (se) {
+	"../se",
+	"../game/config"
+], function (se, config) {
 	se.Game = function(paper) {
 		this.paper = paper;
 		this.scenes = [];
 		this.activeScene = null;
 		this.players = [];
+		this.level = null;
 	};
 
 	se.Game.prototype.update = function (_dt) {
@@ -17,5 +19,36 @@ define([
 
 		if (this.activeScene)
 			this.activeScene.update(_dt);
+
+		if(this.activeScene.mainPawn.score == this.activeScene.level.score){
+			try {
+				this.activeScene.level = config.levels[config.levels.indexOf(this.activeScene.level)+1];
+			}
+			catch(exc){
+				this.activeScene.level = config.finish;
+				paper.project.view.pause();
+				paper.project.remove();
+				paper.project.clear();
+				$('html, body').animate({
+					scrollTop: $('#' + this.activeScene.level.name).offset().top
+				},500);
+				return false;
+			}
+			game.activeScene.mainPawn.item.position = game.activeScene.level.spawn;
+			game.activeScene.mainPawn.lastPosition = game.activeScene.level.spawn;
+			$('html, body').animate({
+				scrollTop: $('#' + this.activeScene.level.name).offset().top
+			}, {
+				duration: 500,
+				complete: function() {
+					game.activeScene.initObstacles();
+				}
+			});
+			this.activeScene.collectibles.map(function(obj){
+				obj.item.remove();
+				game.activeScene.collectibles.splice(game.activeScene.collectibles.indexOf(obj), 1);
+			})
+		}
+
 	}
 })
