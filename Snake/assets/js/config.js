@@ -11,7 +11,8 @@ requirejs.config({
 	deps: ['paper']
 });
 
-require(['app'], function(app) {
+require(['app','helpers/helpers'], function(app, helpers) {
+	helpers.addAllImagesToDOM();
 	$('.level-5__btn').click(function(){
 		app();
 		return false;

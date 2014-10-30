@@ -16,7 +16,6 @@ define([
 		function Start () {
 			var scene, gift, pawn, animation, framesLeft, framesUp, framesRight, framesDown, controller;
 
-			helpers.addAllImagesToDOM();
 			// Create game
 			paper.project = new paper.Project(document.getElementById('sx-game'));
 			paper.project.tool = new paper.Tool({});
