@@ -21,14 +21,15 @@ define([
 			this.activeScene.update(_dt);
 
 		if(this.activeScene.mainPawn.score == this.activeScene.level.score){
-			try {
-				this.activeScene.level = config.levels[config.levels.indexOf(this.activeScene.level)+1];
-			}
-			catch(exc){
+
+			this.activeScene.level = config.levels[config.levels.indexOf(this.activeScene.level)+1];
+
+			if(!this.activeScene.level){
+				game.activeScene.mainPawn.item.position = [-1000,-1000];
 				this.activeScene.level = config.finish;
-				paper.project.view.pause();
-				paper.project.remove();
+				paper.project.view.remove();
 				paper.project.clear();
+				paper.project.remove();
 				$('html, body').animate({
 					scrollTop: $('#' + this.activeScene.level.name).offset().top
 				},500);
