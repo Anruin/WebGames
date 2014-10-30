@@ -19,10 +19,10 @@ define(function () {
 				strokeWidth: 2,
 				strokeCap: 'round',
 				offset:{
-					right: {x:25,y:0},
-					up: {x:33,y:0},
-					left: {x:-25,y:0},
-					down: {x:33,y:0}
+					right: {x:22, y:0},
+					up: {x:30, y:0},
+					left: {x:-22, y:0},
+					down: {x:30, y:0}
 				}
 			},
 			collectible: {

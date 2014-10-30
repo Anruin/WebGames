@@ -20,7 +20,7 @@ define([
 		this.actors = [];
 		this.collectibles = [];
 		this.obstacles = [];
-
+		this.mainPawn = null;
 	};
 	se.Scene.prototype.pawns = [];
 	se.Scene.prototype.collectibles = [];
@@ -86,7 +86,6 @@ define([
 			this.actors.push(obst);
 			i++;
 		}
-		paper.project.view.update();
 	}
 	se.Scene.prototype.createGift = function() {
 		var gift = new se.Gift();
