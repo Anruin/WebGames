@@ -68,7 +68,7 @@ define([
 			game.activeScene.createGift();
 			// Create pawn and initialize graphics
 
-			console.log('Gift created', gift);
+			console.log('Gifts created', game.activeScene.collectibles);
 
 			// Create controller
 			console.log('Create controller');

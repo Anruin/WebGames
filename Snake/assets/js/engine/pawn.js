@@ -23,8 +23,6 @@ define([
 
 	se.Pawn.prototype.move = function(_point) {
 		if(this.path) {
-			console.log("Исходный x:"+this.item.position.x+", y:"+this.item.position.y);
-			console.log("Смещенный x:"+this.pathOffset.x+", y:"+this.pathOffset.y);
 
 			this.path.firstSegment.point = this.pathOffset || this.item.position;
 			//var length = config.params.path.firstLength / 5;

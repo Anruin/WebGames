@@ -86,6 +86,7 @@ define([
 			this.actors.push(obst);
 			i++;
 		}
+		paper.project.view.update();
 	}
 	se.Scene.prototype.createGift = function() {
 		var gift = new se.Gift();
@@ -94,8 +95,9 @@ define([
 		var randomImage = config.img.collectibles[helpers.randomIndex(config.img.collectibles)];
 		gift.item.image = document.getElementById(randomImage);
 		gift.item.scale(config.params.collectible.scale);
-
+		//gift.item.setBounds();
 		helpers.setNotIntersectRandomPoint(gift, game.activeScene.actors);
 		this.collectibles.push(gift);
+		paper.project.view.update();
 	}
 })
