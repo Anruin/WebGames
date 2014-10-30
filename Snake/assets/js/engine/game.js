@@ -27,9 +27,9 @@ define([
 			if(!this.activeScene.level){
 				game.activeScene.mainPawn.item.position = [-1000,-1000];
 				this.activeScene.level = config.finish;
-				paper.project.view.remove();
+				//paper.project.view.remove();
 				paper.project.clear();
-				paper.project.remove();
+				//paper.project.remove();
 				$('html, body').animate({
 					scrollTop: $('#' + this.activeScene.level.name).offset().top
 				},500);

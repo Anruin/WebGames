@@ -86,7 +86,7 @@ define([
 		curScene.obstacles = [];
 		curScene.obstacles.length = 0;
 
-		var obstacles = document.getElementById(curScene.level.name).getElementsByClassName(config.obstacle.class);
+		var obstacles = $('#'+curScene.level.name+" ."+config.obstacle.class);
 		var i = 0;
 		while(obstacles[i]){
 			var el = obstacles[i].getBoundingClientRect();
