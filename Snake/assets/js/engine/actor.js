@@ -59,7 +59,7 @@ define([
 			if(this.item.position != this.lastPosition)
 				this.item.position = this.lastPosition;
 			else
-				this.item.position = helpers.pointSumm(this.item.position, {x: -_point.x, y: -_point.y}, _point, config.params.pawn.speed);
+				this.item.position = helpers.pointDiff(this.item.position, _point, config.params.pawn.speed);
 		}
 	};
 	se.Actor.prototype.turn = function (_params) {
@@ -72,11 +72,4 @@ define([
 	se.Actor.prototype.action = function (_func, _params) {
 		this[_func](_params);
 	};
-
-	//se.Actor.prototype.intersects = function (_actor) {
-	//	if (!_actor.item.position && !this.item.position)
-	//		return false;
-	//
-	//	return !!(_actor && ((this.item.bounds.x + this.item.bounds.width > _actor.item.bounds.x) && (this.item.bounds.y + this.item.bounds.height > _actor.item.bounds.y) && (_actor.item.bounds.x + _actor.item.bounds.width > this.item.bounds.x) && (_actor.item.bounds.y + _actor.item.bounds.height > this.item.bounds.y)));
-	//};
 })

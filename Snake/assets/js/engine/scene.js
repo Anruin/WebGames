@@ -34,8 +34,6 @@ define([
 	se.Scene.prototype.update = function (_dt) {
 		var curScene = this;
 
-		if (se.$debug) console.log('Scene update');
-
 		curScene.actors.map(function(actor){
 			actor.update(_dt);
 		});
