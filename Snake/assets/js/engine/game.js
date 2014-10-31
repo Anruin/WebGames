@@ -49,7 +49,7 @@ define([
 			game.activeScene.level = config.levels[config.levels.indexOf(game.activeScene.level) + 1];
 
 			if(!game.activeScene.level)
-				setTimeout(game.over, 1000);
+				setTimeout(game.over, config.finish.scroll);
 
 			game.initLevel();
 		}
@@ -69,7 +69,7 @@ define([
 			$('html, body').animate({
 				scrollTop: $('#' + this.activeScene.level.name).offset().top
 			}, {
-				duration: 500,
+				duration: game.activeScene.level.scroll,
 				complete: function() {
 					game.activeScene.initObstacles();
 					game.activeScene.prepared = true;

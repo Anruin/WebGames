@@ -1,12 +1,12 @@
 define([
 	"./test/test",
-	"./helpers/helpers",
+	"./game/config",
 	"domReady!"
-  ], function(test, helpers) {
+  ], function(test, config) {
 
 	$('html, body').animate({
 		scrollTop: $('#level_5').offset().top
-	}, 0);
+	}, config.levels[0].scroll);
 	var keys = [37, 38, 39, 40];
 
 	function preventDefault(e) {
