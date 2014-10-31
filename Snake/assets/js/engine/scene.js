@@ -19,6 +19,7 @@ define([
 		this.pawns = [];
 		this.actors = [];
 		this.collectibles = [];
+		this.npc = [];
 		this.obstacles = [];
 		this.mainPawn = null;
 		this.level= null;
@@ -54,9 +55,10 @@ define([
 		if(this.collectibles.length < 2 && this.obstacles.length) {
 			this.createCollectible();
 		}
-		//if(config.params.npc.levels.indexOf(indexLvl) != -1){
-		//
-		//}
+		var indexLvl = config.params.npc.levels.indexOf(this.level);
+		if(config.params.npc.levels.indexOf(indexLvl) != -1 && this.npc.length < 2){
+
+		}
 	};
 
 	/**
