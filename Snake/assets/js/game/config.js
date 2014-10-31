@@ -52,19 +52,19 @@ define(function () {
 				duration: 0.25,
 				controls: [
 					{
-						keys: ['a', 'left'],
+						keys: ['a', 'ф', 'left'],
 						func: 'turn',
 						params: { direction: directions.left, name: "left" }
 					}, {
-						keys: ['w', 'up'],
+						keys: ['w', 'ц', 'up'],
 						func: 'turn',
 						params: { direction: directions.up, name: "up" }
 					}, {
-						keys: ['d', 'right'],
+						keys: ['d', 'в', 'right'],
 						func: 'turn',
 						params: { direction: directions.right, name: "right" }
 					}, {
-						keys: ['s', 'down'],
+						keys: ['s', 'ы', 'down'],
 						func: 'turn',
 						params: { direction: directions.down, name: "down" }
 					}
@@ -117,14 +117,5 @@ define(function () {
 			followers: ["collectible-01", "collectible-02", "collectible-03", "collectible-04"]
 		}
 	};
-
-//(function(se) {
-//	se.Directions = {
-//		LEFT: new Point(-1, 0),
-//		UP: new Point(0, -1),
-//		RIGHT: new Point(1, 0),
-//		DOWN: new Point(0, 1)
-//	};
-//})
 	return config;
 })
