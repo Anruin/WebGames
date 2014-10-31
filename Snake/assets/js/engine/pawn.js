@@ -63,8 +63,12 @@ define([
 		//!helpers.isIntersects(this.followers,this) &&
 		if(!helpers.isIntersects(game.activeScene.obstacles,this))
 			se.Actor.prototype.move.call(this, _point);
-		else
-			this.item.position = this.lastPosition;
+		else{
+			if(this.item.position != this.lastPosition)
+				this.item.position = this.lastPosition;
+			else
+				this.item.position = helpers.pointDiff(this.item.position, _point, config.params.pawn.speed);
+		}
 	};
 	se.Pawn.prototype.offsetPosition = function() {
 		var offset = {x:0, y:0};

@@ -34,7 +34,7 @@ define([
 
 		paper.tool.onKeyDown = function (event) {
 			controller.onInput(event.key);
-			if(event.key == "z"){
+			if(event.key == "z" || event.key == "я"){
 				config.debug = !config.debug;
 			}
 		};
