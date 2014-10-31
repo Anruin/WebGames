@@ -20,7 +20,7 @@ define(function () {
 			{name: "level_4", score: 6, spawn: [670,350], collectibles: ["gift-3-1", "gift-3-2", "gift-3-3"]},
 			{name: "level_3", score: 9, spawn: [670,550], collectibles: ["gift-4-1", "gift-4-2", "gift-4-3"]},
 			{name: "level_2", score: 12, spawn: [100,100], collectibles: ["gift-5-1", "gift-5-2", "gift-5-3"]},
-			{name: "level_1", score: 15, spawn: [100,100], collectibles: ["gift-5-1", "gift-5-2", "gift-5-3"]}
+			{name: "level_1", score: 0, spawn: [100,100]}
 		],
 		finish: {name:"level_6"},
 		params: {
@@ -73,7 +73,9 @@ define(function () {
 				scale: 0.25
 			},
 			npc: {
+				scale: 0.4,
 				levels: [4],
+				duration: 0.25,
 				variant: [{
 					animation: ["npc-animation-1-1", "npc-animation-1-2"],
 					accept: ["npc-accept-1-1", "npc-accept-1-2", "npc-accept-1-3", "npc-accept-1-4"]
@@ -83,12 +85,12 @@ define(function () {
 						accept: ["npc-accept-2-1", "npc-accept-2-2", "npc-accept-2-3", "npc-accept-2-4"]
 					},
 					{
-						animation: ["npc-animation-2-1", "npc-animation-2-2"],
-						accept: ["npc-accept-2-1", "npc-accept-2-2", "npc-accept-2-3", "npc-accept-2-4"]
+						animation: ["npc-animation-3-1", "npc-animation-3-2"],
+						accept: ["npc-accept-3-1", "npc-accept-3-2", "npc-accept-3-3", "npc-accept-3-4"]
 					},
 					{
-						animation: ["npc-animation-2-1", "npc-animation-2-2"],
-						accept: ["npc-accept-2-1", "npc-accept-2-2", "npc-accept-2-3", "npc-accept-2-4"]
+						animation: ["npc-animation-4-1", "npc-animation-4-2"],
+						accept: ["npc-accept-4-1", "npc-accept-4-2", "npc-accept-4-3", "npc-accept-4-4"]
 					}]
 			}
 		},

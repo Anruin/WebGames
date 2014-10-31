@@ -9,6 +9,7 @@ define([
 	"./pawn",
 	"../game/gift",
 	"../game/obstacle",
+	"../game/npc"
 ], function (se, config, helpers) {
 	/**
 	 * Scene constructor
@@ -40,8 +41,6 @@ define([
 		});
 
 		curScene.pawns.map(function(pawn){
-			pawn.update(_dt);
-
 			curScene.collectibles.map(function(obj){
 				if(pawn.item.bounds.intersects(obj.item.bounds)){
 					obj.item.remove();
@@ -52,12 +51,9 @@ define([
 				}
 			});
 		});
-		if(this.collectibles.length < 2 && this.obstacles.length) {
+		if(this.collectibles.length < 2 && this.obstacles.length
+				&& this.level.collectibles && this.level.collectibles.length) {
 			this.createCollectible();
-		}
-		var indexLvl = config.params.npc.levels.indexOf(this.level);
-		if(config.params.npc.levels.indexOf(indexLvl) != -1 && this.npc.length < 2){
-
 		}
 	};
 
@@ -82,6 +78,7 @@ define([
 		pawn.animations = helpers.getFramesAnimations("pawn");
 		//_player.possess(pawn);
 		this.pawns.push(pawn);
+		this.actors.push(pawn);
 	}
 
 	se.Scene.prototype.createCollectible = function() {
@@ -93,6 +90,23 @@ define([
 		collectible.item.scale(config.params.collectible.scale);
 		helpers.setNotIntersectRandomPoint(collectible, game.activeScene.actors);
 		this.collectibles.push(collectible);
+	}
+	//TODO: merge with createPawn(merge config)
+	se.Scene.prototype.createNPC = function() {
+		var npc = new se.NPC();
+		npc.item = new paper.Raster();
+
+		var randIndex = helpers.randomIndex(config.params.npc.variant);
+		var randomImage = config.params.npc.variant[randIndex].animation[0];
+		npc.item.image = document.getElementById(randomImage);
+
+		npc.animations = helpers.getFramesAnimations("npc");
+		npc.activeAnimation = npc.animations[randIndex];
+
+		npc.item.scale(config.params.npc.scale);
+		helpers.setNotIntersectRandomPoint(npc, game.activeScene.actors);
+		this.actors.push(npc);
+		this.npc.push(npc);
 	}
 
 	se.Scene.prototype.initObstacles = function() {
@@ -111,7 +125,7 @@ define([
 			var el = obstacles[i].getBoundingClientRect();
 			var obst = new se.Obstacle();
 			obst.item = new paper.Rectangle(el.left, el.top, el.width, el.height);
-			//rect.selected = true;
+			//obst.selected = true;
 			curScene.obstacles.push(obst);
 			curScene.actors.push(obst);
 			i++;

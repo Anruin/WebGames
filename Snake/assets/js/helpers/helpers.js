@@ -18,23 +18,31 @@ define([
 			var container = document.getElementById('images');
 			container.appendChild(img);
 		},
+		addImageArrayToDOM: function (array, className){
+			if(!array)
+				return;
+
+			array.map(function(imgName){
+				helpers.addImageToDOM(imgName, className);
+			});
+		},
 		addAllImagesToDOM: function (){
 			for(var dir in config.img.pawn){
 				if(config.img.pawn[dir].stand)
 					helpers.addImageToDOM(config.img.pawn[dir].stand);
 
-				config.img.pawn[dir].move.map(function(name){
-					helpers.addImageToDOM(name);
-				});
+				helpers.addImageArrayToDOM(config.img.pawn[dir].move);
 			}
 
 			config.levels.map(function(level){
-				level.collectibles.map(function(name){
-					helpers.addImageToDOM(name, "collectible");
-				});
+				helpers.addImageArrayToDOM(level.collectibles, "collectible");
 			});
-			config.img.followers.map(function(name){
-				helpers.addImageToDOM(name, "follower");
+
+			helpers.addImageArrayToDOM(config.img.followers, "follower");
+
+			config.params.npc.variant.map(function(variant){
+				helpers.addImageArrayToDOM(variant.animation);
+				helpers.addImageArrayToDOM(variant.accept);
 			});
 		},
 
@@ -47,11 +55,11 @@ define([
 		},
 		getFramesAnimations : function(name) {
 			var animations = [];
-			var array = config.img[name] || config[name].variant;
+			var array = config.img[name] || config.params[name].variant;
 
 			for(el in array) {
 				var frames = [];
-				var subArray = config.img[name] ? config.img[name][el].move : el.animation;
+				var subArray = config.img[name] ? config.img[name][el].move : config.params[name].variant[el].animation;
 				subArray.map(function(image){
 					var newFrame = {
 						image: image,
@@ -107,6 +115,9 @@ define([
 		pointDiff: function(point1, point2, factor){
 			factor = factor || 1;
 			return new paper.Point(point1.x - point2.x * factor, point1.y - point2.y * factor);
+		},
+		getFollowerIndexFromSegmentIndex: function (index){
+			return (index+1)/2 - 1;
 		}
 	}
 	return helpers;

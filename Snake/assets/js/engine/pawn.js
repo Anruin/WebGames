@@ -122,11 +122,23 @@ define([
 		segment.item.image = document.getElementById(randomImage);
 		segment.item.scale(config.params.follower.scale);
 
-		//while(this.item.bounds.intersects(segment.item.bounds))
-		//	segment.item.position = helpers.getRandomPointInView();
-
-		//segment.item.visible = true;
 		this.followers.push(segment);
 		//game.activeScene.actors.push(segment);
+	};
+
+	se.Pawn.prototype.removeSegment = function(index) {
+		if(!this.path || !this.path.segments.length)
+			return;
+
+		this.path.removeSegment(index + 2);
+		this.path.removeSegment(index + 2 - 1);
+
+		this.followers[index].item.remove();
+		this.followers.splice(index, 1);
+
+		if(this.path.length < 2){
+			this.path.removeSegments();
+			this.path = null;
+		}
 	};
 })

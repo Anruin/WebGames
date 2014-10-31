@@ -5,7 +5,7 @@
 define([
 	"../se",
 	"../game/config",
-	"./scene",
+	"../game/santa_scene",
 	"./player",
 	"../engine/controller"
 ], function (se, config) {
@@ -16,7 +16,7 @@ define([
 		this.level = null;
 	};
 	se.Game.prototype.create = function () {
-		var scene = new se.Scene(game);
+		var scene = new se.SantaScene(game);
 		console.log('Scene created', scene);
 
 		game.scenes = [scene];

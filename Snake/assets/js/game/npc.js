@@ -3,24 +3,17 @@
  */
 define([
 	"../se",
+	"../game/config",
 	"../helpers/helpers",
-	"./sack",
 	"../engine/common",
 	"../engine/actor"
-], function (se, helpers) {
+], function (se, config, helpers) {
 	se.NPC = function() {
-		/**
-		 * Sack
-		 * @type {se.Sack}
-		 */
-		se.NPC.call(this);
+		se.Actor.call(this);
 	};
 	se.$extend(se.NPC, se.Actor);
 
 	se.NPC.prototype.update = function(_dt) {
-		if(game.activeScene.mainPawn.item.bounds.intersects(this.item.bounds))
-			this.activeAnimation = this.animations[helpers.randomIndex(this.animations)];
-
 		se.Actor.prototype.update.call(this, _dt);
 	};
 })
