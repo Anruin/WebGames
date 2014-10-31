@@ -25,8 +25,8 @@ define(function () {
 		finish: {name:"level_6"},
 		params: {
 			path: {
-				length: 50,
-				firstLength: 50,
+				length: 25,
+				firstLength: 25,
 				strokeColor: '#6d6d6d',
 				strokeWidth: 2,
 				strokeCap: 'round',

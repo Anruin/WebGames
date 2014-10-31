@@ -48,12 +48,14 @@ define([
 				var vector = helpers.pointDiff(segment.point, nextSegment.point);
 				vector.length = i===0 ? config.params.path.firstLength : config.params.path.length;
 				nextSegment.point = helpers.pointDiff(segment.point, vector);
-
-				if(!config.params.collectible.offset)
-					this.followers[i].item.position = nextSegment.point;
-				else {
-					var offset = config.params.collectible.offset;
-					this.followers[i].item.position = helpers.pointSumm(nextSegment.point, offset);
+				if((i+1)%2 == 0) {
+					var n = (i+1)/2 - 1;
+					if (!config.params.collectible.offset)
+						this.followers[n].item.position = nextSegment.point;
+					else {
+						var offset = config.params.collectible.offset;
+						this.followers[n].item.position = helpers.pointSumm(nextSegment.point, offset);
+					}
 				}
 			}
 			this.path.smooth();
@@ -105,12 +107,12 @@ define([
 			this.path = new paper.Path(config.params.path);
 			this.path.add(this.item.position);
 		}
+		this.path.add(helpers.pointDiff(this.path.lastSegment.point, this.velocity, config.params.path.length));
 		var segment = new se.Actor();
 		segment.item = new paper.Raster();
 
 		//устанавливает новый обьект в противоположном направлении движения санты
-		var position = [this.path.lastSegment.point.x - this.velocity.x * 100,
-			this.path.lastSegment.point.y - this.velocity.y * 100];
+		var position = helpers.pointDiff(this.path.lastSegment.point, this.velocity, config.params.path.length*2);
 
 		this.path.add(position);
 		segment.item.position = position;

@@ -104,8 +104,9 @@ define([
 			factor = factor || 1;
 			return new paper.Point(point1.x + point2.x * factor, point1.y + point2.y * factor);
 		},
-		pointDiff: function(point1, point2){
-			return new paper.Point(point1.x - point2.x, point1.y - point2.y);
+		pointDiff: function(point1, point2, factor){
+			factor = factor || 1;
+			return new paper.Point(point1.x - point2.x * factor, point1.y - point2.y * factor);
 		}
 	}
 	return helpers;
