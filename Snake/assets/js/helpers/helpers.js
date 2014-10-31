@@ -47,18 +47,20 @@ define([
 		},
 		getFramesAnimations : function(name) {
 			var animations = [];
-			for(objName in config.img[name]) {
-				var frames = [];
+			var array = config.img[name] || config[name].variant;
 
-				config.img[name][objName].move.map(function(image){
+			for(el in array) {
+				var frames = [];
+				var subArray = config.img[name] ? config.img[name][el].move : el.animation;
+				subArray.map(function(image){
 					var newFrame = {
 						image: image,
-						duration: 0.25
+						duration: config.params[name].duration
 					};
 					frames.push(newFrame);
 				});
 
-				animations.push(helpers.createAnimation(objName, frames));
+				animations.push(helpers.createAnimation(el, frames));
 			}
 			return animations;
 		},
@@ -98,8 +100,9 @@ define([
 			});
 			return mainResult;
 		},
-		pointSumm: function(point1, point2){
-			return new paper.Point(point1.x + point2.x, point1.y + point2.y);
+		pointSumm: function(point1, point2, factor){
+			factor = factor || 1;
+			return new paper.Point(point1.x + point2.x * factor, point1.y + point2.y * factor);
 		},
 		pointDiff: function(point1, point2){
 			return new paper.Point(point1.x - point2.x, point1.y - point2.y);

@@ -5,13 +5,6 @@ define([
 	"../se"
 ], function (se) {
 
-	se.Directions = {
-		LEFT: new paper.Point(-1, 0),
-		UP: new paper.Point(0, -1),
-		RIGHT: new paper.Point(1, 0),
-		DOWN: new paper.Point(0, 1)
-	};
-
 	se.$debug = false;
 
 	se.$extend = function (_childClass, _baseClass) {

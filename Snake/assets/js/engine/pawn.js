@@ -105,7 +105,7 @@ define([
 			this.path = new paper.Path(config.params.path);
 			this.path.add(this.item.position);
 		}
-		var segment = new se.Pawn();
+		var segment = new se.Actor();
 		segment.item = new paper.Raster();
 
 		//устанавливает новый обьект в противоположном направлении движения санты
@@ -116,15 +116,15 @@ define([
 		segment.item.position = position;
 
 		var randomImage = config.img.followers[helpers.randomIndex(config.img.followers)];
-		segment.item.visible = false;
+		//segment.item.visible = false;
 		segment.item.image = document.getElementById(randomImage);
 		segment.item.scale(config.params.follower.scale);
 
-		while(this.item.bounds.intersects(segment.item.bounds))
-			segment.item.position = helpers.getRandomPointInView();
+		//while(this.item.bounds.intersects(segment.item.bounds))
+		//	segment.item.position = helpers.getRandomPointInView();
 
-		segment.item.visible = true;
+		//segment.item.visible = true;
 		this.followers.push(segment);
-		game.activeScene.actors.push(segment);
+		//game.activeScene.actors.push(segment);
 	};
 })

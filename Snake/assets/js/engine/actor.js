@@ -3,8 +3,9 @@
  */
 define([
 	"../se",
-	"../helpers/helpers"
-], function (se, helpers) {
+		"../helpers/helpers",
+	"../game/config"
+], function (se, helpers, config) {
 	se.Actor = function () {
 		/**
 		 * Paper item
@@ -52,13 +53,13 @@ define([
 
 		if(paper.project.view.bounds.contains(this.item.bounds)){
 			this.lastPosition = this.item.position;
-			this.item.position = helpers.pointSumm(this.item.position, _point);
+			this.item.position = helpers.pointSumm(this.item.position, _point, config.params.pawn.speed);
 		}
 		else{
 			if(this.item.position != this.lastPosition)
 				this.item.position = this.lastPosition;
 			else
-				this.item.position = helpers.pointSumm(this.item.position, {x: -_point.x, y: -_point.y});
+				this.item.position = helpers.pointSumm(this.item.position, {x: -_point.x, y: -_point.y}, _point, config.params.pawn.speed);
 		}
 	};
 	se.Actor.prototype.turn = function (_params) {

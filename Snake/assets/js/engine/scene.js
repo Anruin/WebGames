@@ -50,12 +50,13 @@ define([
 					pawn.addSegment();
 				}
 			});
-
-			while(curScene.collectibles.length < 2){
-				if(curScene.obstacles.length)
-					curScene.createGift();
-			}
 		});
+		if(this.collectibles.length < 2 && this.obstacles.length) {
+			this.createCollectible();
+		}
+		//if(config.params.npc.levels.indexOf(indexLvl) != -1){
+		//
+		//}
 	};
 
 	/**
@@ -73,9 +74,25 @@ define([
 	 */
 	se.Scene.prototype.createPawn = function(_player) {
 		var pawn = new se.Pawn();
-		_player.possess(pawn);
+		pawn.item = new paper.Raster();
+		pawn.item.scale(config.params.pawn.scale);
+		pawn.item.image = document.getElementById(config.img.pawn.down.stand);
+		pawn.animations = helpers.getFramesAnimations("pawn");
+		//_player.possess(pawn);
 		this.pawns.push(pawn);
 	}
+
+	se.Scene.prototype.createCollectible = function() {
+		var collectible = new se.Collectible();
+		collectible.item = new paper.Raster();
+
+		var randomImage = this.level.collectibles[helpers.randomIndex(this.level.collectibles)];
+		collectible.item.image = document.getElementById(randomImage);
+		collectible.item.scale(config.params.collectible.scale);
+		helpers.setNotIntersectRandomPoint(collectible, game.activeScene.actors);
+		this.collectibles.push(collectible);
+	}
+
 	se.Scene.prototype.initObstacles = function() {
 		var curScene = this;
 		if(curScene.obstacles.length){
@@ -99,15 +116,5 @@ define([
 		}
 		if(!curScene.obstacles.length)
 			curScene.obstacles.length = 1;
-	}
-	se.Scene.prototype.createGift = function() {
-		var gift = new se.Gift();
-		gift.item = new paper.Raster();
-
-		var randomImage = this.level.collectibles[helpers.randomIndex(this.level.collectibles)];
-		gift.item.image = document.getElementById(randomImage);
-		gift.item.scale(config.params.collectible.scale);
-		helpers.setNotIntersectRandomPoint(gift, game.activeScene.actors);
-		this.collectibles.push(gift);
 	}
 })

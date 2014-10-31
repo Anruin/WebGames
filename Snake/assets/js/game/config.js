@@ -2,11 +2,15 @@ define(function () {
 	var dir = {
 		img: "img/"
 	}
+	var directions = {
+		left: new paper.Point(-1, 0),
+		up: new paper.Point(0, -1),
+		right: new paper.Point(1, 0),
+		down: new paper.Point(0, 1)
+	};
 	var config = {
 		container: {
-			id: "sx-engine",
-			width: 500,
-			height: 500
+			id: "sx-engine"
 		},
 		obstacle: {
 			class: "game-obstacle"
@@ -42,13 +46,34 @@ define(function () {
 				}
 			},
 			pawn: {
-				scale: 0.4
+				scale: 0.4,
+				speed: 2,
+				duration: 0.25,
+				controls: [
+					{
+						keys: ['a', 'left'],
+						func: 'turn',
+						params: { direction: directions.left, name: "left" }
+					}, {
+						keys: ['w', 'up'],
+						func: 'turn',
+						params: { direction: directions.up, name: "up" }
+					}, {
+						keys: ['d', 'right'],
+						func: 'turn',
+						params: { direction: directions.right, name: "right" }
+					}, {
+						keys: ['s', 'down'],
+						func: 'turn',
+						params: { direction: directions.down, name: "down" }
+					}
+				]
 			},
 			follower:{
 				scale: 0.25
 			},
 			npc: {
-				lvls: [4],
+				levels: [4],
 				variant: [{
 					animation: ["npc-animation-1-1", "npc-animation-1-2"],
 					accept: ["npc-accept-1-1", "npc-accept-1-2", "npc-accept-1-3", "npc-accept-1-4"]
