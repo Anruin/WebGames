@@ -23,7 +23,7 @@ define([
 
 	se.Pawn.prototype.move = function(_point) {
 		if(this.path) {
-
+			this.path.selected = config.debug;
 			this.path.firstSegment.point = this.pathOffset || this.item.position;
 			//var length = config.params.path.firstLength / 5;
 			//for (var i = 0; i < this.path.segments.length - 1; i++) {
@@ -123,7 +123,7 @@ define([
 		segment.item.scale(config.params.follower.scale);
 
 		this.followers.push(segment);
-		//game.activeScene.actors.push(segment);
+		game.activeScene.actors.push(segment);
 	};
 
 	se.Pawn.prototype.removeSegment = function(index) {

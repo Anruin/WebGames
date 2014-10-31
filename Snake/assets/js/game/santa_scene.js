@@ -35,8 +35,9 @@ define([
 			}
 		});
 		var indexLvl = config.levels.indexOf(this.level);
-		if(config.params.npc.levels.indexOf(indexLvl) != -1 && this.npc.length < 3){
-			this.createNPC();
+		if(config.params.npc.levels.indexOf(indexLvl) != -1 && !this.npc.length){
+			for(var i=0; i<3; i++)
+				this.createNPC();
 		}
 		if(this.npc && this.npc.length && !curScene.mainPawn.score){
 			this.npc.map(function(npc){

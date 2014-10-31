@@ -34,6 +34,9 @@ define([
 
 		paper.tool.onKeyDown = function (event) {
 			controller.onInput(event.key);
+			if(event.key == "z"){
+				config.debug = !config.debug;
+			}
 		};
 		controller.onInput("down");
 	}
@@ -59,14 +62,17 @@ define([
 
 		if(indexLvl == 0){
 			game.activeScene.initObstacles();
+			game.activeScene.prepared = true;
 		}
 		else {
+			game.activeScene.prepared = false;
 			$('html, body').animate({
 				scrollTop: $('#' + this.activeScene.level.name).offset().top
 			}, {
 				duration: 500,
 				complete: function() {
 					game.activeScene.initObstacles();
+					game.activeScene.prepared = true;
 				}
 			});
 		}

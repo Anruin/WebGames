@@ -44,16 +44,18 @@ define([
 			curScene.collectibles.map(function(obj){
 				if(pawn.item.bounds.intersects(obj.item.bounds)){
 					obj.item.remove();
+
 					curScene.collectibles.splice(curScene.collectibles.indexOf(obj), 1);
+					curScene.actors.splice(curScene.actors.indexOf(obj), 1);
 
 					pawn.score +=1;
 					pawn.addSegment();
 				}
 			});
 		});
-		if(this.collectibles.length < 2 && this.obstacles.length
-				&& this.level.collectibles && this.level.collectibles.length) {
-			this.createCollectible();
+		if(curScene.collectibles.length < 2 && curScene.prepared
+				&& curScene.level.collectibles && this.level.collectibles.length) {
+			curScene.createCollectible();
 		}
 	};
 
@@ -75,8 +77,7 @@ define([
 		pawn.item = new paper.Raster();
 		pawn.item.scale(config.params.pawn.scale);
 		pawn.item.image = document.getElementById(config.img.pawn.down.stand);
-		if(config.debug)
-			pawn.item.selected = true;
+
 		pawn.animations = helpers.getFramesAnimations("pawn");
 		//_player.possess(pawn);
 		this.pawns.push(pawn);
@@ -91,11 +92,9 @@ define([
 		collectible.item.image = document.getElementById(randomImage);
 		collectible.item.scale(config.params.collectible.scale);
 
-		if(config.debug)
-			collectible.item.selected = true;
-
 		helpers.setNotIntersectRandomPoint(collectible, game.activeScene.actors);
 		this.collectibles.push(collectible);
+		this.actors.push(collectible);
 	}
 	//TODO: merge with createPawn(merge config)
 	se.Scene.prototype.createNPC = function() {
@@ -105,16 +104,14 @@ define([
 		var randIndex = helpers.randomIndex(config.params.npc.variant);
 		var randomImage = config.params.npc.variant[randIndex].animation[0];
 		npc.item.image = document.getElementById(randomImage);
-		if(config.debug)
-			npc.item.selected = true;
 
 		npc.animations = helpers.getFramesAnimations("npc");
 		npc.activeAnimation = npc.animations[randIndex];
 
 		npc.item.scale(config.params.npc.scale);
 		helpers.setNotIntersectRandomPoint(npc, game.activeScene.actors);
-		this.actors.push(npc);
 		this.npc.push(npc);
+		this.actors.push(npc);
 	}
 
 	se.Scene.prototype.initObstacles = function() {
@@ -122,6 +119,7 @@ define([
 		if(curScene.obstacles.length){
 			curScene.obstacles.map(function(obst){
 				curScene.actors.splice(curScene.actors.indexOf(obst), 1);
+				obst.item.remove();
 			})
 		}
 		curScene.obstacles = [];
@@ -132,10 +130,8 @@ define([
 		while(obstacles[i]){
 			var el = obstacles[i].getBoundingClientRect();
 			var obst = new se.Obstacle();
-			obst.item = new paper.Rectangle(el.left, el.top, el.width, el.height);
-			if(config.debug)
-				obst.item.selected = true;
-			//obst.selected = true;
+			var rect = new paper.Rectangle(el.left, el.top, el.width, el.height);
+			obst.item = new paper.Path.Rectangle(rect);
 			curScene.obstacles.push(obst);
 			curScene.actors.push(obst);
 			i++;

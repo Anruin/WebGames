@@ -34,7 +34,7 @@ define([
 		//se.Actor.prototype.animations = [];
 
 	se.Actor.prototype.update = function (_dt) {
-		if (se.$debug) console.log('Actor update');
+		this.item.selected = config.debug;
 
 		if (this.velocity)
 			this.move(this.velocity);

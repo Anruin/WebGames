@@ -99,6 +99,8 @@ define([
 					result = objBounds.intersects(el.item.bounds) || objBounds.contains(el.item.bounds) || el.item.bounds.contains();
 				if(el.item && el.item.point)
 					result = objBounds.intersects(el.item) || objBounds.contains(el.item) || objBounds.contains(el.item);
+				else if(el.item.bounds)
+					result = objBounds.intersects(el.item.bounds) || objBounds.contains(el.item.bounds) || objBounds.contains(el.item.bounds);
 				else if(el.bounds)
 					result = objBounds.intersects(el.bounds) || objBounds.contains(el.bounds) || objBounds.contains(el.bounds);
 				else
