@@ -46,7 +46,7 @@ define([
 			game.activeScene.level = config.levels[config.levels.indexOf(game.activeScene.level) + 1];
 
 			if(!game.activeScene.level)
-				game.over();
+				setTimeout(game.over, 1000);
 
 			game.initLevel();
 		}
@@ -88,6 +88,6 @@ define([
 
 		$('html, body').animate({
 			scrollTop: $('#' + game.activeScene.level.name).offset().top
-		},500);
+		},5000);
 	};
 });

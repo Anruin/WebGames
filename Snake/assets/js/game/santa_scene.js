@@ -25,16 +25,17 @@ define([
 					var image = imageArray[helpers.randomIndex(imageArray)];
 					npc.item.image = document.getElementById(image);
 					npc.activeAnimation = null;
+					curScene.npc.splice(curScene.npc.indexOf(npc), 1);
 					curScene.mainPawn.removeSegment(0);
 					curScene.mainPawn.score--;
 
-					if(curScene.mainPawn.score)
+					if(curScene.mainPawn.score && curScene.mainPawn.score > curScene.npc.length)
 						curScene.createNPC();
 				}
 			}
 		});
 		var indexLvl = config.levels.indexOf(this.level);
-		if(config.params.npc.levels.indexOf(indexLvl) != -1 && this.npc.length < 2){
+		if(config.params.npc.levels.indexOf(indexLvl) != -1 && this.npc.length < 3){
 			this.createNPC();
 		}
 		if(this.npc && this.npc.length && !curScene.mainPawn.score){

@@ -75,6 +75,8 @@ define([
 		pawn.item = new paper.Raster();
 		pawn.item.scale(config.params.pawn.scale);
 		pawn.item.image = document.getElementById(config.img.pawn.down.stand);
+		if(config.debug)
+			pawn.item.selected = true;
 		pawn.animations = helpers.getFramesAnimations("pawn");
 		//_player.possess(pawn);
 		this.pawns.push(pawn);
@@ -88,6 +90,10 @@ define([
 		var randomImage = this.level.collectibles[helpers.randomIndex(this.level.collectibles)];
 		collectible.item.image = document.getElementById(randomImage);
 		collectible.item.scale(config.params.collectible.scale);
+
+		if(config.debug)
+			collectible.item.selected = true;
+
 		helpers.setNotIntersectRandomPoint(collectible, game.activeScene.actors);
 		this.collectibles.push(collectible);
 	}
@@ -99,6 +105,8 @@ define([
 		var randIndex = helpers.randomIndex(config.params.npc.variant);
 		var randomImage = config.params.npc.variant[randIndex].animation[0];
 		npc.item.image = document.getElementById(randomImage);
+		if(config.debug)
+			npc.item.selected = true;
 
 		npc.animations = helpers.getFramesAnimations("npc");
 		npc.activeAnimation = npc.animations[randIndex];
@@ -125,6 +133,8 @@ define([
 			var el = obstacles[i].getBoundingClientRect();
 			var obst = new se.Obstacle();
 			obst.item = new paper.Rectangle(el.left, el.top, el.width, el.height);
+			if(config.debug)
+				obst.item.selected = true;
 			//obst.selected = true;
 			curScene.obstacles.push(obst);
 			curScene.actors.push(obst);

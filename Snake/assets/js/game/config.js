@@ -9,6 +9,7 @@ define(function () {
 		down: new paper.Point(0, 1)
 	};
 	var config = {
+		debug: false,
 		container: {
 			id: "sx-engine"
 		},
