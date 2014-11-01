@@ -3,8 +3,9 @@
  */
 define([
 	"../se",
-	"../game/config"
-], function (se, config) {
+	"../game/config",
+		"../helpers/helpers"
+], function (se, config, helpers) {
 
 	se.$extend = function (_childClass, _baseClass) {
 		var originalPrototype = _childClass.prototype;
@@ -72,7 +73,9 @@ define([
 		se.debugTools.onMouseMove = function (event) {
 			if(config.debug) {
 				se.debugTools.pointText.point = event.point;
-				se.debugTools.pointText.content = event.point.toString();
+				var percent = helpers.getPointPercent(event.point);
+				se.debugTools.pointText.content = event.point.toString()
+					+ "; {x: " + helpers.toDigits(percent.x) + "%, y: " + helpers.toDigits(percent.y) + "%}";
 			}
 		};
 		se.debugTools.onMouseDown = function (event) {

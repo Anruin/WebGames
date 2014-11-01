@@ -84,6 +84,13 @@ define([
 			var y = helpers.randomNum(100, paper.project.view.bounds.height - 200);
 			return new paper.Point(x, y);
 		},
+		getPointPercent: function (point) {
+			return {x: 100/paper.project.view.bounds.width * point.x,
+				y: 100/paper.project.view.bounds.height * point.y};
+		},
+		toDigits: function (number) {
+			return Number(number).toFixed(2);
+		},
 		setNotIntersectRandomPoint: function (forRandom, arrayForCompare) {
 			forRandom.item.position = helpers.getRandomPointInView();
 
