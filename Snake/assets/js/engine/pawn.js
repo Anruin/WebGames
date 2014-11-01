@@ -25,22 +25,6 @@ define([
 		if(this.path) {
 			this.path.selected = config.debug;
 			this.path.firstSegment.point = this.pathOffset || this.item.position;
-			//var length = config.params.path.firstLength / 5;
-			//for (var i = 0; i < this.path.segments.length - 1; i++) {
-			//
-			//	var segment = this.path.segments[i];
-			//	var nextSegment = segment.next;
-			//	var vector = helpers.pointDiff(segment.point, nextSegment.point);
-			//	vector.length = length;
-			//	nextSegment.point = helpers.pointDiff(segment.point, vector);
-			//
-			//	if(!config.params.collectible.offset)
-			//		this.followers[i].item.position = nextSegment.point;
-			//	else {
-			//		var offset = config.params.collectible.offset;
-			//		this.followers[i].item.position = helpers.pointSumm(nextSegment.point, offset);
-			//	}
-			//}
 
 			for (var i = 0; i < this.path.segments.length - 1; i++) {
 				var segment = this.path.segments[i];

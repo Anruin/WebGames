@@ -72,4 +72,4 @@ define([
 	se.Actor.prototype.action = function (_func, _params) {
 		this[_func](_params);
 	};
-})
+});

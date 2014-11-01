@@ -11,9 +11,10 @@ requirejs.config({
 	deps: ['paper']
 });
 
-require(['app','helpers/helpers'], function(app, helpers) {
+require(['app','helpers/helpers','se','engine/common'], function(app, helpers, se) {
 	helpers.addAllImagesToDOM();
 	$('.level-5__btn').click(function(){
+		se.disable_scroll();
 		app();
 		return false;
 	});

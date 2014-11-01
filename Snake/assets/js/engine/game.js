@@ -7,7 +7,8 @@ define([
 	"../game/config",
 	"../game/santa_scene",
 	"./player",
-	"../engine/controller"
+	"../engine/controller",
+	"../engine/common"
 ], function (se, config) {
 	se.Game = function () {
 		this.scenes = [];
@@ -95,5 +96,7 @@ define([
 		$('html, body').animate({
 			scrollTop: $('#' + game.activeScene.level.name).offset().top
 		},5000);
+
+		se.enable_scroll();
 	};
 });

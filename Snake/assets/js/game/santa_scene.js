@@ -35,7 +35,7 @@ define([
 			}
 		});
 		var indexLvl = config.levels.indexOf(this.level);
-		if(config.params.npc.levels.indexOf(indexLvl) != -1 && !this.npc.length){
+		if(config.params.npc.levels.indexOf(indexLvl) != -1 && !this.npc.length && curScene.prepared){
 			for(var i=0; i<3; i++)
 				this.createNPC();
 		}

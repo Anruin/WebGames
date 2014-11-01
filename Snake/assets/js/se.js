@@ -6,4 +6,4 @@ define( function (require) {
 		return window.se = window.se || {};
 	};
 	return singleton();
-})
+});

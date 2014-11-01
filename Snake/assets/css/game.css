@@ -1,2 +1,4 @@
 #images { display: none; }
 #sx-game { position: fixed; z-index: 1; }
+
+.level-4__text { z-index: 1000; }
