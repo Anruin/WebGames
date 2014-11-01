@@ -33,16 +33,26 @@ define([
 		game.initLevel();
 		var controller = new se.Controller(game.activeScene.mainPawn);
 
+		se.setDebugTools();
+
 		paper.tool.onKeyDown = function (event) {
 			controller.onInput(event.key);
-			if(event.key == "z" || event.key == "я"){
-				config.debug = !config.debug;
-			}
+			se.debugTools.onKeyDown(event);
 		};
+		paper.tool.onMouseMove = function (event) {
+			se.debugTools.onMouseMove(event);
+		};
+		paper.tool.onMouseDown = function (event) {
+			se.debugTools.onMouseDown(event);
+		};
+
 		controller.onInput("down");
-	}
+	};
 	//game. == this.
 	se.Game.prototype.update = function (_dt) {
+		if (config.debug)
+			se.updateDebugTools();
+
 		if (game.activeScene)
 			game.activeScene.update(_dt);
 

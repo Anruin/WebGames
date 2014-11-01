@@ -2,10 +2,9 @@
  * Created by Anry on 25.10.2014.
  */
 define([
-	"../se"
-], function (se) {
-
-	se.$debug = false;
+	"../se",
+	"../game/config"
+], function (se, config) {
 
 	se.$extend = function (_childClass, _baseClass) {
 		var originalPrototype = _childClass.prototype;
@@ -55,4 +54,41 @@ define([
 		}
 		window.onmousewheel = document.onmousewheel = document.onkeydown = null;
 	};
+
+	se.setDebugTools = function () {
+		se.debugTools = {};
+		se.debugTools.pointText = new paper.PointText(new paper.Point(0, 0));
+		se.debugTools.pointText.fillColor = 'black';
+		se.debugTools.pointText.visible = false;
+		se.debugTools.lastPoints = [];
+		se.debugTools.lastPoints.push(se.debugTools.pointText);
+
+		se.debugTools.onKeyDown = function (event) {
+			if(event.key == "z" || event.key == "я"){
+				config.debug = !config.debug;
+			}
+		};
+
+		se.debugTools.onMouseMove = function (event) {
+			if(config.debug) {
+				se.debugTools.pointText.point = event.point;
+				se.debugTools.pointText.content = event.point.toString();
+			}
+		};
+		se.debugTools.onMouseDown = function (event) {
+			if(config.debug) {
+				se.debugTools.pointText = new paper.PointText(new paper.Point(0, 0));
+				se.debugTools.pointText.fillColor = 'black';
+				se.debugTools.pointText.visible = false;
+				se.debugTools.lastPoints.push(se.debugTools.pointText);
+			}
+		};
+	}
+	se.updateDebugTools = function () {
+		se.debugTools.lastPoints.map(function(el){
+			el.visible = config.debug;
+			el.selected = config.debug;
+			el.bringToFront();
+		});
+	}
 });
