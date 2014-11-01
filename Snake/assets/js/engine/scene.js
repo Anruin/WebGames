@@ -46,13 +46,13 @@ define([
 					curScene.collectibles.splice(curScene.collectibles.indexOf(obj), 1);
 					curScene.actors.splice(curScene.actors.indexOf(obj), 1);
 
-					pawn.score +=1;
+					pawn.score += config.params.collectible.score;
 					pawn.addSegment();
 				}
 			});
 		});
-		if(curScene.collectibles.length < 2 && curScene.prepared
-				&& curScene.level.collectibles && this.level.collectibles.length) {
+		if(curScene.prepared && helpers.isForAdToScene(curScene.level, config.params.collectible,
+						curScene.collectibles, curScene.mainPawn.score)) {
 			curScene.createCollectible();
 		}
 	};
@@ -65,7 +65,18 @@ define([
 		this.actors.push(actor);
 		return actor;
 	};
-	se.Scene.prototype.pawn = null;
+	se.Scene.prototype.createCollectible = function() {
+		var collectible = new se.Collectible();
+		collectible.item = new paper.Raster();
+
+		var randomImage = this.level.collectibles[helpers.randomIndex(this.level.collectibles)];
+		collectible.item.image = document.getElementById(randomImage);
+		collectible.item.scale(config.params.collectible.scale);
+
+		helpers.setNotIntersectRandomPoint(collectible, game.activeScene.actors);
+		this.collectibles.push(collectible);
+		this.actors.push(collectible);
+	}
 	/**
 	 * Create new pawn and possess by player
 	 * @param _player
@@ -80,19 +91,6 @@ define([
 		//_player.possess(pawn);
 		this.pawns.push(pawn);
 		this.actors.push(pawn);
-	}
-
-	se.Scene.prototype.createCollectible = function() {
-		var collectible = new se.Collectible();
-		collectible.item = new paper.Raster();
-
-		var randomImage = this.level.collectibles[helpers.randomIndex(this.level.collectibles)];
-		collectible.item.image = document.getElementById(randomImage);
-		collectible.item.scale(config.params.collectible.scale);
-
-		helpers.setNotIntersectRandomPoint(collectible, game.activeScene.actors);
-		this.collectibles.push(collectible);
-		this.actors.push(collectible);
 	}
 	//TODO: merge with createPawn(merge config)
 	se.Scene.prototype.createNPC = function() {
@@ -121,12 +119,11 @@ define([
 			})
 		}
 		curScene.obstacles = [];
-		curScene.obstacles.length = 0;
 
-		var obstacles = document.getElementById(curScene.level.name).getElementsByClassName(config.obstacle.class);
+		var domObstacles = document.getElementById(curScene.level.name).getElementsByClassName(config.obstacle.class);
 		var i = 0;
-		while(obstacles[i]){
-			var el = obstacles[i].getBoundingClientRect();
+		while(domObstacles[i]){
+			var el = domObstacles[i].getBoundingClientRect();
 			var obst = new se.Obstacle();
 			var rect = new paper.Rectangle(el.left, el.top, el.width, el.height);
 			obst.item = new paper.Path.Rectangle(rect);
@@ -134,7 +131,5 @@ define([
 			curScene.actors.push(obst);
 			i++;
 		}
-		if(!curScene.obstacles.length)
-			curScene.obstacles.length = 1;
 	}
 })

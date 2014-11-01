@@ -118,6 +118,15 @@ define([
 			factor = factor || 1;
 			return new paper.Point(point1.x - point2.x * factor, point1.y - point2.y * factor);
 		},
+		isForAdToScene: function (level, param, array, score) {
+			var indexLvl = config.levels.indexOf(level);
+						//есть ли текущий уровень в массиве конфига эллемента .levels: [...]
+			return param.levels.indexOf(indexLvl) != -1
+						//соответствует ли текущее количество установленному в конфиге эллемента
+							&& array.length < param.appearsNum
+						//не превышает ли количество эллементов необходимого для этого уровня кол-ва очков
+							&& array.length < level.score - score;
+		},
 		//try to universalize pushProcessing from actor and pawn push, not successful
 		pushProcessing: function (point, vector, factor, lastPoint, isNotIntersects) {
 			if (isNotIntersects) {

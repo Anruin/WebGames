@@ -24,25 +24,18 @@ define([
 					var imageArray = config.params.npc.variant[npc.activeAnimation.name].accept;
 					var image = imageArray[helpers.randomIndex(imageArray)];
 					npc.item.image = document.getElementById(image);
+
 					npc.activeAnimation = null;
+
 					curScene.npc.splice(curScene.npc.indexOf(npc), 1);
 					curScene.mainPawn.removeSegment(0);
-					curScene.mainPawn.score--;
-
-					if(curScene.mainPawn.score && curScene.mainPawn.score > curScene.npc.length)
-						curScene.createNPC();
+					curScene.mainPawn.score++;
 				}
 			}
 		});
-		var indexLvl = config.levels.indexOf(this.level);
-		if(config.params.npc.levels.indexOf(indexLvl) != -1 && !this.npc.length && curScene.prepared){
-			for(var i=0; i<3; i++)
-				this.createNPC();
-		}
-		if(this.npc && this.npc.length && !curScene.mainPawn.score){
-			this.npc.map(function(npc){
-				npc.item.remove();
-			})
+		if(curScene.prepared && helpers.isForAdToScene(curScene.level, config.params.npc,
+						curScene.npc, curScene.mainPawn.score)) {
+			curScene.createNPC();
 		}
 	};
 	se.SantaScene.prototype.createPawn = function () {

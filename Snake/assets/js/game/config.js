@@ -22,7 +22,7 @@ define(function () {
 			{name: "level_4", scroll:1500, score: 4, spawn: [670,350], collectibles: ["gift-3-1", "gift-3-2", "gift-3-3"]},
 			{name: "level_3", scroll:1500, score: 6, spawn: [670,550], collectibles: ["gift-4-1", "gift-4-2", "gift-4-3"]},
 			{name: "level_2", scroll:1500, score: 8, spawn: [100,100], collectibles: ["gift-5-1", "gift-5-2", "gift-5-3"]},
-			{name: "level_1", scroll:1500, score: 0, spawn: [100,100]}
+			{name: "level_1", scroll:1500, score: 16, spawn: [100,100]}
 		],
 		finish: {name:"level_6", scroll:1000},
 		params: {
@@ -40,7 +40,10 @@ define(function () {
 				}
 			},
 			collectible: {
+				appearsNum: 1,
 				scale: 0.2,
+				levels: [0, 1, 2, 3],
+				score: 1,
 				height: 100,
 				offset: {
 					x: 0,
@@ -76,6 +79,7 @@ define(function () {
 			},
 			npc: {
 				scale: 0.4,
+				appearsNum: 3,
 				levels: [4],
 				duration: 0.25,
 				variant: [{
