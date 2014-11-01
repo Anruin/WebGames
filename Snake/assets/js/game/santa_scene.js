@@ -44,7 +44,6 @@ define([
 				npc.item.remove();
 			})
 		}
-
 	};
 	se.SantaScene.prototype.createPawn = function () {
 		se.Scene.prototype.createPawn.call(this);

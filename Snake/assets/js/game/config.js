@@ -8,6 +8,7 @@ define(function () {
 		right: new paper.Point(1, 0),
 		down: new paper.Point(0, 1)
 	};
+	//TODO: Optimize
 	var config = {
 		debug: false,
 		container: {

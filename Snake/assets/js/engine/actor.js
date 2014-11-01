@@ -27,11 +27,6 @@ define([
 		this.velocity = null;
 		this.animations = [];
 	};
-	/**
-	 * Animations library
-	 * @type Object
-	 // */
-		//se.Actor.prototype.animations = [];
 
 	se.Actor.prototype.update = function (_dt) {
 		this.item.selected = config.debug;

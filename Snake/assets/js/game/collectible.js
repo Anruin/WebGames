@@ -5,7 +5,7 @@ define([
 	"../se",
 	"../helpers/helpers"
 ], function (se, helpers) {
-	se.NPC = function () {
+	se.Collectible = function () {
 	};
-	se.$extend(se.NPC, se.Actor);
+	se.$extend(se.Collectible, se.Actor);
 })

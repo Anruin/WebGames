@@ -7,16 +7,11 @@ define([
 	"../engine/actor"
 ], function (se) {
 	se.Sack = function() {
-		/**
-		 * Sack
-		 * @type {se.Sack}
-		 */
-		this.next = null;
+		se.Actor.call(this);
 	}
 	se.$extend(se.Sack, se.Actor);
 
 	se.Sack.prototype.update = function() {
-		this.move(this.velocity);
 		se.Actor.prototype.update.call(this);
 	}
 })

@@ -95,7 +95,7 @@ define([
 
 		$('html, body').animate({
 			scrollTop: $('#' + game.activeScene.level.name).offset().top
-		},5000);
+		}, config.finish.scroll);
 
 		se.enable_scroll();
 	};
