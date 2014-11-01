@@ -57,10 +57,15 @@ define([
 	};
 
 	se.setDebugTools = function () {
+		function newPointText() {
+			var pointText = new paper.PointText(new paper.Point(0, 0));
+			pointText.fillColor = 'black';
+			pointText.visible = config.debug;
+			return pointText;
+		}
 		se.debugTools = {};
-		se.debugTools.pointText = new paper.PointText(new paper.Point(0, 0));
-		se.debugTools.pointText.fillColor = 'black';
-		se.debugTools.pointText.visible = false;
+		se.debugTools.pointText = newPointText();
+		se.debugTools.percentMode = true;
 		se.debugTools.lastPoints = [];
 		se.debugTools.lastPoints.push(se.debugTools.pointText);
 
@@ -68,21 +73,28 @@ define([
 			if(event.key == "z" || event.key == "я"){
 				config.debug = !config.debug;
 			}
+			if(event.key == "p" || event.key == "з"){
+				se.debugTools.percentMode = !se.debugTools.percentMode;
+			}
 		};
 
 		se.debugTools.onMouseMove = function (event) {
 			if(config.debug) {
-				se.debugTools.pointText.point = event.point;
-				var percent = helpers.getPointPercent(event.point);
-				se.debugTools.pointText.content = event.point.toString()
-					+ "; {x: " + helpers.toDigits(percent.x) + "%, y: " + helpers.toDigits(percent.y) + "%}";
+				if(event)
+					se.debugTools.pointText.point = event.point;
+				var point = event ? event.point : se.debugTools.pointText.point;
+
+				var percent = helpers.getPointPercent(point);
+
+				if(se.debugTools.percentMode)
+					se.debugTools.pointText.content = "{x: " + helpers.toDigits(percent.x) + "%, y: " + helpers.toDigits(percent.y) + "%}";
+				else
+					se.debugTools.pointText.content = "{x: " + point.x + "px, y: " + point.y + "px}";
 			}
 		};
 		se.debugTools.onMouseDown = function (event) {
 			if(config.debug) {
-				se.debugTools.pointText = new paper.PointText(event.point);
-				se.debugTools.pointText.fillColor = 'black';
-				se.debugTools.pointText.visible = config.debug;
+				se.debugTools.pointText = newPointText();
 				se.debugTools.lastPoints.push(se.debugTools.pointText);
 			}
 		};
@@ -93,5 +105,6 @@ define([
 			el.selected = config.debug;
 			el.bringToFront();
 		});
+		se.debugTools.onMouseMove();
 	}
 });
