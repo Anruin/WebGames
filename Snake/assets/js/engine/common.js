@@ -77,9 +77,9 @@ define([
 		};
 		se.debugTools.onMouseDown = function (event) {
 			if(config.debug) {
-				se.debugTools.pointText = new paper.PointText(new paper.Point(0, 0));
+				se.debugTools.pointText = new paper.PointText(event.point);
 				se.debugTools.pointText.fillColor = 'black';
-				se.debugTools.pointText.visible = false;
+				se.debugTools.pointText.visible = config.debug;
 				se.debugTools.lastPoints.push(se.debugTools.pointText);
 			}
 		};
