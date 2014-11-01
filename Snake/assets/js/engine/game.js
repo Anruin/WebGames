@@ -50,7 +50,7 @@ define([
 	};
 	//game. == this.
 	se.Game.prototype.update = function (_dt) {
-		if (config.debug)
+		if (se.debugTools)
 			se.updateDebugTools();
 
 		if (game.activeScene)
