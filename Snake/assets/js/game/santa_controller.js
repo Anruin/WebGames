@@ -8,6 +8,7 @@ define([
 	"../engine/controller"
 ], function (se) {
 	se.SantaController = function(pawn) {
+		//TODO Possible Delete
 		this.pawn = pawn;
 	};
 

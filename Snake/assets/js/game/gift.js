@@ -8,6 +8,7 @@ define([
 	"../engine/collectible"
 ], function (se) {
 	se.Gift = function() {
+		//TODO Possible Delete
 		se.Collectible.call(this);
 	};
 

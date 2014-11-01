@@ -9,6 +9,7 @@ define([
 	"../engine/pawn"
 ], function (se, helpers) {
 	se.Santa = function() {
+		//TODO Possible Delete
 		/**
 		 * Sack
 		 * @type {se.Sack}

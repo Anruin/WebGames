@@ -7,6 +7,7 @@ define([
 	"../engine/actor"
 ], function (se) {
 	se.Sack = function() {
+		//TODO Possible Delete
 		se.Actor.call(this);
 	}
 	se.$extend(se.Sack, se.Actor);

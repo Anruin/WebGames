@@ -8,6 +8,7 @@ define([
 	"../engine/controller"
 ], function (se, config) {
 	se.SantaGame = function() {
+		//TODO Possible Delete
 		se.Game.call(this);
 	};
 
