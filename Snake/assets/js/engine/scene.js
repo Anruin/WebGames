@@ -18,6 +18,7 @@ define([
 	 */
 	se.Scene = function(_game) {
 		this.pawns = [];
+		this.enemies = [];
 		this.actors = [];
 		this.collectibles = [];
 		this.npc = [];
@@ -51,10 +52,14 @@ define([
 				}
 			});
 		});
-		if(curScene.prepared && helpers.isForAdToScene(curScene.level, config.params.collectible,
+		if(curScene.prepared && helpers.isForAddToScene(curScene.level, config.params.collectible,
 						curScene.collectibles, curScene.mainPawn.score)) {
 			curScene.createCollectible();
 		}
+		//if(curScene.prepared && helpers.isForAddToScene(curScene.level, config.params.collectible,
+		//				curScene.enemies, curScene.mainPawn.score)) {
+		//	curScene.createEnemy();
+		//}
 	};
 
 	/**
@@ -69,14 +74,14 @@ define([
 		var collectible = new se.Collectible();
 		collectible.item = new paper.Raster();
 
-		var randomImage = this.level.collectibles[helpers.randomIndex(this.level.collectibles)];
+		var randomImage = helpers.getRandomImage(this.level.collectibles);
 		collectible.item.image = document.getElementById(randomImage);
 		collectible.item.scale(config.params.collectible.scale);
 
 		helpers.setNotIntersectRandomPoint(collectible, game.activeScene.actors);
 		this.collectibles.push(collectible);
 		this.actors.push(collectible);
-	}
+	};
 	/**
 	 * Create new pawn and possess by player
 	 * @param _player
@@ -91,14 +96,14 @@ define([
 		//_player.possess(pawn);
 		this.pawns.push(pawn);
 		this.actors.push(pawn);
-	}
+	};
 	//TODO: merge with createPawn(merge config)
 	se.Scene.prototype.createNPC = function() {
 		var npc = new se.NPC();
 		npc.item = new paper.Raster();
 
-		var randIndex = helpers.randomIndex(config.params.npc.variant);
-		var randomImage = config.params.npc.variant[randIndex].animation[0];
+		var randIndex = helpers.randomIndex(config.params.npc.img);
+		var randomImage = config.params.npc.img[randIndex].animation[0];
 		npc.item.image = document.getElementById(randomImage);
 
 		npc.animations = helpers.getFramesAnimations("npc");
@@ -110,7 +115,7 @@ define([
 		helpers.setNotIntersectRandomPoint(npc, game.activeScene.actors);
 		this.npc.push(npc);
 		this.actors.push(npc);
-	}
+	};
 
 	se.Scene.prototype.initObstacles = function() {
 		var curScene = this;
@@ -134,4 +139,4 @@ define([
 			i++;
 		}
 	}
-})
+});

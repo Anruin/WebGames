@@ -5,7 +5,7 @@
 define([
 	"../se",
 	"../game/config"
-], function (se, config){
+], function (se, config) {
 	var helpers = {
 		addImageToDOM: function (_name, _class) {
 			var img = document.createElement("IMG");
@@ -34,18 +34,35 @@ define([
 				helpers.addImageArrayToDOM(config.img.pawn[dir].move);
 			}
 
-			config.levels.map(function (level) {
-				helpers.addImageArrayToDOM(level.collectibles, "collectible");
-			});
+			//config.levels.map(function (level) {
+			//	helpers.addImageArrayToDOM(level.collectibles, "collectible");
+			//});
 
-			helpers.addImageArrayToDOM(config.img.followers, "follower");
-
-			config.params.npc.variant.map(function (variant) {
-				helpers.addImageArrayToDOM(variant.animation);
-				helpers.addImageArrayToDOM(variant.accept);
-			});
+			//helpers.addImageArrayToDOM(config.img.followers, "follower");
+			//
+			//config.params.npc.img.map(function (img) {
+			//	helpers.addImageArrayToDOM(img.animation);
+			//	helpers.addImageArrayToDOM(img.accept);
+			//});
+			//config.params.collectible.img.map(function (img) {
+			//	helpers.addImageArrayToDOM(img.normal);
+			//});
+			for (var element in config.images) {
+				config.images[element].map(function (variant) {
+					for (var type in variant) {
+						helpers.addImageArrayToDOM(variant[type]);
+					}
+				});
+			}
 		},
-
+		getRandomImage: function (array, type) {
+			if(type) {
+				var index = helpers.randomIndex(array);
+				return array[index][type][helpers.randomIndex(array[index][type])];
+			}
+			else
+				return array[helpers.randomIndex(array)];
+		},
 		createAnimation: function (_name, _frames) {
 			var animation = new se.Animation();
 			animation.name = _name;
@@ -55,11 +72,11 @@ define([
 		},
 		getFramesAnimations: function (name) {
 			var animations = [];
-			var array = config.img[name] || config.params[name].variant;
+			var array = config.img[name] || config.params[name].img;
 
 			for (el in array) {
 				var frames = [];
-				var subArray = config.img[name] ? config.img[name][el].move : config.params[name].variant[el].animation;
+				var subArray = config.img[name] ? config.img[name][el].move : config.params[name].img[el].animation;
 				subArray.map(function (image) {
 					var newFrame = {
 						image: image,
@@ -86,19 +103,23 @@ define([
 		},
 		getPointPercent: function (point) {
 			//если в обьекте point нет свойства x, значит он скорее всего массив
-			if(!point.x)
+			if (!point.x)
 				point = {x: point[0], y: point[1]};
 
-			return {x: 100/paper.project.view.bounds.width * point.x,
-				y: 100/paper.project.view.bounds.height * point.y};
+			return {
+				x: 100 / paper.project.view.bounds.width * point.x,
+				y: 100 / paper.project.view.bounds.height * point.y
+			};
 		},
 		getPointPixels: function (point) {
 			//если в обьекте point нет свойства x, значит он скорее всего массив
-			if(!point.x)
+			if (!point.x)
 				point = {x: point[0], y: point[1]};
 
-			return {x: point.x/(100/paper.project.view.bounds.width),
-				y: point.y/(100/paper.project.view.bounds.height)};
+			return {
+				x: point.x / (100 / paper.project.view.bounds.width),
+				y: point.y / (100 / paper.project.view.bounds.height)
+			};
 		},
 		toDigits: function (number) {
 			return Number(number).toFixed(2);
@@ -137,14 +158,14 @@ define([
 			factor = factor || 1;
 			return new paper.Point(point1.x - point2.x * factor, point1.y - point2.y * factor);
 		},
-		isForAdToScene: function (level, param, array, score) {
+		isForAddToScene: function (level, param, array, score) {
 			var indexLvl = config.levels.indexOf(level);
-						//есть ли текущий уровень в массиве конфига эллемента .levels: [...]
+			//есть ли текущий уровень в массиве конфига эллемента .levels: [...]
 			return param.levels.indexOf(indexLvl) != -1
-						//соответствует ли текущее количество установленному в конфиге эллемента
-							&& array.length < param.appearsNum
-						//не превышает ли количество эллементов необходимого для этого уровня кол-ва очков
-							&& array.length < level.score - score;
+				//соответствует ли текущее количество установленному в конфиге эллемента
+			&& array.length < param.appearsNum
+				//не превышает ли количество эллементов необходимого для этого уровня кол-ва очков
+			&& array.length < level.score - score;
 		},
 		//try to universalize pushProcessing from actor and pawn push, not successful
 		pushProcessing: function (point, vector, factor, lastPoint, isNotIntersects) {
@@ -161,6 +182,6 @@ define([
 					return helpers.pointDiff(point, vector, factor);
 			}
 		}
-	}
+	};
 	return helpers;
-})
+});

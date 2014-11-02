@@ -19,7 +19,7 @@ define([
 			if (npc.status == "wait" && curScene.mainPawn.item.bounds.intersects(npc.item.bounds)
 					&& curScene.mainPawn.followers.length != 0) {
 
-				var imageArray = config.params.npc.variant[npc.activeAnimation.name].accept;
+				var imageArray = config.params.npc.img[npc.activeAnimation.name].accept;
 				var image = imageArray[helpers.randomIndex(imageArray)];
 				npc.item.image = document.getElementById(image);
 
@@ -31,7 +31,7 @@ define([
 				curScene.mainPawn.score++;
 			}
 		});
-		if(curScene.prepared && helpers.isForAdToScene(curScene.level, config.params.npc,
+		if(curScene.prepared && helpers.isForAddToScene(curScene.level, config.params.npc,
 						curScene.npc, curScene.mainPawn.score)) {
 			curScene.createNPC();
 		}

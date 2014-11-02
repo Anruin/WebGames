@@ -68,10 +68,11 @@ define([
 		if (game.activeScene)
 			game.activeScene.update(_dt);
 
+		var newLvlIndex = config.levels.indexOf(game.activeScene.level) + 1;
 		if (game.activeScene.level && game.activeScene.mainPawn.score == game.activeScene.level.score) {
-			game.activeScene.level = config.levels[config.levels.indexOf(game.activeScene.level) + 1];
+			game.activeScene.level = config.levels[newLvlIndex];
 
-		if(!game.activeScene.level){
+		if(newLvlIndex >= config.levels.length - 1){
 			setTimeout(game.over, 1000);
 			return;
 		}
@@ -124,7 +125,6 @@ define([
 	};
 	se.Game.prototype.over = function () {
 		game.activeScene.mainPawn.item.position = [-1000,-1000];
-		game.activeScene.level = config.finish;
 
 		paper.project.clear();
 		paper.project.remove();
@@ -133,7 +133,7 @@ define([
 
 		$('html, body').animate({
 			scrollTop: $('#' + game.activeScene.level.name).offset().top
-		}, config.finish.scroll);
+		}, game.activeScene.level.scroll);
 
 		se.enable_scroll();
 	};

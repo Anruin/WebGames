@@ -107,7 +107,7 @@ define([
 		this.path.add(position);
 		segment.item.position = position;
 
-		var randomImage = config.img.followers[helpers.randomIndex(config.img.followers)];
+		var randomImage = helpers.getRandomImage(config.images.follower, "normal");
 		//segment.item.visible = false;
 		segment.item.image = document.getElementById(randomImage);
 		segment.item.scale(config.params.follower.scale);

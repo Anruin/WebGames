@@ -9,6 +9,37 @@ define(function () {
 		down: new paper.Point(0, 1)
 	};
 	//TODO: Optimize
+	var images = {
+		collectible: [
+			{normal: ["gift-2-1", "gift-2-2", "gift-2-3"]},
+			{normal: ["gift-3-1", "gift-3-2", "gift-3-3"]},
+			{normal: ["gift-4-1", "gift-4-2", "gift-4-3"]},
+			{normal: ["gift-5-1", "gift-5-2", "gift-5-3"]}
+		],
+		follower: [
+			{normal:["collectible-01"]},
+			{normal:["collectible-02"]},
+			{normal:["collectible-03"]},
+			{normal:["collectible-04"]}
+		],
+		npc: [{
+			animation: ["npc-animation-1-1", "npc-animation-1-2"],
+			accept: ["npc-accept-1-1", "npc-accept-1-2", "npc-accept-1-3", "npc-accept-1-4"]
+			},
+			{
+				animation: ["npc-animation-2-1", "npc-animation-2-2"],
+				accept: ["npc-accept-2-1", "npc-accept-2-2", "npc-accept-2-3", "npc-accept-2-4"]
+			},
+			{
+				animation: ["npc-animation-3-1", "npc-animation-3-2"],
+				accept: ["npc-accept-3-1", "npc-accept-3-2", "npc-accept-3-3", "npc-accept-3-4"]
+			},
+			{
+				animation: ["npc-animation-4-1", "npc-animation-4-2"],
+				accept: ["npc-accept-4-1", "npc-accept-4-2", "npc-accept-4-3", "npc-accept-4-4"]
+			}
+		]
+	};
 	var config = {
 		debug: true,
 		container: {
@@ -18,13 +49,13 @@ define(function () {
 			class: "game-obstacle"
 		},
 		levels: [
-			{name: "level_5", scroll:3000, score: 2, spawn: [50,57], collectibles: ["gift-2-1", "gift-2-2", "gift-2-3"]},
-			{name: "level_4", scroll:1500, score: 4, spawn: [50,57], collectibles: ["gift-3-1", "gift-3-2", "gift-3-3"]},
-			{name: "level_3", scroll:1500, score: 6, spawn: [50,82], collectibles: ["gift-4-1", "gift-4-2", "gift-4-3"]},
-			{name: "level_2", scroll:1500, score: 8, spawn: [8,80], collectibles: ["gift-5-1", "gift-5-2", "gift-5-3"]},
-			{name: "level_1", scroll:1500, score: 16, spawn: [8,80]}
+			{name: "level_5", scroll:3000, score: 2, spawn: [50,57], collectibles: images.collectible[0].normal},
+			{name: "level_4", scroll:1500, score: 4, spawn: [50,57], collectibles: images.collectible[1].normal},
+			{name: "level_3", scroll:1500, score: 6, spawn: [50,82], collectibles: images.collectible[2].normal},
+			{name: "level_2", scroll:1500, score: 8, spawn: [8,80], collectibles: images.collectible[3].normal},
+			{name: "level_1", scroll:1500, score: 16, spawn: [8,80]},
+			{name:"level_6", scroll:1000} //finish, game over
 		],
-		finish: {name:"level_6", scroll:1000},
 		params: {
 			path: {
 				length: 25,
@@ -49,6 +80,7 @@ define(function () {
 					x: 0,
 					y: 15
 				}
+				//img: images.collectible
 			},
 			pawn: {
 				scale: 0.22857,
@@ -82,24 +114,11 @@ define(function () {
 				appearsNum: 3,
 				levels: [4],
 				duration: 0.25,
-				variant: [{
-					animation: ["npc-animation-1-1", "npc-animation-1-2"],
-					accept: ["npc-accept-1-1", "npc-accept-1-2", "npc-accept-1-3", "npc-accept-1-4"]
-				},
-					{
-						animation: ["npc-animation-2-1", "npc-animation-2-2"],
-						accept: ["npc-accept-2-1", "npc-accept-2-2", "npc-accept-2-3", "npc-accept-2-4"]
-					},
-					{
-						animation: ["npc-animation-3-1", "npc-animation-3-2"],
-						accept: ["npc-accept-3-1", "npc-accept-3-2", "npc-accept-3-3", "npc-accept-3-4"]
-					},
-					{
-						animation: ["npc-animation-4-1", "npc-animation-4-2"],
-						accept: ["npc-accept-4-1", "npc-accept-4-2", "npc-accept-4-3", "npc-accept-4-4"]
-					}]
+				img: images.npc
 			}
 		},
+		images: images,
+		//TODO: Move to images:
 		img: {
 			dir: "assets/img/",
 			ext: ".png",
@@ -118,8 +137,7 @@ define(function () {
 					stand: "pawn-st-d",
 					move: ["pawn-mv-d01", "pawn-mv-d02"]
 				}
-			},
-			followers: ["collectible-01", "collectible-02", "collectible-03", "collectible-04"]
+			}
 		}
 	};
 	return config;
