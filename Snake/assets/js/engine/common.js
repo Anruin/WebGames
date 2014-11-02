@@ -19,7 +19,7 @@ define([
 		_childClass.prototype.constructor = _childClass;
 	};
 
-	var keys = [33, 34, 37, 38, 39, 40];
+	var keys = [33, 34, 35, 36, 37, 38, 39, 40];
 
 	function preventDefault(e) {
 		e = e || window.event;
