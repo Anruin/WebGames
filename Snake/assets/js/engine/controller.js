@@ -17,16 +17,23 @@ define([
 		// Controls rules for this controller
 		this.controls = config.params.pawn.controls;
 	};
-
+	se.Controller.prototype.getByKey = function(_key) {
+		return this.controls.filter(function(o) {
+			return (o.keys.indexOf(_key) != -1);
+		})[0];
+	};
+	se.Controller.prototype.getByName = function(_name) {
+		return this.controls.filter(function(o) {
+			return (o.params.name == _name);
+		})[0];
+	};
 	/**
 	 * Receiving and processing user input
 	 * @param _key pressed key
 	 */
 	se.Controller.prototype.onInput = function(_key) {
 		// Look for key to action mapping for pressed key
-		var control = this.controls.filter(function(o) {
-			return (o.keys.indexOf(_key) != -1);
-		})[0];
+		var control = this.getByKey(_key);
 		// Perform mapped action on pawn
 		if (control) {
 			this.pawn.action(control.func, control.params);

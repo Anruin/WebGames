@@ -21,8 +21,8 @@ define([
 			window.game.create();
 			console.log('Game created', game);
 			//paper.project.initialize();
-			//paper.project.view.play();
-			//paper.project.view.update();
+			paper.project.view.play();
+			paper.project.view.update();
 			// Set up updates
 			paper.project.view.onFrame = function (event) {
 				game.update(event.delta);

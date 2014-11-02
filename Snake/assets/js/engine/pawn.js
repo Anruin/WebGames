@@ -22,28 +22,6 @@ define([
 	se.$extend(se.Pawn, se.Actor);
 
 	se.Pawn.prototype.move = function(_point) {
-		if(this.path) {
-			this.path.selected = config.debug;
-			this.path.firstSegment.point = this.pathOffset || this.item.position;
-
-			for (var i = 0; i < this.path.segments.length - 1; i++) {
-				var segment = this.path.segments[i];
-				var nextSegment = segment.next;
-				var vector = helpers.pointDiff(segment.point, nextSegment.point);
-				vector.length = i===0 ? config.params.path.firstLength : config.params.path.length;
-				nextSegment.point = helpers.pointDiff(segment.point, vector);
-				if((i+1)%2 == 0) {
-					var n = (i+1)/2 - 1;
-					if (!config.params.collectible.offset)
-						this.followers[n].item.position = nextSegment.point;
-					else {
-						var offset = config.params.collectible.offset;
-						this.followers[n].item.position = helpers.pointSumm(nextSegment.point, offset);
-					}
-				}
-			}
-			this.path.smooth();
-		}
 		if(!helpers.isIntersects(game.activeScene.obstacles, this))
 			se.Actor.prototype.move.call(this, _point);
 		else{
@@ -53,6 +31,28 @@ define([
 				this.item.position = helpers.pointDiff(this.item.position, _point, config.params.pawn.speed);
 		}
 	};
+	se.Pawn.prototype.setupPath = function() {
+		this.path.selected = config.debug;
+		this.path.firstSegment.point = this.pathOffset || this.item.position;
+
+		for (var i = 0; i < this.path.segments.length - 1; i++) {
+			var segment = this.path.segments[i];
+			var nextSegment = segment.next;
+			var vector = helpers.pointDiff(segment.point, nextSegment.point);
+			vector.length = i === 0 ? config.params.path.firstLength : config.params.path.length;
+			nextSegment.point = helpers.pointDiff(segment.point, vector);
+			if ((i + 1) % 2 == 0) {
+				var n = (i + 1) / 2 - 1;
+				if (!config.params.collectible.offset)
+					this.followers[n].item.position = nextSegment.point;
+				else {
+					var offset = config.params.collectible.offset;
+					this.followers[n].item.position = helpers.pointSumm(nextSegment.point, offset);
+				}
+			}
+		}
+		this.path.smooth();
+	}
 	se.Pawn.prototype.offsetPosition = function() {
 		var offset = {x:0, y:0};
 		if(this.path){
@@ -68,6 +68,9 @@ define([
 	se.Pawn.prototype.update = function(_dt) {
 		this.pathOffset = this.offsetPosition();
 		this.setPathDegree();
+
+		if(this.path)
+			this.setupPath();
 		se.Actor.prototype.update.call(this, _dt);
 	};
 	se.Pawn.prototype.turn = function(_params) {

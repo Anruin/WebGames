@@ -85,8 +85,20 @@ define([
 			return new paper.Point(x, y);
 		},
 		getPointPercent: function (point) {
+			//если в обьекте point нет свойства x, значит он скорее всего массив
+			if(!point.x)
+				point = {x: point[0], y: point[1]};
+
 			return {x: 100/paper.project.view.bounds.width * point.x,
 				y: 100/paper.project.view.bounds.height * point.y};
+		},
+		getPointPixels: function (point) {
+			//если в обьекте point нет свойства x, значит он скорее всего массив
+			if(!point.x)
+				point = {x: point[0], y: point[1]};
+
+			return {x: point.x/(100/paper.project.view.bounds.width),
+				y: point.y/(100/paper.project.view.bounds.height)};
 		},
 		toDigits: function (number) {
 			return Number(number).toFixed(2);

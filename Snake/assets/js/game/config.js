@@ -10,7 +10,7 @@ define(function () {
 	};
 	//TODO: Optimize
 	var config = {
-		debug: false,
+		debug: true,
 		container: {
 			id: "sx-engine"
 		},
@@ -18,11 +18,11 @@ define(function () {
 			class: "game-obstacle"
 		},
 		levels: [
-			{name: "level_5", scroll:3000, score: 2, spawn: [670,350], collectibles: ["gift-2-1", "gift-2-2", "gift-2-3"]},
-			{name: "level_4", scroll:1500, score: 4, spawn: [670,350], collectibles: ["gift-3-1", "gift-3-2", "gift-3-3"]},
-			{name: "level_3", scroll:1500, score: 6, spawn: [670,550], collectibles: ["gift-4-1", "gift-4-2", "gift-4-3"]},
-			{name: "level_2", scroll:1500, score: 8, spawn: [100,100], collectibles: ["gift-5-1", "gift-5-2", "gift-5-3"]},
-			{name: "level_1", scroll:1500, score: 16, spawn: [100,100]}
+			{name: "level_5", scroll:3000, score: 2, spawn: [50,57], collectibles: ["gift-2-1", "gift-2-2", "gift-2-3"]},
+			{name: "level_4", scroll:1500, score: 4, spawn: [50,57], collectibles: ["gift-3-1", "gift-3-2", "gift-3-3"]},
+			{name: "level_3", scroll:1500, score: 6, spawn: [50,82], collectibles: ["gift-4-1", "gift-4-2", "gift-4-3"]},
+			{name: "level_2", scroll:1500, score: 8, spawn: [8,80], collectibles: ["gift-5-1", "gift-5-2", "gift-5-3"]},
+			{name: "level_1", scroll:1500, score: 16, spawn: [8,80]}
 		],
 		finish: {name:"level_6", scroll:1000},
 		params: {

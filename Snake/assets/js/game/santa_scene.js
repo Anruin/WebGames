@@ -15,22 +15,20 @@ define([
 		se.Scene.prototype.update.call(this, _dt);
 		var curScene = this;
 
-		curScene.npc.map(function(npc){
-			if(npc.activeAnimation) {
-				var intersects = curScene.mainPawn.item.bounds.intersects(npc.item.bounds);
-				if (intersects)
-					console.log("менеджер рядом");
-				if (intersects && curScene.mainPawn.followers.length != 0) {
-					var imageArray = config.params.npc.variant[npc.activeAnimation.name].accept;
-					var image = imageArray[helpers.randomIndex(imageArray)];
-					npc.item.image = document.getElementById(image);
+		curScene.npc.map(function(npc) {
+			if (npc.status == "wait" && curScene.mainPawn.item.bounds.intersects(npc.item.bounds)
+					&& curScene.mainPawn.followers.length != 0) {
 
-					npc.activeAnimation = null;
+				var imageArray = config.params.npc.variant[npc.activeAnimation.name].accept;
+				var image = imageArray[helpers.randomIndex(imageArray)];
+				npc.item.image = document.getElementById(image);
 
-					curScene.npc.splice(curScene.npc.indexOf(npc), 1);
-					curScene.mainPawn.removeSegment(0);
-					curScene.mainPawn.score++;
-				}
+				npc.activeAnimation = null;
+
+				npc.status = "success";
+				curScene.npc.splice(curScene.npc.indexOf(npc), 1);
+				curScene.mainPawn.removeSegment(0);
+				curScene.mainPawn.score++;
 			}
 		});
 		if(curScene.prepared && helpers.isForAdToScene(curScene.level, config.params.npc,

@@ -9,6 +9,7 @@ define([
 	"../engine/actor"
 ], function (se, config, helpers) {
 	se.NPC = function() {
+		this.status = null;
 		se.Actor.call(this);
 	};
 	se.$extend(se.NPC, se.Actor);

@@ -21,6 +21,7 @@ define([
 		this.velocity = null;
 		// List of animations
 		this.animations = [];
+		this.command = null;
 	};
 
 	/**
@@ -28,10 +29,13 @@ define([
 	 * @param _dt delta time
 	 */
 	se.Actor.prototype.update = function (_dt) {
-		// TODO: Не понятно
+		//if debug mode, then paper.js item will selected, example:
+		//http://paperjs.org/tutorials/project-items/working-with-items/
 		this.item.selected = config.debug;
-		if (this.velocity)
+
+		if (this.velocity && this.command != "stay")
 			this.move(this.velocity);
+
 		if (this.activeAnimation) {
 			var frame = this.activeAnimation.update(_dt);
 			if (frame !== false && frame !== null) {

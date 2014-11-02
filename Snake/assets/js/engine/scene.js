@@ -104,6 +104,8 @@ define([
 		npc.animations = helpers.getFramesAnimations("npc");
 		npc.activeAnimation = npc.animations[randIndex];
 
+		npc.status = "wait";
+
 		npc.item.scale(config.params.npc.scale);
 		helpers.setNotIntersectRandomPoint(npc, game.activeScene.actors);
 		this.npc.push(npc);
