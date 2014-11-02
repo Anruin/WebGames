@@ -11,6 +11,7 @@ define([
 ], function (se, config, helpers) {
 	se.Pawn = function() {
 		this.score = 0;
+		this.lifes = 0;
 		this.controller = null;
 		this.path = null;
 		this.firstPath = null;

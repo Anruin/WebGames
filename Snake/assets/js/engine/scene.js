@@ -57,7 +57,7 @@ define([
 			curScene.createCollectible();
 		}
 		//if(curScene.prepared && helpers.isForAddToScene(curScene.level, config.params.collectible,
-		//				curScene.enemies, curScene.mainPawn.score)) {
+		//				curScene.enemies, curScene.mainPawn.lifes)) {
 		//	curScene.createEnemy();
 		//}
 	};
@@ -70,6 +70,7 @@ define([
 		this.actors.push(actor);
 		return actor;
 	};
+	//TODO: merge createCollectible, createPawn, createNPC, createEnemy to one function
 	se.Scene.prototype.createCollectible = function() {
 		var collectible = new se.Collectible();
 		collectible.item = new paper.Raster();
@@ -97,7 +98,6 @@ define([
 		this.pawns.push(pawn);
 		this.actors.push(pawn);
 	};
-	//TODO: merge with createPawn(merge config)
 	se.Scene.prototype.createNPC = function() {
 		var npc = new se.NPC();
 		npc.item = new paper.Raster();
@@ -116,7 +116,23 @@ define([
 		this.npc.push(npc);
 		this.actors.push(npc);
 	};
+	se.Scene.prototype.createEnemy = function() {
+		var enemy = new se.Enemy();
+		enemy.item = new paper.Raster();
 
+		var randomImage = helpers.getRandomImage(this.level.collectibles);
+		enemy.item.image = document.getElementById(randomImage);
+
+		enemy.animations = helpers.getFramesAnimations("enemy");
+		enemy.activeAnimation = enemy.animations[0];
+
+		enemy.status = "wait";
+
+		enemy.item.scale(config.params.enemy.scale);
+		helpers.setNotIntersectRandomPoint(enemy, game.activeScene.actors);
+		this.enemies.push(enemy);
+		this.actors.push(enemy);
+	};
 	se.Scene.prototype.initObstacles = function() {
 		var curScene = this;
 		if(curScene.obstacles.length){

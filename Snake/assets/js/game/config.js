@@ -115,6 +115,12 @@ define(function () {
 				levels: [4],
 				duration: 0.25,
 				img: images.npc
+			},
+			enemy: {
+				scale: 0.4,
+				appearsNum: 3,
+				levels: [1,2,3,4],
+				img: images.npc
 			}
 		},
 		images: images,
