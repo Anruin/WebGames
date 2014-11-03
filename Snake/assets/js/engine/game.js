@@ -104,11 +104,8 @@ define([
 				}
 			});
 		}
-
-		game.activeScene.collectibles.map(function(obj){
-			obj.item.remove();
-		});
-		game.activeScene.collectibles = [];
+		helpers.clearActorsArray(game.activeScene.collectibles);
+		helpers.clearActorsArray(game.activeScene.enemies);
 	};
 
 	se.Game.prototype.startLevel = function (){

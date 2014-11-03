@@ -62,13 +62,20 @@ define([
 				var frames = [];
 				//TODO considered this moment
 				var subArray = config.params[name].img[el].animation || config.params[name].img[el].move;
-				subArray.map(function (image) {
-					var newFrame = {
-						image: image,
-						duration: config.params[name].duration
-					};
-					frames.push(newFrame);
-				});
+
+				if(subArray){
+					subArray.map(function (image) {
+						var newFrame = {
+							image: image,
+							duration: config.params[name].duration
+						};
+						frames.push(newFrame);
+					});
+				}
+				else
+					frames = false;
+
+
 
 				animations.push(helpers.createAnimation(el, frames));
 			}
@@ -169,6 +176,12 @@ define([
 		},
 		uppercaseFirstChar: function (string) {
 			return string.charAt(0).toUpperCase() + string.slice(1);
+		},
+		clearActorsArray: function (array) {
+			array.map(function(actor){
+				actor.item.remove();
+			});
+			array = [];
 		}
 	};
 	return helpers;

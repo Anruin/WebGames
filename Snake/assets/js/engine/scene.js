@@ -9,7 +9,8 @@ define([
 	"./pawn",
 	"../game/gift",
 	"../game/obstacle",
-	"../game/npc"
+	"../game/npc",
+	"../game/enemy"
 ], function (se, config, helpers) {
 	/**
 	 * Scene constructor
@@ -47,7 +48,20 @@ define([
 					curScene.collectibles.splice(curScene.collectibles.indexOf(obj), 1);
 					curScene.actors.splice(curScene.actors.indexOf(obj), 1);
 
-					pawn.score += config.params.collectible.score;
+					pawn.score += config.params.collectible.give.score;
+					pawn.lifes += config.params.collectible.give.lives;
+					pawn.addSegment();
+				}
+			});
+			curScene.enemies.map(function(obj){
+				if(pawn.item.bounds.intersects(obj.item.bounds)){
+					obj.item.remove();
+
+					curScene.enemies.splice(curScene.collectibles.indexOf(obj), 1);
+					curScene.actors.splice(curScene.actors.indexOf(obj), 1);
+
+					pawn.score += config.params.collectible.give.score;
+					pawn.lifes += config.params.collectible.give.lives;
 					pawn.addSegment();
 				}
 			});
@@ -57,7 +71,7 @@ define([
 			curScene.createActor("collectible", this.collectibles, "normal");
 		}
 		//if(curScene.prepared && helpers.isForAddToScene(curScene.level, config.params.collectible,
-		//				curScene.enemies, curScene.mainPawn.lifes)) {
+		//				curScene.enemies, curScene.mainPawn.lives)) {
 		//	curScene.createActor("enemy", this.enemies, "animation", true);
 		//}
 	};
@@ -71,12 +85,16 @@ define([
 		actor.item = new paper.Raster();
 
 		var randIndex = helpers.randomIndex(config.params[name].img);
-		var randomImage = config.params[name].img[randIndex][image][0];
+		var imageArray = config.params[name].img[randIndex][image] || config.params[name].img[randIndex].normal;
+		var randomImage = imageArray[0];
 		actor.item.image = document.getElementById(randomImage);
 
 		if(isAnimation) {
 			actor.animations = helpers.getFramesAnimations(name);
 			actor.activeAnimation = actor.animations[randIndex];
+			//little kludge: if in random object absent animation
+			if(!actor.animations[randIndex])
+				actor.animations = null;
 		}
 
 		actor.status = "wait";

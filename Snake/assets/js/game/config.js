@@ -84,7 +84,10 @@ define(function () {
 				appearsNum: 1,
 				scale: 0.2,
 				levels: [0, 1, 2, 3],
-				score: 1,
+				give: {
+					score: 1,
+					lives: 1
+				},
 				height: 100,
 				offset: {
 					x: 0,
@@ -136,7 +139,7 @@ define(function () {
 				scale: 0.4,
 				appearsNum: 3,
 				levels: [1,2,3,4],
-				img: images.npc
+				img: images.enemy
 			}
 		},
 		images: images,
