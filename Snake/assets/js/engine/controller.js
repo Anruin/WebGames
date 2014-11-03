@@ -6,21 +6,45 @@ define([
 	"../se",
 	"../game/config"
 ], function (se, config) {
+	/**
+	 * Controller defines user input logic
+	 * @param pawn
+	 * @constructor
+	 */
 	se.Controller = function(pawn) {
+		// Pawn being controlled by this controller
 		this.pawn = pawn;
+		// Controls rules for this controller
 		this.controls = config.params.pawn.controls;
 	};
 
+	/**
+	 * Receiving and processing user input
+	 * @param _key pressed key
+	 */
 	se.Controller.prototype.onInput = function(_key) {
+		// Look for key to action mapping for pressed key
 		var control = this.controls.filter(function(o) {
 			return (o.keys.indexOf(_key) != -1);
 		})[0];
-		if(control)
+		// Perform mapped action on pawn
+		if (control) {
 			this.pawn.action(control.func, control.params);
+			return true;
+		}
+		return false;
 	};
 
+	/**
+	 * Possess pawn with this controller
+	 * @param _pawn
+	 */
 	se.Controller.prototype.possess = function(_pawn) {
+		// Free last pawn
+		if (this.pawn)
+			this.pawn.controller = null;
+		// Link controller and pawn
 		this.pawn = _pawn;
 		_pawn.controller = this;
-	}
-})
+	};
+});

@@ -10,21 +10,28 @@ define([
 	"../engine/controller",
 	"../engine/common"
 ], function (se, config) {
+	/**
+	 * Game class
+	 * @constructor
+	 */
 	se.Game = function () {
+		// Game levels
 		this.scenes = [];
+		// Current game level object
 		this.activeScene = null;
+		// Active players
 		this.players = [];
+		//
 		this.level = null;
 	};
+
+	/**
+	 * Game initialization function
+	 */
 	se.Game.prototype.create = function () {
 		var scene = new se.SantaScene(game);
-		console.log('Scene created', scene);
-
 		game.scenes = [scene];
-		console.log('Scene pushed', game.scenes);
-
 		game.activeScene = game.scenes[0];
-		console.log('Active scene set', game.activeScene);
 
 		var player = new se.Player();
 		game.activeScene.createPawn(player);
@@ -45,10 +52,12 @@ define([
 		paper.tool.onMouseDown = function (event) {
 			se.debugTools.onMouseDown(event);
 		};
-
-		controller.onInput("down");
 	};
-	//game. == this.
+
+	/**
+	 * Update game
+	 * @param _dt
+	 */
 	se.Game.prototype.update = function (_dt) {
 		if (se.debugTools)
 			se.updateDebugTools();
@@ -56,15 +65,19 @@ define([
 		if (game.activeScene)
 			game.activeScene.update(_dt);
 
-		if(game.activeScene.mainPawn.score == game.activeScene.level.score){
+		if (game.activeScene.mainPawn.score == game.activeScene.level.score) {
 			game.activeScene.level = config.levels[config.levels.indexOf(game.activeScene.level) + 1];
 
-			if(!game.activeScene.level)
-				setTimeout(game.over, config.finish.scroll);
+		if(!game.activeScene.level)
+			setTimeout(game.over, config.finish.scroll);
 
 			game.initLevel();
 		}
 	};
+
+	/**
+	 * Level initialization
+	 */
 	se.Game.prototype.initLevel = function () {
 		var indexLvl = config.levels.indexOf(game.activeScene.level);
 

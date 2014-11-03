@@ -33,10 +33,10 @@ define(function () {
 				strokeWidth: 2,
 				strokeCap: 'round',
 				offset:{
-					right: {x:22, y:0},
-					up: {x:30, y:0},
-					left: {x:-22, y:0},
-					down: {x:30, y:0}
+					right: {x:14, y:0},
+					up: {x:17, y:0},
+					left: {x:-15, y:0},
+					down: {x:17, y:0}
 				}
 			},
 			collectible: {
@@ -51,9 +51,9 @@ define(function () {
 				}
 			},
 			pawn: {
-				scale: 0.4,
+				scale: 0.22857,
 				speed: 2,
-				duration: 0.25,
+				duration: 0.05,
 				controls: [
 					{
 						keys: ['a', 'ф', 'left'],

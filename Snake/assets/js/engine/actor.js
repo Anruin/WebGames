@@ -3,37 +3,35 @@
  */
 define([
 	"../se",
-		"../helpers/helpers",
+	"../helpers/helpers",
 	"../game/config"
 ], function (se, helpers, config) {
 	se.Actor = function () {
-		/**
-		 * Paper item
-		 * @type Object
-		 */
+		// Paper.js item
 		this.item = null;
+		// Used to move actor back for step on collision
 		this.lastPosition = null;
-		/**
-		 * Active animation
-		 * @type Array
-		 */
+		// Currently playing animation
 		this.activeAnimation = null;
+		// Animation timer
 		this.animationTimer = 0.0;
-		/**
-		 * Velocity
-		 * @type Object
-		 */
+		// Last turn direction
 		this.lastTurn = null;
+		// Vector velocity of actor
 		this.velocity = null;
+		// List of animations
 		this.animations = [];
 	};
 
+	/**
+	 * Update actor
+	 * @param _dt delta time
+	 */
 	se.Actor.prototype.update = function (_dt) {
+		// TODO: Не понятно
 		this.item.selected = config.debug;
-
 		if (this.velocity)
 			this.move(this.velocity);
-
 		if (this.activeAnimation) {
 			var frame = this.activeAnimation.update(_dt);
 			if (frame !== false && frame !== null) {
@@ -42,28 +40,49 @@ define([
 		}
 	};
 
-	se.Actor.prototype.move = function (_point) {
-		if (!_point)
-			return;
-
-		if(paper.project.view.bounds.contains(this.item.bounds)){
+	/**
+	 * Actor movement
+	 * @param _velocity velocity vector to add to current coordinates
+	 */
+	se.Actor.prototype.move = function (_velocity) {
+		if (!_velocity)
+			return false;
+		// Test if out of level bounds
+		if (paper.project.view.bounds.contains(this.item.bounds)) {
+			// Store last position
 			this.lastPosition = this.item.position;
-			this.item.position = helpers.pointSumm(this.item.position, _point, config.params.pawn.speed);
-		}
-		else{
-			if(this.item.position != this.lastPosition)
+			// Add position
+			this.item.position = helpers.pointSumm(this.item.position, _velocity, config.params.pawn.speed);
+		} else {
+			// Teleport back to last position
+			if(this.item.position != this.lastPosition) {
 				this.item.position = this.lastPosition;
-			else
-				this.item.position = helpers.pointDiff(this.item.position, _point, config.params.pawn.speed);
+			} else {
+				this.item.position = helpers.pointDiff(this.item.position, _velocity, config.params.pawn.speed);
+			}
 		}
 	};
+
+	/**
+	 * Actor direction changes
+	 * @param _params
+	 */
 	se.Actor.prototype.turn = function (_params) {
+		// Store last direction
 		this.lastTurn = _params.name;
+		// Set velocity
 		this.velocity = _params.direction;
+		// Select animation from animation library
 		this.activeAnimation = this.animations.filter(function (obj) {
 			return obj.name == _params.name;
 		})[0];
 	};
+
+	/**
+	 * Action allows actor to perform an action with parameters
+	 * @param _func
+	 * @param _params
+	 */
 	se.Actor.prototype.action = function (_func, _params) {
 		this[_func](_params);
 	};
