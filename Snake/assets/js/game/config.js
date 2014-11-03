@@ -44,6 +44,10 @@ define(function () {
 			{move: ["pawn-mv-u01", "pawn-mv-u02"], stand: ["pawn-st-u"]},
 			{move: ["pawn-mv-r01", "pawn-mv-r02"]},
 			{move: ["pawn-mv-d01", "pawn-mv-d02"], stand: ["pawn-st-d"]}
+		],
+		enemy: [
+			{animation: ["bomb-01", "bomb-02"], death: ["bomb-explosion"]},
+			{normal: ["pit"]}
 		]
 	};
 	var config = {
@@ -85,8 +89,8 @@ define(function () {
 				offset: {
 					x: 0,
 					y: 15
-				}
-				//img: images.collectible
+				},
+				img: images.collectible
 			},
 			pawn: {
 				scale: 0.22857,

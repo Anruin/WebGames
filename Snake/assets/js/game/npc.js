@@ -8,13 +8,13 @@ define([
 	"../engine/common",
 	"../engine/actor"
 ], function (se, config, helpers) {
-	se.NPC = function() {
+	se.Npc = function() {
 		this.status = null;
 		se.Actor.call(this);
 	};
-	se.$extend(se.NPC, se.Actor);
+	se.$extend(se.Npc, se.Actor);
 
-	se.NPC.prototype.update = function(_dt) {
+	se.Npc.prototype.update = function(_dt) {
 		se.Actor.prototype.update.call(this, _dt);
 	};
 })

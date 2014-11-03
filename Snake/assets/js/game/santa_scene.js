@@ -33,8 +33,11 @@ define([
 		});
 		if(curScene.prepared && helpers.isForAddToScene(curScene.level, config.params.npc,
 						curScene.npc, curScene.mainPawn.score)) {
-			curScene.createNPC();
+			curScene.createActor("npc", this.npc, "animation", true);
 		}
+	};
+	se.SantaScene.prototype.createActor = function (name, array, image, isAnimation) {
+		se.Scene.prototype.createActor.call(this, name, array, image, isAnimation);
 	};
 	se.SantaScene.prototype.createPawn = function () {
 		se.Scene.prototype.createPawn.call(this);

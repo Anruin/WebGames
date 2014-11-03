@@ -54,34 +54,37 @@ define([
 		});
 		if(curScene.prepared && helpers.isForAddToScene(curScene.level, config.params.collectible,
 						curScene.collectibles, curScene.mainPawn.score)) {
-			curScene.createCollectible();
+			curScene.createActor("collectible", this.collectibles, "normal");
 		}
 		//if(curScene.prepared && helpers.isForAddToScene(curScene.level, config.params.collectible,
 		//				curScene.enemies, curScene.mainPawn.lifes)) {
-		//	curScene.createEnemy();
+		//	curScene.createActor("enemy", this.enemies, "animation", true);
 		//}
 	};
 
 	/**
 	 * Create new actor
 	 */
-	se.Scene.prototype.createActor = function () {
-		var actor = new se.Actor();
+	se.Scene.prototype.createActor = function(name, array, image, isAnimation) {
+		//TODO: take image, isAnimation and future params from config.params[name] props
+		var actor = new se[helpers.uppercaseFirstChar(name)]();
+		actor.item = new paper.Raster();
+
+		var randIndex = helpers.randomIndex(config.params[name].img);
+		var randomImage = config.params[name].img[randIndex][image][0];
+		actor.item.image = document.getElementById(randomImage);
+
+		if(isAnimation) {
+			actor.animations = helpers.getFramesAnimations(name);
+			actor.activeAnimation = actor.animations[randIndex];
+		}
+
+		actor.status = "wait";
+
+		actor.item.scale(config.params[name].scale);
+		helpers.setNotIntersectRandomPoint(actor, game.activeScene.actors);
+		array.push(actor);
 		this.actors.push(actor);
-		return actor;
-	};
-	//TODO: merge createCollectible, createPawn, createNPC, createEnemy to one function
-	se.Scene.prototype.createCollectible = function() {
-		var collectible = new se.Collectible();
-		collectible.item = new paper.Raster();
-
-		var randomImage = helpers.getRandomImage(this.level.collectibles);
-		collectible.item.image = document.getElementById(randomImage);
-		collectible.item.scale(config.params.collectible.scale);
-
-		helpers.setNotIntersectRandomPoint(collectible, game.activeScene.actors);
-		this.collectibles.push(collectible);
-		this.actors.push(collectible);
 	};
 	/**
 	 * Create new pawn and possess by player
@@ -98,41 +101,7 @@ define([
 		this.pawns.push(pawn);
 		this.actors.push(pawn);
 	};
-	se.Scene.prototype.createNPC = function() {
-		var npc = new se.NPC();
-		npc.item = new paper.Raster();
 
-		var randIndex = helpers.randomIndex(config.params.npc.img);
-		var randomImage = config.params.npc.img[randIndex].animation[0];
-		npc.item.image = document.getElementById(randomImage);
-
-		npc.animations = helpers.getFramesAnimations("npc");
-		npc.activeAnimation = npc.animations[randIndex];
-
-		npc.status = "wait";
-
-		npc.item.scale(config.params.npc.scale);
-		helpers.setNotIntersectRandomPoint(npc, game.activeScene.actors);
-		this.npc.push(npc);
-		this.actors.push(npc);
-	};
-	se.Scene.prototype.createEnemy = function() {
-		var enemy = new se.Enemy();
-		enemy.item = new paper.Raster();
-
-		var randomImage = helpers.getRandomImage(this.level.collectibles);
-		enemy.item.image = document.getElementById(randomImage);
-
-		enemy.animations = helpers.getFramesAnimations("enemy");
-		enemy.activeAnimation = enemy.animations[0];
-
-		enemy.status = "wait";
-
-		enemy.item.scale(config.params.enemy.scale);
-		helpers.setNotIntersectRandomPoint(enemy, game.activeScene.actors);
-		this.enemies.push(enemy);
-		this.actors.push(enemy);
-	};
 	se.Scene.prototype.initObstacles = function() {
 		var curScene = this;
 		if(curScene.obstacles.length){
