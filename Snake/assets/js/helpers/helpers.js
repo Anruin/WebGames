@@ -12,8 +12,8 @@ define([
 			img.setAttribute('src', config.img.dir + _name + config.img.ext);
 			img.setAttribute('id', _name);
 
-			if (_class && config.params[_class].height)
-				img.style.height = config.params[_class].height;
+			if (_class && config.params[_class].general.height)
+				img.style.height = config.params[_class].general.height;
 
 			var container = document.getElementById('images');
 			container.appendChild(img);
@@ -56,28 +56,23 @@ define([
 		},
 		getFramesAnimations: function (name) {
 			var animations = [];
-			var array = config.params[name].img;
-
-			for (var el in array) {
+			var array = config.params[name].variant;
+			//example:
+			for (var index in array) {
 				var frames = [];
 				//TODO considered this moment
-				var subArray = config.params[name].img[el].animation || config.params[name].img[el].move;
+				var subArray = array.states[index].animation
+						|| config.params[name].variant.states[index].move;
 
 				if(subArray){
-					subArray.map(function (image) {
-						var newFrame = {
-							image: image,
-							duration: config.params[name].duration
-						};
-						frames.push(newFrame);
+					subArray.map(function (image){
+						frames.push(image);
 					});
 				}
 				else
 					frames = false;
 
-
-
-				animations.push(helpers.createAnimation(el, frames));
+				animations.push(helpers.createAnimation(index, frames));
 			}
 			return animations;
 		},
@@ -153,9 +148,9 @@ define([
 		isForAddToScene: function (level, param, array, score) {
 			var indexLvl = config.levels.indexOf(level);
 			//есть ли текущий уровень в массиве конфига эллемента .levels: [...]
-			return param.levels.indexOf(indexLvl) != -1
+			return param.general.levels.indexOf(indexLvl) != -1
 				//соответствует ли текущее количество установленному в конфиге эллемента
-			&& array.length < param.appearsNum
+			&& array.length < param.general.appearsNum
 				//не превышает ли количество эллементов необходимого для этого уровня кол-ва очков
 			&& array.length < level.score - score;
 		},

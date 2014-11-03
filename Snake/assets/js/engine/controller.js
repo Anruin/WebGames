@@ -15,7 +15,7 @@ define([
 		// Pawn being controlled by this controller
 		this.pawn = pawn;
 		// Controls rules for this controller
-		this.controls = config.params.pawn.controls;
+		this.controls = config.params.pawn.general.controls;
 	};
 	se.Controller.prototype.getByKey = function(_key) {
 		return this.controls.filter(function(o) {

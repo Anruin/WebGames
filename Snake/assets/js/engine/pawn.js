@@ -29,7 +29,7 @@ define([
 			if(this.item.position != this.lastPosition)
 				this.item.position = this.lastPosition;
 			else
-				this.item.position = helpers.pointDiff(this.item.position, _point, config.params.pawn.speed);
+				this.item.position = helpers.pointDiff(this.item.position, _point, config.params.pawn.general.speed);
 		}
 	};
 	se.Pawn.prototype.setupPath = function() {
@@ -44,10 +44,10 @@ define([
 			nextSegment.point = helpers.pointDiff(segment.point, vector);
 			if ((i + 1) % 2 == 0) {
 				var n = (i + 1) / 2 - 1;
-				if (!config.params.collectible.offset)
+				if (!config.params.collectible.general.offset)
 					this.followers[n].item.position = nextSegment.point;
 				else {
-					var offset = config.params.collectible.offset;
+					var offset = config.params.collectible.general.offset;
 					this.followers[n].item.position = helpers.pointSumm(nextSegment.point, offset);
 				}
 			}
@@ -108,7 +108,7 @@ define([
 		this.path.add(position);
 		segment.item.position = position;
 
-		var randomImage = helpers.getRandomImage(config.images.follower, "normal");
+		var randomImage = helpers.getRandomImage(config.images.follower, "idle");
 		//segment.item.visible = false;
 		segment.item.image = document.getElementById(randomImage);
 		segment.item.scale(config.params.follower.scale);

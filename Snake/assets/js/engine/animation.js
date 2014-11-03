@@ -4,17 +4,19 @@
 define([
 	"../se"
 ], function (se) {
-	se.Animation = function () {
+	se.Animation = function (_frames, _duration, _loop) {
 		// Animation name
 		this.name = '';
 		// Whether to loop or not
-		this.loop = true;
+		this.loop = _loop || true;
 		// Animation timer
 		this.timer = 0.0;
 		// Animation frames
-		this.frames = [];
+		this.frames = _frames || [];
 		// Active frame
 		this.activeFrameIndex = 0;
+		//duration
+		this.duration = _duration || 0;
 	};
 
 	/**
@@ -40,9 +42,9 @@ define([
 			if (this.activeFrameIndex >= this.frames.length)
 				this.activeFrameIndex = 0;
 			// Reset timer for next frame
-			this.timer = activeFrame.duration;
+			this.timer = this.duration;
 			// Return active frame texture
-			return activeFrame.image;
+			return activeFrame;
 		}
 	};
 });

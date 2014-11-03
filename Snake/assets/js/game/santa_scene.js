@@ -16,24 +16,22 @@ define([
 		var curScene = this;
 
 		curScene.npc.map(function(npc) {
-			if (npc.status == "wait" && curScene.mainPawn.item.bounds.intersects(npc.item.bounds)
+			//TODO actualizing
+			if (npc.command == "active" && curScene.mainPawn.item.bounds.intersects(npc.item.bounds)
 					&& curScene.mainPawn.followers.length != 0) {
 
-				var imageArray = config.params.npc.img[npc.activeAnimation.name].accept;
-				var image = imageArray[helpers.randomIndex(imageArray)];
-				npc.item.image = document.getElementById(image);
+				for(var prop in npc.params.onAccept)
+					npc.params[prop] = npc.params.onAccept[prop];
 
-				npc.activeAnimation = null;
-
-				npc.status = "success";
+				npc.setState("accept", "accept")
 				curScene.npc.splice(curScene.npc.indexOf(npc), 1);
 				curScene.mainPawn.removeSegment(0);
-				curScene.mainPawn.score++;
+				curScene.mainPawn.score ++;
 			}
 		});
 		if(curScene.prepared && helpers.isForAddToScene(curScene.level, config.params.npc,
 						curScene.npc, curScene.mainPawn.score)) {
-			curScene.createActor("npc", this.npc, "animation", true);
+			curScene.createActor("npc", this.npc);
 		}
 	};
 	se.SantaScene.prototype.createActor = function (name, array, image, isAnimation) {

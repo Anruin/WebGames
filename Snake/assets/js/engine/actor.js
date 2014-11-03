@@ -21,7 +21,10 @@ define([
 		this.velocity = null;
 		// List of animations
 		this.animations = [];
-		this.command = null;
+		this.command = "idle";
+		this.states = [];
+		this.curState = {};
+		this.params = {};
 	};
 
 	/**
@@ -56,13 +59,15 @@ define([
 			// Store last position
 			this.lastPosition = this.item.position;
 			// Add position
-			this.item.position = helpers.pointSumm(this.item.position, _velocity, config.params.pawn.speed);
+			this.item.position = helpers.pointSumm(this.item.position, _velocity, this.params.speed);
 		} else {
-			// Teleport back to last position
+			// if still move
 			if(this.item.position != this.lastPosition) {
+				//then teleport back to last position
 				this.item.position = this.lastPosition;
+				//else push to back direction
 			} else {
-				this.item.position = helpers.pointDiff(this.item.position, _velocity, config.params.pawn.speed);
+				this.item.position = helpers.pointDiff(this.item.position, _velocity, this.params.speed);
 			}
 		}
 	};
@@ -77,9 +82,10 @@ define([
 		// Set velocity
 		this.velocity = _params.direction;
 		// Select animation from animation library
-		this.activeAnimation = this.animations.filter(function (obj) {
-			return obj.name == _params.name;
-		})[0];
+		this.setState(_params.name, "move");
+		//this.activeAnimation = this.animations.filter(function (obj) {
+		//	return obj.name == _params.name;
+		//})[0];
 	};
 
 	/**
@@ -89,5 +95,34 @@ define([
 	 */
 	se.Actor.prototype.action = function (_func, _params) {
 		this[_func](_params);
+	};
+	se.Actor.prototype.setState = function (_stateName, _command) {
+		this.curState = this.states.filter(function(state){
+			return state.name == _stateName;
+		})[0];
+		this.command = _command || this.command;
+
+		var initImage = "";
+		if(this.curState.initImage)
+			initImage = this.curState.initImage;
+		else{
+			var index = 0;
+			if(this.params.randomImage)
+				index = helpers.randomIndex(this.curState.img[this.command]);
+
+			initImage = this.curState.img[this.command][index];
+		}
+
+		this.item.image = document.getElementById(initImage);
+
+		var loop = this.curState.loop || this.params.loop;
+		if(loop)
+			this.activeAnimation = new se.Animation(this.curState.img[this.command], this.curState.duration || this.params.duration);
+		else
+			this.activeAnimation= null;
+
+		//var scale = this.curState.scale || this.params.scale;
+		//if(scale)
+		//	this.item.scale(scale);
 	};
 });

@@ -48,27 +48,28 @@ define([
 					curScene.collectibles.splice(curScene.collectibles.indexOf(obj), 1);
 					curScene.actors.splice(curScene.actors.indexOf(obj), 1);
 
-					pawn.score += config.params.collectible.give.score;
-					pawn.lifes += config.params.collectible.give.lives;
+					pawn.score += config.params.collectible.general.give.score;
+					pawn.lifes += config.params.collectible.general.give.lives;
 					pawn.addSegment();
 				}
 			});
 			curScene.enemies.map(function(obj){
 				if(pawn.item.bounds.intersects(obj.item.bounds)){
+					obj.item.image = document.getElementById(config.params.enemy.general.img);
 					obj.item.remove();
 
 					curScene.enemies.splice(curScene.collectibles.indexOf(obj), 1);
 					curScene.actors.splice(curScene.actors.indexOf(obj), 1);
 
-					pawn.score += config.params.collectible.give.score;
-					pawn.lifes += config.params.collectible.give.lives;
+					pawn.score += config.params.collectible.general.give.score;
+					pawn.lifes += config.params.collectible.general.give.lives;
 					pawn.addSegment();
 				}
 			});
 		});
 		if(curScene.prepared && helpers.isForAddToScene(curScene.level, config.params.collectible,
 						curScene.collectibles, curScene.mainPawn.score)) {
-			curScene.createActor("collectible", this.collectibles, "normal");
+			curScene.createActor("collectible", this.collectibles);
 		}
 		//if(curScene.prepared && helpers.isForAddToScene(curScene.level, config.params.collectible,
 		//				curScene.enemies, curScene.mainPawn.lives)) {
@@ -79,47 +80,39 @@ define([
 	/**
 	 * Create new actor
 	 */
-	se.Scene.prototype.createActor = function(name, array, image, isAnimation) {
-		//TODO: take image, isAnimation and future params from config.params[name] props
-		var actor = new se[helpers.uppercaseFirstChar(name)]();
+	se.Scene.prototype.createActor = function(_name, _array, _variant) {
+		var actor = new se[helpers.uppercaseFirstChar(_name)]();
 		actor.item = new paper.Raster();
 
-		var randIndex = helpers.randomIndex(config.params[name].img);
-		var imageArray = config.params[name].img[randIndex][image] || config.params[name].img[randIndex].normal;
-		var randomImage = imageArray[0];
-		actor.item.image = document.getElementById(randomImage);
-
-		if(isAnimation) {
-			actor.animations = helpers.getFramesAnimations(name);
-			actor.activeAnimation = actor.animations[randIndex];
-			//little kludge: if in random object absent animation
-			if(!actor.animations[randIndex])
-				actor.animations = null;
+		actor.params = _.clone(config.params[_name].general);
+		var variant;
+		if(_variant)
+			variant = config.params[_name].variant[_variant];
+		else {
+			var randIndex = helpers.randomIndex(config.params[_name].variant);
+			variant = config.params[_name].variant[randIndex];
 		}
 
-		actor.status = "wait";
+		if(variant.states) {
+			actor.states = variant.states;
+		}
+		else {
+			for(var state in variant){
+				var _img = {};
+				_img[state] = variant[state];
+				actor.states.push({name: state, img: _img})
+			}
+			variant.initCommand = actor.states[0].name;
+		}
+		actor.setState(variant.initState || actor.states[0].name, variant.initCommand || null);
 
-		actor.item.scale(config.params[name].scale);
+		actor.item.scale(config.params[_name].general.scale);
+
 		helpers.setNotIntersectRandomPoint(actor, game.activeScene.actors);
-		array.push(actor);
+		//_player.possess(pawn);
+		_array.push(actor);
 		this.actors.push(actor);
 	};
-	/**
-	 * Create new pawn and possess by player
-	 * @param _player
-	 */
-	se.Scene.prototype.createPawn = function(_player) {
-		var pawn = new se.Pawn();
-		pawn.item = new paper.Raster();
-		pawn.item.scale(config.params.pawn.scale);
-		pawn.item.image = document.getElementById(config.params.pawn.img.down.stand);
-
-		pawn.animations = helpers.getFramesAnimations("pawn");
-		//_player.possess(pawn);
-		this.pawns.push(pawn);
-		this.actors.push(pawn);
-	};
-
 	se.Scene.prototype.initObstacles = function() {
 		var curScene = this;
 		if(curScene.obstacles.length){
@@ -130,7 +123,7 @@ define([
 		}
 		curScene.obstacles = [];
 
-		var domObstacles = document.getElementById(curScene.level.name).getElementsByClassName(config.obstacle.class);
+		var domObstacles = $('#' + curScene.level.name + " ." + config.obstacle.class + ", nav." + config.obstacle.class)
 		var i = 0;
 		while(domObstacles[i]){
 			var el = domObstacles[i].getBoundingClientRect();
