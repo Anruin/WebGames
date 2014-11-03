@@ -91,7 +91,7 @@ define([
 		var pawn = new se.Pawn();
 		pawn.item = new paper.Raster();
 		pawn.item.scale(config.params.pawn.scale);
-		pawn.item.image = document.getElementById(config.img.pawn.down.stand);
+		pawn.item.image = document.getElementById(config.params.pawn.img.down.stand);
 
 		pawn.animations = helpers.getFramesAnimations("pawn");
 		//_player.possess(pawn);

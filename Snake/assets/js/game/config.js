@@ -38,6 +38,12 @@ define(function () {
 				animation: ["npc-animation-4-1", "npc-animation-4-2"],
 				accept: ["npc-accept-4-1", "npc-accept-4-2", "npc-accept-4-3", "npc-accept-4-4"]
 			}
+		],
+		pawn: [
+			{move: ["pawn-mv-l01", "pawn-mv-l02"]},
+			{move: ["pawn-mv-u01", "pawn-mv-u02"], stand: ["pawn-st-u"]},
+			{move: ["pawn-mv-r01", "pawn-mv-r02"]},
+			{move: ["pawn-mv-d01", "pawn-mv-d02"], stand: ["pawn-st-d"]}
 		]
 	};
 	var config = {
@@ -104,7 +110,13 @@ define(function () {
 						func: 'turn',
 						params: { direction: directions.down, name: "down" }
 					}
-				]
+				],
+				img: {
+					left: images.pawn[0],
+					up: images.pawn[1],
+					right: images.pawn[2],
+					down: images.pawn[3]
+				}
 			},
 			follower:{
 				scale: 0.25
@@ -124,26 +136,9 @@ define(function () {
 			}
 		},
 		images: images,
-		//TODO: Move to images:
 		img: {
 			dir: "assets/img/",
-			ext: ".png",
-			pawn: {
-				left: {
-					move: ["pawn-mv-l01", "pawn-mv-l02"]
-				},
-				up: {
-					stand: "pawn-st-u",
-					move: ["pawn-mv-u01", "pawn-mv-u02"]
-				},
-				right: {
-					move: ["pawn-mv-r01", "pawn-mv-r02"]
-				},
-				down: {
-					stand: "pawn-st-d",
-					move: ["pawn-mv-d01", "pawn-mv-d02"]
-				}
-			}
+			ext: ".png"
 		}
 	};
 	return config;

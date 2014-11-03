@@ -27,26 +27,6 @@ define([
 			});
 		},
 		addAllImagesToDOM: function () {
-			for (var dir in config.img.pawn) {
-				if (config.img.pawn[dir].stand)
-					helpers.addImageToDOM(config.img.pawn[dir].stand);
-
-				helpers.addImageArrayToDOM(config.img.pawn[dir].move);
-			}
-
-			//config.levels.map(function (level) {
-			//	helpers.addImageArrayToDOM(level.collectibles, "collectible");
-			//});
-
-			//helpers.addImageArrayToDOM(config.img.followers, "follower");
-			//
-			//config.params.npc.img.map(function (img) {
-			//	helpers.addImageArrayToDOM(img.animation);
-			//	helpers.addImageArrayToDOM(img.accept);
-			//});
-			//config.params.collectible.img.map(function (img) {
-			//	helpers.addImageArrayToDOM(img.normal);
-			//});
 			for (var element in config.images) {
 				config.images[element].map(function (variant) {
 					for (var type in variant) {
@@ -56,10 +36,14 @@ define([
 			}
 		},
 		getRandomImage: function (array, type) {
+			//if type is set, then search on object's properties
 			if(type) {
 				var index = helpers.randomIndex(array);
+				//for example:
+				//     follower[0].normal[1]
 				return array[index][type][helpers.randomIndex(array[index][type])];
 			}
+			//else just search in elements of array
 			else
 				return array[helpers.randomIndex(array)];
 		},
@@ -72,11 +56,12 @@ define([
 		},
 		getFramesAnimations: function (name) {
 			var animations = [];
-			var array = config.img[name] || config.params[name].img;
+			var array = config.params[name].img;
 
-			for (el in array) {
+			for (var el in array) {
 				var frames = [];
-				var subArray = config.img[name] ? config.img[name][el].move : config.params[name].img[el].animation;
+				//TODO considered this moment
+				var subArray = config.params[name].img[el].animation || config.params[name].img[el].move;
 				subArray.map(function (image) {
 					var newFrame = {
 						image: image,
