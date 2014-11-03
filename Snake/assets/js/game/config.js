@@ -151,7 +151,7 @@ define(function () {
 						loop: false
 					}
 				},
-				variant: [images.npc[0], images.npc[1], images.npc[2], images.npc[3]]
+				variant: images.npc
 			},
 			enemy: {
 				general: {
