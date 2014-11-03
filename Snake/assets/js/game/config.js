@@ -10,19 +10,19 @@ define(function () {
 	};
 	var WASDController = [
 		{
-			keys: ['a', 'ф', 'left'],
+			keys: ['a', 'ф', 'left', 'ArrowLeft'],
 			func: 'turn',
 			params: {direction: directions.left, name: "left"}
 		}, {
-			keys: ['w', 'ц', 'up'],
+			keys: ['w', 'ц', 'up', 'ArrowUp'],
 			func: 'turn',
 			params: {direction: directions.up, name: "up"}
 		}, {
-			keys: ['d', 'в', 'right'],
+			keys: ['d', 'в', 'right', 'ArrowRight'],
 			func: 'turn',
 			params: {direction: directions.right, name: "right"}
 		}, {
-			keys: ['s', 'ы', 'down'],
+			keys: ['s', 'ы', 'down', 'ArrowDown'],
 			func: 'turn',
 			params: {direction: directions.down, name: "down"}
 		}
