@@ -7,6 +7,7 @@ define([
 	"../game/config"
 ], function (se, helpers, config) {
 	se.Actor = function () {
+		this.name = "";
 		// Paper.js item
 		this.item = null;
 		// Used to move actor back for step on collision
@@ -116,11 +117,17 @@ define([
 		this.item.image = document.getElementById(initImage);
 
 		var loop = this.curState.loop || this.params.loop;
+		var duration = this.curState.duration || this.params.duration;
 		if(loop)
-			this.activeAnimation = new se.Animation(this.curState.img[this.command], this.curState.duration || this.params.duration);
+			this.activeAnimation = new se.Animation(this.curState.img[this.command], duration);
 		else
-			this.activeAnimation= null;
-
+			this.activeAnimation = null;
+		var curActor = this;
+		if(curActor.curState.onActive)
+			setTimeout(function(){
+				var name = _.keys(curActor.curState.onActive)[0];
+				curActor.item[name] = curActor.curState.onActive[name];
+			}, curActor.curState.duration * 1000);
 		//var scale = this.curState.scale || this.params.scale;
 		//if(scale)
 		//	this.item.scale(scale);

@@ -54,27 +54,37 @@ define([
 				}
 			});
 			curScene.enemies.map(function(obj){
-				if(pawn.item.bounds.intersects(obj.item.bounds)){
-					obj.item.image = document.getElementById(config.params.enemy.general.img);
-					obj.item.remove();
+				if(obj.command == "idle" && pawn.item.bounds.intersects(obj.item.bounds)){
+					obj.setState("active", "active");
+					if(obj.name == "bomb"){
+						curScene.enemies.splice(curScene.enemies.indexOf(obj), 1);
+					}
+					else if(obj.name == "pit"){
+						var intervalID = setInterval(function(){
+							if(!pawn.item.bounds.intersects(obj.item.bounds)){
+								obj.command = "idle";
+								clearInterval(intervalID);
+							}
+						}, 200);
+					}
 
-					curScene.enemies.splice(curScene.collectibles.indexOf(obj), 1);
-					curScene.actors.splice(curScene.actors.indexOf(obj), 1);
-
-					pawn.score += config.params.collectible.general.give.score;
-					pawn.lifes += config.params.collectible.general.give.lives;
-					pawn.addSegment();
+					pawn.score -= config.params.enemy.general.take.score;
+					//pawn.lives += config.params.collectible.general.give.lives;
+					for(var i = 0; i < config.params.enemy.general.take.score; i++){
+						pawn.removeSegment(0);
+						curScene.createActor("collectible", curScene.collectibles);
+					}
 				}
 			});
 		});
 		if(curScene.prepared && helpers.isForAddToScene(curScene.level, config.params.collectible,
 						curScene.collectibles, curScene.mainPawn.score)) {
-			curScene.createActor("collectible", this.collectibles);
+			curScene.createActor("collectible", curScene.collectibles);
 		}
-		//if(curScene.prepared && helpers.isForAddToScene(curScene.level, config.params.collectible,
-		//				curScene.enemies, curScene.mainPawn.lives)) {
-		//	curScene.createActor("enemy", this.enemies, "animation", true);
-		//}
+		if(curScene.prepared && helpers.isForAddToScene(curScene.level, config.params.enemy,
+						curScene.enemies)) {
+			curScene.createActor("enemy", curScene.enemies);
+		}
 	};
 
 	/**
@@ -92,9 +102,20 @@ define([
 			var randIndex = helpers.randomIndex(config.params[_name].variant);
 			variant = config.params[_name].variant[randIndex];
 		}
-
+		actor.name = variant.name;
+		//TODO: move this to helpers functions
 		if(variant.states) {
-			actor.states = variant.states;
+			if(!_.isString(variant.states[0].img[0]))
+				actor.states = variant.states;
+			else{
+				variant.states.map(function(state){
+					var _img = {};
+					_img[state.name] = state.img;
+					state.img = _img;
+					actor.states.push(state);
+				})
+				variant.initCommand = actor.states[0].name;
+			}
 		}
 		else {
 			for(var state in variant){

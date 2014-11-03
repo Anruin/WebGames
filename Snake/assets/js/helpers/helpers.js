@@ -76,16 +76,12 @@ define([
 			}
 			return animations;
 		},
-
-		randomNum: function (from, to) {
-			return Math.floor((Math.random() * to) + from);
-		},
 		randomIndex: function (array) {
-			return helpers.randomNum(0, array.length - 1);
+			return _.random(0, array.length - 1);
 		},
 		getRandomPointInView: function () {
-			var x = helpers.randomNum(100, paper.project.view.bounds.width - 200);
-			var y = helpers.randomNum(100, paper.project.view.bounds.height - 200);
+			var x = _.random(100, paper.project.view.bounds.width - 200);
+			var y = _.random(100, paper.project.view.bounds.height - 200);
 			return new paper.Point(x, y);
 		},
 		getPointPercent: function (point) {
@@ -147,12 +143,17 @@ define([
 		},
 		isForAddToScene: function (level, param, array, score) {
 			var indexLvl = config.levels.indexOf(level);
+
 			//есть ли текущий уровень в массиве конфига эллемента .levels: [...]
-			return param.general.levels.indexOf(indexLvl) != -1
+			var interim = param.general.levels.indexOf(indexLvl) != -1
 				//соответствует ли текущее количество установленному в конфиге эллемента
-			&& array.length < param.general.appearsNum
+			&& array.length < param.general.appearsNum;
+
+			if(score)
 				//не превышает ли количество эллементов необходимого для этого уровня кол-ва очков
-			&& array.length < level.score - score;
+				return interim && array.length < level.score - score;
+			else
+				return interim;
 		},
 		//try to universalize pushProcessing from actor and pawn push, not successful
 		pushProcessing: function (point, vector, factor, lastPoint, isNotIntersects) {
@@ -176,7 +177,7 @@ define([
 			array.map(function(actor){
 				actor.item.remove();
 			});
-			array = [];
+			array.splice(0);
 		}
 	};
 	return helpers;

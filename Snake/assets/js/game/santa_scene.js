@@ -16,7 +16,6 @@ define([
 		var curScene = this;
 
 		curScene.npc.map(function(npc) {
-			//TODO actualizing
 			if (npc.command == "active" && curScene.mainPawn.item.bounds.intersects(npc.item.bounds)
 					&& curScene.mainPawn.followers.length != 0) {
 

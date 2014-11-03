@@ -128,8 +128,7 @@ define(function () {
 					scale: 0.2,
 					levels: [0, 1, 2, 3],
 					give: {
-						score: 1,
-						lives: 1
+						score: 1
 					},
 					height: 100,
 					offset: {
@@ -159,13 +158,16 @@ define(function () {
 					scale: 0.22857,
 					duration: 0.05,
 					appearsNum: 3,
-					levels: [1, 2, 3, 4]
+					levels: [1, 2, 3, 4],
+					take:{
+						score: 1
+					}
 				},
 				variant: [
 					{
 						name: "bomb",
 						states: [{name: "idle", img: images.enemy[0].idle, loop: true},
-							{name: "active", img: images.enemy[0].active, duration: 2}]
+							{name: "active", img: images.enemy[0].active, onActive: {visible: false}, duration: 2}]
 					},
 					{
 						name: "pit",
