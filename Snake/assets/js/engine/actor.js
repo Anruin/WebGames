@@ -26,6 +26,12 @@ define([
 		this.states = [];
 		this.curState = {};
 		this.params = {};
+
+		//TODO think for more elegant solution
+		var curActor = this;
+		this.throttleTurn = _.throttle(function(){
+			curActor.setState(curActor.lastTurn, "move");
+		}, 300);
 	};
 
 	/**
@@ -78,12 +84,15 @@ define([
 	 * @param _params
 	 */
 	se.Actor.prototype.turn = function (_params) {
+		var curActor = this;
 		// Store last direction
-		this.lastTurn = _params.name;
+		curActor.lastTurn = _params.name;
 		// Set velocity
-		this.velocity = _params.direction;
+		curActor.velocity = _params.direction;
 		// Select animation from animation library
-		this.setState(_params.name, "move");
+
+		this.throttleTurn();
+
 		//this.activeAnimation = this.animations.filter(function (obj) {
 		//	return obj.name == _params.name;
 		//})[0];
