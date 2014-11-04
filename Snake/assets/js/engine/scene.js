@@ -24,6 +24,7 @@ define([
 		this.collectibles = [];
 		this.npc = [];
 		this.obstacles = [];
+		this.toRemove = [];
 		this.mainPawn = null;
 		this.level= null;
 	};
@@ -58,6 +59,7 @@ define([
 					obj.setState("active", "active");
 					if(obj.name == "bomb"){
 						curScene.enemies.splice(curScene.enemies.indexOf(obj), 1);
+						curScene.toRemove.push(obj);
 					}
 					else if(obj.name == "pit"){
 						var intervalID = setInterval(function(){
