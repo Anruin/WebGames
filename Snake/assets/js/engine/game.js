@@ -101,7 +101,7 @@ define([
 			}
 
 			game.activeScene.prepared = false;
-			$('html, body').animate({
+			$('html body').animate({
 				scrollTop: $('#' + this.activeScene.level.name).offset().top
 			}, {
 				duration: game.activeScene.level.scroll,
