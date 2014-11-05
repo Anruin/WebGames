@@ -55,23 +55,30 @@ define([
 				}
 			});
 			curScene.enemies.map(function(obj){
-				if(obj.command == "idle" && pawn.item.bounds.intersects(obj.item.bounds)){
-					obj.setState("active", "active");
-					if(obj.name == "bomb"){
-						curScene.enemies.splice(curScene.enemies.indexOf(obj), 1);
-						curScene.toRemove.push(obj);
-					}
-					else if(obj.name == "pit"){
-						var intervalID = setInterval(function(){
-							if(!pawn.item.bounds.intersects(obj.item.bounds)){
-								obj.command = "idle";
-								clearInterval(intervalID);
-							}
-						}, 200);
-					}
+				if((obj.command == "move" || obj.command == "idle") && pawn.item.bounds.intersects(obj.item.bounds)){
+					if(obj.curState.name == "move")
+						obj.setState("active", "active");
 
+					//if(obj.name == "bomb"){
+					//	curScene.enemies.splice(curScene.enemies.indexOf(obj), 1);
+					//	curScene.toRemove.push(obj);
+					//}
+					//else if(obj.name == "pit"){
+					//	var intervalID = setInterval(function(){
+					//		if(!pawn.item.bounds.intersects(obj.item.bounds)){
+					//			obj.command = "idle";
+					//			clearInterval(intervalID);
+					//		}
+					//	}, 200);
+					//}
+
+					//TODO: move this to helpers function
 					pawn.score -= config.params.enemy.general.take.score;
-					//pawn.lives += config.params.collectible.general.give.lives;
+					pawn.lives -= config.params.enemy.general.take.lives;
+
+					if(pawn.lives < 0)
+						game.over(true);
+
 					for(var i = 0; i < config.params.enemy.general.take.score; i++){
 						pawn.removeSegment(0);
 						curScene.createActor("collectible", curScene.collectibles);
@@ -107,7 +114,18 @@ define([
 		actor.name = variant.name;
 		//TODO: move this to helpers functions
 		if(variant.states) {
-			if(!_.isString(variant.states[0].img[0]))
+			if(!_.isArray(variant.states)) {
+				for (var objName in variant.states) {
+					var obj = {
+						name: objName,
+						img: variant.states
+					};
+					actor.states.push(obj);
+				}
+
+				variant.initCommand = actor.states[0].name;
+			}
+			else if(!_.isString(variant.states[0].img[0]))
 				actor.states = variant.states;
 			else{
 				variant.states.map(function(state){

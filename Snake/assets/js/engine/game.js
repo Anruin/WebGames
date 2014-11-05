@@ -95,6 +95,9 @@ define([
 			game.activeScene.mainPawn.turn(game.activeScene.mainPawn.controller.getByName("up").params);
 			game.activeScene.mainPawn.command = "stay";
 
+			if(game.activeScene.level.give)
+				game.activeScene.mainPawn.lives += game.activeScene.level.give.lives;
+
 			game.activeScene.prepared = false;
 			$('html, body').animate({
 				scrollTop: $('#' + this.activeScene.level.name).offset().top
@@ -122,7 +125,7 @@ define([
 		game.activeScene.prepared = true;
 		game.activeScene.mainPawn.command = null;
 	};
-	se.Game.prototype.over = function () {
+	se.Game.prototype.over = function (isLose) {
 		game.activeScene.mainPawn.item.position = [-1000,-1000];
 
 		paper.project.clear();
@@ -135,5 +138,14 @@ define([
 		}, game.activeScene.level.scroll);
 
 		se.enable_scroll();
+
+		if(isLose) {
+			var r = confirm("Вы проиграли! Хотите попробовать снова?");
+			if (r == true) {
+				//yes
+			} else {
+				//no
+			}
+		};
 	};
 });

@@ -131,12 +131,14 @@ define([
 			this.activeAnimation = new se.Animation(this.curState.img[this.command], duration);
 		else
 			this.activeAnimation = null;
+
 		var curActor = this;
-		if(curActor.curState.onActive)
+		if(curActor.name == "bomb" && curActor.curState.name == "active")
 			setTimeout(function(){
-				var name = _.keys(curActor.curState.onActive)[0];
-				curActor.item[name] = curActor.curState.onActive[name];
-			}, curActor.curState.duration * 1000);
+				curActor.setState("idle", "idle");
+				//var name = _.keys(curActor.curState.onActive)[0];
+				//curActor.item[name] = curActor.curState.onActive[name];
+			}, 2000);
 		//var scale = this.curState.scale || this.params.scale;
 		//if(scale)
 		//	this.item.scale(scale);

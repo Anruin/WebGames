@@ -66,8 +66,7 @@ define(function () {
 			{move: ["pawn-mv-d01", "pawn-mv-d02"], idle: ["pawn-st-d"]}
 		],
 		enemy: [
-			{idle: ["bomb-01", "bomb-02"], active: ["bomb-explosion"]},
-			{idle: ["pit"]}
+			{move: ["bomb-01", "bomb-02"], active: ["bomb-explosion"], idle: ["pit"]}
 		]
 	};
 	var config = {
@@ -79,12 +78,61 @@ define(function () {
 			class: "game-obstacle"
 		},
 		levels: [
-			{name: "level_5", scroll:3000, score: 2, spawn: [50,57], collectibles: images.collectible[0].idle},
-			{name: "level_4", scroll:1500, score: 4, spawn: [50,57], collectibles: images.collectible[1].idle},
-			{name: "level_3", scroll:1500, score: 6, spawn: [50,82], collectibles: images.collectible[2].idle},
-			{name: "level_2", scroll:1500, score: 8, spawn: [8,80], collectibles: images.collectible[3].idle},
-			{name: "level_1", scroll:1500, score: 16, spawn: [8,80]},
-			{name:"level_6", scroll:1000} //finish, game over
+			{
+				name: "level_5",
+				scroll:3000,
+				score: 2,
+				spawn: [50,57],
+				collectibles: images.collectible[0].idle,
+				give: {
+					lives: 1
+				}
+			},
+			{
+				name: "level_4",
+				scroll:1500,
+				score: 4,
+				spawn: [50,57],
+				enemy: [
+					[[27,25],[27,70]],
+					[[29,25],[29,70]],
+					[[32,25],[32,70]]
+				],
+				collectibles: images.collectible[1].idle,
+				give: {
+					lives: 1
+				}
+			},
+			{
+				name: "level_3",
+				scroll:1500,
+				score: 6,
+				spawn: [50,82],
+				collectibles: images.collectible[2].idle,
+				give: {
+					lives: 1
+				}
+			},
+			{
+				name: "level_2",
+				scroll:1500,
+				score: 8,
+				spawn: [8,80],
+				collectibles: images.collectible[3].idle,
+				give: {
+					lives: 1
+				}
+			},
+			{
+				name: "level_1",
+				scroll:1500,
+				score: 16,
+				spawn: [8,80]
+			},
+			{
+				name:"level_6", //finish, game over
+				scroll:1000
+			}
 		],
 		params: {
 			path: {
@@ -154,25 +202,21 @@ define(function () {
 			},
 			enemy: {
 				general: {
-					loop: false,
+					loop: true,
 					scale: 0.22857,
 					duration: 0.05,
 					appearsNum: 3,
 					levels: [1, 2, 3, 4],
 					take:{
-						score: 1
+						score: 2,
+						lives: 1
 					}
 				},
 				variant: [
 					{
 						name: "bomb",
-						states: [{name: "idle", img: images.enemy[0].idle, loop: true},
-							{name: "active", img: images.enemy[0].active, onActive: {visible: false}, duration: 2}]
-					},
-					{
-						name: "pit",
-						states: [{name: "idle", img: images.enemy[1].idle},
-							{name: "active", img: images.enemy[1].idle}]
+						initState: "move",
+						states: images.enemy[0]
 					}
 				]
 			}
