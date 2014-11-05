@@ -18,6 +18,8 @@ define([
 		this.pathOffset = null;
 		this.followers = [];
 		this.turns = [];
+		this.pointsToMove = [];
+		this.nextPoint = null;
 		se.Actor.call(this);
 	};
 	se.$extend(se.Pawn, se.Actor);
@@ -67,6 +69,19 @@ define([
 		}
 	};
 	se.Pawn.prototype.update = function(_dt) {
+		if(this.pointsToMove.length && this.nextPoint.isInside(this.item.bounds)){
+			var nextIndex = this.pointsToMove.indexOf(this.nextPoint) + 1;
+			if(nextIndex >= this.pointsToMove.length)
+				nextIndex = 0;
+			this.nextPoint = this.pointsToMove[nextIndex];
+
+			var vector = helpers.pointDiff(this.nextPoint, this.item.position);
+			//var factor = vector.y/(vector.y/0.5)
+			this.velocity = vector.multiply(1/400);
+
+			//var first = this.item.position.multiply((1 - 0.1));
+			//this.item.position = helpers.pointSumm(first, this.nextPoint.multiply(0.1));
+		}
 		this.pathOffset = this.offsetPosition();
 		this.setPathDegree();
 

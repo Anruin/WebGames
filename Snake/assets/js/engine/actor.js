@@ -133,12 +133,14 @@ define([
 			this.activeAnimation = null;
 
 		var curActor = this;
-		if(curActor.name == "bomb" && curActor.curState.name == "active")
+		if(curActor.name == "bomb" && curActor.curState.name == "active"){
+			curActor.velocity = null;
 			setTimeout(function(){
 				curActor.setState("idle", "idle");
 				//var name = _.keys(curActor.curState.onActive)[0];
 				//curActor.item[name] = curActor.curState.onActive[name];
 			}, 2000);
+		}
 		//var scale = this.curState.scale || this.params.scale;
 		//if(scale)
 		//	this.item.scale(scale);

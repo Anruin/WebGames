@@ -175,7 +175,10 @@ define([
 		},
 		clearActorsArray: function (array) {
 			array.map(function(actor){
-				actor.item.remove();
+				if(actor.item)
+					actor.item.remove();
+				else
+					actor.remove();
 			});
 			array.splice(0);
 		}

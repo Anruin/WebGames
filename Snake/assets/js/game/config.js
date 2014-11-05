@@ -94,9 +94,9 @@ define(function () {
 				score: 4,
 				spawn: [50,57],
 				enemy: [
-					[[27,25],[27,70]],
-					[[29,25],[29,70]],
-					[[32,25],[32,70]]
+					[[14,25],[14,60]],
+					[[20,25],[20,60]],
+					[[26,25],[26,60]]
 				],
 				collectibles: images.collectible[1].idle,
 				give: {
@@ -210,7 +210,8 @@ define(function () {
 					take:{
 						score: 2,
 						lives: 1
-					}
+					},
+					step: 1
 				},
 				variant: [
 					{

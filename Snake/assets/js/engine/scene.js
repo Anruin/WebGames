@@ -41,6 +41,10 @@ define([
 			actor.update(_dt);
 		});
 
+		curScene.enemies.map(function(enemy){
+			enemy.update(_dt);
+		});
+
 		curScene.pawns.map(function(pawn){
 			curScene.collectibles.map(function(obj){
 				if(pawn.item.bounds.intersects(obj.item.bounds)){
@@ -100,6 +104,7 @@ define([
 	 * Create new actor
 	 */
 	se.Scene.prototype.createActor = function(_name, _array, _variant) {
+		var curScene = this;
 		var actor = new se[helpers.uppercaseFirstChar(_name)]();
 		actor.item = new paper.Raster();
 
@@ -112,6 +117,7 @@ define([
 			variant = config.params[_name].variant[randIndex];
 		}
 		actor.name = variant.name;
+
 		//TODO: move this to helpers functions
 		if(variant.states) {
 			if(!_.isArray(variant.states)) {
@@ -149,7 +155,21 @@ define([
 
 		actor.item.scale(config.params[_name].general.scale);
 
-		helpers.setNotIntersectRandomPoint(actor, game.activeScene.actors);
+		if(_name == "enemy" && this.level.enemy){
+			actor.pointsToMove = this.level.enemy[this.enemies.length].map(function(el){
+				var path = new paper.Path();
+				var point = new paper.Point(helpers.getPointPixels(el));
+				path.add(point);
+				path.selected = config.debug;
+				curScene.toRemove.push(path);
+				return point;
+			});
+			actor.item.position = actor.pointsToMove[0];
+			actor.nextPoint = actor.pointsToMove[0];
+		}
+		else
+			helpers.setNotIntersectRandomPoint(actor, game.activeScene.actors);
+
 		//_player.possess(pawn);
 		_array.push(actor);
 		this.actors.push(actor);

@@ -6,14 +6,14 @@ define([
 	"../game/config",
 	"../helpers/helpers",
 	"../engine/common",
-	"../engine/actor"
+	"../engine/pawn"
 ], function (se, config, helpers) {
 	se.Enemy = function() {
-		se.Actor.call(this);
+		se.Pawn.call(this);
 	};
-	se.$extend(se.Enemy, se.Actor);
+	se.$extend(se.Enemy, se.Pawn);
 
 	se.Enemy.prototype.update = function(_dt) {
-		se.Actor.prototype.update.call(this, _dt);
+		se.Pawn.prototype.update.call(this, _dt);
 	};
 })
