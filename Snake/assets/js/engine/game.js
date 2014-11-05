@@ -144,7 +144,14 @@ define([
 		if(isLose) {
 			var r = confirm("Вы проиграли! Хотите попробовать снова?");
 			if (r == true) {
-				//yes
+				game.activeScene.prepared = false;
+				$('html, body').animate({
+					scrollTop: $('#' + config.levels[0].name).offset().top
+				}, {
+					duration: config.levels[0].scroll,
+					complete: function(event) {
+					}
+				});
 			} else {
 				//no
 			}

@@ -82,8 +82,10 @@ define([
 					pawn.lives -= config.params.enemy.general.take.lives;
 					helpers.initLives();
 
-					if(pawn.lives < 0)
+					if(pawn.lives < 0){
 						game.over(true);
+						return;
+					}
 
 					for(var i = 0; i < config.params.enemy.general.take.score; i++){
 						pawn.removeSegment(0);

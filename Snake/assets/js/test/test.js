@@ -13,6 +13,7 @@ define([
 ], function (se, config, helpers){
 		function Start () {
 			// Create game
+			document.getElementById('sx-game').style.display = "block";
 			paper.project = new paper.Project(document.getElementById('sx-game'));
 			paper.project.tool = new paper.Tool({});
 			paper.project.activate();
