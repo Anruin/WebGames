@@ -69,7 +69,7 @@ define([
 		}
 	};
 	se.Pawn.prototype.update = function(_dt) {
-		if(this.pointsToMove.length && this.nextPoint.isInside(this.item.bounds)){
+		if(this.pointsToMove.length > 1 && this.nextPoint.isInside(this.item.bounds)){
 			var nextIndex = this.pointsToMove.indexOf(this.nextPoint) + 1;
 			if(nextIndex >= this.pointsToMove.length)
 				nextIndex = 0;

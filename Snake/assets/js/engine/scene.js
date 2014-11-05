@@ -159,17 +159,24 @@ define([
 
 		actor.item.scale(config.params[_name].general.scale);
 
-		if(_name == "enemy" && this.level.enemy){
-			actor.pointsToMove = this.level.enemy[this.enemies.length].map(function(el){
-				var path = new paper.Path();
-				var point = new paper.Point(helpers.getPointPixels(el));
-				path.add(point);
-				path.selected = config.debug;
-				curScene.toRemove.push(path);
-				return point;
-			});
-			actor.item.position = actor.pointsToMove[0];
-			actor.nextPoint = actor.pointsToMove[0];
+		if(this.level && this.level[_name]) {
+			if (_.isArray(this.level[_name][0])) {
+
+				var pointsArray = this.level[_name];
+				if (_.isArray(this.level[_name][0][0]))
+					pointsArray = pointsArray[_array.length];
+
+				actor.pointsToMove = pointsArray.map(function (el) {
+					var path = new paper.Path();
+					var point = new paper.Point(helpers.getPointPixels(el));
+					path.add(point);
+					path.selected = config.debug;
+					curScene.toRemove.push(path);
+					return point;
+				});
+				actor.item.position = actor.pointsToMove[0];
+				actor.nextPoint = actor.pointsToMove[0];
+			}
 		}
 		else
 			helpers.setNotIntersectRandomPoint(actor, game.activeScene.actors);
