@@ -145,11 +145,12 @@ define([
 			var r = confirm("Вы проиграли! Хотите попробовать снова?");
 			if (r == true) {
 				game.activeScene.prepared = false;
-				$('html, body').animate({
+				$('html body').animate({
 					scrollTop: $('#' + config.levels[0].name).offset().top
 				}, {
 					duration: config.levels[0].scroll,
-					complete: function(event) {
+					complete: function() {
+						$('.level-5__btn').trigger("click");
 					}
 				});
 			} else {
