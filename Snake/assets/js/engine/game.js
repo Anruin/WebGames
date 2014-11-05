@@ -95,8 +95,10 @@ define([
 			game.activeScene.mainPawn.turn(game.activeScene.mainPawn.controller.getByName("up").params);
 			game.activeScene.mainPawn.command = "stay";
 
-			if(game.activeScene.level.give)
+			if(game.activeScene.level.give){
 				game.activeScene.mainPawn.lives += game.activeScene.level.give.lives;
+				helpers.initLives();
+			}
 
 			game.activeScene.prepared = false;
 			$('html, body').animate({

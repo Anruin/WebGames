@@ -26,7 +26,8 @@ define([
 		this.obstacles = [];
 		this.toRemove = [];
 		this.mainPawn = null;
-		this.level= null;
+		this.level = null;
+		this.lives = null;
 	};
 	se.Scene.prototype.pawns = [];
 	se.Scene.prototype.collectibles = [];
@@ -79,6 +80,7 @@ define([
 					//TODO: move this to helpers function
 					pawn.score -= config.params.enemy.general.take.score;
 					pawn.lives -= config.params.enemy.general.take.lives;
+					helpers.initLives();
 
 					if(pawn.lives < 0)
 						game.over(true);
@@ -139,7 +141,7 @@ define([
 					_img[state.name] = state.img;
 					state.img = _img;
 					actor.states.push(state);
-				})
+				});
 				variant.initCommand = actor.states[0].name;
 			}
 		}

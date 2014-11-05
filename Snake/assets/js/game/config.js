@@ -29,6 +29,7 @@ define(function () {
 	];
 	//TODO: Optimize
 	var images = {
+		lives: [{empty:["empty-heart"]}, {full:["heart"]}],
 		collectible: [
 			{idle: ["gift-2-1", "gift-2-2", "gift-2-3"]},
 			{idle: ["gift-3-1", "gift-3-2", "gift-3-3"]},

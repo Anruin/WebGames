@@ -133,7 +133,7 @@ define([
 			this.activeAnimation = null;
 
 		var curActor = this;
-		if(curActor.name == "bomb" && curActor.curState.name == "active"){
+		if(curActor.name == "bomb" && curActor.curState.name == "active") {
 			curActor.velocity = null;
 			setTimeout(function(){
 				curActor.setState("idle", "idle");

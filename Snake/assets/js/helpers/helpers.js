@@ -181,6 +181,12 @@ define([
 					actor.remove();
 			});
 			array.splice(0);
+		},
+		initLives: function(){
+			var hearts = $(".game-live");
+			for(var i=0;i<3;i++)
+				$( hearts[i] ).removeClass( "svgicon-heart-empty svgicon-heart" )
+						.addClass( game.activeScene.mainPawn.lives > i ? "svgicon-heart" : "svgicon-heart-empty" );
 		}
 	};
 	return helpers;
