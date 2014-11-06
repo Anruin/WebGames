@@ -24,15 +24,61 @@ define([
 	};
 	se.$extend(se.Pawn, se.Actor);
 
-	se.Pawn.prototype.move = function(_point) {
-		if(!helpers.isIntersects(game.activeScene.obstacles, this))
-			se.Actor.prototype.move.call(this, _point);
-		else{
-			if(this.item.position != this.lastPosition)
-				this.item.position = this.lastPosition;
-			else
-				this.item.position = helpers.pointDiff(this.item.position, _point, config.params.pawn.general.speed);
+	se.Pawn.prototype.notToLet = function (array, point){
+		var curRect = this.item.bounds;
+
+		function isYIntersects(curRect, elRect){
+			return elRect.y + elRect.height > curRect.y && elRect.y < curRect.y + elRect.height;
 		}
+		function isXIntersects(curRect, elRect){
+			return elRect.x + elRect.width > curRect.x && elRect.x < curRect.x + curRect.width;
+		}
+
+		var isRightIntersects = array.some(function(el){
+			var elRect = el.item.bounds;
+			return curRect.right >= elRect.left && curRect.left <= elRect.left
+			&& isYIntersects(curRect, elRect);
+		});
+		var isLeftIntersects = array.some(function(el){
+			var elRect = el.item.bounds;
+			return curRect.left <= elRect.right && curRect.right >= elRect.right
+			&& isYIntersects(curRect, elRect);
+		});
+		var isDownIntersects = array.some(function(el){
+			var elRect = el.item.bounds;
+			return curRect.bottom >= elRect.top && curRect.top <= elRect.top
+			&& isXIntersects(curRect, elRect);
+		});
+		var isUpIntersects = array.some(function(el){
+			var elRect = el.item.bounds;
+			return curRect.top <= elRect.bottom && curRect.bottom >= elRect.bottom
+			&& isXIntersects(curRect, elRect);
+		});
+
+		var newPoint = _.clone(point);
+		if((isRightIntersects && point.x >= 0) || (isLeftIntersects && point.x < 0))
+			newPoint.x = 0;
+		else if((isDownIntersects && point.y >= 0) || (isUpIntersects && point.y < 0))
+			newPoint.y = 0;
+		return newPoint;
+			//var rect = Rectangle.read(arguments);
+			//return rect.x + rect.width > this.x
+			//&& rect.y + rect.height > this.y
+			//&& rect.x < this.x + this.width
+			//&& rect.y < this.y + this.height;
+	}
+
+	se.Pawn.prototype.move = function(_point) {
+		var newPoint = this.notToLet(game.activeScene.obstacles, _point);
+		//if(!helpers.isIntersects(game.activeScene.obstacles, this))
+		//	se.Actor.prototype.move.call(this, _point);
+		//else{
+		//	if(this.item.position != this.lastPosition)
+		//		this.item.position = this.lastPosition;
+		//	else
+		//		this.item.position = helpers.pointDiff(this.item.position, _point, config.params.pawn.general.speed);
+		//}
+		se.Actor.prototype.move.call(this, newPoint);
 	};
 	se.Pawn.prototype.setupPath = function() {
 		this.path.selected = config.debug;
