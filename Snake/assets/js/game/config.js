@@ -195,7 +195,7 @@ define(function () {
 					appearsNum: 3,
 					levels: [4],
 					duration: 0.25,
-					respawn: 5,
+					respawn: 10,
 					randomImage: true,
 					onAccept: {
 						loop: false
