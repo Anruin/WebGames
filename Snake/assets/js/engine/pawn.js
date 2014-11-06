@@ -56,9 +56,9 @@ define([
 		});
 
 		var newPoint = _.clone(point);
-		if((isRightIntersects && point.x >= 0) || (isLeftIntersects && point.x < 0))
+		if((isRightIntersects && point.x > 0) || (isLeftIntersects && point.x < 0))
 			newPoint.x = 0;
-		else if((isDownIntersects && point.y >= 0) || (isUpIntersects && point.y < 0))
+		else if((isDownIntersects && point.y > 0) || (isUpIntersects && point.y < 0))
 			newPoint.y = 0;
 		return newPoint;
 			//var rect = Rectangle.read(arguments);
