@@ -36,36 +36,52 @@ define([
 
 		var isRightIntersects = array.some(function(el){
 			var elRect = el.item.bounds;
-			return curRect.right >= elRect.left && curRect.left <= elRect.left
-			&& isYIntersects(curRect, elRect);
+			return curRect.right >= elRect.left && curRect.left <= elRect.left && elRect.right >= curRect.right
+			//is top or bottom or y(general) intersects
+			&& ((curRect.bottom >= elRect.top && curRect.top <= elRect.top && curRect.bottom <= elRect.bottom)
+			|| (curRect.top <= elRect.bottom && curRect.bottom >= elRect.bottom && curRect.top >= elRect.top)
+			|| isYIntersects(curRect, elRect));
 		});
 		var isLeftIntersects = array.some(function(el){
 			var elRect = el.item.bounds;
-			return curRect.left <= elRect.right && curRect.right >= elRect.right
-			&& isYIntersects(curRect, elRect);
+			return curRect.left <= elRect.right && curRect.right >= elRect.right && elRect.left <= curRect.left
+			//is top or bottom or y(general) intersects
+			&& ((curRect.bottom >= elRect.top && curRect.top <= elRect.top && curRect.bottom <= elRect.bottom)
+			|| (curRect.top <= elRect.bottom && curRect.bottom >= elRect.bottom && curRect.top >= elRect.top)
+			|| isYIntersects(curRect, elRect));
 		});
-		var isDownIntersects = array.some(function(el){
+		var isBottomIntersects = array.some(function(el){
 			var elRect = el.item.bounds;
 			return curRect.bottom >= elRect.top && curRect.top <= elRect.top && curRect.bottom <= elRect.bottom
-			&& isXIntersects(curRect, elRect);
+			//is right or left or x(general) intersects
+			&& ((curRect.right >= elRect.left && curRect.left <= elRect.left && elRect.right >= curRect.right)
+			|| (curRect.left <= elRect.right && curRect.right >= elRect.right && elRect.left <= curRect.left)
+			|| isXIntersects(curRect, elRect));
 		});
-		var isUpIntersects = array.some(function(el){
+		var isTopIntersects = array.some(function(el){
 			var elRect = el.item.bounds;
 			return curRect.top <= elRect.bottom && curRect.bottom >= elRect.bottom && curRect.top >= elRect.top
-			&& isXIntersects(curRect, elRect);
+				//is right or left or x(general) intersects
+			&& ((curRect.right >= elRect.left && curRect.left <= elRect.left && elRect.right >= curRect.right)
+			|| (curRect.left <= elRect.right && curRect.right >= elRect.right && elRect.left <= curRect.left)
+			|| isXIntersects(curRect, elRect));
 		});
 
+
 		var newPoint = _.clone(point);
+		//if(((isRightIntersects && point.x > 0) || (isLeftIntersects && point.x < 0))
+		//		&&(isBottomIntersects || isTopIntersects)){
+		//	newPoint.x = - point.x;
+		//}
+		//else if((isRightIntersects || isLeftIntersects)
+		//		&&((isBottomIntersects && point.y > 0) || (isTopIntersects && point.y < 0))){
+		//	newPoint.y = - point.y;
+		//}
 		if((isRightIntersects && point.x > 0) || (isLeftIntersects && point.x < 0))
 			newPoint.x = 0;
-		else if((isDownIntersects && point.y > 0) || (isUpIntersects && point.y < 0))
+		else if((isBottomIntersects && point.y > 0) || (isTopIntersects && point.y < 0))
 			newPoint.y = 0;
 		return newPoint;
-			//var rect = Rectangle.read(arguments);
-			//return rect.x + rect.width > this.x
-			//&& rect.y + rect.height > this.y
-			//&& rect.x < this.x + this.width
-			//&& rect.y < this.y + this.height;
 	}
 
 	se.Pawn.prototype.move = function(_point) {
