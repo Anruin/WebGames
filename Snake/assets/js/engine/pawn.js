@@ -51,7 +51,7 @@ define([
 		});
 		var isUpIntersects = array.some(function(el){
 			var elRect = el.item.bounds;
-			return curRect.top < elRect.bottom && curRect.bottom > elRect.bottom
+			return curRect.top <= elRect.bottom && curRect.bottom >= elRect.bottom && curRect.top >= elRect.top
 			&& isXIntersects(curRect, elRect);
 		});
 
