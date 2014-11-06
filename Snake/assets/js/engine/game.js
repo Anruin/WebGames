@@ -113,6 +113,7 @@ define([
 		helpers.clearActorsArray(game.activeScene.collectibles);
 		helpers.clearActorsArray(game.activeScene.enemies);
 		helpers.clearActorsArray(game.activeScene.toRemove);
+		game.activeScene.nums = {};
 	};
 
 	se.Game.prototype.startLevel = function (){

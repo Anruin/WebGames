@@ -81,9 +81,10 @@ define(function () {
 		levels: [
 			{
 				name: "level_5",
-				scroll:3000,
+				scroll: 3000,
 				score: 2,
 				spawn: [50,57],
+				collectible: [[35,55], [60,55]],
 				collectibles: images.collectible[0].idle,
 				give: {
 					lives: 1

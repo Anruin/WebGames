@@ -28,6 +28,7 @@ define([
 		this.mainPawn = null;
 		this.level = null;
 		this.lives = null;
+		this.nums = {};
 	};
 	se.Scene.prototype.pawns = [];
 	se.Scene.prototype.collectibles = [];
@@ -108,6 +109,9 @@ define([
 	 * Create new actor
 	 */
 	se.Scene.prototype.createActor = function(_name, _array, _variant) {
+		if(!this.nums[_name])
+			this.nums[_name] = 0;
+
 		var curScene = this;
 		var actor = new se[helpers.uppercaseFirstChar(_name)]();
 		actor.item = new paper.Raster();
@@ -160,13 +164,8 @@ define([
 		actor.item.scale(config.params[_name].general.scale);
 
 		if(this.level && this.level[_name]) {
-			if (_.isArray(this.level[_name][0])) {
-
-				var pointsArray = this.level[_name];
-				if (_.isArray(this.level[_name][0][0]))
-					pointsArray = pointsArray[_array.length];
-
-				actor.pointsToMove = pointsArray.map(function (el) {
+			if (_.isArray(this.level[_name][0]) && _.isArray(this.level[_name][0][0])) {
+				actor.pointsToMove = this.level[_name][this.nums[_name]].map(function (el) {
 					var path = new paper.Path();
 					var point = new paper.Point(helpers.getPointPixels(el));
 					path.add(point);
@@ -177,6 +176,12 @@ define([
 				actor.item.position = actor.pointsToMove[0];
 				actor.nextPoint = actor.pointsToMove[0];
 			}
+			else if(_.isArray(this.level[_name][0])){
+				actor.item.position = helpers.getPointPixels(this.level[_name][this.nums[_name]]);
+			}
+			else {
+				actor.item.position = helpers.getPointPixels(this.level[_name]);
+			}
 		}
 		else
 			helpers.setNotIntersectRandomPoint(actor, game.activeScene.actors);
@@ -184,6 +189,8 @@ define([
 		//_player.possess(pawn);
 		_array.push(actor);
 		this.actors.push(actor);
+
+		this.nums[_name]++;
 	};
 	se.Scene.prototype.initObstacles = function() {
 		var curScene = this;
