@@ -21,4 +21,4 @@ endif;
 
 $domain = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : '/';
 #header("Location: {$domain}?status={$status}");
-echo var_export($domain);
+var_export($domain);
