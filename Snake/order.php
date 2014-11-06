@@ -1,12 +1,12 @@
 <?php
-if ($_SERVER['REQUEST_METHOD'] != 'post'):
+if (strtolower($_SERVER['REQUEST_METHOD']) != 'post'):
 	die('unsupported');
 endif;
 
-$name = filter_var($_POST['name'], FILTER_VALIDATE_REGEXP, '/^[А-Яа-яЁёA-Za-z0-9 .\-]+$/iu');
+$name = filter_var($_POST['name'], FILTER_VALIDATE_REGEXP, ['options'=>['regexp'=>'/^[А-Яа-яЁёA-Za-z0-9 .\-]+$/iu']]);
 $email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
-$phone = filter_var($_POST['phone'], FILTER_VALIDATE_REGEXP, '/^[0-9 .\-]+$/i');
-$promo = filter_var($_POST['promo'], FILTER_VALIDATE_REGEXP, '/^[А-Яа-яЁёA-Za-z0-9 .\-]+$/iu');
+$phone = filter_var($_POST['phone'], FILTER_VALIDATE_REGEXP, ['options'=>['regexp'=>'/^[0-9 .\-]+$/i']]);
+$promo = filter_var($_POST['promo'], FILTER_VALIDATE_REGEXP, ['options'=>['regexp'=>'/^[А-Яа-яЁёA-Za-z0-9 .\-]+$/iu']]);
 $subscribe = filter_var($_POST['subscribe'], FILTER_VALIDATE_BOOLEAN);
 
 if ($name === FALSE || $email === FALSE || $phone === FALSE || $promo === FALSE || $subscribe === FALSE):
@@ -20,5 +20,5 @@ else:
 endif;
 
 $domain = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : '/';
-#header("Location: {$domain}?status={$status}");
-var_export($domain);
+header("Location: http://{$domain}?status={$status}");
+#var_export($domain);
