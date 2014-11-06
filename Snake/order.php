@@ -13,7 +13,7 @@ if ($name === FALSE || $email === FALSE || $phone === FALSE || $promo === FALSE 
 	$status = 'Validation error';
 else:
 	$subscribe_str = $subscribe ? 'Да' : 'Нет';
-	$destination_mail = 'info@verstak.ru';
+	$destination_mail = 'jonybang@mail.ru';
 	$theme = 'Web Games Order';
 	$message = "Имя: {$name}\nПочта: {$email}\nТелефон: {$phone}\nПромо-код: {$promo}\nПодписка: {$subscribe_str}";
 	$status = mail($destination_mail, $theme, $message) ? 'success' : 'fail';
