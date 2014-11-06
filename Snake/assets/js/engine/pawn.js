@@ -46,12 +46,12 @@ define([
 		});
 		var isDownIntersects = array.some(function(el){
 			var elRect = el.item.bounds;
-			return curRect.bottom >= elRect.top && curRect.top <= elRect.top
+			return curRect.bottom >= elRect.top && curRect.top <= elRect.top && curRect.bottom <= elRect.bottom
 			&& isXIntersects(curRect, elRect);
 		});
 		var isUpIntersects = array.some(function(el){
 			var elRect = el.item.bounds;
-			return curRect.top <= elRect.bottom && curRect.bottom >= elRect.bottom
+			return curRect.top < elRect.bottom && curRect.bottom > elRect.bottom
 			&& isXIntersects(curRect, elRect);
 		});
 
