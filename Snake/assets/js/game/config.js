@@ -84,7 +84,7 @@ define(function () {
 				scroll: 3000,
 				score: 2,
 				spawn: [50,57],
-				collectible: [[35,55], [60,55]],
+				collectible: [[35,55], [60,65]],
 				collectibles: images.collectible[0].idle,
 				give: {
 					lives: 1
@@ -195,6 +195,7 @@ define(function () {
 					appearsNum: 3,
 					levels: [4],
 					duration: 0.25,
+					respawn: 5,
 					randomImage: true,
 					onAccept: {
 						loop: false

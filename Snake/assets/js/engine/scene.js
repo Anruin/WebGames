@@ -191,6 +191,13 @@ define([
 		this.actors.push(actor);
 
 		this.nums[_name]++;
+
+		if(actor.params.respawn){
+			setInterval(function(){
+				if(actor && actor.item && actor.curState.name != "accept")
+					helpers.setNotIntersectRandomPoint(actor, game.activeScene.actors);
+			}, actor.params.respawn * 1000)
+		}
 	};
 	se.Scene.prototype.initObstacles = function() {
 		var curScene = this;

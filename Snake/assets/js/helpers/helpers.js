@@ -117,6 +117,9 @@ define([
 		isIntersects: function (array, object) {
 			var objBounds = object.bounds || (object.item ? object.item.bounds : object);
 			var mainResult = array.some(function (el) {
+				if(el == object)
+					return false;
+
 				var result;
 				if (el.item && !el.item.point)
 					result = objBounds.intersects(el.item.bounds) || objBounds.contains(el.item.bounds) || el.item.bounds.contains();
