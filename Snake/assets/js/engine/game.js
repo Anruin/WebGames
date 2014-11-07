@@ -56,6 +56,22 @@ define([
 		paper.tool.onMouseDown = function (event) {
 			se.debugTools.onMouseDown(event);
 		};
+
+		var resizeDebounce = _.debounce(function(){
+			game.activeScene.initObstacles();
+			
+			var toReplace = [game.activeScene.pawns, game.activeScene.collectibles, game.activeScene.npc, game.activeScene.enemies];
+			toReplace.map(function(array){
+				array.map(function(actor){
+					if(helpers.isIntersects(game.activeScene.obstacles, actor))
+						helpers.setNotIntersectRandomPoint(actor, game.activeScene.obstacles);
+				});
+			});
+			console.log("react to resize");
+		}, 300);
+		paper.project.view.onResize = function(event){
+			resizeDebounce();
+		};
 	};
 
 	/**
