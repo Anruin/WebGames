@@ -32,6 +32,13 @@ define([
 						curScene.npc, curScene.mainPawn.score)) {
 			curScene.createActor("npc", this.npc);
 		}
+		curScene.bulbs.map(function(bulb){
+			bulb.item.selected = config.debug;
+			if(!bulb.isActive && curScene.mainPawn.item.bounds.intersects(bulb.item.bounds)){
+				$(bulb.elem).trigger("click");
+				bulb.isActive = true;
+			}
+		});
 	};
 	se.SantaScene.prototype.createActor = function (name, array, image, isAnimation) {
 		se.Scene.prototype.createActor.call(this, name, array, image, isAnimation);

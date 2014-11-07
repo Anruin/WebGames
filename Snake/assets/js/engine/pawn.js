@@ -28,10 +28,12 @@ define([
 		var curRect = this.item.bounds;
 
 		function isYIntersects(curRect, elRect){
-			return elRect.y + elRect.height > curRect.y && elRect.y < curRect.y + elRect.height;
+			return elRect.y + elRect.height > curRect.y && elRect.y < curRect.y + elRect.height
+			&& elRect.top < curRect.bottom && elRect.bottom > curRect.top;
 		}
 		function isXIntersects(curRect, elRect){
-			return elRect.x + elRect.width > curRect.x && elRect.x < curRect.x + curRect.width;
+			return elRect.x + elRect.width > curRect.x && elRect.x < curRect.x + curRect.width
+			&& curRect.left < elRect.right && elRect.left < curRect.right;
 		}
 
 		var isRightIntersects = array.some(function(el){
@@ -44,11 +46,12 @@ define([
 		});
 		var isLeftIntersects = array.some(function(el){
 			var elRect = el.item.bounds;
+			var isY = isYIntersects(curRect, elRect);
 			return curRect.left <= elRect.right && curRect.right >= elRect.right && elRect.left <= curRect.left
 			//is top or bottom or y(general) intersects
 			&& ((curRect.bottom >= elRect.top && curRect.top <= elRect.top && curRect.bottom <= elRect.bottom)
 			|| (curRect.top <= elRect.bottom && curRect.bottom >= elRect.bottom && curRect.top >= elRect.top)
-			|| isYIntersects(curRect, elRect));
+			|| isY);
 		});
 		var isBottomIntersects = array.some(function(el){
 			var elRect = el.item.bounds;
@@ -86,6 +89,7 @@ define([
 
 	se.Pawn.prototype.move = function(_point) {
 		//var newPoint = this.notToLet(game.activeScene.obstacles, _point);
+		//se.Actor.prototype.move.call(this, newPoint);
 		if(!helpers.isIntersects(game.activeScene.obstacles, this))
 			se.Actor.prototype.move.call(this, _point);
 		else{
@@ -94,7 +98,6 @@ define([
 			else
 				this.item.position = helpers.pointDiff(this.item.position, _point, config.params.pawn.general.speed);
 		}
-		//se.Actor.prototype.move.call(this, _point);
 	};
 	se.Pawn.prototype.setupPath = function() {
 		this.path.selected = config.debug;

@@ -59,7 +59,7 @@ define([
 
 		var resizeDebounce = _.debounce(function(){
 			game.activeScene.initObstacles();
-			
+
 			var toReplace = [game.activeScene.pawns, game.activeScene.collectibles, game.activeScene.npc, game.activeScene.enemies];
 			toReplace.map(function(array){
 				array.map(function(actor){
@@ -67,6 +67,7 @@ define([
 						helpers.setNotIntersectRandomPoint(actor, game.activeScene.obstacles);
 				});
 			});
+			setBulbs ();
 			console.log("react to resize");
 		}, 300);
 		paper.project.view.onResize = function(event){
@@ -130,6 +131,8 @@ define([
 		helpers.clearActorsArray(game.activeScene.enemies);
 		helpers.clearActorsArray(game.activeScene.toRemove);
 		game.activeScene.nums = {};
+
+		setBulbs();
 	};
 
 	se.Game.prototype.startLevel = function (){
@@ -174,5 +177,23 @@ define([
 				//no
 			}
 		};
+	};
+	function setBulbs () {
+		if(game.activeScene.bulbs && game.activeScene.bulbs.length)
+			game.activeScene.bulbs.map(function(bulb){
+				bulb.item.remove();
+			});
+		game.activeScene.bulbs = [];
+
+		if(game.activeScene.level.name == "level_4"){
+			game.activeScene.level.bulbs.map(function(bulb){
+				var trigger = {};
+				var rect = new paper.Rectangle(helpers.getPointPixels(bulb[0]), helpers.getPointPixels(bulb[1]));
+				trigger.item = new paper.Path.Rectangle(rect);
+				trigger.elem = ".level-4__text.text-" + (game.activeScene.bulbs.length + 1);
+				trigger.isActive = false;
+				game.activeScene.bulbs.push(trigger);
+			});
+		}
 	};
 });

@@ -96,7 +96,7 @@ define(function () {
 				scroll: 3000,
 				score: 2,
 				spawn: [50,57],
-				collectible: [[35,55], [60,65]],
+				collectible: [[63, 60], [87,20]],
 				collectibles: images.collectible[0].idle,
 				give: {
 					lives: 1
@@ -106,7 +106,8 @@ define(function () {
 				name: "level_4",
 				scroll:1500,
 				score: 4,
-				spawn: [50,57],
+				spawn: [4,55],
+				collectible: [[49, 73], [88, 60]],
 				enemy: [
 					[[14,25],[14,60]],
 					[[20,25],[20,60]],
@@ -115,7 +116,13 @@ define(function () {
 				collectibles: images.collectible[1].idle,
 				give: {
 					lives: 1
-				}
+				},
+				bulbs:[
+					[[14.8, 49.8],[21.6, 64.8]],
+					[[35.9, 61.3],[41.3, 79.1]],
+					[[56.9, 62.5],[64.6, 79.1]],
+					[[78.1, 52.6],[86.7, 64.8]]
+				]
 			},
 			{
 				name: "level_3",
