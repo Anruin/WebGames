@@ -139,17 +139,19 @@ define([
 
 				variant.initCommand = actor.states[0].name;
 			}
-			else if(!_.isString(variant.states[0].img[0]))
-				actor.states = variant.states;
-			else{
+			else {
 				variant.states.map(function(state){
-					var _img = {};
-					_img[state.name] = state.img;
-					state.img = _img;
-					actor.states.push(state);
-				});
-				variant.initCommand = actor.states[0].name;
-			}
+					if(!_.isString(state.img[0]))
+						actor.states.push(state);
+					else {
+						var _img = {};
+						_img[state.name] = state.img;
+						state.img = _img;
+						actor.states.push(state);
+					}
+				})
+				variant.initCommand = Object.keys(actor.states[0].img)[0];
+			};
 		}
 		else {
 			for(var state in variant){

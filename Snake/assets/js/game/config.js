@@ -45,19 +45,31 @@ define(function () {
 		npc: [
 			{
 				active: ["npc-animation-1-1", "npc-animation-1-2"],
-				accept: ["npc-accept-1-1", "npc-accept-1-2", "npc-accept-1-3", "npc-accept-1-4"]
+				accept1: ["npc-accept-1-1-1", "npc-accept-1-1-2"],
+				accept2: ["npc-accept-1-2-1", "npc-accept-1-2-2"],
+				accept3: ["npc-accept-1-3-1", "npc-accept-1-3-2"],
+				accept4: ["npc-accept-1-4-1", "npc-accept-1-4-2"]
 			},
 			{
 				active: ["npc-animation-2-1", "npc-animation-2-2"],
-				accept: ["npc-accept-2-1", "npc-accept-2-2", "npc-accept-2-3", "npc-accept-2-4"]
+				accept1: ["npc-accept-2-1-1", "npc-accept-2-1-2"],
+				accept2: ["npc-accept-2-2-1", "npc-accept-2-2-2"],
+				accept3: ["npc-accept-2-3-1", "npc-accept-2-3-2"],
+				accept4: ["npc-accept-2-4-1", "npc-accept-2-4-2"]
 			},
 			{
 				active: ["npc-animation-3-1", "npc-animation-3-2"],
-				accept: ["npc-accept-3-1", "npc-accept-3-2", "npc-accept-3-3", "npc-accept-3-4"]
+				accept1: ["npc-accept-3-1-1", "npc-accept-3-1-2"],
+				accept2: ["npc-accept-3-2-1", "npc-accept-3-2-2"],
+				accept3: ["npc-accept-3-3-1", "npc-accept-3-3-2"],
+				accept4: ["npc-accept-3-4-1", "npc-accept-3-4-2"]
 			},
 			{
 				active: ["npc-animation-4-1", "npc-animation-4-2"],
-				accept: ["npc-accept-4-1", "npc-accept-4-2", "npc-accept-4-3", "npc-accept-4-4"]
+				accept1: ["npc-accept-4-1-1", "npc-accept-4-1-2"],
+				accept2: ["npc-accept-4-2-1", "npc-accept-4-2-2"],
+				accept3: ["npc-accept-4-3-1", "npc-accept-4-3-2"],
+				accept4: ["npc-accept-4-4-1", "npc-accept-4-4-2"]
 			}
 		],
 		pawn: [
@@ -162,10 +174,10 @@ define(function () {
 					name: "santa",
 					initState: "down",
 					states: [
+						{name: "down", img: images.pawn[3]},
 						{name: "left", img: images.pawn[0]},
 						{name: "up", img: images.pawn[1]},
-						{name: "right", img: images.pawn[2]},
-						{name: "down", img: images.pawn[3]}
+						{name: "right", img: images.pawn[2]}
 					]
 				}]
 			},
@@ -196,12 +208,42 @@ define(function () {
 					levels: [4],
 					duration: 0.25,
 					respawn: 10,
-					randomImage: true,
-					onAccept: {
-						loop: false
-					}
+					randomImage: true
 				},
-				variant: images.npc
+				variant: [
+					{
+						name: "npc-1",
+						initState: "active",
+						states: [
+							{name: "active", img: images.npc[0].active},
+							{name: "accept", img: {1: images.npc[0].accept1, 2: images.npc[0].accept2, 3: images.npc[0].accept3, 4: images.npc[0].accept4}}
+						]
+					},
+					{
+						name: "npc-2",
+						initState: "active",
+						states: [
+							{name: "active", img: images.npc[1].active},
+							{name: "accept", img: {1: images.npc[1].accept1, 2: images.npc[1].accept2, 3: images.npc[1].accept3, 4: images.npc[1].accept4}}
+						]
+					},
+					{
+						name: "npc-3",
+						initState: "active",
+						states: [
+							{name: "active", img: images.npc[2].active},
+							{name: "accept", img: {1: images.npc[2].accept1, 2: images.npc[2].accept2, 3: images.npc[2].accept3, 4: images.npc[2].accept4}}
+						]
+					},
+					{
+						name: "npc-4",
+						initState: "active",
+						states: [
+							{name: "active", img: images.npc[3].active},
+							{name: "accept", img: {1: images.npc[3].accept1, 2: images.npc[3].accept2, 3: images.npc[3].accept3, 4: images.npc[3].accept4}}
+						]
+					}
+				]
 			},
 			enemy: {
 				general: {

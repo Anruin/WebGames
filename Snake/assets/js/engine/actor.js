@@ -106,6 +106,7 @@ define([
 	se.Actor.prototype.action = function (_func, _params) {
 		this[_func](_params);
 	};
+
 	se.Actor.prototype.setState = function (_stateName, _command) {
 		this.curState = this.states.filter(function(state){
 			return state.name == _stateName;
@@ -117,8 +118,17 @@ define([
 			initImage = this.curState.initImage;
 		else{
 			var index = 0;
-			if(this.params.randomImage)
-				index = helpers.randomIndex(this.curState.img[this.command]);
+			if(this.params.randomImage){
+				var imgArray = this.curState.img[this.command];
+				if(!imgArray){
+					if(config.debug)
+						console.log("command " + this.command+ " not exist in " + this.curState.name + " state, will take random command");
+
+					this.command = Object.keys(this.curState.img)[helpers.randomIndex(Object.keys(this.curState.img))];
+					imgArray = this.curState.img[this.command];
+				}
+				index = helpers.randomIndex(imgArray);
+			}
 
 			initImage = this.curState.img[this.command][index];
 		}

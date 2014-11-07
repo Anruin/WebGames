@@ -85,16 +85,16 @@ define([
 	}
 
 	se.Pawn.prototype.move = function(_point) {
-		var newPoint = this.notToLet(game.activeScene.obstacles, _point);
-		//if(!helpers.isIntersects(game.activeScene.obstacles, this))
-		//	se.Actor.prototype.move.call(this, _point);
-		//else{
-		//	if(this.item.position != this.lastPosition)
-		//		this.item.position = this.lastPosition;
-		//	else
-		//		this.item.position = helpers.pointDiff(this.item.position, _point, config.params.pawn.general.speed);
-		//}
-		se.Actor.prototype.move.call(this, newPoint);
+		//var newPoint = this.notToLet(game.activeScene.obstacles, _point);
+		if(!helpers.isIntersects(game.activeScene.obstacles, this))
+			se.Actor.prototype.move.call(this, _point);
+		else{
+			if(this.item.position != this.lastPosition)
+				this.item.position = this.lastPosition;
+			else
+				this.item.position = helpers.pointDiff(this.item.position, _point, config.params.pawn.general.speed);
+		}
+		//se.Actor.prototype.move.call(this, _point);
 	};
 	se.Pawn.prototype.setupPath = function() {
 		this.path.selected = config.debug;
