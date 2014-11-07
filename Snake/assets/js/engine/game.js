@@ -111,6 +111,7 @@ define([
 		else {
 			game.activeScene.mainPawn.turn(game.activeScene.mainPawn.controller.getByName("up").params);
 			game.activeScene.mainPawn.command = "stay";
+			helpers.clearActorsArray(game.activeScene.obstacles);
 
 			if(game.activeScene.level.give){
 				game.activeScene.mainPawn.lives += game.activeScene.level.give.lives;
@@ -124,6 +125,7 @@ define([
 				duration: game.activeScene.level.scroll,
 				complete: function() {
 					game.startLevel();
+					setBulbs();
 				}
 			});
 		}
@@ -131,8 +133,6 @@ define([
 		helpers.clearActorsArray(game.activeScene.enemies);
 		helpers.clearActorsArray(game.activeScene.toRemove);
 		game.activeScene.nums = {};
-
-		setBulbs();
 	};
 
 	se.Game.prototype.startLevel = function (){

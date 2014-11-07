@@ -29,6 +29,8 @@ define([
 		this.level = null;
 		this.lives = null;
 		this.nums = {};
+		//temporary:
+		this.bulbs = [];
 	};
 	se.Scene.prototype.pawns = [];
 	se.Scene.prototype.collectibles = [];
