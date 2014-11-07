@@ -111,7 +111,7 @@ define([
 		else {
 			game.activeScene.mainPawn.turn(game.activeScene.mainPawn.controller.getByName("up").params);
 			game.activeScene.mainPawn.command = "stay";
-			helpers.clearActorsArray(game.activeScene.obstacles);
+			helpers.clearActorsArray(game.activeScene.obstacles, true);
 
 			if(game.activeScene.level.give){
 				game.activeScene.mainPawn.lives += game.activeScene.level.give.lives;

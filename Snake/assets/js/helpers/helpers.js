@@ -108,11 +108,17 @@ define([
 			return Number(number).toFixed(2);
 		},
 		setNotIntersectRandomPoint: function (forRandom, arrayForCompare) {
-			forRandom.item.position = helpers.getRandomPointInView();
-
-			while (helpers.isIntersects(arrayForCompare, forRandom)) {
+			var promise = new Promise(function(resolve, reject) {
 				forRandom.item.position = helpers.getRandomPointInView();
-			}
+				while (helpers.isIntersects(arrayForCompare, forRandom)) {
+					forRandom.item.position = helpers.getRandomPointInView();
+				}
+				resolve(forRandom.item.position);
+			});
+
+			promise.then(function(result) {
+				forRandom.item.position = result;
+			});
 		},
 		isIntersects: function (array, object) {
 			var objBounds = object.bounds || (object.item ? object.item.bounds : object);
@@ -176,14 +182,15 @@ define([
 		uppercaseFirstChar: function (string) {
 			return string.charAt(0).toUpperCase() + string.slice(1);
 		},
-		clearActorsArray: function (array) {
+		clearActorsArray: function (array, isNotDeleteElements) {
 			array.map(function(actor){
 				if(actor.item)
 					actor.item.remove();
 				else
 					actor.remove();
 			});
-			array.splice(0);
+			if(!isNotDeleteElements)
+				array.splice(0);
 		},
 		initLives: function(){
 			var hearts = $(".game-live");

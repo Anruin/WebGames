@@ -208,7 +208,9 @@ define([
 		if(curScene.obstacles.length){
 			curScene.obstacles.map(function(obst){
 				curScene.actors.splice(curScene.actors.indexOf(obst), 1);
-				obst.item.remove();
+
+				if(obst.item)
+					obst.item.remove();
 			})
 		}
 		curScene.obstacles = [];
