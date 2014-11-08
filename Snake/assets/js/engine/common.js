@@ -94,8 +94,15 @@ define([
 		};
 		se.debugTools.onMouseDown = function (event) {
 			if(config.debug) {
-				se.debugTools.pointText = newPointText();
-				se.debugTools.lastPoints.push(se.debugTools.pointText);
+				var pointText = se.debugTools.lastPoints.filter(function(pointText){
+					return pointText.bounds.contains(event.point) && pointText != se.debugTools.pointText;
+				})[0];
+				if(pointText)
+					window.prompt("Copy to clipboard: Ctrl+C, Enter", pointText.content);
+				else{
+					se.debugTools.pointText = newPointText();
+					se.debugTools.lastPoints.push(se.debugTools.pointText);
+				}
 			}
 		};
 	}
