@@ -13,6 +13,16 @@ $(document).ready(function() {
         var light_number = $(this).index() + 1;
         $light_level.addClass('light-' + light_number);
     });
+		$('#order').on('click', function(){
+			if(window.game)
+				game.over();
+
+			//se.enable_scroll();
+
+			$('html body').animate({
+				scrollTop: $('#level_6').offset().top
+			}, 1000);
+		});
 
 
 	function daysLeftNewYear(en) {
