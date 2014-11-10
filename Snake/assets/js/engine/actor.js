@@ -114,6 +114,7 @@ define([
 	se.Actor.prototype.initVariant = function (_variant) {
 		var curActor = this;
 		var variant;
+		//если передан индекс варианта, тогда установится он, иначе установится случайный вариант
 		if(_variant)
 			variant = config.params[curActor.params.name].variant[_variant];
 		else {
@@ -121,9 +122,11 @@ define([
 			variant = config.params[curActor.params.name].variant[randIndex];
 		}
 		curActor.name = variant.name;
-
+		//если существует свойство states
 		if(variant.states) {
+			//если состояния представляет из себя обьект а не массив
 			if(!_.isArray(variant.states)) {
+				//тогда берется имя каждого свойства, и с этими именами создается массив из состояний
 				for (var objName in variant.states) {
 					var obj = {
 						name: objName,
@@ -131,33 +134,60 @@ define([
 					};
 					curActor.states.push(obj);
 				}
+				//устанавливаем изначальную комманду, на тот случай, если изначальная команда не зада в конфиге
 				variant.initCommand = curActor.states[0].name;
 			}
 			else {
+				//иначе состояния представляют из себя массив
 				variant.states.map(function(state){
+					//если первый обьект массива img представляет из себя не строку, а обьект, содержащий набор изображений для каждой команды
 					if(!_.isString(state.img[0]))
+						//тогда добавляем данное состояние в массив, так как оно в нужном для нас виде
 						curActor.states.push(state);
 					else {
+						//иначе приводим к нужному для нас виду, создавая команду с именем, идентичным имени состояния
 						var _img = {};
 						_img[state.name] = state.img;
 						state.img = _img;
 						curActor.states.push(state);
 					}
 				});
+				//устанавливаем изначальную комманду, на тот случай, если изначальная команда не зада в конфиге
 				variant.initCommand = Object.keys(curActor.states[0].img)[0];
 			}
 		}
 		else {
+			//иначе, если свойства states не существует, тогда variant представляет из себя обьект с свойствами-коммандами,
+			//содержащими массивы изображений, тогда формируем из этих комманд состояния
 			for(var state in variant){
 				var _img = {};
 				_img[state] = variant[state];
 				curActor.states.push({name: state, img: _img})
 			}
+			//устанавливаем изначальную комманду, на тот случай, если изначальная команда не зада в конфиге
 			variant.initCommand = curActor.states[0].name;
 		}
+		//в результате манипуляций извлекаем состояния из обьекта variants и приводим массив состояний к такому виду:
+		//states:
+		//[
+		//	{
+		//		name: "state1",
+		//		img: {
+		//			command1: ["image1", "image2"],
+		//			command2: ["image3"]
+		//		}
+		//	},
+		//	{
+		//		name: "state2",
+		//		img: {
+		//			command1: ["image4", "image5"]
+		//		}
+		//	}
+		//]
 		curActor.params.initState = variant.initState || curActor.states[0].name;
 		curActor.command = variant.initCommand || curActor.command;
 
+		//Извлекаем перегруженные свойства params из текущего variant
 		for(var param in variant){
 			if(curActor.paramsNames.some(function(p){return p == param}))
 				curActor.params[param] = variant[param];
@@ -166,15 +196,23 @@ define([
 
 	se.Actor.prototype.setState = function (_stateName, _command) {
 		_stateName = _stateName || this.params.initState;
+		_command = _command || this.command;
+
+		if(this.curState && this.curState.name == _stateName && this.command == _command)
+			return;
+		
+		this.command = _command;
+		//поиск state в массиве this.states по имени
 		this.curState = this.states.filter(function(state){
 			return state.name == _stateName;
 		})[0];
-		this.command = _command || this.command;
 
 		var initImage = "";
+		//если в текущем state задано изначальное изображение, то установиться оно
 		if(this.curState.initImage)
 			initImage = this.curState.initImage;
 		else{
+			//иначе установиться или первое изображение среди изображений обьекта state, или рандомное, если так сказано в конфиге
 			var index = 0;
 			if(this.params.randomImage){
 				var imgArray = this.curState.img[this.command];
@@ -201,6 +239,8 @@ define([
 			this.activeAnimation = null;
 
 		var curActor = this;
+		//если это бомба и нужно установить состояние в active, тогда через 2 сек. установится состояние idle
+		//TODO: take from config
 		if(curActor.name == "bomb" && curActor.curState.name == "active") {
 			curActor.velocity = null;
 			setTimeout(function(){

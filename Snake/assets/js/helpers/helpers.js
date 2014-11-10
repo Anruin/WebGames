@@ -127,6 +127,7 @@ define([
 					return false;
 
 				var result;
+				//поиск свойства bounds в ппереданых обьектах
 				if (el.item && !el.item.point)
 					result = objBounds.intersects(el.item.bounds) || objBounds.contains(el.item.bounds) || el.item.bounds.contains();
 				if (el.item && el.item.point)
@@ -200,10 +201,14 @@ define([
 						.addClass( game.activeScene.mainPawn.lives > i ? "svgicon-heart" : "svgicon-heart-empty" );
 		},
 		setConfigPosition: function(_actor, _level, _name, _nums){
+			//если настройки точек для данного актера существуют
 			if(_level && _level[_name] && _level[_name].points) {
 				var points = _level[_name].points;
+				//если точки представляют из себя массив массивов, тоесть в виде: [[10, 20], [10, 30]]
 				if (_.isArray(points[0]) && _.isArray(points[0][0])) {
+					//тогда эти точки задают движение актера
 					_actor.pointsToMove = points[_nums[_name]].map(function (el) {
+						//по видимому пути
 						var path = new paper.Path();
 						var point = new paper.Point(helpers.getPointPixels(el));
 						path.add(point);
@@ -212,20 +217,28 @@ define([
 						return point;
 					});
 					_actor.item.position = _actor.pointsToMove[0];
+					//следующая позициия устанавливается такая-же для того чтобы в актере автоматически установилась новая позиция, так как эта уже достигнута
 					_actor.nextPoint = _actor.pointsToMove[0];
 				}
+				//иначе, если настройки точек представляют из себя просто массив, по виду: [10, 20]
 				else if(_.isArray(points[0])){
+					//тогда ищется точка конкретно для данного актера по счету на данном уровне(счет введется в обьекте _nums)
 					var point = points[_nums[_name]];
+					//если точка для данного актера с номером(по счету) есть
 					if(point)
+					//тогда эта точка переводится из процентов в пиксели и устанавливается данному актеру
 						_actor.item.position = helpers.getPointPixels(point);
 					else
+						//иначе устанавливается рандомная точка, с условием что позиция актера не будет пересекаться с другими актерами
 						helpers.setNotIntersectRandomPoint(_actor, game.activeScene.actors);
 				}
 				else {
+					//если представлен не массив точек для данного уровня, а всего одна точка, тогда эта точка используется для всех актеров этого типа
 					_actor.item.position = helpers.getPointPixels(points);
 				}
 			}
 			else
+				//если в конфиге не заданы настройки точек, тогда устанавливается рандомная точка
 				helpers.setNotIntersectRandomPoint(_actor, game.activeScene.actors);
 		}
 	};
