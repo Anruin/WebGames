@@ -1,10 +1,9 @@
 define([
 	"./test/test",
-	"./game/config",
-	"domReady!"
+	"./game/config"
   ], function(test, config) {
 
-	$('html, body').animate({
+	$('html body').animate({
 		scrollTop: $('#level_5').offset().top
 	}, config.levels[0].scroll);
 	return test;

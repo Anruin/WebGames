@@ -200,7 +200,7 @@ define([
 
 		if(this.curState && this.curState.name == _stateName && this.command == _command)
 			return;
-		
+
 		this.command = _command;
 		//поиск state в массиве this.states по имени
 		this.curState = this.states.filter(function(state){
