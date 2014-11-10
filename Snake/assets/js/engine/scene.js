@@ -181,7 +181,11 @@ define([
 				actor.nextPoint = actor.pointsToMove[0];
 			}
 			else if(_.isArray(this.level[_name][0])){
-				actor.item.position = helpers.getPointPixels(this.level[_name][this.nums[_name]]);
+				var point = this.level[_name][this.nums[_name]];
+				if(point)
+					actor.item.position = helpers.getPointPixels(point);
+				else
+					helpers.setNotIntersectRandomPoint(actor, game.activeScene.actors);
 			}
 			else {
 				actor.item.position = helpers.getPointPixels(this.level[_name]);

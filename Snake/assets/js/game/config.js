@@ -95,8 +95,8 @@ define(function () {
 				name: "level_5",
 				scroll: 3000,
 				score: 2,
-				spawn: [50,57],
-				collectible: [[63, 60], [87,20]],
+				pawn: [50, 78],
+				collectible: [[49.4, 51], [13.9, 48.5]],
 				collectibles: images.collectible[0].idle,
 				give: {
 					lives: 1
@@ -106,12 +106,12 @@ define(function () {
 				name: "level_4",
 				scroll:1500,
 				score: 4,
-				spawn: [4,55],
-				collectible: [[49, 73], [88, 60]],
+				pawn: [3.1, 55.1],
+				collectible: [[17.1, 54.3], [90, 54.2]],
 				enemy: [
-					[[14,25],[14,60]],
-					[[20,25],[20,60]],
-					[[26,25],[26,60]]
+					[[49.5, 60.1],[49.5, 79.7]],
+					[[30.9, 92.9],[66.1, 92.9]],
+					[[31.6, 39.7],[66.5, 39.9]]
 				],
 				collectibles: images.collectible[1].idle,
 				give: {
@@ -128,7 +128,14 @@ define(function () {
 				name: "level_3",
 				scroll:1500,
 				score: 6,
-				spawn: [50,82],
+				//pawn: [49.3, 39.7],
+				pawn: [43.2, 56.1],
+				enemy: [
+					[[31.0, 67.0],[31.0, 9.0]],
+					[[49.7, 96.0],[49.7, 72.0]],
+					[[68.0, 67.0],[66.5, 9.0]]
+				],
+				collectible: [[16.7, 33.3], [82.1, 33.3]],
 				collectibles: images.collectible[2].idle,
 				give: {
 					lives: 1
@@ -138,7 +145,13 @@ define(function () {
 				name: "level_2",
 				scroll:1500,
 				score: 8,
-				spawn: [8,80],
+				pawn: [59.3, 39.7],
+				enemy: [
+					[[49.5, 88.6],[49.5, 65.1]],
+					[[30.9, 95.5],[66.0, 95.5]],
+					[[31.6, 41.2],[66.5, 41.2]]
+				],
+				collectible: [[35.0, 69.6], [64.2, 70.0]],
 				collectibles: images.collectible[3].idle,
 				give: {
 					lives: 1
@@ -148,7 +161,16 @@ define(function () {
 				name: "level_1",
 				scroll:1500,
 				score: 16,
-				spawn: [8,80]
+				pawn: [8,80],
+				enemy: [
+					[[29.3, 42.2],[0.8, 42.2]],
+					[[68.3, 40.8],[95.5, 40.8]],
+					[[50.5, 11.5],[50.5, 21.3]],
+					[[38.5, 58.8],[38.5, 96.4]],
+					[[59.6, 57.7],[59.6, 97.8]],
+					[[31.6, 39.7],[66.5, 39.7]]
+				],
+				collectible: [[35.0, 69.6], [64.2, 70.0]]
 			},
 			{
 				name:"level_6", //finish, game over

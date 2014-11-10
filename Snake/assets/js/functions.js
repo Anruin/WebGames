@@ -17,8 +17,6 @@ $(document).ready(function() {
 			if(window.game)
 				game.over();
 
-			//se.enable_scroll();
-
 			$('html body').animate({
 				scrollTop: $('#level_6').offset().top
 			}, 1000);

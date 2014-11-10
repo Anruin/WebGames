@@ -38,10 +38,9 @@ define([
 
 		var player = new se.Player();
 
-		game.activeScene.createActor("pawn", game.activeScene.pawns);
-		game.activeScene.mainPawn = game.activeScene.pawns[0];
 		game.activeScene.level = config.levels[0];
 		game.initLevel();
+
 		var controller = new se.Controller(game.activeScene.mainPawn);
 		game.activeScene.mainPawn.controller = controller;
 		se.setDebugTools();
@@ -106,6 +105,10 @@ define([
 		var indexLvl = config.levels.indexOf(game.activeScene.level);
 
 		if(indexLvl == 0){
+			game.activeScene.createActor("pawn", game.activeScene.pawns);
+			game.activeScene.mainPawn = game.activeScene.pawns[0];
+			game.activeScene.mainPawn.command = null;
+
 			game.startLevel();
 		}
 		else {
@@ -138,14 +141,12 @@ define([
 	se.Game.prototype.startLevel = function (){
 		game.activeScene.initObstacles();
 
-		if(game.activeScene.level.spawn)
-			game.activeScene.mainPawn.item.position = helpers.getPointPixels(game.activeScene.level.spawn);
+		if(game.activeScene.level.pawn)
+			game.activeScene.mainPawn.item.position = helpers.getPointPixels(game.activeScene.level.pawn);
 		else
 			helpers.setNotIntersectRandomPoint(game.activeScene.mainPawn.item.position, game.activeScene.obstacles);
 
-		game.activeScene.mainPawn.lastPosition = game.activeScene.mainPawn.item.position;
 		game.activeScene.prepared = true;
-		game.activeScene.mainPawn.command = null;
 	};
 	se.Game.prototype.over = function (isLose) {
 		game.activeScene.mainPawn.item.position = [-1000,-1000];
