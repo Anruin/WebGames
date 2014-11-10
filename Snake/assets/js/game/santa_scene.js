@@ -22,13 +22,13 @@ define([
 				for(var prop in npc.params.onAccept)
 					npc.params[prop] = npc.params.onAccept[prop];
 
-				npc.setState("accept", "accept")
+				npc.setState("accept", "accept");
 				curScene.npc.splice(curScene.npc.indexOf(npc), 1);
 				curScene.mainPawn.removeSegment(0);
 				curScene.mainPawn.score ++;
 			}
 		});
-		if(curScene.prepared && helpers.isForAddToScene(curScene.level, config.params.npc,
+		if(curScene.prepared && helpers.isForAddToScene(curScene.level, "npc",
 						curScene.npc, curScene.mainPawn.score)) {
 			curScene.createActor("npc", this.npc);
 		}

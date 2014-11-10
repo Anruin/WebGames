@@ -17,7 +17,7 @@ define([
 	 * @param _game
 	 * @constructor
 	 */
-	se.Scene = function(_game) {
+	se.Scene = function() {
 		this.pawns = [];
 		this.enemies = [];
 		this.actors = [];
@@ -97,11 +97,11 @@ define([
 				}
 			});
 		});
-		if(curScene.prepared && helpers.isForAddToScene(curScene.level, config.params.collectible,
+		if(curScene.prepared && helpers.isForAddToScene(curScene.level, "collectible",
 						curScene.collectibles, curScene.mainPawn.score)) {
 			curScene.createActor("collectible", curScene.collectibles);
 		}
-		if(curScene.prepared && helpers.isForAddToScene(curScene.level, config.params.enemy,
+		if(curScene.prepared && helpers.isForAddToScene(curScene.level, "enemy",
 						curScene.enemies)) {
 			curScene.createActor("enemy", curScene.enemies);
 		}
@@ -150,7 +150,7 @@ define([
 		}
 		curScene.obstacles = [];
 
-		var domObstacles = $('#' + curScene.level.name + " ." + config.obstacle.class + ", nav." + config.obstacle.class)
+		var domObstacles = $('#' + curScene.level.name + " ." + config.obstacle.class + ", nav." + config.obstacle.class);
 		var i = 0;
 		while(domObstacles[i]){
 			var el = domObstacles[i].getBoundingClientRect();

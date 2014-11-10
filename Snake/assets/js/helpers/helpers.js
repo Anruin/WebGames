@@ -150,13 +150,14 @@ define([
 			factor = factor || 1;
 			return new paper.Point(point1.x - point2.x * factor, point1.y - point2.y * factor);
 		},
-		isForAddToScene: function (level, param, array, score) {
+		isForAddToScene: function (level, name, array, score) {
+			var param = config.params[name];
 			var indexLvl = config.levels.indexOf(level);
 
 			//есть ли текущий уровень в массиве конфига эллемента .levels: [...]
 			var interim = param.general.levels.indexOf(indexLvl) != -1
-				//соответствует ли текущее количество установленному в конфиге эллемента
-			&& array.length < param.general.appearsNum;
+				//соответствует ли текущее количество установленному в конфиге уровня или эллемента
+			&& array.length < ((level[name] ? level[name].appearsNum : false) || param.general.appearsNum);
 
 			if(score)
 				//не превышает ли количество эллементов необходимого для этого уровня кол-ва очков
