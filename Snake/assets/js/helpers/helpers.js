@@ -197,6 +197,35 @@ define([
 			for(var i=0;i<3;i++)
 				$( hearts[i] ).removeClass( "svgicon-heart-empty svgicon-heart" )
 						.addClass( game.activeScene.mainPawn.lives > i ? "svgicon-heart" : "svgicon-heart-empty" );
+		},
+		setConfigPosition: function(_actor, _level, _name, _nums){
+			if(_level && _level[_name] && _level[_name].points) {
+				var points = _level[_name].points;
+				if (_.isArray(points[0]) && _.isArray(points[0][0])) {
+					_actor.pointsToMove = points[_nums[_name]].map(function (el) {
+						var path = new paper.Path();
+						var point = new paper.Point(helpers.getPointPixels(el));
+						path.add(point);
+						path.selected = config.debug;
+						game.activeScene.toRemove.push(path);
+						return point;
+					});
+					_actor.item.position = _actor.pointsToMove[0];
+					_actor.nextPoint = _actor.pointsToMove[0];
+				}
+				else if(_.isArray(points[0])){
+					var point = points[_nums[_name]];
+					if(point)
+						_actor.item.position = helpers.getPointPixels(point);
+					else
+						helpers.setNotIntersectRandomPoint(_actor, game.activeScene.actors);
+				}
+				else {
+					_actor.item.position = helpers.getPointPixels(points);
+				}
+			}
+			else
+				helpers.setNotIntersectRandomPoint(_actor, game.activeScene.actors);
 		}
 	};
 	return helpers;

@@ -90,7 +90,8 @@ define([
 	se.Pawn.prototype.move = function(_point) {
 		//var newPoint = this.notToLet(game.activeScene.obstacles, _point);
 		//se.Actor.prototype.move.call(this, newPoint);
-		if(!helpers.isIntersects(game.activeScene.obstacles, this))
+		if(!this.params.obstaclesBalk
+				|| !helpers.isIntersects(game.activeScene.obstacles, this))
 			se.Actor.prototype.move.call(this, _point);
 		else{
 			if(this.item.position != this.lastPosition)
@@ -120,7 +121,7 @@ define([
 			}
 		}
 		this.path.smooth();
-	}
+	};
 	se.Pawn.prototype.offsetPosition = function() {
 		var offset = {x:0, y:0};
 		if(this.path){

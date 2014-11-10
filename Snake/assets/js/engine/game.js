@@ -142,7 +142,7 @@ define([
 		game.activeScene.initObstacles();
 
 		if(game.activeScene.level.pawn)
-			game.activeScene.mainPawn.item.position = helpers.getPointPixels(game.activeScene.level.pawn);
+			game.activeScene.mainPawn.item.position = helpers.getPointPixels(game.activeScene.level.pawn.points);
 		else
 			helpers.setNotIntersectRandomPoint(game.activeScene.mainPawn.item.position, game.activeScene.obstacles);
 

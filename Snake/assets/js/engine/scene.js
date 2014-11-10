@@ -114,85 +114,16 @@ define([
 		if(!this.nums[_name])
 			this.nums[_name] = 0;
 
-		var curScene = this;
 		var actor = new se[helpers.uppercaseFirstChar(_name)]();
 		actor.item = new paper.Raster();
 
-		actor.params = _.clone(config.params[_name].general);
-		var variant;
-		if(_variant)
-			variant = config.params[_name].variant[_variant];
-		else {
-			var randIndex = helpers.randomIndex(config.params[_name].variant);
-			variant = config.params[_name].variant[randIndex];
-		}
-		actor.name = variant.name;
-
-		//TODO: move this to helpers functions
-		if(variant.states) {
-			if(!_.isArray(variant.states)) {
-				for (var objName in variant.states) {
-					var obj = {
-						name: objName,
-						img: variant.states
-					};
-					actor.states.push(obj);
-				}
-
-				variant.initCommand = actor.states[0].name;
-			}
-			else {
-				variant.states.map(function(state){
-					if(!_.isString(state.img[0]))
-						actor.states.push(state);
-					else {
-						var _img = {};
-						_img[state.name] = state.img;
-						state.img = _img;
-						actor.states.push(state);
-					}
-				})
-				variant.initCommand = Object.keys(actor.states[0].img)[0];
-			};
-		}
-		else {
-			for(var state in variant){
-				var _img = {};
-				_img[state] = variant[state];
-				actor.states.push({name: state, img: _img})
-			}
-			variant.initCommand = actor.states[0].name;
-		}
-		actor.setState(variant.initState || actor.states[0].name, variant.initCommand || null);
+		actor.initParams(_name);
+		actor.initVariant(_variant);
+		actor.setState();
 
 		actor.item.scale(config.params[_name].general.scale);
 
-		if(this.level && this.level[_name]) {
-			if (_.isArray(this.level[_name][0]) && _.isArray(this.level[_name][0][0])) {
-				actor.pointsToMove = this.level[_name][this.nums[_name]].map(function (el) {
-					var path = new paper.Path();
-					var point = new paper.Point(helpers.getPointPixels(el));
-					path.add(point);
-					path.selected = config.debug;
-					curScene.toRemove.push(path);
-					return point;
-				});
-				actor.item.position = actor.pointsToMove[0];
-				actor.nextPoint = actor.pointsToMove[0];
-			}
-			else if(_.isArray(this.level[_name][0])){
-				var point = this.level[_name][this.nums[_name]];
-				if(point)
-					actor.item.position = helpers.getPointPixels(point);
-				else
-					helpers.setNotIntersectRandomPoint(actor, game.activeScene.actors);
-			}
-			else {
-				actor.item.position = helpers.getPointPixels(this.level[_name]);
-			}
-		}
-		else
-			helpers.setNotIntersectRandomPoint(actor, game.activeScene.actors);
+		helpers.setConfigPosition(actor, this.level, _name, this.nums);
 
 		//_player.possess(pawn);
 		_array.push(actor);

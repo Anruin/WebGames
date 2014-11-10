@@ -95,29 +95,41 @@ define(function () {
 				name: "level_5",
 				scroll: 3000,
 				score: 2,
-				pawn: [50, 78],
-				collectible: [[49.4, 51], [13.9, 48.5]],
-				collectibles: images.collectible[0].idle,
+				pawn: {
+						points: [50, 78]
+				},
+				collectible: {
+					points: [[49.4, 51], [13.9, 48.5]],
+					img: images.collectible[0].idle
+				},
+				collectibles: images.collectible[0].idle, //TODO: Delete
 				give: {
 					lives: 1
 				}
 			},
 			{
 				name: "level_4",
-				scroll:1500,
+				scroll: 1500,
 				score: 4,
-				pawn: [3.1, 55.1],
-				collectible: [[17.1, 54.3], [90, 54.2]],
-				enemy: [
-					[[49.5, 60.1],[49.5, 79.7]],
-					[[30.9, 92.9],[66.1, 92.9]],
-					[[31.6, 39.7],[66.5, 39.9]]
-				],
-				collectibles: images.collectible[1].idle,
+				pawn: {
+					points: [3.1, 55.1]
+				},
+				collectible: {
+					points: [[17.1, 54.3], [90, 54.2]],
+					img: images.collectible[1].idle
+				},
+				enemy: {
+					points: [
+						[[30.6, 25.0], [30.6, 75.0]],
+						[[49.9, 25.0], [49.9, 75.0]],
+						[[70.8, 25.0], [70.8, 75.0]]
+					]
+				},
+				collectibles: images.collectible[1].idle, //TODO: Delete
 				give: {
 					lives: 1
 				},
-				bulbs:[
+				bulbs: [
 					[[14.1, 0],[21.6, 100]],
 					[[35.9, 0],[41.3, 100]],
 					[[56.9, 0],[64.6, 100]],
@@ -126,55 +138,76 @@ define(function () {
 			},
 			{
 				name: "level_3",
-				scroll:1500,
+				scroll: 1500,
 				score: 6,
-				//pawn: [49.3, 39.7],
-				pawn: [43.2, 56.1],
-				enemy: [
-					[[31.0, 67.0],[31.0, 9.0]],
-					[[49.7, 96.0],[49.7, 72.0]],
-					[[68.0, 67.0],[66.5, 9.0]]
-				],
-				collectible: [[16.7, 33.3], [82.1, 33.3]],
-				collectibles: images.collectible[2].idle,
+				pawn: {
+					points: [43.2, 56.1]
+				},
+				collectible: {
+					points: [[16.7, 33.3], [82.1, 33.3]],
+					img: images.collectible[2].idle
+				},
+				enemy: {
+					points: [
+						[[31.0, 67.0], [31.0, 8.0]],
+						[[49.7, 96.0], [49.7, 72.0]],
+						[[68.0, 67.0], [66.5, 8.0]]
+					]
+				},
+				collectibles: images.collectible[2].idle, //TODO: Delete
 				give: {
 					lives: 1
 				}
 			},
 			{
 				name: "level_2",
-				scroll:1500,
+				scroll: 1500,
 				score: 8,
-				pawn: [59.3, 39.7],
-				enemy: [
-					[[49.5, 88.6],[49.5, 65.1]],
-					[[30.9, 95.5],[66.0, 95.5]],
-					[[31.6, 41.2],[66.5, 41.2]]
-				],
-				collectible: [[35.0, 69.6], [64.2, 70.0]],
-				collectibles: images.collectible[3].idle,
+				pawn: {
+					points: [59.3, 39.7]
+				},
+				collectible: {
+					points: [[35.0, 69.6], [64.2, 70.0]],
+					img: images.collectible[3].idle
+				},
+				enemy: {
+					points: [
+						[[49.5, 83.0], [49.5, 63.0]],
+						[[30.9, 95.5], [66.0, 95.5]],
+						[[31.6, 41.2], [66.5, 41.2]]
+					]
+				},
+				collectibles: images.collectible[3].idle, //TODO: Delete
 				give: {
 					lives: 1
 				}
 			},
 			{
 				name: "level_1",
-				scroll:1500,
+				scroll: 1500,
 				score: 16,
-				pawn: [8,80],
-				enemy: [
-					[[29.3, 42.2],[0.8, 42.2]],
-					[[68.3, 40.8],[95.5, 40.8]],
-					[[50.5, 11.5],[50.5, 21.3]],
-					[[38.5, 58.8],[38.5, 96.4]],
-					[[59.6, 57.7],[59.6, 97.8]],
-					[[31.6, 39.7],[66.5, 39.7]]
-				],
-				collectible: [[35.0, 69.6], [64.2, 70.0]]
+				pawn: {
+					points: [8,80]
+				},
+				collectible: {
+					points: [[35.0, 69.6], [64.2, 70.0]],
+					img: images.collectible[3].idle
+				},
+				enemy: {
+					points: [
+						[[29.3, 42.2], [0.8, 42.2]],
+						[[68.3, 40.8], [95.5, 40.8]],
+						[[50.5, 7.8], [50.5, 21.3]],
+						[[38.5, 58.8], [38.5, 96.4]],
+						[[59.6, 57.7], [59.6, 97.8]],
+						[[31.6, 39.7], [66.5, 39.7]]
+					],
+					appearsNum: 6
+				}
 			},
 			{
-				name:"level_6", //finish, game over
-				scroll:1000
+				name: "level_6", //finish, game over
+				scroll: 1000
 			}
 		],
 		params: {
@@ -197,7 +230,8 @@ define(function () {
 					scale: 0.22857,
 					speed: 2,
 					duration: 0.05,
-					controls: WASDController
+					controls: WASDController,
+					obstaclesBalk: true
 				},
 				variant:[{
 					name: "santa",
@@ -291,6 +325,7 @@ define(function () {
 					{
 						name: "bomb",
 						initState: "move",
+						initCommand: "move",
 						states: images.enemy[0]
 					}
 				]

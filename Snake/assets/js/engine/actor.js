@@ -26,6 +26,7 @@ define([
 		this.states = [];
 		this.curState = {};
 		this.params = {};
+		this.paramsNames = ["initState", "appearsNum", "initCommand", "duration"];
 
 		//TODO think for more elegant solution
 		var curActor = this;
@@ -106,8 +107,65 @@ define([
 	se.Actor.prototype.action = function (_func, _params) {
 		this[_func](_params);
 	};
+	se.Actor.prototype.initParams = function (_name) {
+		this.params = _.clone(config.params[_name].general);
+		this.params.name = _name;
+	};
+	se.Actor.prototype.initVariant = function (_variant) {
+		var curActor = this;
+		var variant;
+		if(_variant)
+			variant = config.params[curActor.params.name].variant[_variant];
+		else {
+			var randIndex = helpers.randomIndex(config.params[curActor.params.name].variant);
+			variant = config.params[curActor.params.name].variant[randIndex];
+		}
+		curActor.name = variant.name;
+
+		if(variant.states) {
+			if(!_.isArray(variant.states)) {
+				for (var objName in variant.states) {
+					var obj = {
+						name: objName,
+						img: variant.states
+					};
+					curActor.states.push(obj);
+				}
+				variant.initCommand = curActor.states[0].name;
+			}
+			else {
+				variant.states.map(function(state){
+					if(!_.isString(state.img[0]))
+						curActor.states.push(state);
+					else {
+						var _img = {};
+						_img[state.name] = state.img;
+						state.img = _img;
+						curActor.states.push(state);
+					}
+				});
+				variant.initCommand = Object.keys(curActor.states[0].img)[0];
+			}
+		}
+		else {
+			for(var state in variant){
+				var _img = {};
+				_img[state] = variant[state];
+				curActor.states.push({name: state, img: _img})
+			}
+			variant.initCommand = curActor.states[0].name;
+		}
+		curActor.params.initState = variant.initState || curActor.states[0].name;
+		curActor.command = variant.initCommand || curActor.command;
+
+		for(var param in variant){
+			if(curActor.paramsNames.some(function(p){return p == param}))
+				curActor.params[param] = variant[param];
+		}
+	};
 
 	se.Actor.prototype.setState = function (_stateName, _command) {
+		_stateName = _stateName || this.params.initState;
 		this.curState = this.states.filter(function(state){
 			return state.name == _stateName;
 		})[0];
@@ -155,4 +213,5 @@ define([
 		//if(scale)
 		//	this.item.scale(scale);
 	};
+
 });
