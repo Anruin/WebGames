@@ -79,7 +79,7 @@ define(function () {
 			{move: ["pawn-mv-d01", "pawn-mv-d02"], idle: ["pawn-st-d"]}
 		],
 		enemy: [
-			{move: ["bomb-01", "bomb-02"], active: ["bomb-explosion"], idle: ["pit"]}
+			{move: ["bomb-01", "bomb-02"], active: ["bomb-explosion-01", "bomb-explosion-02"], idle: ["pit"]}
 		]
 	};
 	var config = {
@@ -102,10 +102,10 @@ define(function () {
 					points: [[49.4, 51], [13.9, 48.5]],
 					img: images.collectible[0].idle
 				},
-				collectibles: images.collectible[0].idle, //TODO: Delete
-				give: {
-					lives: 1
-				}
+				collectibles: images.collectible[0].idle //TODO: Delete
+				//give: {
+				//	lives: 1
+				//}
 			},
 			{
 				name: "level_4",
@@ -126,9 +126,9 @@ define(function () {
 					]
 				},
 				collectibles: images.collectible[1].idle, //TODO: Delete
-				give: {
-					lives: 1
-				},
+				//give: {
+				//	lives: 1
+				//},
 				bulbs: [
 					[[14.1, 0],[21.6, 100]],
 					[[35.9, 0],[41.3, 100]],
@@ -154,10 +154,10 @@ define(function () {
 						[[68.0, 67.0], [66.5, 8.0]]
 					]
 				},
-				collectibles: images.collectible[2].idle, //TODO: Delete
-				give: {
-					lives: 1
-				}
+				collectibles: images.collectible[2].idle //TODO: Delete
+				//give: {
+				//	lives: 1
+				//}
 			},
 			{
 				name: "level_2",
@@ -178,10 +178,10 @@ define(function () {
 						[[31.6, 41.2], [66.5, 41.2]]
 					]
 				},
-				collectibles: images.collectible[3].idle, //TODO: Delete
-				give: {
-					lives: 1
-				}
+				collectibles: images.collectible[3].idle //TODO: Delete
+				//give: {
+				//	lives: 1
+				//}
 			},
 			{
 				name: "level_1",
@@ -259,7 +259,9 @@ define(function () {
 					offset: {
 						x: 0,
 						y: 15
-					}
+					},
+					variantPerLevel: true,
+					uniqueImage: true
 				},
 				variant: images.collectible
 			},
@@ -312,7 +314,6 @@ define(function () {
 				general: {
 					loop: true,
 					scale: 0.22857,
-					duration: 0.05,
 					appearsNum: 3,
 					levels: [1, 2, 3, 4],
 					take:{
@@ -326,7 +327,35 @@ define(function () {
 						name: "bomb",
 						initState: "move",
 						initCommand: "move",
-						states: images.enemy[0]
+						states: [
+							{
+								name: "move",
+								img: images.enemy[0].move,
+								duration: 0.05,
+								next: {
+									if: "intersects",
+									state: "active",
+									command: "active",
+									velocity: null
+								}
+							},
+							{
+								name: "active",
+								duration: 1,
+								img: images.enemy[0].active,
+								next: {
+									if: "auto",
+									state: "idle",
+									command: "idle",
+									duration: 2000
+								}
+							},
+							{
+								name: "idle",
+								loop: false,
+								img: images.enemy[0].idle
+							}
+						]
 					}
 				]
 			}

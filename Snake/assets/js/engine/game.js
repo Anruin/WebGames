@@ -108,6 +108,7 @@ define([
 			game.activeScene.createActor("pawn", game.activeScene.pawns);
 			game.activeScene.mainPawn = game.activeScene.pawns[0];
 			game.activeScene.mainPawn.command = null;
+			helpers.initLives();
 
 			game.startLevel();
 		}

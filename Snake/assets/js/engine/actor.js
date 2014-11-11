@@ -115,7 +115,7 @@ define([
 		var curActor = this;
 		var variant;
 		//если передан индекс варианта, тогда установится он, иначе установится случайный вариант
-		if(_variant)
+		if(_variant || _variant == 0)
 			variant = config.params[curActor.params.name].variant[_variant];
 		else {
 			var randIndex = helpers.randomIndex(config.params[curActor.params.name].variant);
@@ -194,6 +194,19 @@ define([
 		}
 	};
 
+	se.Actor.prototype.nextState = function (term) {
+		var curActor = this;
+
+		if(curActor.curState.next && curActor.curState.next.if == term){
+			if(curActor.curState.next.state.velocity || curActor.curState.next.state.velocity == null)
+				curActor.velocity = curActor.curState.next.state.velocity;
+
+			setTimeout(function(){
+				curActor.setState(curActor.curState.next.state, curActor.curState.next.command);
+			}, curActor.curState.next.duration || 0);
+		}
+	};
+
 	se.Actor.prototype.setState = function (_stateName, _command) {
 		_stateName = _stateName || this.params.initState;
 		_command = _command || this.command;
@@ -218,12 +231,18 @@ define([
 				var imgArray = this.curState.img[this.command];
 				if(!imgArray){
 					if(config.debug)
-						console.log("command " + this.command+ " not exist in " + this.curState.name + " state, will take random command");
+						console.log("command " + this.command + " not exist in " + this.curState.name
+						+ " state, will take random command");
 
 					this.command = Object.keys(this.curState.img)[helpers.randomIndex(Object.keys(this.curState.img))];
 					imgArray = this.curState.img[this.command];
 				}
 				index = helpers.randomIndex(imgArray);
+			}
+			else if(this.params.uniqueImage){
+				index = game.activeScene.nums[this.params.name];
+				if(!this.curState.img[this.command][index])
+					index = index - this.curState.img[this.command].length + 1;
 			}
 
 			initImage = this.curState.img[this.command][index];
@@ -238,20 +257,7 @@ define([
 		else
 			this.activeAnimation = null;
 
-		var curActor = this;
-		//если это бомба и нужно установить состояние в active, тогда через 2 сек. установится состояние idle
-		//TODO: take from config
-		if(curActor.name == "bomb" && curActor.curState.name == "active") {
-			curActor.velocity = null;
-			setTimeout(function(){
-				curActor.setState("idle", "idle");
-				//var name = _.keys(curActor.curState.onActive)[0];
-				//curActor.item[name] = curActor.curState.onActive[name];
-			}, 2000);
-		}
-		//var scale = this.curState.scale || this.params.scale;
-		//if(scale)
-		//	this.item.scale(scale);
+		this.nextState("auto");
 	};
 
 });

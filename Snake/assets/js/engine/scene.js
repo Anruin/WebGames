@@ -64,21 +64,7 @@ define([
 			});
 			curScene.enemies.map(function(obj){
 				if((obj.command == "move" || obj.command == "idle") && pawn.item.bounds.intersects(obj.item.bounds)){
-					if(obj.curState.name == "move")
-						obj.setState("active", "active");
-
-					//if(obj.name == "bomb"){
-					//	curScene.enemies.splice(curScene.enemies.indexOf(obj), 1);
-					//	curScene.toRemove.push(obj);
-					//}
-					//else if(obj.name == "pit"){
-					//	var intervalID = setInterval(function(){
-					//		if(!pawn.item.bounds.intersects(obj.item.bounds)){
-					//			obj.command = "idle";
-					//			clearInterval(intervalID);
-					//		}
-					//	}, 200);
-					//}
+					obj.nextState("intersects");
 
 					//TODO: move this to helpers function
 					pawn.score -= config.params.enemy.general.take.score;
@@ -118,6 +104,10 @@ define([
 		actor.item = new paper.Raster();
 
 		actor.initParams(_name);
+		if(config.params[_name].general.variantPerLevel) {
+			var index = config.levels.indexOf(this.level);
+			_variant = index < config.params[_name].variant.length ? index : index - config.params[_name].variant.length;
+		}
 		actor.initVariant(_variant);
 		actor.setState();
 
