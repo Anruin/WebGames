@@ -201,9 +201,10 @@ define([
 			if(curActor.curState.next.state.velocity || curActor.curState.next.state.velocity == null)
 				curActor.velocity = curActor.curState.next.state.velocity;
 
+			var next = curActor.curState.next;
 			setTimeout(function(){
-				curActor.setState(curActor.curState.next.state, curActor.curState.next.command);
-			}, curActor.curState.next.duration || 0);
+				curActor.setState(next.state, next.command);
+			}, next.duration || 0);
 		}
 	};
 
