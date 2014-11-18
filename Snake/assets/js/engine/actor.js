@@ -243,7 +243,7 @@ define([
 			else if(this.params.uniqueImage){
 				index = game.activeScene.nums[this.params.name];
 				if(!this.curState.img[this.command][index])
-					index = index - this.curState.img[this.command].length + 1;
+					index = index - this.curState.img[this.command].length;
 			}
 
 			initImage = this.curState.img[this.command][index];

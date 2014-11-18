@@ -64,19 +64,25 @@ define([
 			});
 			curScene.enemies.map(function(obj){
 				if((obj.command == "move" || obj.command == "idle") && pawn.item.bounds.intersects(obj.item.bounds)){
-					obj.nextState("intersects");
+					if(obj.name == "bomb" && obj.command == "idle") {
+						obj.command = "active";
+						var intervalID = setInterval(function () {
+							if (!pawn.item.bounds.intersects(obj.item.bounds)) {
+								obj.command = "idle";
+								clearInterval(intervalID);
+							}
+						}, 200);
+					}
 
-					//TODO: move this to helpers function
-					pawn.score -= config.params.enemy.general.take.score;
-					pawn.lives -= config.params.enemy.general.take.lives;
-					helpers.initLives();
+					obj.nextState("intersects");
+					var takenScore = helpers.calcScoreAndLives(pawn, config.params.enemy);
 
 					if(pawn.lives < 0){
 						game.over(true);
 						return;
 					}
 
-					for(var i = 0; i < config.params.enemy.general.take.score; i++){
+					for(var i = 0; i < takenScore; i++){
 						pawn.removeSegment(0);
 						curScene.createActor("collectible", curScene.collectibles);
 					}

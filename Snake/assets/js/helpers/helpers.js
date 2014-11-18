@@ -242,6 +242,23 @@ define([
 			else
 				//если в конфиге не заданы настройки точек, тогда устанавливается рандомная точка
 				helpers.setNotIntersectRandomPoint(_actor, game.activeScene.actors);
+		},
+		calcScoreAndLives: function(actor, param){
+			var take = param.take || param.general.take;
+			if(take){
+				if(take.score){
+					var takenScore = take.score > actor.score ? actor.score : take.score;
+					actor.score -= takenScore;
+				}
+
+
+				if(take.lives){
+					actor.lives -= take.lives;
+					helpers.initLives();
+				}
+			}
+
+			return takenScore;
 		}
 	};
 	return helpers;
