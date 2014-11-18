@@ -108,17 +108,19 @@ define([
 			return Number(number).toFixed(2);
 		},
 		setNotIntersectRandomPoint: function (forRandom, arrayForCompare) {
-			var promise = new Promise(function(resolve, reject) {
+
+			//require('es6-promise').polyfill();
+			//var promise = new window.Promise(function(resolve, reject) {
 				forRandom.item.position = helpers.getRandomPointInView();
 				while (helpers.isIntersects(arrayForCompare, forRandom)) {
 					forRandom.item.position = helpers.getRandomPointInView();
 				}
-				resolve(forRandom.item.position);
-			});
+			//	resolve(forRandom.item.position);
+			//});
 
-			promise.then(function(result) {
-				forRandom.item.position = result;
-			});
+			//promise.then(function(result) {
+			//	forRandom.item.position = result;
+			//});
 		},
 		isIntersects: function (array, object) {
 			var objBounds = object.bounds || (object.item ? object.item.bounds : object);
