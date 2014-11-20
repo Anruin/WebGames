@@ -10,13 +10,13 @@ $promo = filter_var($_POST['promo'], FILTER_VALIDATE_REGEXP, ['options'=>['regex
 $subscribe = (array_key_exists('subscribe', $_POST) ? filter_var($_POST['subscribe'], FILTER_VALIDATE_BOOLEAN) : 0);
 
 if ($name === FALSE || $email === FALSE || $phone === FALSE):
-	$status = 'error';
+	$status = 'invalid';
 else:
 	$subscribe_str = $subscribe ? 'Да' : 'Нет';
 	$destination_mail = 'jonybang@mail.ru';
 	$theme = 'Web Games Order';
 	$message = "Имя: {$name}\nПочта: {$email}\nТелефон: {$phone}\nПромо-код: {$promo}\nПодписка: {$subscribe_str}";
-	$status = mail($destination_mail, $theme, $message) ? 'error' : 'fail';
+	$status = mail($destination_mail, $theme, $message) ? 'success' : 'error';
 endif;
 
 $invalid = array();
