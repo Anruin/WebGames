@@ -22,28 +22,34 @@ $(document).ready(function() {
 			}, 1000);
 		});
 
-
+	function enducement(num, one, two, five){
+		num = Math.abs(num);
+		num %= 100;
+		if ( (num >= 5) && (num <= 20) ) {
+			return five;
+		}
+		num %= 10;
+		if (num == 1) {
+			return one;
+		}
+		if ( (num >= 2) && (num <= 4) ) {
+			return two;
+		}
+		return five;
+	}
 	function daysLeftNewYear(en) {
 		var today = new Date();
 		var targetDate = new Date("December 31, "+today.getFullYear());
 		var millisecondsPerDay = 24*60*60*1000;
 		var daysLeft = Math.round((targetDate.getTime() - today.getTime()) / millisecondsPerDay);
-		var dayName = "";
 		var daysLeftString = "" + daysLeft;
-		var daysLeftLastDigit = parseInt(daysLeftString.substr(daysLeftString.length - 1));
-		if (daysLeft > 4 && daysLeft < 21) {
-			dayName = en ? "days" : " дней";
-		} else {
-			if (daysLeftLastDigit == 1) {
-				dayName = en ? "day" : " день";
-			} else {
-				if (daysLeftLastDigit >= 2 || daysLeftLastDigit <= 4) {
-					dayName = en ? "days" : " дня";
-				} else {
-					dayName = en ? "days" : " дней";
-				}
-			}
-		}
+
+		var dayName = "";
+		if(en)
+			dayName = enducement(daysLeft, "day", "days", "days");
+		else
+			dayName = enducement(daysLeft, "день", "дня", "дней");
+
 		if (daysLeft < 0) {
 			$firstDigit.addClass('digit-0');
 			$lastDigit.addClass('digit-0');
