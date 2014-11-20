@@ -40,7 +40,7 @@
 
 		<!-- Brand and toggle get grouped for better mobile display -->
 		<div class="navbar-header">
-			<a class="navbar-brand" href="#">
+			<a class="navbar-brand" target="_blank" href="http://verstak.ru/">
 				<div class="svgicon svgicon-logo">
 					<span class="sr-only">Design Bureau Verstak</span>
 				</div>
@@ -267,7 +267,7 @@
 		<!-- Уровень 6 -->
 		<div class="level-content">
 			<div class="container level-6__form">
-				<form class="form-horizontal" action="order.php" method="post">
+				<form class="form-horizontal" id="santa_form" action="javascript:void(null);" onsubmit="send()" method="post">
 					<div class="form-group">
 						<div class="col-xs-4 col-xs-offset-4">
 							<input name="name" type="text" class="form-control input-lg text-uppercase bg-info" placeholder="ПРЕДСТАВЬТЕСЬ, ПОЖАЛУЙСТА">
@@ -299,6 +299,12 @@
 						</div>
 					</div>
 				</form>
+				<div id="form_success" class="alert alert-success" role="alert">
+					Ваша заявка принята!
+				</div>
+				<div id="form_danger" class="alert alert-danger" role="alert">
+					В форме присутствуют неверные данные.
+				</div>
 			</div>
 		</div>
 	</section>

@@ -54,6 +54,7 @@ define([
 		};
 		paper.tool.onMouseDown = function (event) {
 			se.debugTools.onMouseDown(event);
+			game.onMouseDown(event);
 		};
 
 		var resizeDebounce = _.debounce(function(){
@@ -196,6 +197,17 @@ define([
 				trigger.isActive = false;
 				game.activeScene.bulbs.push(trigger);
 			});
+		}
+	};
+	se.Game.prototype.onMouseDown = function (event) {
+		if(game.activeScene.bulbs && game.activeScene.bulbs.length){
+			var bulb = game.activeScene.bulbs.filter(function(bulb){
+				return bulb.item.bounds.contains(event.point) && !bulb.isActive;
+			})[0];
+			if(bulb){
+				$(bulb.elem).trigger("click");
+				bulb.isActive = true;
+			}
 		}
 	};
 });

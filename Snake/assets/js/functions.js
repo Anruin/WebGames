@@ -62,4 +62,24 @@ $(document).ready(function() {
 	}
 
 	daysLeftNewYear(window.en);
+	$('#form_success').hide();
+	$('#form_danger').hide();
 });
+function send() {
+	$('#form_success').hide();
+	$('#form_danger').hide();
+	var msg = $('#santa_form').serialize();
+	$.ajax({
+		type: 'POST',
+		url: 'order.php',
+		data: msg,
+		success: function(data) {
+			$('#form_succes').show();
+			$('#form_danger').hide();
+		},
+		error:  function(xhr, str){
+			$('#form_succes').hide();
+			$('#form_danger').show();
+		}
+	});
+}
