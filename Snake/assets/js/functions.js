@@ -73,8 +73,10 @@ function send() {
 	$('#form_error').hide();
 	$('#form_already').hide();
 
-	if($('#santa_form').data("sent"))
+	if($('#santa_form').data("sent")){
 		$('#form_already').show();
+		return;
+	}
 
 	var msg = $('#santa_form').serialize();
 	$.ajax({
