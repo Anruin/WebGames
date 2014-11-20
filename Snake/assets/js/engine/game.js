@@ -143,8 +143,11 @@ define([
 	se.Game.prototype.startLevel = function (){
 		game.activeScene.initObstacles();
 
-		if(game.activeScene.level.pawn)
+		if(game.activeScene.level.pawn){
 			game.activeScene.mainPawn.item.position = helpers.getPointPixels(game.activeScene.level.pawn.points);
+			if(helpers.isIntersects(game.activeScene.obstacles, game.activeScene.mainPawn))
+				helpers.setNotIntersectRandomPoint(this, game.activeScene.obstacles);
+		}
 		else
 			helpers.setNotIntersectRandomPoint(game.activeScene.mainPawn.item.position, game.activeScene.obstacles);
 

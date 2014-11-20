@@ -95,7 +95,7 @@ define([
 			se.Actor.prototype.move.call(this, _point);
 		else{
 			if(this.item.position != this.lastPosition)
-				this.item.position = this.lastPosition;
+				this.item.position = this.lastPosition || helpers.setNotIntersectRandomPoint(this, game.activeScene.obstacles);
 			else
 				this.item.position = helpers.pointDiff(this.item.position, _point, config.params.pawn.general.speed);
 		}

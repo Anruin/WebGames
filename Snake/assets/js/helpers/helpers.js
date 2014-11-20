@@ -115,6 +115,7 @@ define([
 				while (helpers.isIntersects(arrayForCompare, forRandom)) {
 					forRandom.item.position = helpers.getRandomPointInView();
 				}
+			return forRandom.item.position;
 			//	resolve(forRandom.item.position);
 			//});
 
