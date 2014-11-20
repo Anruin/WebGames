@@ -74,11 +74,11 @@ function send() {
 		url: 'order.php',
 		data: msg,
 		success: function(data) {
-			$('#form_succes').show();
+			$('#form_success').show();
 			$('#form_danger').hide();
 		},
 		error:  function(xhr, str){
-			$('#form_succes').hide();
+			$('#form_success').hide();
 			$('#form_danger').show();
 		}
 	});
