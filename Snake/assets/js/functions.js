@@ -65,12 +65,14 @@ $(document).ready(function() {
 	$('#form_success').hide();
 	$('#form_danger').hide();
 	$('#form_error').hide();
+	$('#form_already').hide();
 });
 function send() {
 	$('#form_success').hide();
 	$('#form_danger').hide();
 	$('#form_error').hide();
-	
+	$('#form_already').hide();
+
 	if($('#santa_form').data("sent"))
 		$('#form_already').show();
 
