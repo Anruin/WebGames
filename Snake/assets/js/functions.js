@@ -70,14 +70,20 @@ function send() {
 	$('#form_success').hide();
 	$('#form_danger').hide();
 	$('#form_error').hide();
+	
+	if($('#santa_form').data("sent"))
+		$('#form_already').show();
+
 	var msg = $('#santa_form').serialize();
 	$.ajax({
 		type: 'POST',
 		url: 'order.php',
 		data: msg,
 		success: function(data) {
-			if(data.status == "success")
+			if(data.status == "success"){
 				$('#form_success').show();
+				$('#santa_form').data("sent", true);
+			}
 			else
 				$('#form_danger').show();
 		},

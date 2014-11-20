@@ -267,7 +267,7 @@
 		<!-- Уровень 6 -->
 		<div class="level-content">
 			<div class="container level-6__form">
-				<form class="form-horizontal" id="santa_form" action="javascript:void(null);" onsubmit="send()" method="post">
+				<form class="form-horizontal" id="santa_form" action="javascript:void(null);" onsubmit="send()" data-sent="false" method="post">
 					<div class="form-group">
 						<div class="col-xs-4 col-xs-offset-4">
 							<input name="name" type="text" class="form-control input-lg text-uppercase bg-info" placeholder="ПРЕДСТАВЬТЕСЬ, ПОЖАЛУЙСТА" required>
@@ -307,6 +307,9 @@
 				</div>
 				<div id="form_danger" class="alert alert-danger" role="alert">
 					В форме присутствуют неверные данные.
+				</div>
+				<div id="form_already" class="alert alert-warning" role="alert">
+					Вы уже отправили заявку :)
 				</div>
 			</div>
 		</div>
