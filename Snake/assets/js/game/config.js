@@ -268,7 +268,7 @@ define(function () {
 			npc: {
 				general: {
 					loop: true,
-					scale: 0.4,
+					scale: 0.28,
 					appearsNum: 3,
 					levels: [4],
 					duration: 0.25,
