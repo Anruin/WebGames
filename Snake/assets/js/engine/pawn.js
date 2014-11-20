@@ -135,6 +135,10 @@ define([
 		}
 	};
 	se.Pawn.prototype.update = function(_dt) {
+		//TODO: take from config:
+		if(!this.velocity && this.name == "santa")
+			this.setState(this.curState.name, "idle");
+
 		if(this.pointsToMove.length > 1 && this.nextPoint.isInside(this.item.bounds)){
 			var nextIndex = this.pointsToMove.indexOf(this.nextPoint) + 1;
 			if(nextIndex >= this.pointsToMove.length)

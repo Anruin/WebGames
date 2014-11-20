@@ -104,9 +104,10 @@ define([
 	 * @param _func
 	 * @param _params
 	 */
-	se.Actor.prototype.action = function (_func, _params) {
-		this[_func](_params);
+	se.Actor.prototype.action = function (_func, _params, _subparams) {
+		this[_func](_params, _subparams);
 	};
+
 	se.Actor.prototype.initParams = function (_name) {
 		this.params = _.clone(config.params[_name].general);
 		this.params.name = _name;
@@ -214,6 +215,8 @@ define([
 
 		if(this.curState && this.curState.name == _stateName && this.command == _command)
 			return;
+
+		console.log("set state: " + _stateName + ", command: " + _command);
 
 		this.command = _command;
 		//поиск state в массиве this.states по имени

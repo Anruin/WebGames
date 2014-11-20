@@ -15,6 +15,12 @@ define([
 		// Pawn being controlled by this controller
 		this.pawn = pawn;
 		// Controls rules for this controller
+		this.isKeyDown = false;
+		var controller = this;
+		this.keyUp = _.debounce(function(){
+			controller.isKeyDown = false;
+		}, 500);
+
 		this.controls = config.params.pawn.general.controls;
 	};
 	se.Controller.prototype.getByKey = function(_key) {
@@ -32,6 +38,8 @@ define([
 	 * @param _key pressed key
 	 */
 	se.Controller.prototype.onInput = function(_key) {
+		this.isKeyDown = true;
+		this.keyUp();
 		// Look for key to action mapping for pressed key
 		var control = this.getByKey(_key);
 		// Perform mapped action on pawn
@@ -41,7 +49,15 @@ define([
 		}
 		return false;
 	};
-
+	se.Controller.prototype.onCessation = function(_key) {
+		this.pawn.action('setState', this.pawn.curState.name, 'idle');
+		this.pawn.velocity = null;
+		this.isKeyDown = true;
+	};
+	se.Controller.prototype.update = function(_dt){
+		if(!this.isKeyDown)
+			this.onCessation()
+	};
 	/**
 	 * Possess pawn with this controller
 	 * @param _pawn

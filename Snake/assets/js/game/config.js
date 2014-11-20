@@ -73,9 +73,9 @@ define(function () {
 			}
 		],
 		pawn: [
-			{move: ["pawn-mv-l01", "pawn-mv-l02"]},
+			{move: ["pawn-mv-l01", "pawn-mv-l02"], idle: ["pawn-st-d"]},
 			{move: ["pawn-mv-u01", "pawn-mv-u02"], idle: ["pawn-st-u"]},
-			{move: ["pawn-mv-r01", "pawn-mv-r02"]},
+			{move: ["pawn-mv-r01", "pawn-mv-r02"], idle: ["pawn-st-d"]},
 			{move: ["pawn-mv-d01", "pawn-mv-d02"], idle: ["pawn-st-d"]}
 		],
 		enemy: [

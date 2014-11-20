@@ -45,9 +45,12 @@ define([
 		game.activeScene.mainPawn.controller = controller;
 		se.setDebugTools();
 
-		paper.tool.onKeyDown = function (event) {
+		paper.tool.onKeyDown = function(event){
 			controller.onInput(event.key);
 			se.debugTools.onKeyDown(event);
+		};
+		paper.tool.onKeyUp = function (event) {
+			//controller.onCessation(event.key);
 		};
 		paper.tool.onMouseMove = function (event) {
 			se.debugTools.onMouseMove(event);
@@ -82,6 +85,9 @@ define([
 	se.Game.prototype.update = function (_dt) {
 		if (se.debugTools)
 			se.updateDebugTools();
+
+		if(game.activeScene.mainPawn.controller)
+			game.activeScene.mainPawn.controller.update(_dt);
 
 		if (game.activeScene)
 			game.activeScene.update(_dt);
