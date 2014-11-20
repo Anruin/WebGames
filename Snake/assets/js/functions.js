@@ -64,22 +64,25 @@ $(document).ready(function() {
 	daysLeftNewYear(window.en);
 	$('#form_success').hide();
 	$('#form_danger').hide();
+	$('#form_error').hide();
 });
 function send() {
 	$('#form_success').hide();
 	$('#form_danger').hide();
+	$('#form_error').hide();
 	var msg = $('#santa_form').serialize();
 	$.ajax({
 		type: 'POST',
 		url: 'order.php',
 		data: msg,
 		success: function(data) {
-			$('#form_success').show();
-			$('#form_danger').hide();
+			if(data.status == "success")
+				$('#form_success').show();
+			else
+				$('#form_danger').show();
 		},
 		error:  function(xhr, str){
-			$('#form_success').hide();
-			$('#form_danger').show();
+			$('#form_error').show();
 		}
 	});
 }
