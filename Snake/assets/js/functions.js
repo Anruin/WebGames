@@ -76,10 +76,13 @@ function send() {
 		url: 'order.php',
 		data: msg,
 		success: function(data) {
-			$('#form_success').show();
+			if(data.status == "success")
+				$('#form_success').show();
+			else
+				$('#form_danger').show();
 		},
 		error:  function(xhr, str){
-			$('#form_danger').show();
+			$('#form_error').show();
 		}
 	});
 }
