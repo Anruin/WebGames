@@ -130,7 +130,7 @@ define([
 			}
 
 			game.activeScene.prepared = false;
-			$('html body').animate({
+			$('body,html').stop(true,true).animate({
 				scrollTop: $('#' + this.activeScene.level.name).offset().top
 			}, {
 				duration: game.activeScene.level.scroll,
@@ -177,7 +177,7 @@ define([
 			var r = confirm("Вы проиграли! Хотите попробовать снова?");
 			if (r == true) {
 				game.activeScene.prepared = false;
-				$('html body').animate({
+				$('body,html').stop(true,true).animate({
 					scrollTop: $('#' + config.levels[0].name).offset().top
 				}, {
 					duration: config.levels[0].scroll,

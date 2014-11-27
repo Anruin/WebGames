@@ -3,7 +3,7 @@ define([
 	"./game/config"
   ], function(test, config) {
 
-	$('html body').animate({
+	$('body,html').stop(true,true).animate({
 		scrollTop: $('#level_5').offset().top
 	}, config.levels[0].scroll);
 	return test;
