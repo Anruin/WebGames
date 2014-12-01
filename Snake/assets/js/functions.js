@@ -17,7 +17,7 @@ $(document).ready(function() {
     });
 		$('#order').on('click', function(){
 			if(window.game)
-				game.over();
+				game.over("exit");
 
 			$('html body').animate({
 				scrollTop: $('#level_6').offset().top

@@ -11,11 +11,22 @@ requirejs.config({
 	deps: ['paper']
 });
 
-require(['app','helpers/helpers','se','engine/common', "domReady!"], function(app, helpers, se) {
+require(['app','helpers/helpers','game/config','se','engine/common', "domReady!"], function(app, helpers,  config, se) {
 	helpers.addAllImagesToDOM();
 	$('.level-5__btn').click(function(event){
 		se.disable_scroll();
 		app();
 		return false;
+	});
+	var debounceComplete = _.debounce(function() {
+		$('.level-5__btn').trigger("click");
+	}, 500);
+	$('#new_game_btn').click(function(event){
+		$('body,html').stop(true,true).animate({
+			scrollTop: $('#' + config.levels[0].name).offset().top
+		}, {
+			duration: config.levels[0].scroll,
+			complete: debounceComplete
+		});
 	});
 });

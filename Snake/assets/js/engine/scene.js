@@ -78,7 +78,7 @@ define([
 					var takenScore = helpers.calcScoreAndLives(pawn, config.params.enemy);
 
 					if(pawn.lives < 0){
-						game.over(true);
+						game.over("lose");
 						return;
 					}
 

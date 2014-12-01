@@ -97,7 +97,7 @@ define([
 			game.activeScene.level = config.levels[newLvlIndex];
 
 		if(newLvlIndex >= config.levels.length - 1){
-			setTimeout(game.over, 1000);
+			setTimeout(function(){game.over("win")}, 1000);
 			return;
 		}
 
@@ -110,6 +110,10 @@ define([
 	 */
 	se.Game.prototype.initLevel = function () {
 		var indexLvl = config.levels.indexOf(game.activeScene.level);
+
+		if(indexLvl == 4){
+			$('#lastLevelModal').modal('show');
+		}
 
 		if(indexLvl == 0){
 			game.activeScene.createActor("pawn", game.activeScene.pawns);
@@ -129,15 +133,16 @@ define([
 				helpers.initLives();
 			}
 
+			var debounceComplete = _.debounce(function() {
+				game.startLevel();
+				setBulbs();
+			}, 500);
 			game.activeScene.prepared = false;
 			$('body,html').stop(true,true).animate({
 				scrollTop: $('#' + this.activeScene.level.name).offset().top
 			}, {
 				duration: game.activeScene.level.scroll,
-				complete: function() {
-					game.startLevel();
-					setBulbs();
-				}
+				complete: debounceComplete
 			});
 		}
 		helpers.clearActorsArray(game.activeScene.collectibles);
@@ -159,7 +164,7 @@ define([
 
 		game.activeScene.prepared = true;
 	};
-	se.Game.prototype.over = function (isLose) {
+	se.Game.prototype.over = function (status) {
 		game.activeScene.mainPawn.item.position = [-1000,-1000];
 
 		paper.project.clear();
@@ -167,28 +172,31 @@ define([
 
 		document.getElementById('sx-game').style.display = "none";
 
-		$('html, body').animate({
+		$('body,html').stop(true,true).animate({
 			scrollTop: $('#' + game.activeScene.level.name).offset().top
 		}, game.activeScene.level.scroll);
 
 		se.enable_scroll();
 
-		if(isLose) {
-			var r = confirm("Вы проиграли! Хотите попробовать снова?");
-			if (r == true) {
-				game.activeScene.prepared = false;
-				$('body,html').stop(true,true).animate({
-					scrollTop: $('#' + config.levels[0].name).offset().top
-				}, {
-					duration: config.levels[0].scroll,
-					complete: function() {
-						$('.level-5__btn').trigger("click");
-					}
-				});
-			} else {
-				//no
+		if(status == "lose") {
+			$('#gameOverModal').modal('show');
+			var count;
+			if(game.activeScene.level.name != "level_1"){
+				count = config.levels[3].score - game.activeScene.mainPawn.score;
+				$('#gift-count-text').html("ВАМ ОСТАЛОСЬ СОБРАТЬ ВСЕГО ");
 			}
-		};
+			else{
+				count = game.activeScene.mainPawn.followers.length + game.activeScene.collectibles.length;
+				$('#gift-count-text').html("ВАМ ОСТАЛОСЬ РАЗДАТЬ ВСЕГО ");
+			}
+
+			$('.js-modal-gift-count').html(count);
+
+			$('#gift-count-word').html(helpers.enducement(count, " ПОДАРОК", " ПОДАРКА", " ПОДАРКОВ"));
+		}
+		else if(status == "win"){
+			$('#gameWinModal').modal('show');
+		}
 	};
 	function setBulbs () {
 		if(game.activeScene.bulbs && game.activeScene.bulbs.length)
