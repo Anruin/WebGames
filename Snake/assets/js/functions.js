@@ -4,6 +4,8 @@ $(function(){
 
 $(document).ready(function() {
     BackgroundAnimation();
+	
+	$('.game-level.level-1').snowfall({image :"assets/img/snowfall/flake.png", minSize: 10, maxSize:32}).css('overflow', 'hidden');
 
     var $light_level = $('.level-4');
     var i;

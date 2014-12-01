@@ -75,7 +75,7 @@ body {
 .navbar .nav-block-tel {
   position: absolute;
   top: 0;
-  left: 62%;
+  left: 60%;
 }
 .navbar .nav-block-tel .svgicon-tel {
   font-size: 26px;
@@ -85,8 +85,13 @@ body {
 .navbar .nav-block-social {
   position: absolute;
   top: 0;
-  left: 81%;
+  left: 80%;
   padding-top: 18px;
+  width: 300px;
+}
+.navbar .nav-block-social li {
+  margin: 0 5px;
+  display: inline-block;
 }
 .game-levels {
   position: relative;
@@ -128,6 +133,7 @@ body {
 }
 .game-levels .game-level.level-1 .level-1__timer-text {
   font-size: 20px;
+  letter-spacing: 0.1em;
 }
 .game-levels .game-level.level-1 .level-1__timer-text .days {
   display: block;
@@ -247,7 +253,7 @@ body {
   left: 50%;
   top: 51%;
 }
-.game-levels .game-level.level-3 .adv-4-1 {
+.game-levels .game-level.level-3 .adv-4 {
   left: 72%;
   top: 68%;
 }
@@ -272,7 +278,7 @@ body {
 .game-levels .game-level.level-4 .level-4__lights {
   width: 100%;
   position: relative;
-  margin-top: 10%;
+  margin-top: 12%;
   padding: 0;
 }
 .game-levels .game-level.level-4 .level-4__lights img {
@@ -288,7 +294,7 @@ body {
   left: 0;
   right: 0;
   bottom: 3%;
-  top: 65.4%;
+  top: 60%;
   padding: 0 12px;
 }
 .game-levels .game-level.level-4 .level-4__texts .level-4__text.text-1 {
@@ -309,9 +315,9 @@ body {
   height: 100%;
   padding: 5px 20px;
   color: transparent;
-  font-size: 15px;
-  font-size: 2vh;
-  line-height: 1.46em;
+  font-size: 18px;
+  font-size: 2.5vh;
+  line-height: 1.26em;
   font-weight: 300;
   border: 2px dashed #fff;
   -webkit-border-radius: 13px;
@@ -588,4 +594,13 @@ body {
 }
 .timer__digit.digit-0 {
   background-image: url('../../img/timer__0.png');
+}
+@media screen and (min-width: 1200px) {
+  .level-bg.level-5 {
+    margin-top: 145px;
+    margin-bottom: -145px;
+  }
+  .game-levels .game-level.level-4 .level-4__lights {
+    margin-top: 10%;
+  }
 }

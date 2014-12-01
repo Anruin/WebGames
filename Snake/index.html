@@ -10,9 +10,15 @@
 	<!-- Bootstrap -->
 	<link href="assets/css/bootstrap/bootstrap.css" rel="stylesheet">
 	<link href="assets/css/bootstrap/theme.css" rel="stylesheet">
+	<link href="assets/css/bootstrap/modal.css" rel="stylesheet">
 	<link href="assets/css/icomoon.css" rel="stylesheet">
 	<link href="assets/css/fonts.css" rel="stylesheet">
-
+	<style>
+		.adv-4-1 {
+			left: 72%;
+			top: 68%;
+		}
+	</style>
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]>
@@ -30,6 +36,18 @@
 	<!-- GAME -->
 </head>
 <body>
+
+<!-- FACEBOOK LIKE :: START -->
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<!-- FACEBOOK LIKE :: END -->
+
 <!-- GAME -->
 <div id="images"></div>
 <canvas id="sx-game" data-paper-resize="true" data-paper-keepalive="false" style="z-index:20"></canvas>
@@ -73,8 +91,11 @@
 		</ul>
 
 		<ul class="nav navbar-nav nav-block-social">
-			<li>Facebook</li>
-			<li>Twitter</li>
+			<li><div class="fb-like" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div></li>
+			<li>
+				<a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+			</li>
 		</ul>
 
 	</div><!-- /.container-fluid -->
@@ -337,6 +358,54 @@
 	</div>
 </div>
 
+<!-- GameOver Popup : start -->
+<div class="modal fade" id="gameOverModal" tabindex="-1" role="dialog" aria-labelledby="gameOverModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true"><span class="modal-close"></span></span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p class="lead text-center">ВАМ ОСТАЛОСЬ СОБРАТЬ ВСЕГО <span class="text-primary js-modal-gift-count">X</span> ПОДАРКОВ!</p>
+            </div>
+            <div class="modal-footer text-center">
+                <button type="button" class="btn btn-primary btn-lg text-uppercase" data-dismiss="modal">Играть снова</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- GameOver Popup : end -->
+
+<!-- GameWin Popup : start -->
+<div class="modal fade" id="gameWinModal" tabindex="-1" role="dialog" aria-labelledby="gameWinModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p class="lead lead-sm text-center text-uppercase">ВЫ ОТЛИЧНЫЙ ДЕД&nbsp;МОРОЗ И&nbsp;ТЕПЕРЬ МОЖЕТЕ ПОЛУЧИТЬ ПОДАРОК ОТ&nbsp;НАШЕЙ СТУДИИ ПРИ&nbsp;ЗАКАЗЕ ПРОМО-ИГРЫ!</p>
+            </div>
+            <div class="modal-footer text-center">
+                <button type="button" class="btn btn-primary btn-lg text-uppercase" data-dismiss="modal">ОК</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- GameWin Popup : end -->
+
+<!-- LastLevel Popup : start -->
+<div class="modal fade" id="lastLevelModal" tabindex="-1" role="dialog" aria-labelledby="lastLevelModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p class="lead lead-sm text-center text-uppercase">А ТЕПЕРЬ РАЗДАЙТЕ <br>ПОДАРКИ ЛЮДЯМ!</p>
+            </div>
+            <div class="modal-footer text-center">
+                <button type="button" class="btn btn-primary btn-lg text-uppercase" data-dismiss="modal">ОК</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- LastLevel Popup : end -->
+
 <!-- Scripts  -->
 <script src="assets/js/vendor/jquery.js"></script>
 <!--<script src="assets/js/vendor/jquery.visible.min.js"></script>-->
@@ -344,6 +413,7 @@
 <script src="assets/js/vendor/TweenMax.min.js"></script>
 <script src="assets/js/vendor/jquery.scrollmagic.js"></script>
 <script src="assets/js/vendor/jquery.scrollmagic.debug.js"></script>
+<script src="assets/js/vendor/jquery.snowfall.min.js"></script>
 <script src="assets/js/background.js"></script>
 <script src="assets/js/functions.js"></script>
 </body>

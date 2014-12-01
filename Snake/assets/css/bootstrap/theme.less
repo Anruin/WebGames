@@ -95,7 +95,7 @@ body{
   .nav-block-tel {
     position: absolute;
     top: 0;
-    left: 62%;
+    left: 60%;
     .svgicon-tel {
       font-size: 26px;
       margin-top: 14px;
@@ -106,8 +106,13 @@ body{
   .nav-block-social {
     position: absolute;
     top: 0;
-    left: 81%;
+    left: 80%;
     padding-top: 18px;
+    width: 300px;
+    li {
+      margin: 0 5px;
+      display: inline-block;
+    }
   }
 }
 
@@ -152,6 +157,7 @@ body{
       }
       .level-1__timer-text {
         font-size: 20px;
+        letter-spacing: 0.1em;
         .days {
           display: block;
           line-height: 20px;
@@ -277,7 +283,7 @@ body{
         left: 50%;
         top: 51%;
       }
-      .adv-4-1 {
+      .adv-4 {
         left: 72%;
         top: 68%;
       }
@@ -304,7 +310,7 @@ body{
       .level-4__lights {
         width: 100%;
         position: relative;
-        margin-top: 10%;
+        margin-top: 12%;
         padding: 0;
         img {
           position: absolute;
@@ -321,7 +327,7 @@ body{
           left: 0;
           right: 0;
           bottom: 3%;
-          top: 65.4%;
+          top: 60%;
           padding: 0 12px;
           &.text-1 {
             left: 0;
@@ -341,9 +347,9 @@ body{
             height: 100%;
             padding: 5px 20px;
             color: transparent;
-            font-size: 15px;
-            font-size: 2vh;
-            line-height: 1.46em;
+            font-size: 18px;
+            font-size: 2.5vh;
+            line-height: 1.26em;
             font-weight: 300;
             border: 2px dashed #fff;
             -webkit-border-radius: 13px;
@@ -648,5 +654,23 @@ body{
   }
   &.digit-0 {
     background-image: url('../../img/timer__0.png');
+  }
+}
+
+@media screen and (max-width: 1024px){
+
+}
+
+@media screen and (min-width: 1025px) and (max-width: 1199px){
+
+}
+
+@media screen and (min-width: 1200px){
+  .level-bg.level-5 {
+    margin-top: 145px;
+    margin-bottom: -145px;
+  }
+  .game-levels .game-level.level-4 .level-4__lights {
+    margin-top: 10%;
   }
 }
