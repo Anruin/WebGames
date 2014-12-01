@@ -196,6 +196,7 @@ define([
 		}
 		else if(status == "win"){
 			$('#gameWinModal').modal('show');
+			$('#promo-code').val("promo");
 		}
 	};
 	function setBulbs () {
