@@ -125,7 +125,7 @@ body{
     display: block;
     height: 100%;
     _height:100%;
-    min-height: 663px;
+    min-height: 500px;
     /*border: 5px dashed #ff0000;*/
     //outline: 3px dashed #ff0000;
     //outline-offset: -5px;
@@ -226,14 +226,14 @@ body{
     &.level-3 {
       .level-3__caption {
         position: absolute;
-        top: 19.45%;
+        top: 17.45%;
         left: 20px;
         right: 20px;
         text-align: center;
         h1 {
           font-size: 36px;
           font-weight: 700;
-          line-height: 50px;
+          line-height: 40px;
           margin-top: 0;
           letter-spacing: 0.1em;
         }
@@ -310,7 +310,7 @@ body{
       .level-4__lights {
         width: 100%;
         position: relative;
-        margin-top: 12%;
+        margin-top: 8%;
         padding: 0;
         img {
           position: absolute;
@@ -584,6 +584,7 @@ body{
     &.level-5 {
       z-index: 2;
       background-color: #BF5852;
+      width: 100%;
     }
     &.level-6 {
       z-index: 1;
@@ -657,20 +658,8 @@ body{
   }
 }
 
-@media screen and (max-width: 1024px){
-
-}
-
-@media screen and (min-width: 1025px) and (max-width: 1199px){
-
-}
-
-@media screen and (min-width: 1200px){
-  .level-bg.level-5 {
-    margin-top: 145px;
-    margin-bottom: -145px;
-  }
-  .game-levels .game-level.level-4 .level-4__lights {
-    margin-top: 10%;
+@media(max-height: 600px){
+  .level-4__lights {
+    margin-top: 0% !important;
   }
 }

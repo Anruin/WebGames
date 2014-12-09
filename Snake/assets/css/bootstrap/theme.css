@@ -103,7 +103,7 @@ body {
   display: block;
   height: 100%;
   _height: 100%;
-  min-height: 663px;
+  min-height: 500px;
   /*border: 5px dashed #ff0000;*/
 }
 .game-levels .game-level.level-1 .level-1__img-text {
@@ -196,7 +196,7 @@ body {
 }
 .game-levels .game-level.level-3 .level-3__caption {
   position: absolute;
-  top: 19.45%;
+  top: 17.45%;
   left: 20px;
   right: 20px;
   text-align: center;
@@ -204,7 +204,7 @@ body {
 .game-levels .game-level.level-3 .level-3__caption h1 {
   font-size: 36px;
   font-weight: 700;
-  line-height: 50px;
+  line-height: 40px;
   margin-top: 0;
   letter-spacing: 0.1em;
 }
@@ -278,7 +278,7 @@ body {
 .game-levels .game-level.level-4 .level-4__lights {
   width: 100%;
   position: relative;
-  margin-top: 12%;
+  margin-top: 8%;
   padding: 0;
 }
 .game-levels .game-level.level-4 .level-4__lights img {
@@ -528,6 +528,7 @@ body {
 .game-background .level-bg.level-5 {
   z-index: 2;
   background-color: #BF5852;
+  width: 100%;
 }
 .game-background .level-bg.level-6 {
   z-index: 1;
@@ -595,12 +596,8 @@ body {
 .timer__digit.digit-0 {
   background-image: url('../../img/timer__0.png');
 }
-@media screen and (min-width: 1200px) {
-  .level-bg.level-5 {
-    margin-top: 145px;
-    margin-bottom: -145px;
-  }
-  .game-levels .game-level.level-4 .level-4__lights {
-    margin-top: 10%;
+@media (max-height: 600px) {
+  .level-4__lights {
+    margin-top: 0% !important;
   }
 }
