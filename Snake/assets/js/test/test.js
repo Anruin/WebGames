@@ -29,8 +29,8 @@ define([
 				game.update(event.delta);
 			};
 			paper.project.layers[0].activate();
-			paper.project.view.play();
-			paper.project.view.update();
+			//paper.project.view.play();
+			//paper.project.view.update();
 		}
 	return Start;
 });
