@@ -199,4 +199,7 @@ $(function() {
 	$('.level-3__advantage.adv-4').click(function(){
 		playSound(BUFFERS.pickUp, 0);
 	});
+	$('.level-3__advantage.adv-5').click(function(){
+		playSound(BUFFERS.give, 0);
+	});
 })
