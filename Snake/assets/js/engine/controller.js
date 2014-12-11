@@ -18,8 +18,10 @@ define([
 		this.isKeyDown = false;
 		var controller = this;
 		controller.steps = {};
+		controller.steps.isend = true;
 		this.keyUp = _.debounce(function(){
-			controller.steps.stop();
+			if(controller.steps.stop)
+				controller.steps.stop();
 			controller.steps.isend = true;
 			controller.isKeyDown = false;
 		}, 500);
