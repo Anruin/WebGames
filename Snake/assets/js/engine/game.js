@@ -178,19 +178,20 @@ define([
 
 		if(status == "lose") {
 			$('#gameOverModal').modal('show');
-			var count;
+			var count, text;
 			if(game.activeScene.level.name != "level_1"){
 				count = config.levels[3].score - game.activeScene.mainPawn.score;
-				$('#gift-count-text').html("ВАМ ОСТАЛОСЬ СОБРАТЬ ВСЕГО ");
+				text = window.en ? "COLLECT" : "СОБРАТЬ";
 			}
 			else{
 				count = game.activeScene.mainPawn.followers.length + game.activeScene.collectibles.length;
-				$('#gift-count-text').html("ВАМ ОСТАЛОСЬ РАЗДАТЬ ВСЕГО ");
+				text = window.en ? "GIVE" : "РАЗДАТЬ";
 			}
+			var wordNum = window.en ? helpers.enducement(count, "GIFT", "GIFTS", "GIFTS") : helpers.enducement(count, "ПОДАРОК", "ПОДАРКА", "ПОДАРКОВ");
 
+			$('#gift-count-text').html(text);
 			$('.js-modal-gift-count').html(count);
-
-			$('#gift-count-word').html(helpers.enducement(count, " ПОДАРОК", " ПОДАРКА", " ПОДАРКОВ"));
+			$('#gift-count-word').html(wordNum);
 		}
 		else if(status == "win"){
 			$('#gameWinModal').modal('show');
