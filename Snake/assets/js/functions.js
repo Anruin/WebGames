@@ -148,7 +148,7 @@ BufferLoader.prototype.load = function() {
 $(function() {
 	var BUFFERS = {};
 	var context = null;
-	var names = ["steps", "pit", "bang", "pickUp", "give"];
+	var names = ["steps", "pit", "bang", "pickup", "give"];
 	var BUFFERS_TO_LOAD = {};
 	names.map(function(name){
 		BUFFERS_TO_LOAD[name] = 'http://games.narleyn.ru/Snake/assets/sounds/' + name + '.mp3';
@@ -197,7 +197,7 @@ $(function() {
 		playSound(BUFFERS.bang, 0);
 	});
 	$('.level-3__advantage.adv-4').click(function(){
-		playSound(BUFFERS.pickUp, 0);
+		playSound(BUFFERS.pickup, 0);
 	});
 	$('.level-3__advantage.adv-5').click(function(){
 		playSound(BUFFERS.give, 0);
