@@ -162,7 +162,7 @@ $(function() {
 			names.push(name);
 			paths.push(path);
 		}
-		var bufferLoader = new BufferLoader(context, paths, function (bufferList) {
+		var bufferLoader = new BufferLoader(window.context, paths, function (bufferList) {
 			for (var i = 0; i < bufferList.length; i++) {
 				var buffer = bufferList[i];
 				var name = names[i];
@@ -172,7 +172,7 @@ $(function() {
 		bufferLoader.load();
 	}
 	function playSound(buffer, time) {
-		var source = context.createBufferSource();
+		var source = window.context.createBufferSource();
 		source.buffer = buffer;
 		source.connect(context.destination);
 		if (!source.start)
