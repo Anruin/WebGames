@@ -73,9 +73,7 @@ define([
 			setBulbs ();
 			console.log("react to resize");
 		}, 300);
-		paper.project.view.onResize = function(event){
-			resizeDebounce();
-		};
+		paper.project.view.onResize = resizeDebounce;
 	};
 
 	/**

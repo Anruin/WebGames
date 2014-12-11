@@ -10,10 +10,9 @@ $(document).ready(function() {
     var $light_level = $('.level-4');
     var i;
 
-    var $triggers = $('.level-4__text');
+    var $triggers = $('.level-4__text, .bulb');
     $triggers.on('click', function(){
-        var light_number = $(this).index() + 1;
-        $light_level.addClass('light-' + light_number);
+        $light_level.addClass('light-' + $(this).data('number'));
     });
 		$('#order').on('click', function(){
 			if(window.game)
