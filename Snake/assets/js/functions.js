@@ -196,7 +196,7 @@ $(function() {
 	$('.level-3__advantage.adv-3').click(function(){
 		playSound(BUFFERS.bang, 0);
 	});
-	$('.level-3__advantage.adv-4').click(function(){
+	$('.level-3__advantage.adv-4-1').click(function(){
 		playSound(BUFFERS.pickup, 0);
 	});
 	$('.level-3__advantage.adv-5').click(function(){
