@@ -17,13 +17,21 @@ define([
 		// Controls rules for this controller
 		this.isKeyDown = false;
 		var controller = this;
+		controller.steps = {};
 		this.keyUp = _.debounce(function(){
 			controller.steps.stop();
+			controller.steps.isend = true;
 			controller.isKeyDown = false;
 		}, 500);
-		this.stepSound = _.throttle(function(){
-			controller.steps = window.sound('steps');
-		}, 5000)
+		this.stepSound = function(){
+			if(controller.steps.isend)
+				controller.steps = window.sound('steps');
+
+			controller.steps.isend = false;
+			controller.steps.onended = function(){
+				controller.steps.isend = true;
+			}
+		};
 
 		this.controls = config.params.pawn.general.controls;
 	};
