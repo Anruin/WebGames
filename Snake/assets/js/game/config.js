@@ -362,7 +362,7 @@ define(function () {
 		},
 		images: images,
 		img: {
-			dir: "assets/img/",
+			dir: window.en ? "../assets/img/" : "./assets/img/",
 			ext: ".png"
 		}
 	};

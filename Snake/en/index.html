@@ -19,6 +19,9 @@
 			top: 68%;
 		}
 	</style>
+	<script type="application/javascript">
+		window.en = true;
+	</script>
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]>
@@ -66,8 +69,8 @@
 		</div>
 
 		<ul class="nav navbar-nav nav-block-language">
-			<li><a class="text-uppercase active" href="../"><span class="svgicon text-lg svgicon-dot"></span> Рус</a></li>
-			<li><a class="text-uppercase" href="../en/"><span class="svgicon text-lg svgicon-dot-empty"></span> Eng</a></li>
+			<li><a class="text-uppercase active" href="../"><span class="svgicon text-lg svgicon-dot-empty"></span> Рус</a></li>
+			<li><a class="text-uppercase" href="../en/"><span class="svgicon text-lg svgicon-dot"></span> Eng</a></li>
 		</ul>
 
 		<ul class="nav navbar-nav nav-block-game-life">
@@ -114,8 +117,8 @@
 				</div>
 				<p class="level-1__timer-text">
 					<span class="days"><span class="game-obstacle">ДНЕЙ</span></span>
-					<span class="to"><span class="game-obstacle">до</span></span>
-					<span class="new-year"><span class="game-obstacle">НОВОГО ГОДА</span></span>
+					<span class="to"><span class="game-obstacle">before</span></span>
+					<span class="new-year"><span class="game-obstacle">THE NEW YEAR</span></span>
 				</p>
 			</div>
 		</div>
@@ -192,7 +195,7 @@
 	<!-- Уровень 3 -->
 	<div class="level-content">
 		<div class="container level-3__caption">
-			<h1 class="text-uppercase text-center"><span class="game-obstacle">Web-app</span><br><span class="game-obstacle">with game</span><br><span class="game-obstacle">с игрой</span></h1>
+			<h1 class="text-uppercase text-center"><span class="game-obstacle">Web-app</span><br><span class="game-obstacle">with game</span></h1>
 		</div>
 		<div class="container level-3__text text-uppercase text-center"><span class="game-obstacle">Advantages:</span></div>
 		<div class="level-3__advantage adv-1">
@@ -219,6 +222,17 @@
 </section>
 <section class="game-level level-4" id="level_4" data-level-id="4">
 	<!-- Уровень 4 -->
+	<style>
+		.bulb {
+			position:absolute;
+			cursor: pointer;
+			z-index: 2000;
+		}
+	</style>
+	<div class="bulb" style="top: 43%; height:20%; left:14%; width:8%;" data-number="1"></div>
+	<div class="bulb" style="top: 57%; height:17%; left:36%; width:7%;" data-number="2"></div>
+	<div class="bulb" style="top: 57%; height:17%; left:58%; width:7%;" data-number="3"></div>
+	<div class="bulb" style="top: 44%; height:20%; left:80%; width:7%;" data-number="4"></div>
 	<div class="level-content">
 		<div class="container level-4__caption">
 			<h1 class="text-uppercase text-center"><span class="game-obstacle">How does it work?</span></h1>
@@ -231,24 +245,24 @@
 			<img class="img-responsive bulb-4" src="../assets/img/level-4__lights_4.svg" alt="">
 		</div>
 		<div class="level-4__texts">
-			<div class="level-4__text text-1">
+			<div class="level-4__text text-1" data-number="1">
 				<div class="text-content game-obstacle">
 					<p>You upload client database and can send presentation mailing with invite and link to the website. Your website will be both a <strong>christmas card and game at the same time.</strong></p>
 				</div>
 			</div>
-			<div class="level-4__text text-2">
+			<div class="level-4__text text-2" data-number="2">
 				<div class="text-content game-obstacle">
-					<p>Клиент играет в несложную игру и получает удовольствие. По результату игры клиенту отправляется письмо, где его <strong>поздравляют с победой</strong> и <strong>сообщают о подарке.</strong></p>
+					<p>ClienClients can play the simple game and have fun. As result of this, your client gets an email of your choosing with <strong>congratulations</strong> and a <strong>gift message.</strong></p>
 				</div>
 			</div>
-			<div class="level-4__text text-3">
+			<div class="level-4__text text-3" data-number="3">
 				<div class="text-content game-obstacle">
-					<p>Подарком может являться что угодно. Например, скидка на услуги компании. Главное, что клиент получает <strong>персональное поздравление</strong> и <strong>предложение продолжить сотрудничество.</strong></p>
+					<p>A gift can be anything. For example, it can be company services discount. The important aspect is that your clients gets something <strong>personal</strong> and <strong>offer to continue partnership.</strong></p>
 				</div>
 			</div>
-			<div class="level-4__text text-4">
+			<div class="level-4__text text-4" data-number="4">
 				<div class="text-content game-obstacle">
-					<p>Через несколько недель у&nbsp;вас появляется ещё один повод <strong>напомнить о&nbsp;себе</strong> и&nbsp;<strong>стимулировать продажи</strong> в&nbsp;начале нового года.</p>
+					<p>As it gets used, the game builds up <strong>analytical information</strong>, which can be used to <strong>stimulate sales</strong> at&nbsp;the beggining of new year.</p>
 				</div>
 			</div>
 			<div class="clearfix"></div>
@@ -258,13 +272,13 @@
 <section class="game-level level-5" id="level_5" data-level-id="5">
 	<!-- Уровень 5 -->
 	<div class="level-content">
-		<div class="level-5__price" style="background-image: url('../assets/img/level-5__price_ru.svg')"></div>
-		<p class="level-5__price-info text-uppercase"><span class="game-obstacle">Стоимость поздравления, аналогичного</span><br><span class="game-obstacle">этому сайту с игрой, которую вы можете</span><br><span class="game-obstacle">попробовать сейчас</span></p>
+		<div class="level-5__price" style="background-image: url('../assets/img/level-5__price_en.svg')"></div>
+		<p class="level-5__price-info text-uppercase"><span class="game-obstacle">Cost of web-app, similar to</span><br><span class="game-obstacle">this website with a game, that you can</span><br><span class="game-obstacle">try now</span></p>
 		<ul class="level-5__list">
-			<li><span class="game-obstacle">Адаптивная вёрстка</span></li>
-			<li><span class="game-obstacle">Уникальный дизайн сайта</span></li>
-			<li><span class="game-obstacle">Удобный инструмент</span><br/><span class="game-obstacle">управления базой данных</span></li>
-			<li><span class="game-obstacle">10 видов игр на выбор</span></li>
+				<li><span class="game-obstacle">Adaptive layout for your website</span></li>
+				<li><span class="game-obstacle">Unique design for the theme you want</span></li>
+				<li><span class="game-obstacle">Convenient tool for</span><br/><span class="game-obstacle">managing database</span></li>
+				<li><span class="game-obstacle">5 types of games to choose from</span></li>
 		</ul>
 		<div class="level-5__right-block">
 			<div class="level-5__controls text-center">
@@ -274,14 +288,14 @@
 				<span class="level-5__control game-obstacle">↓</span>
 				<span class="level-5__control game-obstacle">→</span>
 			</div>
-			<p class="text-center text-uppercase"><span class="game-obstacle">Управление</span></p>
+			<p class="text-center text-uppercase"><span class="game-obstacle">How to play</span></p>
 			<div class="game__start_position">
 				<span class="game__player game-obstacle"></span>
 			</div>
-			<p class="text-center text-uppercase"><span class="text-primary game-obstacle">Соберите все подарки,</span><br><span class="game-obstacle">а потом раздайте <br>их людям</span></p>
-			<p class="text-center text-uppercase"><span class="text-primary game-obstacle">Избегайте столкновения</span> <br><span class="game-obstacle">деда мороза с текстом,</span> <br><span class="game-obstacle">обходите бомбы и ямы</span></p>
+			<p class="text-center text-uppercase"><span class="text-primary game-obstacle">Collect all the gifts,</span><br><span class="game-obstacle">and then give them <br>to people</span></p>
+				<p class="text-center text-uppercase"><span class="text-primary game-obstacle">As Santa, you should avoid collisions</span> <br><span class="game-obstacle">with text blocks,</span> <br><span class="game-obstacle">bombs and pits.</span></p>
 		</div>
-		<a href="#" class="level-5__btn game-obstacle"><span class="sr-only">Играть</span></a>
+		<a href="#" class="level-5__btn game-obstacle"><span class="sr-only">PLAY!</span></a>
 	</div>
 </section>
 <section class="game-level level-6" id="level_6" data-level-id="6">
@@ -291,46 +305,46 @@
 			<form class="form-horizontal" id="santa_form" action="javascript:void(null);" onsubmit="send()" data-sent="false" method="post">
 				<div class="form-group">
 					<div class="col-xs-4 col-xs-offset-4">
-						<input name="name" type="text" class="form-control input-lg text-uppercase bg-info" placeholder="ПРЕДСТАВЬТЕСЬ, ПОЖАЛУЙСТА" required>
+						<input name="name" type="text" class="form-control input-lg text-uppercase bg-info" placeholder="YOUR NAME" required>
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-xs-4 col-xs-offset-4">
-						<input name="email" type="email" class="form-control input-lg text-uppercase bg-info" placeholder="ЭЛЕКТРОННАЯ ПОЧТА" required>
+						<input name="email" type="email" class="form-control input-lg text-uppercase bg-info" placeholder="EMAIL" required>
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-xs-4 col-xs-offset-4">
-						<input name="phone" type="tel" class="form-control input-lg text-uppercase bg-info" placeholder="ТЕЛЕФОН" required>
+						<input name="phone" type="tel" class="form-control input-lg text-uppercase bg-info" placeholder="PHONE" required>
 					</div>
 					<div class="col-xs-2">
-						<input name="promo" id="promo-code" type="text" class="form-control input-lg text-uppercase" placeholder="ПРОМО КОД">
+						<input name="promo" id="promo-code" type="text" class="form-control input-lg text-uppercase" placeholder="PROMOTIONAL CODE">
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-xs-4 col-xs-offset-4">
 						<label>
-							<input name="subscribe" type="checkbox" class="checkbox"> <span class="checkbox-text">ДЕРЖИТЕ МЕНЯ В КУРСЕ <br>КРЕАТИВНЫХ ПРОГРАММ СТУДИИ!</span>
+							<input name="subscribe" type="checkbox" class="checkbox"> <span class="checkbox-text">KEEP ME IN TOUCH <br>WITH YOUR CREATIVE PROGRAMS!</span>
 						</label>
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-xs-4 col-xs-offset-4">
-						<input class="btn btn-lg btn-info btn-block" type="submit" value="ОТПРАВИТЬ">
+						<input class="btn btn-lg btn-info btn-block" type="submit" value="SEND">
 					</div>
 				</div>
 			</form>
 			<div id="form_success" class="alert alert-success" role="alert">
-				Ваша заявка принята!
+				Your application is accepted!
 			</div>
 			<div id="form_error" class="alert alert-danger" role="alert">
-				Что-то пошло не так, попробуйте в следующий раз :(
+				Something went wrong, try the next time :(
 			</div>
 			<div id="form_danger" class="alert alert-danger" role="alert">
-				В форме присутствуют неверные данные.
+				In the present form of incorrect data.
 			</div>
 			<div id="form_already" class="alert alert-warning" role="alert">
-				Вы уже отправили заявку :)
+				You have already sent a request :)
 			</div>
 		</div>
 	</div>
@@ -366,10 +380,10 @@
 				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true"><span class="modal-close"></span></span><span class="sr-only">Close</span></button>
 			</div>
 			<div class="modal-body">
-				<p class="lead text-center"><span id="gift-count-text">ВАМ ОСТАЛОСЬ СОБРАТЬ ВСЕГО </span> <span class="text-primary js-modal-gift-count">X</span><span id="gift-count-word"> ПОДАРКОВ!</span></p>
+				<p class="lead text-center"><span id="gift-count-text">YOU HAVE LEFT TO COLLECT ONLY </span> <span class="text-primary js-modal-gift-count">X</span><span id="gift-count-word"> GIFTS!</span></p>
 			</div>
 			<div class="modal-footer text-center">
-				<button type="button" class="btn btn-primary btn-lg text-uppercase" data-dismiss="modal" id="new_game_btn">Играть снова</button>
+				<button type="button" class="btn btn-primary btn-lg text-uppercase" data-dismiss="modal" id="new_game_btn">Play again</button>
 			</div>
 		</div>
 	</div>
@@ -381,10 +395,10 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-body">
-				<p class="lead lead-sm text-center text-uppercase">ВЫ ОТЛИЧНЫЙ ДЕД&nbsp;МОРОЗ И&nbsp;ТЕПЕРЬ МОЖЕТЕ ПОЛУЧИТЬ ПОДАРОК ОТ&nbsp;НАШЕЙ СТУДИИ ПРИ&nbsp;ЗАКАЗЕ ПРОМО-ИГРЫ!</p>
+				<p class="lead lead-sm text-center text-uppercase">YOU ARE A GREAT SANTA CLAUS AND IS NOW ABLE TO RECEIVE A GIFT FROM OUR STUDIO ORDER PROMO GAMES!</p>
 			</div>
 			<div class="modal-footer text-center">
-				<button type="button" class="btn btn-primary btn-lg text-uppercase" data-dismiss="modal">ОК</button>
+				<button type="button" class="btn btn-primary btn-lg text-uppercase" data-dismiss="modal">OK</button>
 			</div>
 		</div>
 	</div>
@@ -396,10 +410,10 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-body">
-				<p class="lead lead-sm text-center text-uppercase">А ТЕПЕРЬ РАЗДАЙТЕ <br>ПОДАРКИ ЛЮДЯМ!</p>
+				<p class="lead lead-sm text-center text-uppercase">NOW GIVE<br>GIFTS TO PEOPLE!</p>
 			</div>
 			<div class="modal-footer text-center">
-				<button type="button" class="btn btn-primary btn-lg text-uppercase" data-dismiss="modal">ОК</button>
+				<button type="button" class="btn btn-primary btn-lg text-uppercase" data-dismiss="modal">OK</button>
 			</div>
 		</div>
 	</div>
