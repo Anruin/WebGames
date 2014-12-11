@@ -178,6 +178,7 @@ $(function() {
 		if (!source.start)
 			source.start = source.noteOn;
 		source.start(time);
+		return source;
 	}
 	try {
 		window.AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -188,6 +189,6 @@ $(function() {
 	}
 	loadBuffers();
 	window.sound = function(name){
-		playSound(BUFFERS[name], 0);
+		return playSound(BUFFERS[name], 0);
 	};
 })

@@ -18,11 +18,11 @@ define([
 		this.isKeyDown = false;
 		var controller = this;
 		this.keyUp = _.debounce(function(){
+			controller.steps.stop();
 			controller.isKeyDown = false;
 		}, 500);
-
 		this.stepSound = _.throttle(function(){
-			window.sound('steps');
+			controller.steps = window.sound('steps');
 		}, 5000)
 
 		this.controls = config.params.pawn.general.controls;
