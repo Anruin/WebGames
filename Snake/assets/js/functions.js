@@ -187,19 +187,7 @@ $(function() {
 		alert("Web Audio API is not supported in this browser");
 	}
 	loadBuffers();
-	$('.level-3__advantage.adv-1').click(function(){
-		playSound(BUFFERS.steps, 0);
-	});
-	$('.level-3__advantage.adv-2').click(function(){
-		playSound(BUFFERS.pit, 0);
-	});
-	$('.level-3__advantage.adv-3').click(function(){
-		playSound(BUFFERS.bang, 0);
-	});
-	$('.level-3__advantage.adv-4-1').click(function(){
-		playSound(BUFFERS.pickup, 0);
-	});
-	$('.level-3__advantage.adv-5').click(function(){
-		playSound(BUFFERS.give, 0);
-	});
+	window.sound = function(name){
+		playSound(BUFFERS[name], 0);
+	};
 })

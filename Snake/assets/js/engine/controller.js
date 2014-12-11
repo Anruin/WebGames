@@ -21,6 +21,10 @@ define([
 			controller.isKeyDown = false;
 		}, 500);
 
+		this.stepSound = _.throttle(function(){
+			window.sound('steps');
+		}, 5000)
+
 		this.controls = config.params.pawn.general.controls;
 	};
 	se.Controller.prototype.getByKey = function(_key) {
@@ -44,6 +48,7 @@ define([
 		var control = this.getByKey(_key);
 		// Perform mapped action on pawn
 		if (control) {
+			this.stepSound();
 			this.pawn.action(control.func, control.params);
 			return true;
 		}

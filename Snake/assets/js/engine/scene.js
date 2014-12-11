@@ -52,6 +52,8 @@ define([
 		curScene.pawns.map(function(pawn){
 			curScene.collectibles.map(function(obj){
 				if(pawn.item.bounds.intersects(obj.item.bounds)){
+					window.sound("pickup");
+
 					obj.item.remove();
 
 					curScene.collectibles.splice(curScene.collectibles.indexOf(obj), 1);
@@ -65,6 +67,7 @@ define([
 			curScene.enemies.map(function(obj){
 				if((obj.command == "move" || obj.command == "idle") && pawn.item.bounds.intersects(obj.item.bounds)){
 					if(obj.name == "bomb" && obj.command == "idle") {
+						window.sound("pit");
 						obj.command = "active";
 						var intervalID = setInterval(function () {
 							if (!pawn.item.bounds.intersects(obj.item.bounds)) {
@@ -73,6 +76,9 @@ define([
 							}
 						}, 200);
 					}
+
+					if(obj.name == "bomb" && obj.command == "move")
+						window.sound("bang");
 
 					obj.nextState("intersects");
 					var takenScore = helpers.calcScoreAndLives(pawn, config.params.enemy);

@@ -19,6 +19,8 @@ define([
 			if (npc.command == "active" && curScene.mainPawn.item.bounds.intersects(npc.item.bounds)
 					&& curScene.mainPawn.followers.length != 0) {
 
+				window.sound("give");
+
 				for(var prop in npc.params.onAccept)
 					npc.params[prop] = npc.params.onAccept[prop];
 
