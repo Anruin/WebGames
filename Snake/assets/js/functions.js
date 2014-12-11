@@ -174,7 +174,7 @@ $(function() {
 	function playSound(buffer, time) {
 		var source = window.context.createBufferSource();
 		source.buffer = buffer;
-		source.connect(context.destination);
+		source.connect(window.context.destination);
 		if (!source.start)
 			source.start = source.noteOn;
 		source.start(time);
