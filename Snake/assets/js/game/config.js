@@ -93,7 +93,7 @@ define(function () {
 		levels: [
 			{
 				name: "level_5",
-				scroll: 3000,
+				scroll: 10000,
 				score: 2,
 				pawn: {
 						points: [50, 78]
@@ -109,7 +109,7 @@ define(function () {
 			},
 			{
 				name: "level_4",
-				scroll: 1500,
+				scroll: 3000,
 				score: 4,
 				pawn: {
 					points: [3.1, 55.1]
@@ -138,7 +138,7 @@ define(function () {
 			},
 			{
 				name: "level_3",
-				scroll: 1500,
+				scroll: 3000,
 				score: 6,
 				pawn: {
 					points: [43.2, 56.1]
@@ -161,7 +161,7 @@ define(function () {
 			},
 			{
 				name: "level_2",
-				scroll: 1500,
+				scroll: 3000,
 				score: 8,
 				pawn: {
 					points: [48.6, 27.6]
@@ -185,7 +185,7 @@ define(function () {
 			},
 			{
 				name: "level_1",
-				scroll: 1500,
+				scroll: 3000,
 				score: 16,
 				pawn: {
 					points: [8,80]
@@ -207,7 +207,7 @@ define(function () {
 			},
 			{
 				name: "level_6", //finish, game over
-				scroll: 1000
+				scroll: 10000
 			}
 		],
 		params: {
