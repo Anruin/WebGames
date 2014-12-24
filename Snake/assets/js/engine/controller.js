@@ -70,7 +70,7 @@ define([
 		this.isKeyDown = true;
 		if(this.key!=_key)
 			this.timer = -1;
-		
+
 		this.key = _key;
 		this.resetKeyDownTm(this);
 		//this.keyUp();
