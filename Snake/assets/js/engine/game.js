@@ -46,10 +46,12 @@ define([
 		se.setDebugTools();
 
 		paper.tool.onKeyDown = function(event){
+			//console.log('keydown');
 			controller.onInput(event.key);
 			se.debugTools.onKeyDown(event);
 		};
 		paper.tool.onKeyUp = function (event) {
+			//console.log('keyup');
 			//controller.onCessation(event.key);
 		};
 		paper.tool.onMouseMove = function (event) {

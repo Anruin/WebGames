@@ -65,7 +65,7 @@ $(document).ready(function() {
 					$firstDigit.addClass('digit-' + daysLeftString.substr(daysLeftString.length - 2, 1));
 				else
 					$firstDigit.addClass('digit-0');
-				
+
 				$lastDigit.addClass('digit-' + daysLeftString.substr(daysLeftString.length - 1));
 				$days.html(dayName);
 			}
@@ -139,7 +139,7 @@ BufferLoader.prototype.loadBuffer = function(url, index) {
 		);
 	}
 	request.onerror = function() {
-		alert('BufferLoader: XHR error');
+		console.log('BufferLoader: XHR error');
 	}
 	request.send();
 }
@@ -177,6 +177,8 @@ $(function() {
 	}
 	function playSound(buffer, time) {
 		var source = window.context.createBufferSource();
+		if(!buffer)
+			return;
 		source.buffer = buffer;
 		source.connect(window.context.destination);
 		if (!source.start)
@@ -193,6 +195,6 @@ $(function() {
 	}
 	loadBuffers();
 	window.sound = function(name){
-		return playSound(BUFFERS[name], 0);
+		return playSound(BUFFERS[name], 0) || {};
 	};
 })
