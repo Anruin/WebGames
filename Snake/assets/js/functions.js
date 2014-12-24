@@ -13,6 +13,7 @@ $(document).ready(function() {
     var $triggers = $('.level-4__text, .bulb');
     $triggers.on('click', function(){
         $light_level.addClass('light-' + $(this).data('number'));
+				$('.level-4__text.text-' + $(this).data('number')).show();
     });
 		$('#order').on('click', function(){
 			if(window.game)
