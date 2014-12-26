@@ -83,7 +83,7 @@ define(function () {
 		]
 	};
 	var config = {
-		debug: true,
+		debug: false,
 		container: {
 			id: "sx-engine"
 		},

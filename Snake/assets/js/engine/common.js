@@ -70,9 +70,9 @@ define([
 		se.debugTools.lastPoints.push(se.debugTools.pointText);
 
 		se.debugTools.onKeyDown = function (event) {
-			if(event.key == "z" || event.key == "я"){
-				config.debug = !config.debug;
-			}
+			//if(event.key == "z" || event.key == "я"){
+			//	config.debug = !config.debug;
+			//}
 			if(event.key == "p" || event.key == "з"){
 				se.debugTools.percentMode = !se.debugTools.percentMode;
 			}
