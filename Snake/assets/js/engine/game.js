@@ -39,6 +39,7 @@ define([
 		var player = new se.Player();
 
 		game.activeScene.level = config.levels[0];
+		$('#santa_to_hide').hide();
 		game.initLevel();
 
 		var controller = new se.Controller(game.activeScene.mainPawn);
@@ -200,6 +201,7 @@ define([
 			$('#gift-count-word').html(wordNum);
 		}
 		else if(status == "win"){
+			window.sound("win");
 			$('#gameWinModal').modal('show');
 			$('#promo-code').val("promo");
 		}

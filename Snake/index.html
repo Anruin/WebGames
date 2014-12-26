@@ -61,7 +61,7 @@
 			width: 30%;
 			margin-right: -15%;
 			right: 20%;
-			bottom: 3.33%;
+			top: 55%;
 		}
 		.level-5__new-right-block p {
 			font-weight: 700;
@@ -83,6 +83,18 @@
 			/*margin-bottom: -120px;*/
 			/*position: static;*/
 		/*}*/
+		.game-levels .game-level.level-4 .level-4__texts .level-4__text.text-1 {
+			width:34%
+		}
+		.game-levels .game-level.level-4 .level-4__texts .level-4__text.text-2 {
+			width:28%
+		}
+		.game-levels .game-level.level-4 .level-4__texts .level-4__text.text-3 {
+			width:25%
+		}
+		.game-levels .game-level.level-4 .level-4__texts .level-4__text.text-4 {
+			width:19%
+		}
 	</style>
 </head>
 <body>
@@ -130,7 +142,7 @@
 		</ul>
 
 		<ul class="nav navbar-nav nav-block-btn">
-			<li><button type="button" class="btn btn-primary navbar-btn text-uppercase" id="order">Заказать</button></li>
+			<li><button type="button" class="btn btn-primary navbar-btn text-uppercase" id="order">Играть</button></li>
 		</ul>
 
 		<ul class="nav navbar-nav nav-block-tel">
@@ -211,25 +223,25 @@
 				<div class="col-xs-8 col-xs-offset-2 level-2__icons">
 					<div class="col-xs-3 text-center">
 						<div class="level-2__icon">
-							<span class="svgicon svgicon-email game-obstacle"></span>
+							<span class="svgicon svgicon-website game-obstacle"></span>
 						</div>
 						<p class="text-uppercase"><span class="game-obstacle">ПЯТЬ ВЕБ-</span><br><span class="game-obstacle">ПРОЕКТОВ</span></p>
 					</div>
 					<div class="col-xs-3 text-center">
 						<div class="level-2__icon">
-							<span class="svgicon svgicon-website game-obstacle"></span>
+							<div class="svgicon game-obstacle game__image" style="background-image: url('assets/img/level-2_icon-2.svg'); width:45px; height:45px;"></div>
 						</div>
 						<p class="text-uppercase"><span class="game-obstacle">ТРИ ПРОЕКТА</span><br><span class="game-obstacle">АЙДЕНТИКИ</span></p>
 					</div>
 					<div class="col-xs-3 text-center">
 						<div class="level-2__icon">
-							<span class="svgicon svgicon-game game-obstacle"></span>
+							<div class="svgicon game-obstacle game__image" style="background-image: url('assets/img/level-2_icon-3.svg'); width:45px; height:45px;"></div>
 						</div>
 						<p class="text-uppercase"><span class="game-obstacle">ТРИ НАБОРА</span><br><span class="game-obstacle">УПАКОВКИ</span></p>
 					</div>
 					<div class="col-xs-3 text-center">
 						<div class="level-2__icon">
-							<span class="svgicon svgicon-analytics game-obstacle"></span>
+							<div class="svgicon game-obstacle game__image" style="background-image: url('assets/img/level-2_icon-4.svg'); width:45px; height:45px;"></div>
 						</div>
 						<p class="text-uppercase"><span class="game-obstacle">МНОГО ВСЕГО</span><br><span class="game-obstacle">ПЕЧАТНОГО</span></p>
 					</div>
@@ -244,7 +256,7 @@
 		<div class="container level-3__caption">
 			<h1 class="text-uppercase text-center"><span class="game-obstacle">А ЕЩЁ НАМ ОЧЕНЬ</span><br><span class="game-obstacle">ПРИЯТНО, ЧТО МЫ:</span></h1>
 		</div>
-		<div class="container level-3__text text-uppercase text-center"><span class="game-obstacle"></span></div>
+		<div class="container level-3__text text-uppercase text-center"></div>
 		<div class="level-3__advantage adv-1">
 			<div class="level-3__icon"><span class="game-obstacle">1</span></div>
 			<p class="text-uppercase"><span class="game-obstacle">ПОРАБОТАЛИ С КУЧЕЙ</span><br><span class="game-obstacle">ИНТЕРЕСНЫХ ЛЮДЕЙ</span></p>
@@ -337,7 +349,7 @@
 		</div>
 		<div class="level-5__right-block">
 			<div class="game__start_position">
-				<span class="game__player game-obstacle"></span>
+				<span class="game__player game-obstacle" id="santa_to_hide"></span>
 			</div>
 			<div class="level-5__controls text-center">
 				<span class="level-5__control game-obstacle">↑</span>
@@ -386,7 +398,7 @@
 				</div>
 				<div class="form-group">
 					<div class="col-xs-4 col-xs-offset-4">
-						<input name="phone" type="tel" class="form-control input-lg text-uppercase bg-info" placeholder="ТЕЛЕФОН" required>
+						<input name="phone" type="tel" class="form-control input-lg text-uppercase bg-info" placeholder="ТЕКСТ ПОЗДРАВЛЕНИЯ" required>
 					</div>
 				</div>
 				<div class="form-group">
@@ -463,7 +475,7 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-body">
-				<p class="lead lead-sm text-center text-uppercase">Вы отличный Дед Мороз и теперь можете получить подарок. Для этого просто напишите нам</p>
+				<p class="lead lead-sm text-center text-uppercase">Вы отличный Дед Мороз<br>и теперь можете получить подарок.<br>Для этого просто напишите нам.</p>
 			</div>
 			<div class="modal-footer text-center">
 				<button type="button" class="btn btn-primary btn-lg text-uppercase" data-dismiss="modal">ОК</button>

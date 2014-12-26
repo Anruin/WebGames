@@ -96,7 +96,7 @@ define(function () {
 				scroll: 10000,
 				score: 2,
 				pawn: {
-						points: [50, 78]
+						points: [50, 63.5]
 				},
 				collectible: {
 					points: [[49.4, 51], [13.9, 48.5]],
@@ -141,7 +141,7 @@ define(function () {
 				scroll: 3000,
 				score: 6,
 				pawn: {
-					points: [43.2, 56.1]
+					points: [50, 42]
 				},
 				collectible: {
 					points: [[16.7, 33.3], [82.1, 33.3]],

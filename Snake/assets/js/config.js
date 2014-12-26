@@ -15,9 +15,6 @@ require(['app','helpers/helpers','game/config','se','engine/common', "domReady!"
 	helpers.addAllImagesToDOM();
 	window.isAutoStart = false;
 	$('.level-5__btn').click(function(event){
-		if(window.isAutoStart)
-			return false;
-
 		se.disable_scroll();
 		app();
 		return false;

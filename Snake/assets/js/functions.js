@@ -11,7 +11,7 @@ $(document).ready(function() {
 		resize : false,
 		keyboardScrolling: false,
 		afterLoad: function(anchorLink, index){
-			if(index == 4 && window.isAutoStart){
+			if(index == 5 && window.isAutoStart){
 				$('.level-5__btn').trigger("click");
 				window.isAutoStart = false;
 			}
@@ -44,12 +44,14 @@ $(document).ready(function() {
 				$('.level-4__text.text-' + $(this).data('number')).show();
     });
 		$('#order').on('click', function(){
-			if(window.game)
-				game.over("exit");
-
-			$('html body').animate({
-				scrollTop: $('#level_6').offset().top
-			}, 1000);
+			if(!window.game)
+				$('#new_game_btn').trigger('click');
+			//if(window.game)
+			//	game.over("exit");
+			//
+			//$('html body').animate({
+			//	scrollTop: $('#level_6').offset().top
+			//}, 1000);
 		});
 
 	function enducement(num, one, two, five){
@@ -181,7 +183,7 @@ BufferLoader.prototype.load = function() {
 $(function() {
 	var BUFFERS = {};
 	var context = null;
-	var names = ["steps", "pit", "bang", "pickup", "give"];
+	var names = ["steps", "pit", "bang", "pickup", "give", "win"];
 	var BUFFERS_TO_LOAD = {};
 	names.map(function(name){
 		BUFFERS_TO_LOAD[name] = 'http://games.narleyn.ru/Snake/assets/sounds/' + name + '.mp3';
