@@ -17,7 +17,7 @@ define([
 			paper.project = new paper.Project(document.getElementById('sx-game'));
 			paper.project.tool = new paper.Tool({});
 			paper.project.activate();
-			paper.project.view.pause();
+			//paper.project.view.pause();
 			window.game = new se.Game();
 			window.game.create();
 			console.log('Game created', game);

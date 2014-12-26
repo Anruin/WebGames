@@ -78,6 +78,7 @@ define([
 			console.log("react to resize");
 		}, 500);
 		paper.project.view.onResize = game.resizeDebounce;
+		setTimeout(game.resizeDebounce, 1000);
 	};
 
 	/**
