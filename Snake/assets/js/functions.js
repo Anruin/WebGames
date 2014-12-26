@@ -186,7 +186,7 @@ $(function() {
 	var names = ["steps", "pit", "bang", "pickup", "give", "win"];
 	var BUFFERS_TO_LOAD = {};
 	names.map(function(name){
-		BUFFERS_TO_LOAD[name] = 'http://games.narleyn.ru/Snake/assets/sounds/' + name + '.mp3';
+		BUFFERS_TO_LOAD[name] = 'http://game.verstak.ru/assets/sounds/' + name + '.mp3';
 	});
 
 	function loadBuffers() {

@@ -46,8 +46,10 @@ define([
 			clearTimeout(controller.keyDownTm);
 
 		controller.keyDownTm = setTimeout(function(){
-			if(controller.steps.stop)
-				controller.steps.stop();
+			try{
+				if(controller.steps.stop)
+					controller.steps.stop();
+			}
 			controller.steps.isend = true;
 			controller.isKeyDown = false;
 		}, 500);
