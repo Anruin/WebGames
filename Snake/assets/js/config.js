@@ -13,26 +13,28 @@ requirejs.config({
 
 require(['app','helpers/helpers','game/config','se','engine/common', "domReady!"], function(app, helpers,  config, se) {
 	helpers.addAllImagesToDOM();
-	var isDisabled = false;
+	window.isAutoStart = false;
 	$('.level-5__btn').click(function(event){
-		if(isDisabled)
+		if(window.isAutoStart)
 			return false;
 
 		se.disable_scroll();
 		app();
 		return false;
 	});
-	var debounceComplete = _.debounce(function() {
-		isDisabled = false;
-		$('.level-5__btn').trigger("click");
-	}, 500);
+	//var debounceComplete = _.debounce(function() {
+	//	window.isAutoStart = false;
+	//	$('.level-5__btn').trigger("click");
+	//}, 500);
+
 	$('#new_game_btn').click(function(event){
-		isDisabled = true;
-		$('body,html').stop(true,true).animate({
-			scrollTop: $('#' + config.levels[0].name).offset().top
-		}, {
-			duration: config.levels[0].scroll,
-			complete: debounceComplete
-		});
+		window.isAutoStart = true;
+		//$('body,html').stop(true,true).animate({
+		//	scrollTop: $('#' + config.levels[0].name).offset().top
+		//}, {
+		//	duration: config.levels[0].scroll,
+		//	complete: debounceComplete
+		//});
+		$.fn.fullpage.moveTo(5);
 	});
 });

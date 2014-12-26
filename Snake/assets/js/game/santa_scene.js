@@ -39,6 +39,7 @@ define([
 			if(!bulb.isActive && curScene.mainPawn.item.bounds.intersects(bulb.item.bounds)){
 				$(bulb.elem).trigger("click");
 				bulb.isActive = true;
+				game.resizeDebounce(true);
 			}
 		});
 	};

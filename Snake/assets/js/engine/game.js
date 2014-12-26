@@ -62,7 +62,7 @@ define([
 			game.onMouseDown(event);
 		};
 
-		var resizeDebounce = _.debounce(function(){
+		game.resizeDebounce = _.debounce(function(isNotSetBulbs){
 			game.activeScene.initObstacles();
 
 			var toReplace = [game.activeScene.pawns, game.activeScene.collectibles, game.activeScene.npc, game.activeScene.enemies];
@@ -72,10 +72,11 @@ define([
 						helpers.setNotIntersectRandomPoint(actor, game.activeScene.obstacles);
 				});
 			});
-			setBulbs ();
+			if(!isNotSetBulbs)
+				game.setBulbs ();
 			console.log("react to resize");
-		}, 300);
-		paper.project.view.onResize = resizeDebounce;
+		}, 500);
+		paper.project.view.onResize = game.resizeDebounce;
 	};
 
 	/**
@@ -133,17 +134,20 @@ define([
 				helpers.initLives();
 			}
 
-			var debounceComplete = _.debounce(function() {
-				game.startLevel();
-				setBulbs();
-			}, 500);
+			//var debounceComplete = _.debounce(function() {
+			//	game.startLevel();
+			//	game.setBulbs();
+			//}, 500);
 			game.activeScene.prepared = false;
-			$('body,html').stop(true,true).animate({
-				scrollTop: $('#' + this.activeScene.level.name).offset().top
-			}, {
-				duration: game.activeScene.level.scroll,
-				complete: debounceComplete
-			});
+			game.isToStartLvl = true;
+			var index = $('.game-level#' + game.activeScene.level.name).index();
+			$.fn.fullpage.moveTo(index + 1);
+			//$('body,html').stop(true,true).animate({
+			//	scrollTop: $('#' + this.activeScene.level.name).offset().top
+			//}, {
+			//	duration: game.activeScene.level.scroll,
+			//	complete: debounceComplete
+			//});
 		}
 		helpers.clearActorsArray(game.activeScene.collectibles);
 		helpers.clearActorsArray(game.activeScene.enemies);
@@ -172,10 +176,10 @@ define([
 
 		document.getElementById('sx-game').style.display = "none";
 
-		$('body,html').stop(true,true).animate({
-			scrollTop: $('#' + game.activeScene.level.name).offset().top
-		}, game.activeScene.level.scroll);
-
+		//$('body,html').stop(true,true).animate({
+		//	scrollTop: $('#' + game.activeScene.level.name).offset().top
+		//}, game.activeScene.level.scroll);
+		$.fn.fullpage.moveTo(6);
 		se.enable_scroll();
 
 		if(status == "lose") {
@@ -200,7 +204,7 @@ define([
 			$('#promo-code').val("promo");
 		}
 	};
-	function setBulbs () {
+	se.Game.prototype.setBulbs = function () {
 		if(game.activeScene.bulbs && game.activeScene.bulbs.length)
 			game.activeScene.bulbs.map(function(bulb){
 				bulb.item.remove();
@@ -226,6 +230,7 @@ define([
 			if(bulb){
 				$(bulb.elem).trigger("click");
 				bulb.isActive = true;
+				game.resizeDebounce(true);
 			}
 		}
 	};

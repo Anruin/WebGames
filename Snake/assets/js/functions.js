@@ -4,8 +4,35 @@ $(function(){
 
 $(document).ready(function() {
     BackgroundAnimation();
+	var padding = '500px';
+	$('#game_levels').fullpage({
+		paddingBottom: padding,
+		scrollingSpeed: 1500,
+		keyboardScrolling: false,
+		afterLoad: function(anchorLink, index){
+			if(index == 4 && window.isAutoStart){
+				$('.level-5__btn').trigger("click");
+				window.isAutoStart = false;
+			}
+			if(window.game && window.game.isToStartLvl){
+				window.game.startLevel();
+				window.game.setBulbs();
+				window.game.isToStartLvl = false;
+			}
+		},
+		afterResize: function(){
+			setTimeout(function(){
+				if(window.game && window.game.resizeDebounce)
+					game.resizeDebounce();
+			}, 1000);
+
+		}
+	});
 	var snowpath = window.en ? "../assets/img/snowfall/flake.png" : "./assets/img/snowfall/flake.png";
-	$('.game-level.level-1').snowfall({image :snowpath, minSize: 10, maxSize:32}).css('overflow', 'hidden');
+	$('.game-level.level-1').css('padding-bottom','0px').snowfall({image :snowpath, minSize: 10, maxSize:32})
+			.css({
+				'overflow': 'hidden'
+			});
 
     var $light_level = $('.level-4');
     var i;

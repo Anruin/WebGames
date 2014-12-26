@@ -13,6 +13,7 @@
 	<link href="assets/css/bootstrap/modal.css" rel="stylesheet">
 	<link href="assets/css/icomoon.css" rel="stylesheet">
 	<link href="assets/css/fonts.css" rel="stylesheet">
+	<link href="assets/css/jquery.fullPage.css" rel="stylesheet">
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]>
@@ -151,7 +152,7 @@
 </nav>
 
 <div class="game-levels" id="game_levels">
-<section class="game-level level-1" id="level_1" data-level-id="1">
+<section class="game-level level-1 section" id="level_1" data-level-id="1">
 	<!-- Уровень 1 -->
 	<div class="level-content">
 		<div class="text-center">
@@ -170,7 +171,7 @@
 		</div>
 	</div>
 </section>
-<section class="game-level level-2" id="level_2" data-level-id="2">
+<section class="game-level level-2 section" id="level_2" data-level-id="2">
 	<!-- Уровень 2 -->
 	<div class="level-content">
 		<div class="container level-2__block-1">
@@ -237,7 +238,7 @@
 		</div>
 	</div>
 </section>
-<section class="game-level level-3" id="level_3" data-level-id="3">
+<section class="game-level level-3 section" id="level_3" data-level-id="3">
 	<!-- Уровень 3 -->
 	<div class="level-content">
 		<div class="container level-3__caption">
@@ -266,7 +267,7 @@
 		</div>
 	</div>
 </section>
-<section class="game-level level-4" id="level_4" data-level-id="4">
+<section class="game-level level-4 section" id="level_4" data-level-id="4">
 	<!-- Уровень 4 -->
 	<style>
 		.bulb {
@@ -296,34 +297,40 @@
 		</div>
 		<div class="level-4__texts white-font text-uppercase">
 			<div class="level-4__text text-1" data-number="1">
-				<div class="game-obstacle">
-					E-MAIL<br>АГЕНТА
-				</div>
+					<span class="game-obstacle">E-MAIL АГЕНТА</span>
 			</div>
 			<div class="level-4__text text-2" data-number="2">
-				<div class="game-obstacle">
+				<span class="game-obstacle">
 					ПРОМО-САЙТ
-				</div>
+				</span>
 			</div>
 			<div class="level-4__text text-3" data-number="3">
-				<div class="game-obstacle">
-					ИГРУ<br>С ПРИЗАМИ
-				</div>
+				<span class="game-obstacle">
+					ИГРУ
+				</span>
+				<br>
+				<span class="game-obstacle">
+					С ПРИЗАМИ
+				</span>
 			</div>
 			<div class="level-4__text text-4" data-number="4">
-				<div class="game-obstacle">
-					АНАЛИТИКУ<br>ПО БАЗЕ КЛИЕНТОВ
-				</div>
+				<span class="game-obstacle">
+					АНАЛИТИКУ
+				</span>
+				<br>
+				<span class="game-obstacle">
+					ПО БАЗЕ КЛИЕНТОВ
+				</span>
 			</div>
 			<div class="clearfix"></div>
 		</div>
 	</div>
 </section>
-<section class="game-level level-5" id="level_5" data-level-id="5">
+<section class="game-level level-5 section" id="level_5" data-level-id="5">
 	<!-- Уровень 5 -->
 	<div class="level-content">
-		<div class="level-5__price" style="background-image: url('assets/img/level-5__price_ru.svg')"></div>
-		<p class="level-5__price-info text-uppercase"><span class="game-obstacle">Стоимость поздравления, аналогичного</span><br><span class="game-obstacle">этому сайту с игрой, которую вы можете</span><br><span class="game-obstacle">попробовать сейчас</span></p>
+		<div class="level-5__price" style="background-image: url('assets/img/OfficeSanta.svg')"></div>
+		<p class="level-5__price-info text-uppercase"></p>
 		<div class="new-left-text">
 			<p class="text-uppercase"><span class="text-primary game-obstacle">Соберите все подарки,</span><br><span class="game-obstacle">а потом раздайте <br>их людям</span></p>
 			<p class="text-uppercase"><span class="text-primary game-obstacle">Избегайте столкновения</span> <br><span class="game-obstacle">деда мороза с текстом,</span> <br><span class="game-obstacle">обходите бомбы и ямы</span></p>
@@ -343,26 +350,26 @@
 		</div>
 		<div class="level-5__new-right-block">
 			<div class="game__start_position" style="height: 60px;">
-				<span class="game__image" style="background-image: url('./assets/img/gift-5-3.png');"></span>
+				<span class="game__image game-obstacle" style="background-image: url('./assets/img/gift-5-3.png');"></span>
 			</div>
 			<p class="text-center text-uppercase"><span class="game-obstacle">Подарки</span></p>
 			<div class="game__start_position ">
-				<span class="game__player" style="background-image: url('./assets/img/npc-image-1.png');"></span>
+				<span class="game__player game-obstacle" style="background-image: url('./assets/img/npc-image-1.png');"></span>
 				<span class="game__player" style="background-image: url('');"></span>
-				<span class="game__player" style="background-image: url('./assets/img/npc-image-2.png');"></span>
+				<span class="game__player game-obstacle" style="background-image: url('./assets/img/npc-image-2.png');"></span>
 			</div>
 			<p class="text-center text-uppercase"><span class="game-obstacle">Девочки и мальчики</span></p>
 			<div class="game__start_position">
-				<span class="game__player" style="background-image: url('./assets/img/bomb-02.png');"></span>
+				<span class="game__player game-obstacle" style="background-image: url('./assets/img/bomb-02.png');"></span>
 				<span class="game__player" style="background-image: url('');"></span>
-				<span class="game__player" style="background-image: url('./assets/img/pit.png');"></span>
+				<span class="game__player game-obstacle" style="background-image: url('./assets/img/pit.png');"></span>
 			</div>
 			<p class="text-center text-uppercase"><span class="game-obstacle">Опасности</span></p>
 		</div>
 		<a href="#" class="level-5__btn game-obstacle"><span class="sr-only">Играть</span></a>
 	</div>
 </section>
-<section class="game-level level-6" id="level_6" data-level-id="6">
+<section class="game-level level-6 section" id="level_6" data-level-id="6">
 	<!-- Уровень 6 -->
 	<div class="level-content">
 		<div class="container level-6__form">
@@ -482,6 +489,8 @@
 
 <!-- Scripts  -->
 <script src="assets/js/vendor/jquery.js"></script>
+<script src="assets/js/vendor/jquery.slimscroll.min.js"></script>
+<script src="assets/js/vendor/jquery.fullPage.js"></script>
 <!--<script src="assets/js/vendor/jquery.visible.min.js"></script>-->
 <script src="assets/js/vendor/bootstrap.min.js"></script>
 <script src="assets/js/vendor/TweenMax.min.js"></script>
