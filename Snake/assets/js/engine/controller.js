@@ -46,6 +46,8 @@ define([
 			clearTimeout(controller.keyDownTm);
 
 		controller.keyDownTm = setTimeout(function(){
+			controller.steps.isend = true;
+			controller.isKeyDown = false;
 			try{
 				if(controller.steps.stop)
 					controller.steps.stop();
@@ -53,8 +55,6 @@ define([
 			catch(e) {
 				console.log('cant stop');
 			}
-			controller.steps.isend = true;
-			controller.isKeyDown = false;
 		}, 500);
 	};
 	se.Controller.prototype.getByKey = function(_key) {

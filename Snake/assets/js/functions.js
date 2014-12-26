@@ -126,6 +126,7 @@ function send() {
 		url: 'order.php',
 		data: msg,
 		success: function(data) {
+			console.log(data);
 			if(data.status == "success"){
 				$('#form_success').show();
 				$('#santa_form').data("sent", true);
@@ -134,6 +135,7 @@ function send() {
 				$('#form_danger').show();
 		},
 		error:  function(xhr, str){
+			console.log(xhr + str);
 			$('#form_error').show();
 		}
 	});
