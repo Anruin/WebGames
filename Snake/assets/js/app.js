@@ -5,6 +5,6 @@ define([
 	//$('body,html').stop(true,true).animate({
 	//	scrollTop: $('#level_5').offset().top
 	//}, config.levels[0].scroll);
-	$.fn.fullpage.moveTo(5);
+	//$.fn.fullpage.moveTo(5);
 	return test;
 });
