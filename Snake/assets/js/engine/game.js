@@ -66,7 +66,7 @@ define([
 		game.resizeDebounce = _.debounce(function(isNotSetBulbs){
 			game.activeScene.initObstacles();
 
-			var toReplace = [game.activeScene.pawns, game.activeScene.collectibles, game.activeScene.npc, game.activeScene.enemies];
+			var toReplace = [game.activeScene.pawns, game.activeScene.collectibles, game.activeScene.npc];
 			toReplace.map(function(array){
 				array.map(function(actor){
 					if(helpers.isIntersects(game.activeScene.obstacles, actor))
