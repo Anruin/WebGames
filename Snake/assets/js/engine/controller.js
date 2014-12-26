@@ -50,6 +50,9 @@ define([
 				if(controller.steps.stop)
 					controller.steps.stop();
 			}
+			catch(e) {
+				console.log('cant stop');
+			}
 			controller.steps.isend = true;
 			controller.isKeyDown = false;
 		}, 500);
