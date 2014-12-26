@@ -8,6 +8,7 @@ $(document).ready(function() {
 	$('#game_levels').fullpage({
 		paddingBottom: padding,
 		scrollingSpeed: 1500,
+		resize : false,
 		keyboardScrolling: false,
 		afterLoad: function(anchorLink, index){
 			if(index == 4 && window.isAutoStart){
