@@ -61,6 +61,27 @@ define([
 		paper.tool.onMouseDown = function (event) {
 			se.debugTools.onMouseDown(event);
 			game.onMouseDown(event);
+
+
+		};
+		paper.tool.onMouseDrag = function (event) {
+			var pawnPoint = game.activeScene.mainPawn.item.position;
+			//if($.browser.device){
+			var xDist = event.point.x - pawnPoint.x;
+			var yDist = event.point.y - pawnPoint.y;
+
+			var key;
+			if(Math.abs(xDist) > Math.abs(yDist)){
+				key = xDist > 0 ? "right" : "left";
+			}
+			else{
+				key = yDist > 0 ? "down" : "up";
+			}
+			//setInterval(function(){
+			//
+			//})
+			controller.onInput(key);
+			//}
 		};
 
 		game.resizeDebounce = _.debounce(function(isNotSetBulbs){

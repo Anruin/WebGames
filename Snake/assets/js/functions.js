@@ -17,6 +17,10 @@ $(function(){
 	//		clearInterval(badInterval);
 	//
 	//}, 500);
+	if(!$.browser)
+		$.browser = {};
+
+	$.browser.device = (/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase()));
 });
 
 $(document).ready(function() {
