@@ -30,7 +30,7 @@ $(document).ready(function() {
 		paddingBottom: padding,
 		scrollingSpeed: 1500,
 		resize : false,
-		keyboardScrolling: false,
+		keyboardScrolling: true,
 		afterLoad: function(anchorLink, index){
 			if(index == 5 && window.isAutoStart){
 				$('.level-5__btn').trigger("click");

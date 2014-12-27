@@ -30,6 +30,8 @@ define([
 	 * Game initialization function
 	 */
 	se.Game.prototype.create = function () {
+		$.fn.fullpage.setAllowScrolling(false);
+		$.fn.fullpage.setKeyboardScrolling(false);
 		document.getElementById('sx-game').style.display = "block";
 
 		var scene = new se.SantaScene(game);
@@ -204,6 +206,8 @@ define([
 		//}, game.activeScene.level.scroll);
 		$.fn.fullpage.moveTo(6);
 		se.enable_scroll();
+		$.fn.fullpage.setAllowScrolling(true);
+		$.fn.fullpage.setKeyboardScrolling(true);
 
 		if(status == "lose") {
 			$('#gameOverModal').modal('show');
