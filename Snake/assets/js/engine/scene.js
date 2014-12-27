@@ -90,7 +90,7 @@ define([
 
 					for(var i = 0; i < takenScore; i++){
 						pawn.removeSegment(0);
-						curScene.createActor("collectible", curScene.collectibles);
+						curScene.createActor("collectible", curScene.collectibles, null, 'prev');
 					}
 				}
 			});
@@ -108,7 +108,7 @@ define([
 	/**
 	 * Create new actor
 	 */
-	se.Scene.prototype.createActor = function(_name, _array, _variant) {
+	se.Scene.prototype.createActor = function(_name, _array, _variant, note) {
 		if(!this.nums[_name])
 			this.nums[_name] = 0;
 
@@ -118,7 +118,9 @@ define([
 		actor.initParams(_name);
 		if(config.params[_name].general.variantPerLevel) {
 			var index = config.levels.indexOf(this.level);
-			_variant = index < config.params[_name].variant.length ? index : index - config.params[_name].variant.length;
+			if(note == "prev")
+				index = index - 1;
+			_variant = (index < config.params[_name].variant.length) ? index : index - config.params[_name].variant.length;
 		}
 		actor.initVariant(_variant);
 		actor.setState();

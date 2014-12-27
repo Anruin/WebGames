@@ -98,6 +98,15 @@
 		.game-levels .game-level.level-2 .level-2__block-1{
 			top: 16%;
 		}
+		.level-1__img-text{
+			width:33%!important;
+			text-align: center;
+		}
+		.level-1__img-text img{
+			display:block;
+			margin:auto;
+			max-width: 100%
+		}
 	</style>
 </head>
 <body>
@@ -158,8 +167,17 @@
 		<ul class="nav navbar-nav nav-block-social">
 			<li><div class="fb-like" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div></li>
 			<li>
-				<a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
-				<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+				<a href="https://twitter.com/share" class="twitter-share-button"></a>
+				<script>!function(d,s,id){
+					var js,
+							fjs=d.getElementsByTagName(s)[0],
+							p=/^http:/.test(d.location)?'http':'https';
+					if(!d.getElementById(id)){
+						js=d.createElement(s);
+						js.id=id;js.src=p+'://platform.twitter.com/widgets.js';
+						fjs.parentNode.insertBefore(js,fjs);
+					}
+				}(document, 'script', 'twitter-wjs');</script>
 			</li>
 		</ul>
 
@@ -171,7 +189,14 @@
 	<!-- Уровень 1 -->
 	<div class="level-content">
 		<div class="text-center">
-			<img class="level-1__img-text img-responsive game-obstacle" src="assets/img/level-1__img-new-text.png" alt="Дарите подарки и увеличивайте продажи">
+			<div class="level-1__img-text img-responsive">
+				<img src="assets/img/level-1__img-new-text-1.png" style="width:35.42%" class="game-obstacle">
+				<img src="assets/img/level-1__img-new-text-2.png" style="width:67.48%" class="game-obstacle">
+				<img src="assets/img/level-1__img-new-text-3.png" style="width:46.79%" class="game-obstacle">
+				<img src="assets/img/level-1__img-new-text-4.png" style="width:100%" class="game-obstacle">
+				<img src="assets/img/level-1__img-new-text-5.png" style="width:33.61%" class="game-obstacle">
+			</div>
+			<!--<img class="level-1__img-text img-responsive game-obstacle" src="assets/img/level-1__img-new-text.png" alt="Дарите подарки и увеличивайте продажи">-->
 			<div class="level-1__countdown">
 				<div class="level-1__div-timer game-obstacle">
 					<div class="timer__digit"></div>
@@ -418,7 +443,7 @@
 				</div>
 			</form>
 			<div id="form_success" class="alert alert-success" role="alert">
-				Ваша заявка принята!
+				Спасибо, что написали нам!
 			</div>
 			<div id="form_error" class="alert alert-danger" role="alert">
 				Что-то пошло не так, попробуйте в следующий раз :(
@@ -427,7 +452,7 @@
 				В форме присутствуют неверные данные.
 			</div>
 			<div id="form_already" class="alert alert-warning" role="alert">
-				Вы уже отправили заявку :)
+				Вы уже отправили нам поздравление :)
 			</div>
 		</div>
 	</div>

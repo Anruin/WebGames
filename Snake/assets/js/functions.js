@@ -1,5 +1,22 @@
 $(function(){
-
+	//var isFBset = false;
+	//var $fbEl = $($('.nav-block-social li').first().find('div').find('span'));
+	//var isTWset = false;
+	//var $twEl = $('#twitter-widget-0').contents().find("#count");
+	//var badInterval = setInterval(function(){
+	//	if(!isFBset && $fbEl.length){
+	//		$fbEl.text(parseInt($fbEl) + 47);
+	//		isFBset = true;
+	//	}
+	//	if(!isTWset && $twEl.length){
+	//		$twEl.text(parseInt($twEl) + 23);
+	//		isTWset = true;
+	//	}
+	//
+	//	if(isFBset && isTWset)
+	//		clearInterval(badInterval);
+	//
+	//}, 500);
 });
 
 $(document).ready(function() {
@@ -73,7 +90,7 @@ $(document).ready(function() {
 		var today = new Date();
 		var targetDate = new Date("December 31, "+today.getFullYear());
 		var millisecondsPerDay = 24*60*60*1000;
-		var daysLeft = Math.round((targetDate.getTime() - today.getTime()) / millisecondsPerDay);
+		var daysLeft = Math.ceil((targetDate.getTime() - today.getTime()) / millisecondsPerDay);
 		var daysLeftString = "" + daysLeft;
 
 		var dayName = "";
