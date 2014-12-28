@@ -63,8 +63,6 @@ define([
 		paper.tool.onMouseDown = function (event) {
 			se.debugTools.onMouseDown(event);
 			game.onMouseDown(event);
-
-
 		};
 		paper.tool.onMouseDrag = function (event) {
 			var pawnPoint = game.activeScene.mainPawn.item.position;
@@ -79,11 +77,24 @@ define([
 			else{
 				key = yDist > 0 ? "down" : "up";
 			}
+
+			if(game.touchWalk)
+				clearInterval(game.touchWalk);
+
+			game.touchWalk = setInterval(function(){
+				controller.onInput(key);
+			}, 500);
+			controller.onInput(key);
+
 			//setInterval(function(){
 			//
 			//})
-			controller.onInput(key);
 			//}
+		};
+
+		paper.tool.onMouseUp = function (event) {
+			clearInterval(game.touchWalk);
+			game.touchWalk = null;
 		};
 
 		game.resizeDebounce = _.debounce(function(isNotSetBulbs){
