@@ -21,6 +21,12 @@ $(function(){
 		$.browser = {};
 
 	$.browser.device = (/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase()));
+
+	$(document).keyup(function(e) {
+		if(e.keyCode==13){
+			$('.modal').modal('hide');
+		}
+	});
 });
 
 $(document).ready(function() {
