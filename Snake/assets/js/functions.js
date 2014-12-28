@@ -249,6 +249,7 @@ $(function() {
 	}
 	loadBuffers();
 	window.sound = function(name){
-		return playSound(BUFFERS[name], 0) || {};
+		//return playSound(BUFFERS[name], 0) || {};
+		return {};
 	};
 })
