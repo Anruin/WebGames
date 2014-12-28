@@ -55,7 +55,7 @@ $(document).ready(function() {
 			.css({
 				'overflow': 'hidden'
 			});
-
+	  $('.game-level.level-6').css('padding-bottom','0px');
     var $light_level = $('.level-4');
     var i;
 
