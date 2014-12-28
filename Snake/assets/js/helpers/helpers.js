@@ -160,8 +160,11 @@ define([
 
 			//есть ли текущий уровень в массиве конфига эллемента .levels: [...]
 			var interim = param.general.levels.indexOf(indexLvl) != -1
-				//соответствует ли текущее количество установленному в конфиге уровня или эллемента
-			&& array.length < ((level[name] ? level[name].appearsNum : false) || param.general.appearsNum);
+					//соответствует ли текущее количество установленному в конфиге уровня или эллемента
+					&& array.length < ((level[name] ? level[name].appearsNum : false) || param.general.appearsNum);
+
+			//if((level[name] && level[name].maxCount) || param.general.maxCount)
+			//	interim = interim && array.length < ((level[name] ? level[name].maxCount : false) || param.general.maxCount);
 
 			if(score)
 				//не превышает ли количество эллементов необходимого для этого уровня кол-ва очков

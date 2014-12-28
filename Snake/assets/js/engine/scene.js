@@ -87,7 +87,6 @@ define([
 						game.over("lose");
 						return;
 					}
-
 					for(var i = 0; i < takenScore; i++){
 						pawn.removeSegment(0);
 						curScene.createActor("collectible", curScene.collectibles, null, 'prev');

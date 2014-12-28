@@ -31,7 +31,7 @@ define([
 			}
 		});
 		if(curScene.prepared && helpers.isForAddToScene(curScene.level, "npc",
-						curScene.npc, curScene.mainPawn.score)) {
+						curScene.npc, curScene.mainPawn.score + curScene.collectibles.length)) {
 			curScene.createActor("npc", this.npc);
 		}
 		curScene.bulbs.map(function(bulb){

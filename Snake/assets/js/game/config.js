@@ -270,6 +270,7 @@ define(function () {
 					loop: true,
 					scale: 0.28,
 					appearsNum: 3,
+					maxCount: 8,
 					levels: [4],
 					duration: 0.25,
 					respawn: 10,
