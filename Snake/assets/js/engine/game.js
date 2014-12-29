@@ -29,7 +29,15 @@ define([
 	/**
 	 * Game initialization function
 	 */
+	se.Game.prototype.initBackgroundSound = function() {
+		game.background = window.sound('background');
+		game.background.onended = function(){
+			game.initBackgroundSound();
+		};
+	};
 	se.Game.prototype.create = function () {
+		game.initBackgroundSound();
+
 		$.fn.fullpage.setAllowScrolling(false);
 		$.fn.fullpage.setKeyboardScrolling(false);
 		document.getElementById('sx-game').style.display = "block";
@@ -205,6 +213,7 @@ define([
 		game.activeScene.prepared = true;
 	};
 	se.Game.prototype.over = function (status) {
+		game.background.stop();
 		game.activeScene.mainPawn.item.position = [-1000,-1000];
 
 		paper.project.clear();

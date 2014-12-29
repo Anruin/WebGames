@@ -27,8 +27,8 @@ define([
 			controller.isKeyDown = false;
 		}, 500);
 		this.stepSound = function(){
-			if(controller.steps.isend)
-				controller.steps = window.sound('steps');
+			//if(controller.steps.isend)
+			//	controller.steps = window.sound('steps');
 
 			controller.steps.isend = false;
 			controller.steps.onended = function(){
