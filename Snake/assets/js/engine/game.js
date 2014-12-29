@@ -219,10 +219,11 @@ define([
 		paper.project.clear();
 		paper.project.remove();
 		try{
-			game.background.stop();
+			game.background.stop(0);
 		}
 		catch(e){
-			console.log('cant stop background music');
+			console.log('cant stop background music: ');
+			console.log(e);
 		}
 
 		document.getElementById('sx-game').style.display = "none";
