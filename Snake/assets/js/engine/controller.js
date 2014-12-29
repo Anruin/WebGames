@@ -21,8 +21,8 @@ define([
 		controller.steps = {};
 		controller.steps.isend = true;
 		this.keyUp = _.debounce(function(){
-			if(controller.steps.stop)
-				controller.steps.stop();
+			//if(controller.steps.stop)
+			//	controller.steps.stop();
 			controller.steps.isend = true;
 			controller.isKeyDown = false;
 		}, 500);
@@ -31,9 +31,9 @@ define([
 			//	controller.steps = window.sound('steps');
 
 			controller.steps.isend = false;
-			controller.steps.onended = function(){
-				controller.steps.isend = true;
-			}
+			//controller.steps.onended = function(){
+			//	controller.steps.isend = true;
+			//}
 		};
 
 		this.controls = config.params.pawn.general.controls;
@@ -49,8 +49,8 @@ define([
 			controller.steps.isend = true;
 			controller.isKeyDown = false;
 			try{
-				if(controller.steps.stop)
-					controller.steps.stop();
+				//if(controller.steps.stop)
+				//	controller.steps.stop();
 			}
 			catch(e) {
 				console.log('cant stop');
