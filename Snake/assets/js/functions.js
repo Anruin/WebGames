@@ -232,6 +232,8 @@ $(function() {
 				var name = names[i];
 				BUFFERS[name] = buffer;
 			}
+			if(paper.project && !game.background.stop)
+				game.initBackgroundSound();
 		});
 		bufferLoader.load();
 	}
