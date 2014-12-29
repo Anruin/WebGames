@@ -32,7 +32,8 @@ define([
 	se.Game.prototype.initBackgroundSound = function() {
 		game.background = window.sound('background-64');
 		game.background.onended = function(){
-			game.initBackgroundSound();
+			if(paper.project)
+				game.initBackgroundSound();
 		};
 	};
 	se.Game.prototype.create = function () {
@@ -213,11 +214,11 @@ define([
 		game.activeScene.prepared = true;
 	};
 	se.Game.prototype.over = function (status) {
-		game.background.stop();
 		game.activeScene.mainPawn.item.position = [-1000,-1000];
 
 		paper.project.clear();
 		paper.project.remove();
+		game.background.stop();
 
 		document.getElementById('sx-game').style.display = "none";
 
