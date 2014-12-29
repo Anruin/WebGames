@@ -30,7 +30,7 @@ define([
 	 * Game initialization function
 	 */
 	se.Game.prototype.initBackgroundSound = function() {
-		game.background = window.sound('background');
+		game.background = window.sound('background-64');
 		game.background.onended = function(){
 			game.initBackgroundSound();
 		};
