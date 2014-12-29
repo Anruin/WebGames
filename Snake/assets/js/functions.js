@@ -71,7 +71,7 @@ $(document).ready(function() {
 				$('.level-4__text.text-' + $(this).data('number')).show();
     });
 		$('#order').on('click', function(){
-			if(!window.game)
+			if(!paper.project)
 				$('#new_game_btn').trigger('click');
 			//if(window.game)
 			//	game.over("exit");
