@@ -138,8 +138,11 @@ define([
 		if (game.activeScene)
 			game.activeScene.update(_dt);
 
-		var newLvlIndex = config.levels.indexOf(game.activeScene.level) + 1;
 		if (game.activeScene.level && game.activeScene.mainPawn.score == game.activeScene.level.score) {
+			if(game.activeScene.collectibles.length || game.activeScene.npc.length)
+				return;
+
+			var newLvlIndex = config.levels.indexOf(game.activeScene.level) + 1;
 			game.activeScene.level = config.levels[newLvlIndex];
 
 		if(newLvlIndex >= config.levels.length - 1){

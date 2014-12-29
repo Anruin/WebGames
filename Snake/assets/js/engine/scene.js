@@ -31,6 +31,11 @@ define([
 		this.nums = {};
 		//temporary:
 		this.bulbs = [];
+		this.stats = {
+			collectibles: 0,
+			npc: 0,
+			enemies: 0
+		}
 	};
 	se.Scene.prototype.pawns = [];
 	se.Scene.prototype.collectibles = [];
@@ -62,6 +67,8 @@ define([
 					pawn.score += config.params.collectible.general.give.score;
 					pawn.lifes += config.params.collectible.general.give.lives;
 					pawn.addSegment();
+
+					curScene.stats.collectibles ++;
 				}
 			});
 			curScene.enemies.map(function(obj){
@@ -81,6 +88,13 @@ define([
 						window.sound("bang");
 
 					obj.nextState("intersects");
+
+					curScene.stats.enemies ++;
+					//костыль, на последнем уровне выпадают лишние подарки
+					//var extraScores = 0;
+					//if(curScene.level.name == "level_1")
+					//	extraScores = - (curScene.npc.length + curScene.stats.npc + curScene.stats.collectibles);
+
 					var takenScore = helpers.calcScoreAndLives(pawn, config.params.enemy);
 
 					if(pawn.lives < 0){

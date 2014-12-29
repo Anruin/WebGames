@@ -186,7 +186,7 @@ define(function () {
 			{
 				name: "level_1",
 				scroll: 3000,
-				score: 16,
+				score: 0,
 				pawn: {
 					points: [8,80]
 				},

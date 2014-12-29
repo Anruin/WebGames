@@ -27,11 +27,12 @@ define([
 				npc.setState("accept", "accept");
 				curScene.npc.splice(curScene.npc.indexOf(npc), 1);
 				curScene.mainPawn.removeSegment(0);
-				curScene.mainPawn.score ++;
+				curScene.mainPawn.score --;
+				curScene.stats.npc ++;
 			}
 		});
 		if(curScene.prepared && helpers.isForAddToScene(curScene.level, "npc",
-						curScene.npc, curScene.mainPawn.score + curScene.collectibles.length)) {
+						curScene.npc, - (curScene.mainPawn.score + curScene.collectibles.length))) {
 			curScene.createActor("npc", this.npc);
 		}
 		curScene.bulbs.map(function(bulb){

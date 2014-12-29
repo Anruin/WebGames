@@ -166,7 +166,7 @@ define([
 			//if((level[name] && level[name].maxCount) || param.general.maxCount)
 			//	interim = interim && array.length < ((level[name] ? level[name].maxCount : false) || param.general.maxCount);
 
-			if(score)
+			if(score !== undefined)
 				//не превышает ли количество эллементов необходимого для этого уровня кол-ва очков
 				return interim && array.length < level.score - score;
 			else
